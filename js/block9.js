@@ -54,7 +54,7 @@ function run() {
   const cols = S.keys.map(k => Data.col(ds, k));
   if (cols.length < 2) { showMessage('b9Msgs', 'warn', L2('Elige al menos dos columnas.', 'Pick at least two columns.')); ['b9ContCard', 'b9IccCard', 'b9CatCard'].forEach(id => { el(id).hidden = true; }); return; }
   const allCont = cols.every(c => c.type === 'continuous'), allCat = cols.every(isCat);
-  if (!allCont && !allCat) showMessage('b9Msgs', 'warn', L2('Mezclaste columnas continuas y categóricas: se analizan como categorías sólo si todas lo son; quita las de otro tipo.', 'You mixed continuous and categorical columns: they are analysed as categories only if all are; remove those of the other kind.'));
+  if (!allCont && !allCat) showMessage('b9Msgs', 'warn', L2('Mezclaste columnas continuas y categóricas: se analizan como categorías sólo si todas lo son; quita las de otro tipo.', 'You mixed continuous and categorical columns: they are analyzed as categories only if all are; remove those of the other kind.'));
   if (allCat) {
     const levs = cols.map(c => (c.levels || []).join('|'));
     if (new Set(levs).size > 1) showMessage('b9Msgs', 'info', L2('Las columnas no tienen exactamente las mismas categorías: se comparan por su posición en la escala (código), revisa que coincidan.', 'The columns do not have exactly the same categories: they are compared by their position on the scale (code); check they match.'));
@@ -136,8 +136,8 @@ function paintCat(R, cols) {
   Object.assign(R, { kappa: k0, kappaL: kl, kappaQ: kq, fleiss: F, conger: Fc, gwet: G, gwet2: G2, krippN: An, krippO: Ao });
   const main = many ? F : (ordinal && cols[0].levels.length > 2 ? kq : k0), mw = LK(main.est);
   statTiles('b9KTiles', [
-    [many ? T('κ de Fleiss', 'Fleiss’ κ') : ordinal && cols[0].levels.length > 2 ? T('κ ponderada (cuadrática)', 'Weighted κ (quadratic)') : T('κ de Cohen', 'Cohen’s κ'), fr(main.est), `${T(mw[0], mw[1])} (Landis y Koch 1977) · ${pTxt(main.p)}`, main.est > 0.6 ? 'ok' : 'warn'],
-    [T('Acuerdo observado', 'Observed agreement'), Fmt.num(100 * (many ? F.po : k0.po), 1) + ' %', T(`por azar ${Fmt.num(100 * (many ? F.pe : k0.pe), 1)} %`, `by chance ${Fmt.num(100 * (many ? F.pe : k0.pe), 1)}%`)],
+    [many ? T('κ de Fleiss', 'Fleiss’ κ') : ordinal && cols[0].levels.length > 2 ? T('κ ponderada (cuadrática)', 'Weighted κ (quadratic)') : T('κ de Cohen', 'Cohen’s κ'), fr(main.est), `${T(mw[0], mw[1])} (${T('Landis y Koch', 'Landis and Koch')} 1977) · ${pTxt(main.p)}`, main.est > 0.6 ? 'ok' : 'warn'],
+    [T('Acuerdo observado', 'Observed agreement'), Fmt.num(100 * (many ? F.po : k0.po), 1) + ' %', T(`por azar ${Fmt.num(100 * (many ? F.pe : k0.pe), 1)} %`, `by chance ${Fmt.num(100 * (many ? F.pe : k0.pe), 1)} %`)],
     [T('AC1 de Gwet', 'Gwet’s AC1'), fr(G.est), `± ${Fmt.num(G.se, 3)}`],
     [T('α de Krippendorff', 'Krippendorff’s α'), ordinal ? fr(Ao.est) : fr(An.est), ordinal ? T('ordinal', 'ordinal') : T('nominal', 'nominal')],
   ]);

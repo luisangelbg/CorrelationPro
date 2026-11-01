@@ -102,6 +102,8 @@ function onGallery(e) {
 function palState() {
   return { hPos: +el('b13HPos').value, hNeg: +el('b13HNeg').value, L1: +el('b13L1').value, C: +el('b13C1').value, name: el('b13PName').value.trim() || L('Mi paleta', 'My palette') };
 }
+/* the default name of a new palette follows the language until the user writes another */
+function palNameLang() { const pn = el('b13PName'); if (pn && (pn.value === 'Mi paleta' || pn.value === 'My palette')) pn.value = L('Mi paleta', 'My palette'); }
 function setPalInputs(o) { el('b13HPos').value = Math.round(o.hPos); el('b13HNeg').value = Math.round(o.hNeg); el('b13L1').value = o.L1; el('b13C1').value = o.C; if (o.name) el('b13PName').value = o.name; }
 function paintPal() {
   const from = el('b13PFrom');
@@ -113,7 +115,7 @@ function paintPal() {
   }
   const o = palState(), p = paletteFrom(o);
   el('b13HPosV').textContent = o.hPos + '°'; el('b13HNegV').textContent = o.hNeg + '°'; el('b13L1V').textContent = Fmt.num(o.L1, 2); el('b13C1V').textContent = Math.round(100 * o.C) + ' %';
-  const visions = [['none', 'Visión típica', 'Typical vision'], ['protan', 'Protanopía', 'Protanopia'], ['deutan', 'Deuteranopía', 'Deuteranopia'], ['tritan', 'Tritanopía', 'Tritanopia'], ['grey', 'En gris', 'In grey']];
+  const visions = [['none', 'Visión típica', 'Typical vision'], ['protan', 'Protanopía', 'Protanopia'], ['deutan', 'Deuteranopía', 'Deuteranopia'], ['tritan', 'Tritanopía', 'Tritanopia'], ['grey', 'En gris', 'In gray']];
   const stops = Pal.stops(p, 17, { invert: View.invert });
   el('b13Ramps').innerHTML = visions.map(([k, es, en]) => `<div class="b13-ramp"><span>${esc(L(es, en))}</span><div class="pal-ramp">${stops.map(c => `<i style="background:${k === 'grey' ? Pal.grey(c) : Pal.simulate(k, c)}"></i>`).join('')}</div></div>`).join('') +
     `<div class="b13-ramp b13-ends"><span></span><div><b>r = −1</b><b>0</b><b>r = +1</b></div></div>`;
@@ -122,8 +124,8 @@ function paintPal() {
   el('b13Checks').innerHTML = `<ul>` +
     mk2(c.ok.gamut, 'Cabe en la pantalla (sRGB)', 'Fits the screen (sRGB)') +
     mk2(c.ok.uniform, 'Pasos uniformes', 'Uniform steps', `ΔE ${Fmt.num(Math.min(...c.steps), 3)}–${Fmt.num(Math.max(...c.steps), 3)}`) +
-    mk2(c.ok.sign, 'El signo se distingue con daltonismo', 'The sign reads with colour blindness', `${L('ΔE mínima en |r| = .25', 'smallest ΔE at |r| = .25')}: ${Fmt.num(minSign, 3)}`) +
-    mk2(c.ok.greySymmetric, 'Simétrica en gris', 'Symmetric in grey', `ΔL ${Fmt.num(c.grey.diff, 3)}`) +
+    mk2(c.ok.sign, 'El signo se distingue con daltonismo', 'The sign reads with color blindness', `${L('ΔE mínima en |r| = .25', 'smallest ΔE at |r| = .25')}: ${Fmt.num(minSign, 3)}`) +
+    mk2(c.ok.greySymmetric, 'Simétrica en gris', 'Symmetric in gray', `ΔL ${Fmt.num(c.grey.diff, 3)}`) +
     mk2(c.ok.contrast, 'Contraste con el fondo ≥ 3:1', 'Contrast with the background ≥ 3:1', `${Fmt.num(c.contrast.neg, 1)} · ${Fmt.num(c.contrast.pos, 1)}`) + '</ul>' +
     `<p class="b13-verdict ${c.pass ? 'ok' : 'no'}">${esc(c.pass ? L('Pasa todas las pruebas.', 'It passes every check.') : L('No pasa todas las pruebas: mueve los tonos o baja la luminosidad de los extremos.', 'It does not pass every check: move the hues or lower the lightness of the ends.'))}</p>`;
   const D = Datasets.iris, vars = D.vars.slice(0, 4), R = vars.map(a => vars.map(b => Coef.pearson(a.v, b.v).est));
@@ -134,7 +136,7 @@ function usePal() {
   const o = palState(), p = Pal.register(paletteFrom(o));
   Prefs.set('customPal', o);
   View.setPalette(p.id);
-  showMessage('b13PMsgs', 'ok', L2(`«${esc(o.name)}» es ahora la paleta de toda la app; también aparece en la galería del Inicio y se guarda en el paquete del proyecto.`, `«${esc(o.name)}» is now the palette of the whole app; it also appears in the gallery on Home and is saved in the project package.`));
+  showMessage('b13PMsgs', 'ok', L2(`«${esc(o.name)}» es ahora la paleta de toda la app; también aparece en la galería del Inicio y se guarda en el paquete del proyecto.`, `“${esc(o.name)}” is now the palette of the whole app; it also appears in the gallery on Home and is saved in the project package.`));
 }
 /* the hue for negative r that, with the chosen positive hue, keeps the sign most distinct for every vision */
 function autoNeg() {
@@ -148,7 +150,7 @@ function autoNeg() {
   }
   el('b13HNeg').value = best.h;
   paintPal();
-  showMessage('b13PMsgs', 'info', L2(`Con el tono ${o.hPos}° para r positiva, el que mejor separa el signo con las tres formas de daltonismo es ${best.h}°.`, `With hue ${o.hPos}° for positive r, the one that best separates the sign with the three forms of colour blindness is ${best.h}°.`));
+  showMessage('b13PMsgs', 'info', L2(`Con el tono ${o.hPos}° para r positiva, el que mejor separa el signo con las tres formas de daltonismo es ${best.h}°.`, `With hue ${o.hPos}° for positive r, the one that best separates the sign with the three forms of color blindness is ${best.h}°.`));
 }
 
 /* ================= the publication table ================= */
@@ -171,7 +173,7 @@ function tableData() {
   return { keys, names: keys.map(k => label(Data.col(ds, k))), method, adj, R: C.R, P: C.P, Q, N: C.N, CI, desc, sig: el('b13TSig').value, dig: +el('b13TDig').value, dsc: el('b13TDesc').value };
 }
 const METHOD_NAME = { pearson: ['r de Pearson', 'Pearson’s r'], spearman: ['ρ de Spearman', 'Spearman’s ρ'], kendall: ['τ-b de Kendall', 'Kendall’s τ-b'] };
-const ADJ_NAME = { none: ['sin corrección por pruebas múltiples', 'no multiple-testing correction'], holm: ['corregidos por Holm', 'corrected by Holm'], BH: ['corregidos por Benjamini–Hochberg', 'corrected by Benjamini–Hochberg'], bonferroni: ['corregidos por Bonferroni', 'corrected by Bonferroni'] };
+const ADJ_NAME = { none: ['sin corrección por pruebas múltiples', 'with no multiple-testing correction'], holm: ['corregidos por Holm', 'corrected by Holm'], BH: ['corregidos por Benjamini–Hochberg', 'corrected by Benjamini–Hochberg'], bonferroni: ['corregidos por Bonferroni', 'corrected by Bonferroni'] };
 /* the table as HTML with inline styles (it pastes as a table into a word processor), and as rows for the CSV */
 function buildTable(T0, forReport) {
   const p = T0.keys.length, d = T0.dig, st = q => (!isFinite(q) ? '' : q < 0.001 ? '***' : q < 0.01 ? '**' : q < 0.05 ? '*' : '');
@@ -250,7 +252,7 @@ function writeAll() {
   const list = a => (a.length <= 1 ? a.join('') : a.slice(0, -1).join(', ') + L(' y ', ' and ') + a[a.length - 1]);
   if (!ds) return { P, RES, refs };
   const vars = ds.cols.filter(c => c.role === 'var');
-  P.push({ h: L('Datos', 'Data'), t: L(`Se analizaron ${ds.n} casos y ${vars.length} variables del conjunto «${esc(ds.title ? L(ds.title.es, ds.title.en) : ds.name)}». Los valores faltantes se trataron ${ds.missingMode === 'listwise' ? 'por listas (sólo casos completos en todas las variables)' : 'por pares (cada correlación con los casos completos en ese par)'}.`, `${ds.n} cases and ${vars.length} variables of the dataset «${esc(ds.title ? L(ds.title.es, ds.title.en) : ds.name)}» were analysed. Missing values were handled ${ds.missingMode === 'listwise' ? 'listwise (only cases complete in every variable)' : 'pairwise (each correlation with the cases complete in that pair)'}.`) });
+  P.push({ h: L('Datos', 'Data'), t: L(`Se analizaron ${ds.n} casos y ${vars.length} variables del conjunto «${esc(ds.title ? L(ds.title.es, ds.title.en) : ds.name)}». Los valores faltantes se trataron ${ds.missingMode === 'listwise' ? 'por listas (sólo casos completos en todas las variables)' : 'por pares (cada correlación con los casos completos en ese par)'}.`, `${ds.n} cases and ${vars.length} variables of the dataset “${esc(ds.title ? L(ds.title.es, ds.title.en) : ds.name)}” were analyzed. Missing values were handled ${ds.missingMode === 'listwise' ? 'listwise (only cases complete in every variable)' : 'pairwise (each correlation with the cases complete in that pair)'}.`) });
   const X = state.explore;
   if (X) {
     cite('royston1995', 'anderson1952', 'mardia1970', 'henze1990', 'cleveland1979', 'koenker1981', 'maronna2002');
@@ -328,7 +330,7 @@ function writeAll() {
     if (St.space) { cite('clifford1989', 'dutilleul1993'); bits.push(L('la prueba t modificada de Dutilleul (1993) para datos espaciales', 'Dutilleul’s (1993) modified t test for spatial data')); }
     if (St.phylo) { cite('felsenstein1985', 'garland1992'); bits.push(L('los contrastes filogenéticamente independientes (Felsenstein, 1985)', 'phylogenetically independent contrasts (Felsenstein, 1985)')); }
     if (St.circ) { cite('jammalamadaka1988', 'mardia1976'); bits.push(L('la correlación circular (Jammalamadaka y SenGupta, 1988; Mardia, 1976)', 'circular correlation (Jammalamadaka and SenGupta, 1988; Mardia, 1976)')); }
-    if (St.comp) { cite('aitchison1986', 'lovell2015', 'erb2016'); bits.push(L('la proporcionalidad ρp de datos composicionales tras la razón logarítmica centrada (Aitchison, 1986; Lovell et al., 2015)', 'the proportionality ρp of compositional data after the centred log-ratio (Aitchison, 1986; Lovell et al., 2015)')); }
+    if (St.comp) { cite('aitchison1986', 'lovell2015', 'erb2016'); bits.push(L('la proporcionalidad ρp de datos composicionales tras la razón logarítmica centrada (Aitchison, 1986; Lovell et al., 2015)', 'the proportionality ρp of compositional data after the centered log-ratio (Aitchison, 1986; Lovell et al., 2015)')); }
     if (bits.length) P.push({ h: L('Datos con estructura', 'Structured data'), t: L(`Para respetar la estructura de los datos se usaron ${list(bits)}.`, `To respect the structure of the data, ${list(bits)} were used.`) });
   }
   const Nw = state.network;
@@ -428,14 +430,14 @@ function paintProject() {
   if (!el('b13RTitle').value) el('b13RTitle').value = ds ? L(`Análisis de correlación: ${ds.title ? ds.title.es : ds.name}`, `Correlation analysis: ${ds.title ? ds.title.en : ds.name}`) : L('Análisis de correlación', 'Correlation analysis');
   const used = STEPS.filter(s => s.n > 1 && s.n < 13 && state[{ 2: 'data', 3: 'explore', 4: 'pair', 5: 'matrix', 6: 'nonlin', 7: 'partial', 8: 'categorical', 9: 'agreement', 10: 'structure', 11: 'network', 12: 'inference' }[s.n]]);
   const nf = S.include.size;
-  el('b13RSummary').innerHTML = `<p class="hint">${L2(`Incluye: ${used.length ? used.map(s => esc(s.es)).join(', ') : 'nada todavía'}; ${nf} figura${nf === 1 ? '' : 's'} marcada${nf === 1 ? '' : 's'} en «Figuras»; la tabla de correlaciones; los métodos y las referencias.`, `Includes: ${used.length ? used.map(s => esc(s.en)).join(', ') : 'nothing yet'}; ${nf} figure${nf === 1 ? '' : 's'} ticked in «Figures»; the correlation table; the methods and the references.`)}</p>`;
+  el('b13RSummary').innerHTML = `<p class="hint">${L2(`Incluye: ${used.length ? used.map(s => esc(s.es)).join(', ') : 'nada todavía'}; ${nf} figura${nf === 1 ? '' : 's'} marcada${nf === 1 ? '' : 's'} en «Figuras»; la tabla de correlaciones; los métodos y las referencias.`, `Includes: ${used.length ? used.map(s => esc(s.en)).join(', ') : 'nothing yet'}; ${nf} figure${nf === 1 ? '' : 's'} ticked in “Figures”; the correlation table; the methods and the references.`)}</p>`;
 }
 function openReport() {
   clearMessages('b13RMsgs');
   if (!state.data) { showMessage('b13RMsgs', 'warn', L2('Abre primero unos datos.', 'Open some data first.')); return; }
   const url = URL.createObjectURL(new Blob([reportHTML()], { type: 'text/html;charset=utf-8' }));
   const w = window.open(url, '_blank');
-  if (!w) showMessage('b13RMsgs', 'warn', L2('El navegador bloqueó la pestaña nueva: usa «Descargar el informe».', 'The browser blocked the new tab: use «Download the report».'));
+  if (!w) showMessage('b13RMsgs', 'warn', L2('El navegador bloqueó la pestaña nueva: usa «Descargar el informe».', 'The browser blocked the new tab: use “Download the report”.'));
   setTimeout(() => URL.revokeObjectURL(url), 60000);
 }
 
@@ -475,7 +477,7 @@ function openProject(file) {
         View.setInvert(!!pk.prefs.invert);
         View.setPalette(View.palette);
       }
-      B2.useDataset(ds, L2(`Proyecto «${esc(file.name)}» abierto: ${ds.n} filas y ${ds.cols.length} columnas, guardado el ${esc(new Date(pk.saved).toLocaleString())}.`, `Project «${esc(file.name)}» opened: ${ds.n} rows and ${ds.cols.length} columns, saved on ${esc(new Date(pk.saved).toLocaleString())}.`));
+      B2.useDataset(ds, L2(`Proyecto «${esc(file.name)}» abierto: ${ds.n} filas y ${ds.cols.length} columnas, guardado el ${esc(new Date(pk.saved).toLocaleString())}.`, `Project “${esc(file.name)}” opened: ${ds.n} rows and ${ds.cols.length} columns, saved on ${esc(new Date(pk.saved).toLocaleString())}.`));
       if (d.missingMode && d.missingMode !== state.data.missingMode) { state.data.missingMode = d.missingMode; document.dispatchEvent(new CustomEvent('datachange', { detail: { reason: 'missing' } })); }
       if (pk.report) { el('b13RTitle').value = pk.report.title || ''; el('b13RAuthor').value = pk.report.author || ''; }
       showMessage('b13PkMsgs', 'ok', L2('Proyecto abierto. Los bloques se recalculan al visitarlos.', 'Project opened. The blocks recompute when you visit them.'));
@@ -492,6 +494,7 @@ function setFont(f) {
 /* ---------------- wiring ---------------- */
 document.addEventListener('DOMContentLoaded', () => {
   if (!el('panel-13')) return;
+  palNameLang();
   el('panel-13').querySelector('.b12-bar').addEventListener('click', e => { const b = e.target.closest('[data-sec]'); if (b) showSec(b.dataset.sec); });
   el('b13Gallery').addEventListener('click', onGallery);
   el('b13Gallery').addEventListener('change', onGallery);
@@ -522,7 +525,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 document.addEventListener('datachange', () => { S.tKeys = null; S.include.clear(); el('b13RTitle') && (el('b13RTitle').value = ''); paint(); });
 document.addEventListener('stepchange', e => { if (e.detail.step === 13) paint(); });
-document.addEventListener('langchange', () => { const f = el('b13PFrom'); if (f) f.innerHTML = ''; paint(); });
+document.addEventListener('langchange', () => { const f = el('b13PFrom'); if (f) f.innerHTML = ''; palNameLang(); paint(); });
 document.addEventListener('fmtchange', paint);
 document.addEventListener('palettechange', () => { if (S.sec === 'pal' || S.sec === 'figs') paint(); });
 window.B13 = { state: S, writeAll, reportHTML, buildTable, tableData, packProject, openProject };

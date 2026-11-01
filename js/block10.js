@@ -198,7 +198,7 @@ function paintCirc() {
   clearMessages('b10CMsgs');
   const ka = el('b10CA').value, kb = el('b10CB').value;
   el('b10CScPane').hidden = true; el('b10CTiles').innerHTML = '';
-  if (!ka) { showMessage('b10CMsgs', 'info', L2('No hay columnas circulares (ángulos, horas, días del año, meses). Márcalas como «circular» en el Bloque 2, o usa el ejemplo simulado.', 'There are no circular columns (angles, hours, days of the year, months). Mark them as «circular» in Block 2, or use the simulated example.')); return; }
+  if (!ka) { showMessage('b10CMsgs', 'info', L2('No hay columnas circulares (ángulos, horas, días del año, meses). Márcalas como «circular» en el Bloque 2, o usa el ejemplo simulado.', 'There are no circular columns (angles, hours, days of the year, months). Mark them as “circular” in Block 2, or use the simulated example.')); return; }
   if (!kb || kb === ka) return;
   const A = col(ka), B = col(kb), a = Array.from(Data.toRadians(A));
   el('b10CScPane').hidden = false;
@@ -231,7 +231,7 @@ function paintComp() {
   const C = Struct.composition(parts, names);
   state.structure.comp = C;
   const mat = (M, ttl, plot, aria) => `<div class="pg-pane"><div class="pg-title">${ttl}</div>${Plot.matrix({ R: M, labels: names.map(s => short(s, 14)), glyph: { lower: 'number', upper: 'ellipse', diag: 'diag' }, palette: View.palette, invert: View.invert, size: 46, labelWidth: 96, colorbar: false, plot, label: aria })}</div>`;
-  el('b10K').innerHTML = mat(C.raw, L2('Pearson de las partes (espuria)', 'Pearson of the parts (spurious)'), 'b10-raw', T('Pearson de las partes', 'Pearson of the parts')) + mat(C.clrR, L2('Pearson de los log-cocientes centrados', 'Pearson of the centred log-ratios'), 'b10-clr', T('Pearson de los log-cocientes centrados', 'Pearson of the centred log-ratios')) + mat(C.rhoP, L2('Proporcionalidad <span class="nc">ρ<sub>p</sub></span>', 'Proportionality <span class="nc">ρ<sub>p</sub></span>'), 'b10-rhop', T('Proporcionalidad ρp', 'Proportionality ρp'));
+  el('b10K').innerHTML = mat(C.raw, L2('Pearson de las partes (espuria)', 'Pearson of the parts (spurious)'), 'b10-raw', T('Pearson de las partes', 'Pearson of the parts')) + mat(C.clrR, L2('Pearson de los log-cocientes centrados', 'Pearson of the centered log-ratios'), 'b10-clr', T('Pearson de los log-cocientes centrados', 'Pearson of the centered log-ratios')) + mat(C.rhoP, L2('Proporcionalidad <span class="nc">ρ<sub>p</sub></span>', 'Proportionality <span class="nc">ρ<sub>p</sub></span>'), 'b10-rhop', T('Proporcionalidad ρp', 'Proportionality ρp'));
 }
 
 /* ---------------- simulated examples ---------------- */

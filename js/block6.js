@@ -191,7 +191,13 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 document.addEventListener('datachange', onData);
 document.addEventListener('stepchange', e => { if (e.detail.step === 6 && state.data && (S.dirty || !state.nonlin)) run(); });
-document.addEventListener('langchange', () => { if (state.nonlin) paintPair(); if (S.sweep) paintSweep(); });
+/* the names of the variables in the two lists, in the new language */
+function relabel() {
+  if (!state.data) return;
+  const cs = cands(state.data);
+  ['b6X', 'b6Y'].forEach(id => [...el(id).options].forEach(o => { const c = cs.find(x => x.key === o.value); if (c) o.textContent = label(c); }));
+}
+document.addEventListener('langchange', () => { relabel(); if (state.nonlin) paintPair(); if (S.sweep) paintSweep(); });
 document.addEventListener('fmtchange', () => { if (state.nonlin) paintPair(); if (S.sweep) paintSweep(); });
 window.B6 = { setPair(kx, ky) { S.pair = [kx, ky]; if (state.data) { el('b6X').value = kx; el('b6Y').value = ky; } S.dirty = true; } };
 })();

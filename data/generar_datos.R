@@ -30,9 +30,9 @@ D <- function(id, es, en, desc_es, desc_en, vars, refs, pd_es, pd_en, tags) list
 
 sets <- list()
 sp <- c("setosa", "versicolor", "virginica")
-sets$iris <- D("iris", "Lirios de Anderson (iris)", "Anderson's irises (iris)",
+sets$iris <- D("iris", "Lirios de Anderson (iris)", "Anderson’s irises (iris)",
   "Medidas de 50 flores de cada una de tres especies de Iris, tomadas por E. Anderson en la península de Gaspé (Quebec) y publicadas por R. A. Fisher. Cuatro medidas continuas y la especie: sirve para la matriz de correlación, las correlaciones dentro y entre especies y la paradoja de Simpson.",
-  "Measurements of 50 flowers of each of three Iris species, taken by E. Anderson on the Gaspé Peninsula (Quebec) and published by R. A. Fisher. Four continuous measurements and the species: useful for the correlation matrix, within- and between-species correlations and Simpson's paradox.",
+  "Measurements of 50 flowers of each of three Iris species, taken by E. Anderson on the Gaspé Peninsula (Quebec) and published by R. A. Fisher. Four continuous measurements and the species: useful for the correlation matrix, within- and between-species correlations and Simpson’s paradox.",
   list(V("sepal_length", "Largo del sépalo", "Sepal length", iris$Sepal.Length, "cm"),
        V("sepal_width", "Ancho del sépalo", "Sepal width", iris$Sepal.Width, "cm"),
        V("petal_length", "Largo del pétalo", "Petal length", iris$Petal.Length, "cm"),
@@ -40,20 +40,20 @@ sets$iris <- D("iris", "Lirios de Anderson (iris)", "Anderson's irises (iris)",
        V("species", "Especie", "Species", as.character(iris$Species), type = "nominal", role = "group", levels = sp)),
   c("anderson1935", "fisher1936"), "Dominio público: datos publicados en 1935 y 1936.", "Public domain: data published in 1935 and 1936.",
   c("botánica", "botany"))
-sets$peas <- D("peas", "Guisantes de Galton (1877)", "Galton's sweet peas (1877)",
+sets$peas <- D("peas", "Guisantes de Galton (1877)", "Galton’s sweet peas (1877)",
   "Diámetro de semillas de guisante de olor (Lathyrus odoratus): siete tamaños de semilla madre, con 100 semillas hijas cada uno, en centésimas de pulgada. El primer estudio de la herencia por regresión: los hijos de semillas grandes son grandes, pero menos que sus madres. Muchos empates: buen ejemplo para los convenios de Spearman, Kendall y ξ.",
   "Diameter of sweet pea seeds (Lathyrus odoratus): seven sizes of mother seed, with 100 daughter seeds each, in hundredths of an inch. The first study of heredity by regression: daughters of large seeds are large, but less so than their mothers. Many ties: a good example for the conventions of Spearman, Kendall and ξ.",
   list(V("parent", "Diámetro de la semilla madre", "Diameter of the mother seed", peas$parent, "0.01 in"),
        V("child", "Diámetro de la semilla hija", "Diameter of the daughter seed", peas$child, "0.01 in")),
   c("galton1877"), "Dominio público: datos publicados en 1877.", "Public domain: data published in 1877.", c("botánica", "botany"))
-sets$galton <- D("galton", "Estaturas de Galton (1886)", "Galton's heights (1886)",
+sets$galton <- D("galton", "Estaturas de Galton (1886)", "Galton’s heights (1886)",
   "Estatura de 928 hijos adultos y la estatura media de sus padres (las de las mujeres multiplicadas por 1.08), en pulgadas, agrupadas en clases de una pulgada. Es la tabla con la que Galton describió la regresión a la media.",
-  "Height of 928 adult children and the mean height of their parents (women's multiplied by 1.08), in inches, grouped in one-inch classes. It is the table with which Galton described regression to the mean.",
+  "Height of 928 adult children and the mean height of their parents (women’s multiplied by 1.08), in inches, grouped in one-inch classes. It is the table with which Galton described regression to the mean.",
   list(V("parent", "Estatura media de los padres", "Mid-parent height", Galton$parent, "in"),
        V("child", "Estatura del hijo", "Child height", Galton$child, "in")),
   c("galton1886"), "Dominio público: datos publicados en 1886.", "Public domain: data published in 1886.", c("historia", "history"))
 zm <- ZeaMays
-sets$maize <- D("maize", "Maíz de Darwin (1876)", "Darwin's maize (1876)",
+sets$maize <- D("maize", "Maíz de Darwin (1876)", "Darwin’s maize (1876)",
   "Altura de 15 pares de plantas de maíz (Zea mays), una de polinización cruzada y otra de autopolinización, crecidas en la misma maceta, en pulgadas. Datos pareados: la correlación entre las dos plantas de cada par refleja la maceta que comparten.",
   "Height of 15 pairs of maize plants (Zea mays), one cross-pollinated and one self-pollinated, grown in the same pot, in inches. Paired data: the correlation between the two plants of each pair reflects the pot they share.",
   list(V("pair", "Par", "Pair", zm$pair, type = "id", role = "exclude"),
@@ -89,7 +89,7 @@ tt <- as.data.frame(Titanic)
 tt <- tt[rep(seq_len(nrow(tt)), tt$Freq), 1:4]
 sets$titanic <- D("titanic", "Titanic, 1912", "Titanic, 1912",
   "Las 2 201 personas a bordo del Titanic: clase (primera, segunda, tercera o tripulación), sexo, edad (niño o adulto) y si sobrevivieron. Cuatro variables categóricas: para las tablas de contingencia, la V de Cramér, la razón de momios y la tetracórica.",
-  "The 2,201 people aboard the Titanic: class (first, second, third or crew), sex, age (child or adult) and whether they survived. Four categorical variables: for contingency tables, Cramér's V, the odds ratio and the tetrachoric correlation.",
+  "The 2,201 people aboard the Titanic: class (first, second, third or crew), sex, age (child or adult) and whether they survived. Four categorical variables: for contingency tables, Cramér’s V, the odds ratio and the tetrachoric correlation.",
   list(V("class", "Clase", "Class", as.character(tt$Class), type = "nominal", levels = c("1st", "2nd", "3rd", "Crew"), levels_es = c("1.ª", "2.ª", "3.ª", "Tripulación")),
        V("sex", "Sexo", "Sex", as.character(tt$Sex), type = "binary", levels = c("Male", "Female"), levels_es = c("Hombre", "Mujer")),
        V("age", "Edad", "Age", as.character(tt$Age), type = "binary", levels = c("Child", "Adult"), levels_es = c("Niño", "Adulto")),

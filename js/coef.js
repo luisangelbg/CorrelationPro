@@ -89,7 +89,7 @@ Coef.pearson = function (x0, y0, o) {
   if (n > 2) Object.assign(res, tTest(r, n - 2, alt));
   if (n > 3) res.ci = fisherCI(r, 1 / sqrt(n - 3), alt, conf, 'fisher');
   res.conv.push(['Prueba t con n − 2 grados de libertad; intervalo por la transformación z de Fisher con error 1/√(n − 3).',
-    't test with n − 2 degrees of freedom; interval by Fisher\'s z transformation with standard error 1/√(n − 3).']);
+    't test with n − 2 degrees of freedom; interval by Fisher’s z transformation with standard error 1/√(n − 3).']);
   return res;
 };
 
@@ -131,9 +131,9 @@ Coef.spearman = function (x0, y0, o) {
   if (n > 3) {
     const se = ciM === 'fisher' ? 1 / sqrt(n - 3) : ciM === 'bonett' ? sqrt((1 + rho * rho / 2) / (n - 3)) : sqrt(1.06 / (n - 3));
     res.ci = fisherCI(rho, se, alt, conf, ciM);
-    res.conv.push(ciM === 'fieller' ? ['Intervalo por z de Fisher con la varianza 1.06/(n − 3) de Fieller, Hartley y Pearson (1957).', 'Interval by Fisher\'s z with the variance 1.06/(n − 3) of Fieller, Hartley and Pearson (1957).']
-      : ciM === 'bonett' ? ['Intervalo por z de Fisher con la varianza (1 + ρ²/2)/(n − 3) de Bonett y Wright (2000).', 'Interval by Fisher\'s z with the variance (1 + ρ²/2)/(n − 3) of Bonett and Wright (2000).']
-        : ['Intervalo por z de Fisher con la varianza 1/(n − 3) de Pearson.', 'Interval by Fisher\'s z with Pearson\'s variance 1/(n − 3).']);
+    res.conv.push(ciM === 'fieller' ? ['Intervalo por z de Fisher con la varianza 1.06/(n − 3) de Fieller, Hartley y Pearson (1957).', 'Interval by Fisher’s z with the variance 1.06/(n − 3) of Fieller, Hartley and Pearson (1957).']
+      : ciM === 'bonett' ? ['Intervalo por z de Fisher con la varianza (1 + ρ²/2)/(n − 3) de Bonett y Wright (2000).', 'Interval by Fisher’s z with the variance (1 + ρ²/2)/(n − 3) of Bonett and Wright (2000).']
+        : ['Intervalo por z de Fisher con la varianza 1/(n − 3) de Pearson.', 'Interval by Fisher’s z with Pearson’s variance 1/(n − 3).']);
   }
   return res;
 };
@@ -217,12 +217,12 @@ Coef.kendall = function (x0, y0, o) {
     res.stat = { name: 'z', value: z };
     res.p = pAlt(alt, Num.pnorm(z, true), Num.pnorm(z));
     res.conv.push([ties ? 'Hay empates: valor p normal con la varianza de S corregida por empates (Kendall 1970).' : 'Valor p normal con la varianza de S de Kendall.',
-      ties ? 'There are ties: normal p-value with the variance of S corrected for ties (Kendall 1970).' : 'Normal p-value with Kendall\'s variance of S.']);
+      ties ? 'There are ties: normal p-value with the variance of S corrected for ties (Kendall 1970).' : 'Normal p-value with Kendall’s variance of S.']);
     if (o.continuity) res.conv.push(['Con corrección por continuidad (|S| − 1).', 'With continuity correction (|S| − 1).']);
   }
   if (n > 4 && kind === 'b') {
     res.ci = fisherCI(res.est, sqrt(0.437 / (n - 4)), alt, conf, 'fieller');
-    res.conv.push(['Intervalo por z de Fisher con la varianza 0.437/(n − 4) de Fieller, Hartley y Pearson (1957).', 'Interval by Fisher\'s z with the variance 0.437/(n − 4) of Fieller, Hartley and Pearson (1957).']);
+    res.conv.push(['Intervalo por z de Fisher con la varianza 0.437/(n − 4) de Fieller, Hartley y Pearson (1957).', 'Interval by Fisher’s z with the variance 0.437/(n − 4) of Fieller, Hartley and Pearson (1957).']);
   }
   return res;
 };
@@ -423,7 +423,7 @@ Coef.dcor = function (x0, y0, o) {
   res.stat = { name: 'T', value: T, df };
   res.p = Num.pt(T, df, true);
   res.conv.push(['dCor = raíz del cociente de V-estadísticos con matrices de distancia doblemente centradas (sesgada hacia arriba en muestras chicas). Valor p unilateral de la prueba t con dCor² corregida por sesgo (U-centrado), gl = n(n − 3)/2 − 1.',
-    'dCor = square root of the ratio of V-statistics with doubly centred distance matrices (biased upwards in small samples). One-sided p-value from the t test on the bias-corrected dCor² (U-centring), df = n(n − 3)/2 − 1.']);
+    'dCor = square root of the ratio of V-statistics with doubly centered distance matrices (biased upwards in small samples). One-sided p-value from the t test on the bias-corrected dCor² (U-centring), df = n(n − 3)/2 − 1.']);
   return res;
 };
 
@@ -594,17 +594,17 @@ Coef.permutation = function (stat, x0, y0, o) {
 /* the catalogue of the coefficients of two continuous variables, in the order
    the labs and the pair study show them */
 Coef.PAIR = [
-  { id: 'pearson', f: Coef.pearson, es: 'r de Pearson', en: 'Pearson\'s r', sym: 'r', fam: 'lin' },
-  { id: 'spearman', f: Coef.spearman, es: 'ρ de Spearman', en: 'Spearman\'s ρ', sym: 'ρ', fam: 'rank' },
-  { id: 'kendall', f: Coef.kendall, es: 'τ-b de Kendall', en: 'Kendall\'s τ-b', sym: 'τ', fam: 'rank' },
+  { id: 'pearson', f: Coef.pearson, es: 'r de Pearson', en: 'Pearson’s r', sym: 'r', fam: 'lin' },
+  { id: 'spearman', f: Coef.spearman, es: 'ρ de Spearman', en: 'Spearman’s ρ', sym: 'ρ', fam: 'rank' },
+  { id: 'kendall', f: Coef.kendall, es: 'τ-b de Kendall', en: 'Kendall’s τ-b', sym: 'τ', fam: 'rank' },
   { id: 'gaussian', f: Coef.gaussianRank, es: 'Rangos gaussianos', en: 'Gaussian rank', sym: 'r_G', fam: 'rank' },
-  { id: 'blomqvist', f: Coef.blomqvist, es: 'β de Blomqvist', en: 'Blomqvist\'s β', sym: 'β', fam: 'rank' },
+  { id: 'blomqvist', f: Coef.blomqvist, es: 'β de Blomqvist', en: 'Blomqvist’s β', sym: 'β', fam: 'rank' },
   { id: 'biweight', f: Coef.biweight, es: 'Peso doble', en: 'Biweight', sym: 'r_bw', fam: 'rob' },
   { id: 'pbend', f: Coef.percentageBend, es: 'Flexión porcentual', en: 'Percentage bend', sym: 'r_pb', fam: 'rob' },
   { id: 'winsorized', f: Coef.winsorized, es: 'Winsorizada', en: 'Winsorized', sym: 'r_w', fam: 'rob' },
   { id: 'dcor', f: Coef.dcor, es: 'Correlación de distancias', en: 'Distance correlation', sym: 'dCor', fam: 'dep' },
-  { id: 'xi', f: Coef.xi, es: 'ξ de Chatterjee', en: 'Chatterjee\'s ξ', sym: 'ξ', fam: 'dep' },
-  { id: 'hoeffding', f: Coef.hoeffding, es: 'D de Hoeffding', en: 'Hoeffding\'s D', sym: 'D', fam: 'dep' },
+  { id: 'xi', f: Coef.xi, es: 'ξ de Chatterjee', en: 'Chatterjee’s ξ', sym: 'ξ', fam: 'dep' },
+  { id: 'hoeffding', f: Coef.hoeffding, es: 'D de Hoeffding', en: 'Hoeffding’s D', sym: 'D', fam: 'dep' },
   { id: 'taustar', f: Coef.tauStar, es: 'τ* de Bergsma–Dassios', en: 'Bergsma–Dassios τ*', sym: 'τ*', fam: 'dep' },
 ];
 

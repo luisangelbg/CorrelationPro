@@ -50,7 +50,7 @@ function onData() {
 function paintControls() {
   const ds = state.data, cs = cands(ds);
   el('b3Vars').innerHTML = cs.length ? cs.map(c => `<button type="button" class="chip${S.keys.includes(c.key) ? ' on' : ''}" data-k="${c.key}" aria-pressed="${S.keys.includes(c.key)}">${esc(label(c))}${c.type === 'ordinal' ? ' <small>' + L2('ord.', 'ord.') + '</small>' : ''}</button>`).join('')
-    : `<p class="hint">${L2('No hay variables numéricas con papel «variable». Revisa los tipos en el Bloque 2.', 'There are no numeric variables with the role «variable». Check the kinds in Block 2.')}</p>`;
+    : `<p class="hint">${L2('No hay variables numéricas con papel «variable». Revisa los tipos en el Bloque 2.', 'There are no numeric variables with the role “variable”. Check the kinds in Block 2.')}</p>`;
   const gs = groupCands(ds);
   el('b3Group').innerHTML = `<option value="">${esc(T('Sin grupos', 'No groups'))}</option>` + gs.map(c => `<option value="${c.key}">${esc(label(c))} (${c.levels.length})</option>`).join('');
   el('b3Group').value = S.group;
@@ -137,7 +137,7 @@ function paintSplom() {
     smooth: S.smooth, lowess: splomLowess, stats: R.stats, sel, max: MAXPTS, plot: 'b3-splom', clip: 'b3',
     label: T('Matriz de dispersión de las variables elegidas', 'Scatterplot matrix of the chosen variables'),
   });
-  el('b3SplomLegend').innerHTML = gi ? `<span class="fl-title">${esc(label(gi.col))}:</span> ` + gi.names.map((nm, k) => `<span class="fl-item"><i style="background:${Pal.CAT.laca[k % 8]}"></i>${esc(nm)}</span>`).join('') + `<span class="fl-note">${L2('los números de colores, abajo de cada celda de arriba, son la r dentro de cada grupo', 'the coloured numbers at the bottom of each upper cell are r within each group')}</span>` : '';
+  el('b3SplomLegend').innerHTML = gi ? `<span class="fl-title">${esc(label(gi.col))}:</span> ` + gi.names.map((nm, k) => `<span class="fl-item"><i style="background:${Pal.CAT.laca[k % 8]}"></i>${esc(nm)}</span>`).join('') + `<span class="fl-note">${L2('los números de colores, abajo de cada celda de arriba, son la r dentro de cada grupo', 'the colored numbers at the bottom of each upper cell are r within each group')}</span>` : '';
   el('b3SplomNote').innerHTML = ds.n > MAXPTS ? L2(`Las nubes muestran ${MAXPTS} de las ${fmtNum(ds.n, 0)} filas, al azar; los números usan todas.`, `The clouds show ${MAXPTS} of the ${fmtNum(ds.n, 0)} rows, at random; the numbers use all of them.`) : '';
 }
 function verdictTxt(u) {
@@ -192,7 +192,7 @@ function paintMv() {
     el('b3MvOut').innerHTML = `<div class="pg-title">${L2('Filas más alejadas (distancia robusta)', 'Farthest rows (robust distance)')}</div>` + (flagged.length ? `<table class="b3-out"><thead><tr><th>${L2('Fila', 'Row')}</th><th class="num">${L2('Robusta', 'Robust')}</th><th class="num">${L2('Clásica', 'Classical')}</th></tr></thead><tbody>` +
       flagged.slice(0, 8).map(o => `<tr${o.dc <= mv.out.cut ? ' class="masked"' : ''}><td>${o.r + 1}</td><td class="num">${Fmt.num(o.d, 1)}</td><td class="num">${Fmt.num(o.dc, 1)}</td></tr>`).join('') + '</tbody></table>' +
       (flagged.length > 8 ? `<p class="hint">${L2(`y ${flagged.length - 8} más`, `and ${flagged.length - 8} more`)}</p>` : '') +
-      (flagged.some(o => o.dc <= mv.out.cut) ? `<p class="hint">${L2('En gris, las que la distancia clásica no ve: el enmascaramiento.', 'In grey, those the classical distance does not see: masking.')}</p>` : '')
+      (flagged.some(o => o.dc <= mv.out.cut) ? `<p class="hint">${L2('En gris, las que la distancia clásica no ve: el enmascaramiento.', 'In gray, those the classical distance does not see: masking.')}</p>` : '')
       : `<p class="hint">${L2('Ninguna fila pasa el corte.', 'No row passes the cut.')}</p>`);
   }
 }

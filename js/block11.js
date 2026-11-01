@@ -149,7 +149,7 @@ function build() {
   S.cur = L;
   placeLabels(L);
   el('b11Leg').innerHTML = `<span class="fl-item"><i class="ln" style="border-top-color:${Pal.color(pal, 0.85, { invert: View.invert })}"></i>${L2('positiva', 'positive')}</span><span class="fl-item"><i class="ln" style="border-top-color:${Pal.color(pal, -0.85, { invert: View.invert })}"></i>${L2('negativa', 'negative')}</span>` +
-    Array.from({ length: N.nCom }, (_, c) => `<span class="fl-item"><i style="background:${cat[c % 8]}"></i>${L2('comunidad', 'community')} ${c + 1}</span>`).join('') + (N.isolated ? `<span class="fl-item"><i style="background:var(--fig-muted)"></i>${L2(`aislados (${N.isolated})`, `isolated (${N.isolated})`)}</span>` : '') + `<span class="fl-note">${L2('grosor = |peso|; tamaño del nodo = fuerza; pasa el puntero sobre un nodo para ver sus vecinos', 'thickness = |weight|; node size = strength; hover a node to see its neighbours')}</span>`;
+    Array.from({ length: N.nCom }, (_, c) => `<span class="fl-item"><i style="background:${cat[c % 8]}"></i>${L2('comunidad', 'community')} ${c + 1}</span>`).join('') + (N.isolated ? `<span class="fl-item"><i style="background:var(--fig-muted)"></i>${L2(`aislados (${N.isolated})`, `isolated (${N.isolated})`)}</span>` : '') + `<span class="fl-note">${L2('grosor = |peso|; tamaño del nodo = fuerza; pasa el puntero sobre un nodo para ver sus vecinos', 'thickness = |weight|; node size = strength; hover a node to see its neighbors')}</span>`;
   els('.b11-bar [data-view]').forEach(b => b.classList.toggle('on', b.dataset.view === S.view));
   wire();
 }

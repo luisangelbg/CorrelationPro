@@ -173,7 +173,7 @@ function reading(R) {
     const ev = PairStat.evidence(R.bayes.BF10);
     parts.push(ev.favours === 'h1' ? [`El factor de Bayes de la r de Pearson, ${fmtBF(R.bayes.logBF10)}, es evidencia ${ev.es} a favor de que hay correlación.`, `The Bayes factor of Pearson’s r, ${fmtBF(R.bayes.logBF10)}, is ${ev.en} evidence that there is a correlation.`]
       : ev.favours === 'h0' ? [`El factor de Bayes de la r de Pearson, ${fmtBF(R.bayes.logBF10)} (BF₀₁ = ${fmtBF(-R.bayes.logBF10)}), es evidencia ${ev.es} a favor de que no la hay.`, `The Bayes factor of Pearson’s r, ${fmtBF(R.bayes.logBF10)} (BF₀₁ = ${fmtBF(-R.bayes.logBF10)}), is ${ev.en} evidence that there is none.`]
-        : ['El factor de Bayes no favorece a ninguna de las dos hipótesis.', 'The Bayes factor favours neither hypothesis.']);
+        : ['El factor de Bayes no favorece a ninguna de las dos hipótesis.', 'The Bayes factor favors neither hypothesis.']);
   }
   if (m.def.id === 'pearson') { const r2 = est * est; parts.push([`r² = ${Fmt.bounded(r2, 2)}: en sentido lineal, las dos variables comparten el ${Math.round(100 * r2)} % de su varianza.`, `r² = ${Fmt.bounded(r2, 2)}: in a linear sense, the two variables share ${Math.round(100 * r2)}% of their variance.`]); }
   parts.push(['Una correlación describe una asociación; no dice cuál variable causa a la otra, ni si las dos dependen de una tercera.', 'A correlation describes an association; it does not say which variable causes the other, or whether both depend on a third.']);

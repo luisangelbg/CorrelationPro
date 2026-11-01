@@ -39,7 +39,7 @@ const TYPES = [
 const LIMITS = [
   [['Matriz de Pearson de 200 × 200 variables, 1 000 filas', 'Pearson matrix of 200 × 200 variables, 1,000 rows'], '34 ms', ['instantáneo', 'instant']],
   [['Matriz de Pearson de 1 000 × 1 000 variables', 'Pearson matrix of 1,000 × 1,000 variables'], '83 ms', ['instantáneo; se dibuja en lienzo', 'instant; drawn on canvas']],
-  [['τ-b de Kendall con 100 000 pares', 'Kendall\'s τ-b with 100,000 pairs'], '64 ms', ['instantáneo', 'instant']],
+  [['τ-b de Kendall con 100 000 pares', 'Kendall’s τ-b with 100,000 pairs'], '64 ms', ['instantáneo', 'instant']],
   [['Correlación de distancias con 2 000 pares', 'Distance correlation with 2,000 pairs'], '33 ms', ['instantáneo; hasta 3 000 pares', 'instant; up to 3,000 pairs']],
   [['Prueba de Mantel, 9 999 permutaciones, 200 sitios', 'Mantel test, 9,999 permutations, 200 sites'], '0.34 s', ['un instante', 'a moment']],
   [['Bootstrap BCa de r con 1 999 remuestreos, 1 000 pares', 'BCa bootstrap of r with 1,999 resamples, 1,000 pairs'], '0.9 s', ['un instante', 'a moment']],
@@ -47,8 +47,8 @@ const LIMITS = [
 ];
 
 /* where a measure is computed: its block, or that the catalogue only describes it */
-const whereL2 = m => (m.calc ? L2('Bloque ' + m.blk, 'Block ' + m.blk) : L2('sólo en el catálogo', 'catalogue only'));
-const whereT = m => (m.calc ? T('Bloque ', 'Block ') + m.blk : T('sólo en el catálogo', 'catalogue only'));
+const whereL2 = m => (m.calc ? L2('Bloque ' + m.blk, 'Block ' + m.blk) : L2('sólo en el catálogo', 'catalog only'));
+const whereT = m => (m.calc ? T('Bloque ', 'Block ') + m.blk : T('sólo en el catálogo', 'catalog only'));
 
 /* ---------------- builders ---------------- */
 function buildStepper() {
@@ -89,8 +89,8 @@ function buildTypes() {
 
 /* ---------------- glyph gallery ---------------- */
 const GL_NAMES = {
-  number: ['Número', 'Number', 'el valor, en color', 'the value, in colour'],
-  color: ['Color', 'Colour', 'la celda llena', 'the whole cell'],
+  number: ['Número', 'Number', 'el valor, en color', 'the value, in color'],
+  color: ['Color', 'Color', 'la celda llena', 'the whole cell'],
   shade: ['Sombreado', 'Shade', 'rayas que suben o bajan', 'stripes rising or falling'],
   circle: ['Círculo', 'Circle', 'área ∝ |r|', 'area ∝ |r|'],
   square: ['Cuadrado', 'Square', 'área ∝ |r|', 'area ∝ |r|'],
@@ -140,8 +140,8 @@ function paintPalettes() {
     const c = Pal.check(p);
     const ok = (k, es, en) => `<span${c.ok[k] === false ? ' class="no"' : ''}>${c.ok[k] === false ? '✗' : '✓'} ${L2(es, en)}</span>`;
     const checks = p.kind === 'div'
-      ? ok('gamut', 'cabe', 'fits') + ok('uniform', 'uniforme', 'uniform') + ok('sign', 'daltonismo', 'colour-blind') + ok('greySymmetric', 'gris', 'grey') + ok('contrast', 'contraste', 'contrast')
-      : ok('gamut', 'cabe', 'fits') + ok('uniform', 'uniforme', 'uniform') + ok('greyMonotone', 'gris', 'grey') + ok('contrast', 'contraste', 'contrast');
+      ? ok('gamut', 'cabe', 'fits') + ok('uniform', 'uniforme', 'uniform') + ok('sign', 'daltonismo', 'color-blind') + ok('greySymmetric', 'gris', 'gray') + ok('contrast', 'contraste', 'contrast')
+      : ok('gamut', 'cabe', 'fits') + ok('uniform', 'uniforme', 'uniform') + ok('greyMonotone', 'gris', 'gray') + ok('contrast', 'contraste', 'contrast');
     return `<button type="button" class="pal-card${p.id === View.palette ? ' on' : ''}" data-pal="${p.id}" aria-pressed="${p.id === View.palette}">` +
       `<div class="pn">${p.es}${p.kind === 'seq' ? ' · ' + L2('secuencial', 'sequential') : p.dark ? ' · ' + L2('fondo oscuro', 'dark background') : ''}</div><div class="pg">${L2(p.kind === 'div' ? 'divergente' : 'para |r|, r² y densidades', p.gloss)}</div>` +
       `<div class="pal-ramp">${rampHTML(p, vision)}</div><div class="pal-checks">${checks}</div></button>`;
@@ -165,7 +165,7 @@ function paintPalSample() {
 /* ---------------- reporting styles ---------------- */
 const STYLES = [
   ['apa', 'Psicología y ciencias sociales (APA 7)', 'Psychology and social sciences (APA 7)', 'Sin cero inicial en r y p; p < .001; IC entre corchetes.', 'No leading zero in r and p; p < .001; CI in brackets.', { style: 'apa', decimal: '.' }],
-  ['sampl', 'Biomédico (guías SAMPL)', 'Biomedical (SAMPL guidelines)', 'Con cero inicial; P mayúscula; IC «0.20 a 0.65».', 'Leading zero; capital P; CI «0.20 to 0.65».', { style: 'sampl', decimal: '.' }],
+  ['sampl', 'Biomédico (guías SAMPL)', 'Biomedical (SAMPL guidelines)', 'Con cero inicial; P mayúscula; IC «0.20 a 0.65».', 'Leading zero; capital P; CI “0.20 to 0.65”.', { style: 'sampl', decimal: '.' }],
   ['nom', 'Normativo mexicano (NOM-008)', 'Mexican standard (NOM-008)', 'Cero inicial obligatorio; punto decimal.', 'Leading zero required; decimal point.', { style: 'nom', decimal: '.' }],
   ['nomc', 'Normativo con coma decimal', 'Standard with decimal comma', 'Coma decimal; límites separados por punto y coma.', 'Decimal comma; limits separated by a semicolon.', { style: 'nom', decimal: ',' }],
 ];
@@ -188,9 +188,9 @@ function buildCatalog() {
   const C = Catalog.CATALOG, F = Catalog.FAMS;
   filt.innerHTML = `<button type="button" class="chip on" data-f="">${L2('Todas', 'All')} (${C.length})</button>` +
     Object.keys(F).map(f => `<button type="button" class="chip" data-f="${f}">${L2(F[f][0], F[f][1])} (${C.filter(c => c.fam === f).length})</button>`).join('');
-  host.innerHTML = C.map(m => `<button type="button" class="method-card f-${m.fam}" data-id="${m.id}" data-fam="${m.fam}" aria-label="${esc(T(m.es, m.en) + " — " + m.by + " · " + whereT(m))}">` +
+  host.innerHTML = C.map(m => `<button type="button" class="method-card f-${m.fam}" data-id="${m.id}" data-fam="${m.fam}" aria-label="${esc(T(m.es, m.en) + " — " + T(m.by, m.byEn) + " · " + whereT(m))}">` +
     /* the space between name and author is not drawn (they are stacked); it keeps them apart in the text the label must contain */
-    `<span class="m-ico">${Art.famIcon(m.fam)}</span><span class="m-txt"><span class="m-name">${L2(m.es, m.en)}</span> <span class="m-sub">${esc(m.by)} · ${whereL2(m)}</span></span></button>`).join('');
+    `<span class="m-ico">${Art.famIcon(m.fam)}</span><span class="m-txt"><span class="m-name">${L2(m.es, m.en)}</span> <span class="m-sub">${L2(esc(m.by), esc(m.byEn))} · ${whereL2(m)}</span></span></button>`).join('');
   filt.addEventListener('click', e => {
     const b = e.target.closest('.chip');
     if (!b) return;
@@ -208,7 +208,7 @@ function filterCatalog() {
   let shown = 0;
   els('#methodGallery .method-card').forEach(c => {
     const m = Catalog.byId(c.dataset.id);
-    const hay = norm([m.es, m.en, m.by, m.what[0], m.what[1]].join(' ').replace(/<[^>]+>/g, ''));
+    const hay = norm([m.es, m.en, m.by, m.byEn, m.what[0], m.what[1]].join(' ').replace(/<[^>]+>/g, ''));
     const vis = (!famOn || m.fam === famOn) && (!q || hay.includes(q));
     c.hidden = !vis;
     if (vis) shown++;
@@ -221,7 +221,7 @@ function openMeasure(id) {
   const F = Catalog.FAMS[m.fam];
   const sec = (es, en, body) => body && (body[0] || body[1]) ? `<h4>${L2(es, en)}</h4><p>${L2(body[0], body[1])}</p>` : '';
   const refs = m.refs.map(k => `<li>${L2(Theory.refText(k, 'es'), Theory.refText(k, 'en'))}</li>`).join('');
-  dlg.innerHTML = `<div class="mdlg-head"><div><span class="m-fam">${L2(F[0], F[1])}</span><h3 id="mdlgTitle">${L2(m.es, m.en)}</h3><div class="hint" style="margin:2px 0 0">${esc(m.by)} · ${whereL2(m)}</div></div>` +
+  dlg.innerHTML = `<div class="mdlg-head"><div><span class="m-fam">${L2(F[0], F[1])}</span><h3 id="mdlgTitle">${L2(m.es, m.en)}</h3><div class="hint" style="margin:2px 0 0">${L2(esc(m.by), esc(m.byEn))} · ${whereL2(m)}</div></div>` +
     `<button type="button" class="btn btn-ghost btn-sm x" data-close aria-label="${T('Cerrar', 'Close')}">✕</button></div>` +
     `<div class="mdlg-body"><div class="mdlg-art">${Art.methodArt(m.fam, m.id.length * 13 + m.blk)}</div><p>${L2(m.what[0], m.what[1])}</p>` +
     (m.f ? `<h4>${L2('Fórmula', 'Formula')}</h4><div class="fbox">${m.f}</div>` : '') +
@@ -265,18 +265,26 @@ function buildRefs() {
   if (sum) sum.innerHTML = L2(`Ver las ${keys.length} referencias`, `See the ${keys.length} references`);
   host.innerHTML = keys.map(k => { const t = Theory.REFS[k][1]; return `<li data-t="${t}">${L2(Theory.refText(k, 'es'), Theory.refText(k, 'en'))} <span class="ref-topic">${L2(Theory.REF_TOPICS[t][0], Theory.REF_TOPICS[t][1])}</span></li>`; }).join('');
 }
-function buildCite() {
-  const apa = 'Barrera-Guzmán, L. Á. (2026). <i>CorrelationPro: análisis de correlación de todo tipo en el navegador</i> (versión 1.0.0) [Programa de cómputo]. Zenodo. https://doi.org/10.5281/zenodo.23867439';
-  const bib = '@software{barreraguzman2026correlationpro,\n  author  = {Barrera-Guzmán, Luis Ángel},\n  title   = {CorrelationPro: análisis de correlación de todo tipo en el navegador},\n  version = {1.0.0},\n  year    = {2026},\n  license = {GPL-3.0-or-later},\n  doi     = {10.5281/zenodo.23867439},\n  url     = {https://doi.org/10.5281/zenodo.23867439}\n}';
+/* the citation in the active language; the English title is the one of CITATION.cff */
+const CITE = {
+  es: { title: 'CorrelationPro: análisis de correlación de todo tipo en el navegador', ver: 'versión 1.0.0', kind: 'Programa de cómputo' },
+  en: { title: 'CorrelationPro: a browser-based platform for correlation analysis of every kind, with its theory', ver: 'Version 1.0.0', kind: 'Computer software' },
+};
+const citeApa = () => { const c = T(CITE); return `Barrera-Guzmán, L. Á. (2026). <i>${c.title}</i> (${c.ver}) [${c.kind}]. Zenodo. https://doi.org/10.5281/zenodo.23867439`; };
+const citeBib = () => '@software{barreraguzman2026correlationpro,\n  author  = {Barrera-Guzmán, Luis Ángel},\n  title   = {' + T(CITE).title + '},\n  version = {1.0.0},\n  year    = {2026},\n  license = {GPL-3.0-or-later},\n  doi     = {10.5281/zenodo.23867439},\n  url     = {https://doi.org/10.5281/zenodo.23867439}\n}';
+function paintCite() {
   const a = el('citeApa'), b = el('citeBib');
-  if (a) a.innerHTML = apa;
-  if (b) b.textContent = bib;
+  if (a) a.innerHTML = citeApa();
+  if (b) b.textContent = citeBib();
+}
+function buildCite() {
+  paintCite();
   const copy = (btn, text) => btn && btn.addEventListener('click', () => {
     const done = () => { if (window.LABG) LABG.toast(T('Copiado', 'Copied')); };
-    if (navigator.clipboard) navigator.clipboard.writeText(text).then(done, () => {}); else done();
+    if (navigator.clipboard) navigator.clipboard.writeText(text()).then(done, () => {}); else done();
   });
-  copy(el('copyApa'), apa.replace(/<[^>]+>/g, ''));
-  copy(el('copyBib'), bib);
+  copy(el('copyApa'), () => citeApa().replace(/<[^>]+>/g, ''));
+  copy(el('copyBib'), citeBib);
 }
 /* every picture is drawn again when the language changes */
 function paintArt() {
@@ -328,9 +336,9 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 const repaintNumbers = () => { paintGlyphs(); paintPalSample(); paintStyles(); Art.Hero.mount(el('heroArt')); };
 document.addEventListener('langchange', () => {
-  paintArt(); paintGlyphs(); paintPalettes(); paintStyles(); filterCatalog();
+  paintArt(); paintGlyphs(); paintPalettes(); paintStyles(); filterCatalog(); paintCite();
   /* the labels the search reads, in the new language */
-  els(".method-card[data-id]").forEach(b => { const m = Catalog.byId(b.dataset.id); if (m) b.setAttribute("aria-label", T(m.es, m.en) + " — " + m.by + " · " + whereT(m)); });
+  els(".method-card[data-id]").forEach(b => { const m = Catalog.byId(b.dataset.id); if (m) b.setAttribute("aria-label", T(m.es, m.en) + " — " + T(m.by, m.byEn) + " · " + whereT(m)); });
   const nav = el('stepper');
   if (nav) nav.querySelectorAll('.step-btn.soon').forEach(b => b.setAttribute('data-soon', T('pronto', 'soon')));
 });

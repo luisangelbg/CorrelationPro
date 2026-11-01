@@ -247,7 +247,7 @@ NL.mutualInfo = function (x0, y0, o) {
     acc += NL.digamma(cx + 1) + NL.digamma(cy + 1);
   }
   const I = NL.digamma(k) + NL.digamma(n) - acc / n;
-  return { id: 'mi', est: I, n, k, linfoot: sqrt(1 - exp(-2 * max(0, I))), conv: [[`Estimador de Kraskov, Stögbauer y Grassberger con k = ${k} vecinos sobre las dos variables estandarizadas, en nats.`, `Kraskov–Stögbauer–Grassberger estimator with k = ${k} neighbours on the two standardized variables, in nats.`]] };
+  return { id: 'mi', est: I, n, k, linfoot: sqrt(1 - exp(-2 * max(0, I))), conv: [[`Estimador de Kraskov, Stögbauer y Grassberger con k = ${k} vecinos sobre las dos variables estandarizadas, en nats.`, `Kraskov–Stögbauer–Grassberger estimator with k = ${k} neighbors on the two standardized variables, in nats.`]] };
 };
 
 /* ---------------- maximal correlation on quantile classes ---------------- */

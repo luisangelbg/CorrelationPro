@@ -247,7 +247,7 @@ document.addEventListener('DOMContentLoaded', () => setTimeout(() => {
       ['Una correlación alta no es acuerdo: dos métodos pueden correlacionar a 0.99 y diferir siempre por lo mismo.',
         'A high correlation is not agreement: two methods can correlate at 0.99 and always differ by the same amount.'],
       ['Con empates, el valor p «exacto» de Spearman y de Kendall deja de serlo: la app dice cuál usó.',
-        'With ties, the «exact» p-value of Spearman and Kendall no longer is: the app says which one it used.'],
+        'With ties, the “exact” p-value of Spearman and Kendall no longer is: the app says which one it used.'],
       ['r = 0 no quiere decir independencia: una parábola perfecta puede tener r = 0 y una correlación de distancias de 0.5.',
         'r = 0 does not mean independence: a perfect parabola can have r = 0 and a distance correlation of 0.5.'],
     ];

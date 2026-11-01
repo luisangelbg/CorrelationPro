@@ -140,7 +140,7 @@ Hero.apply = function (host) {
   host.querySelectorAll('.hg-pts circle').forEach(c => { c.style.fill = m ? '' : '#D9CDC6'; });
   const cap = host.querySelector('#heroCap'), tg = host.querySelector('#heroToggle');
   if (cap) cap.textContent = m ? T('Dentro de cada especie, las flores con sépalo más largo lo tienen más ancho.', 'Within each species, flowers with longer sepals have wider ones.')
-    : T('Juntas, las 150 flores parecen decir lo contrario: es la paradoja de Simpson.', 'Pooled, the 150 flowers seem to say the opposite: Simpson\'s paradox.');
+    : T('Juntas, las 150 flores parecen decir lo contrario: es la paradoja de Simpson.', 'Pooled, the 150 flowers seem to say the opposite: Simpson’s paradox.');
   if (tg) tg.textContent = m ? T('Ver todas juntas', 'See them pooled') : T('Ver por especie', 'See by species');
 };
 const reduced = () => window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;

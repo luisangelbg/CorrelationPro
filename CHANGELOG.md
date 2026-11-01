@@ -159,3 +159,29 @@ lo que se compara, cómo correrlo y los errores que la validación atrapó.
 - **Manual:** las citas de los créditos y del apéndice E.3 con el DOI, la dirección del código y la app en línea
   (también en la sección I.5); PDF reimpreso.
 - Las 285 pruebas siguen pasando.
+
+## La interfaz en inglés, revisada (1 de noviembre de 2026)
+
+Sin cambio de versión: sigue siendo la 1.0.0. Lo que salió al traducir el manual al inglés.
+
+- **Español que se colaba en inglés.** «Cómo citar» (`js/home.js`) da en inglés la cita APA y el BibTeX con el título
+  inglés de `CITATION.cff` («CorrelationPro: a browser-based platform for correlation analysis of every kind, with its
+  theory», «(Version 1.0.0) [Computer software]») y cambia con el idioma; los botones copian la del idioma activo. Los
+  autores de las fichas del catálogo dicen «and» en inglés («Goodman and Kruskal 1954»; `byEn` en `js/catalog.js`) y
+  el buscador encuentra las dos formas. «(Landis and Koch 1977)» en el Bloque 9. El nombre por omisión de la paleta del
+  Bloque 13 es «My palette» en inglés mientras no se escriba otro. Las listas de variables del Bloque 6 cambian de
+  idioma con la app (se quedaban con los nombres del idioma en que se abrieron los datos).
+- **Ortografía estadounidense** en todos los textos ingleses, también en el navegador, el estudio de figuras y el
+  editor ✎ de la app (variante de íconos propios): color, gray, center/centered («Centered log-ratio», «Center on the
+  mean»), neighbors, analyze/analyzed, license, catalog, toward, favor, behavioral, analog, canceled. No cambian
+  identificadores, claves, nombres de archivo ni los títulos de las obras citadas.
+- **Puntuación inglesa en inglés:** comillas “…” en lugar de «…» (también en las referencias en inglés), apóstrofo
+  tipográfico («Pearson’s r», «Anderson’s irises»; también en `data/generar_datos.R`, que escribe `js/datasets.js`), y
+  «1,999 / 4,999 / 9,999» en las réplicas bootstrap del Bloque 4. «20.5 %» con espacio, como el resto, en la tarjeta de
+  κ del Bloque 9.
+- **Erratas:** «separates each variable from its dependence» (Bloque 6) y «p-values with no multiple-testing
+  correction» (Bloque 13).
+- Los nombres largos de los coeficientes del laboratorio «Arrastra los puntos» pasan a un segundo renglón en vez de
+  cortarse («Distance correlation», «Correlación de distancias»).
+- `index.html` regenerado con `data/armar_index.js`. Las 285 pruebas siguen pasando; ninguna petición fuera del equipo
+  ni errores de consola al recorrer los trece bloques en los dos idiomas.

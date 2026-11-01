@@ -108,19 +108,19 @@ Data.infer = function (name, cells, o) {
     const distinct = [...new Set(nums)].sort((a, b) => a - b), k = distinct.length;
     const allInt = nums.every(v => Number.isInteger(v)), mn = distinct[0], mx = distinct[k - 1];
     res.role = 'var';
-    if (NAME.doy.test(nm) && mn >= 1 && mx <= 366) return Object.assign(res, { type: 'circular', unit: 'doy', why: ['El nombre dice «día del año» y los valores van de 1 a 366: es un dato circular (el día 365 está junto al 1).', 'The name says «day of year» and values lie between 1 and 366: circular data (day 365 is next to day 1).'] });
+    if (NAME.doy.test(nm) && mn >= 1 && mx <= 366) return Object.assign(res, { type: 'circular', unit: 'doy', why: ['El nombre dice «día del año» y los valores van de 1 a 366: es un dato circular (el día 365 está junto al 1).', 'The name says “day of year” and values lie between 1 and 366: circular data (day 365 is next to day 1).'] });
     if (NAME.angleDeg.test(nm) && mn >= 0 && mx <= 360) return Object.assign(res, { type: 'circular', unit: 'deg', why: ['El nombre indica una dirección y los valores van de 0 a 360: es un ángulo en grados (circular).', 'The name indicates a direction and values lie between 0 and 360: an angle in degrees (circular).'] });
-    if (NAME.hour.test(nm) && mn >= 0 && mx <= 24) return Object.assign(res, { type: 'circular', unit: 'hour', why: ['El nombre dice «hora» y los valores van de 0 a 24: es circular (las 23 h están junto a las 0 h).', 'The name says «hour» and values lie between 0 and 24: circular (23 h is next to 0 h).'] });
-    if (NAME.month.test(nm) && allInt && mn >= 1 && mx <= 12) return Object.assign(res, { type: 'circular', unit: 'month', why: ['El nombre dice «mes» y los valores son enteros de 1 a 12: es circular (diciembre está junto a enero).', 'The name says «month» and values are integers from 1 to 12: circular (December is next to January).'] });
+    if (NAME.hour.test(nm) && mn >= 0 && mx <= 24) return Object.assign(res, { type: 'circular', unit: 'hour', why: ['El nombre dice «hora» y los valores van de 0 a 24: es circular (las 23 h están junto a las 0 h).', 'The name says “hour” and values lie between 0 and 24: circular (23 h is next to 0 h).'] });
+    if (NAME.month.test(nm) && allInt && mn >= 1 && mx <= 12) return Object.assign(res, { type: 'circular', unit: 'month', why: ['El nombre dice «mes» y los valores son enteros de 1 a 12: es circular (diciembre está junto a enero).', 'The name says “month” and values are integers from 1 to 12: circular (December is next to January).'] });
     if (NAME.lat.test(nm)) return Object.assign(res, { type: 'continuous', role: 'coordY', why: ['El nombre indica una coordenada norte–sur: queda como coordenada Y (para los análisis espaciales del Bloque 10).', 'The name indicates a north–south coordinate: kept as the Y coordinate (for the spatial analyses of Block 10).'] });
     if (NAME.lon.test(nm)) return Object.assign(res, { type: 'continuous', role: 'coordX', why: ['El nombre indica una coordenada este–oeste: queda como coordenada X.', 'The name indicates an east–west coordinate: kept as the X coordinate.'] });
     if (NAME.id.test(nm) && allInt) {
       const repeats = k < present.length;
       return Object.assign(res, repeats
         ? { type: 'id', role: 'subject', why: ['Parece un identificador y sus valores se repiten: cada valor es un sujeto medido varias veces (medidas repetidas).', 'It looks like an identifier and its values repeat: each value is a subject measured several times (repeated measures).'] }
-        : { type: 'id', role: 'exclude', why: ['Parece un identificador (un valor distinto por fila): no se analiza.', 'It looks like an identifier (a different value per row): not analysed.'] });
+        : { type: 'id', role: 'exclude', why: ['Parece un identificador (un valor distinto por fila): no se analiza.', 'It looks like an identifier (a different value per row): not analyzed.'] });
     }
-    if (NAME.weight.test(nm) && mn >= 0) return Object.assign(res, { type: 'continuous', role: 'weight', why: ['El nombre indica un peso muestral o una frecuencia por fila. Ningún bloque pondera los casos, así que la columna se conserva pero no se analiza; cámbiala a «variable» si quieres usarla.', 'The name indicates a sampling weight or a frequency per row. No block weights the cases, so the column is kept but not analysed; change it to «variable» to use it.'] });
+    if (NAME.weight.test(nm) && mn >= 0) return Object.assign(res, { type: 'continuous', role: 'weight', why: ['El nombre indica un peso muestral o una frecuencia por fila. Ningún bloque pondera los casos, así que la columna se conserva pero no se analiza; cámbiala a «variable» si quieres usarla.', 'The name indicates a sampling weight or a frequency per row. No block weights the cases, so the column is kept but not analyzed; change it to “variable” to use it.'] });
     if (k === 1) return Object.assign(res, { type: 'continuous', role: 'exclude', why: ['Todos los valores son iguales: no puede correlacionar con nada.', 'All values are equal: it cannot correlate with anything.'] });
     if (k === 2) return Object.assign(res, { type: 'binary', levels: distinct.map(String), num: recode(res.num, distinct), why: [`Sólo toma dos valores (${distinct.join(' y ')}): binaria.`, `It takes only two values (${distinct.join(' and ')}): binary.`] });
     if (allInt && k <= 7 && present.length >= 10 && mx - mn <= 10) return Object.assign(res, { type: 'ordinal', levels: distinct.map(String), num: recode(res.num, distinct), why: [`Toma ${k} valores enteros (${mn} a ${mx}): probablemente una escala ordinal. Si es un conteo, cámbiala a continua.`, `It takes ${k} integer values (${mn} to ${mx}): probably an ordinal scale. If it is a count, change it to continuous.`] });
@@ -138,7 +138,7 @@ Data.infer = function (name, cells, o) {
   const texts = present.map(c => String(c).trim());
   const levels = [...new Set(texts)];
   const k = levels.length;
-  if (k === present.length && present.length > 10) return Object.assign(res, { type: 'id', role: NAME.id.test(nm) ? 'exclude' : 'exclude', why: ['Un texto distinto en cada fila: es un identificador o una etiqueta; no se analiza.', 'A different text in every row: an identifier or a label; not analysed.'] });
+  if (k === present.length && present.length > 10) return Object.assign(res, { type: 'id', role: NAME.id.test(nm) ? 'exclude' : 'exclude', why: ['Un texto distinto en cada fila: es un identificador o una etiqueta; no se analiza.', 'A different text in every row: an identifier or a label; not analyzed.'] });
   if (NAME.id.test(nm) && k < present.length) {
     const lv = levels.slice().sort();
     return Object.assign(res, { type: 'id', role: 'subject', levels: lv, num: codes(cells, idx, texts, lv, n), why: ['Parece un identificador que se repite: cada valor es un sujeto medido varias veces.', 'It looks like a repeated identifier: each value is a subject measured several times.'] });
@@ -147,7 +147,7 @@ Data.infer = function (name, cells, o) {
   if (ord) return Object.assign(res, { type: k === 2 ? 'binary' : 'ordinal', role: 'var', levels: ord, num: codes(cells, idx, texts, ord, n), why: [`Sus categorías forman una escala conocida (${ord.join(' < ')}): ordinal, en ese orden.`, `Its categories form a known scale (${ord.join(' < ')}): ordinal, in that order.`] });
   const lv = levels.slice().sort((a, b) => a.localeCompare(b, 'es'));
   if (k === 2) return Object.assign(res, { type: 'binary', role: 'var', levels: lv, num: codes(cells, idx, texts, lv, n), why: [`Dos categorías (${lv.join(' y ')}): binaria.`, `Two categories (${lv.join(' and ')}): binary.`] });
-  if (k > Math.max(30, present.length / 2)) return Object.assign(res, { type: 'text', role: 'exclude', why: [`${k} textos distintos: demasiados para ser categorías; no se analiza.`, `${k} different texts: too many to be categories; not analysed.`] });
+  if (k > Math.max(30, present.length / 2)) return Object.assign(res, { type: 'text', role: 'exclude', why: [`${k} textos distintos: demasiados para ser categorías; no se analiza.`, `${k} different texts: too many to be categories; not analyzed.`] });
   return Object.assign(res, { type: 'nominal', role: k <= 12 ? 'group' : 'var', levels: lv, num: codes(cells, idx, texts, lv, n), why: [`${k} categorías sin orden: nominal${k <= 12 ? '; puede servir para separar grupos' : ''}.`, `${k} unordered categories: nominal${k <= 12 ? '; it can be used to split groups' : ''}.`] });
 };
 function recode(num, levelValues) { const map = new Map(levelValues.map((v, i) => [v, i])); return num.map(v => (map.has(v) ? map.get(v) : NaN)); }
@@ -352,7 +352,7 @@ Data.boxcoxLambda = function (y) {
 Data.TRANSFORMS = {
   rank: { es: 'Rangos (promedio en empates)', en: 'Ranks (average for ties)', ok: c => ['continuous', 'ordinal', 'date'].includes(c.type) },
   z: { es: 'Estandarizar (z)', en: 'Standardize (z)', ok: c => c.type === 'continuous' },
-  center: { es: 'Centrar en la media', en: 'Centre on the mean', ok: c => c.type === 'continuous' },
+  center: { es: 'Centrar en la media', en: 'Center on the mean', ok: c => c.type === 'continuous' },
   ln: { es: 'Logaritmo natural', en: 'Natural logarithm', ok: c => c.type === 'continuous' },
   log10: { es: 'Logaritmo base 10', en: 'Base-10 logarithm', ok: c => c.type === 'continuous' },
   log1p: { es: 'log(x + 1) (admite ceros)', en: 'log(x + 1) (allows zeros)', ok: c => c.type === 'continuous' },
@@ -361,7 +361,7 @@ Data.TRANSFORMS = {
   boxcox: { es: 'Box–Cox (λ estimada)', en: 'Box–Cox (estimated λ)', ok: c => c.type === 'continuous' },
   normal: { es: 'Puntuaciones normales', en: 'Normal scores', ok: c => ['continuous', 'ordinal'].includes(c.type) },
   reverse: { es: 'Invertir la escala', en: 'Reverse the scale', ok: c => ['continuous', 'ordinal'].includes(c.type) },
-  clr: { es: 'Log-cociente centrado (composicional)', en: 'Centred log-ratio (compositional)', ok: (c, ds) => ds && ds.comp.some(gp => gp.includes(c.key)) },
+  clr: { es: 'Log-cociente centrado (composicional)', en: 'Centered log-ratio (compositional)', ok: (c, ds) => ds && ds.comp.some(gp => gp.includes(c.key)) },
 };
 Data.transform = function (ds, key, op) {
   const c = Data.col(ds, key), v = Array.from(c.num), n = v.length;
@@ -414,7 +414,7 @@ Data.transform = function (ds, key, op) {
   const nc = {
     key: 'c' + (++KEY), name, raw: out.map(x => (isFinite(x) ? x : '')), num: Float64Array.from(out), type: op === 'rank' && c.type === 'ordinal' ? 'continuous' : 'continuous', role: 'var', unit: null, levels: null,
     nMissing: out.filter(x => !isFinite(x)).length, derived: { from: c.key, op, note },
-    why: [`Creada con «${T.es}» a partir de ${c.name}${note && note.lambda != null ? ` (λ = ${note.lambda.toFixed(3)})` : ''}.`, `Made with «${T.en}» from ${c.name}${note && note.lambda != null ? ` (λ = ${note.lambda.toFixed(3)})` : ''}.`],
+    why: [`Creada con «${T.es}» a partir de ${c.name}${note && note.lambda != null ? ` (λ = ${note.lambda.toFixed(3)})` : ''}.`, `Made with “${T.en}” from ${c.name}${note && note.lambda != null ? ` (λ = ${note.lambda.toFixed(3)})` : ''}.`],
   };
   nc.auto = { type: nc.type, role: 'var' };
   ds.cols.push(nc);
@@ -477,42 +477,42 @@ Data.recommend = function (ds, ka, kb) {
       const MAP = { pearson: ['pearson', 4], spearman: ['spearman', 4], kendallB: ['kendall', 4], pbend: ['pbend', 4], dcor: ['dcor', 6], groups: ['pearson', 4] };
       const [id, blk] = MAP[v.id] || ['pearson', 4];
       add(id, v.es, v.en, [v.why[0] + (v.notes.length ? ' ' + v.notes.map(nt => nt[0]).join(' ') : ''), v.why[1] + (v.notes.length ? ' ' + v.notes.map(nt => nt[1]).join(' ') : '')], blk, 'best');
-      if (id !== 'spearman' && id !== 'dcor') add('spearman', 'ρ de Spearman', 'Spearman\'s ρ', ['La correlación de rangos: no supone una recta, sólo que la relación sube (o baja).', 'The rank correlation: it does not assume a line, only that the relation rises (or falls).'], 4);
-      if (id !== 'kendall' && (pc.distinct <= 10 || p.n < 30)) add('kendall', 'τ-b de Kendall', 'Kendall\'s τ-b', [pc.distinct <= 10 ? 'Una de las dos toma pocos valores: τ-b trata los empates de forma explícita.' : 'La muestra es chica: τ tiene una distribución exacta y un significado claro (concordancia).', pc.distinct <= 10 ? 'One of the two takes few values: τ-b handles ties explicitly.' : 'The sample is small: τ has an exact distribution and a clear meaning (concordance).'], 4);
+      if (id !== 'spearman' && id !== 'dcor') add('spearman', 'ρ de Spearman', 'Spearman’s ρ', ['La correlación de rangos: no supone una recta, sólo que la relación sube (o baja).', 'The rank correlation: it does not assume a line, only that the relation rises (or falls).'], 4);
+      if (id !== 'kendall' && (pc.distinct <= 10 || p.n < 30)) add('kendall', 'τ-b de Kendall', 'Kendall’s τ-b', [pc.distinct <= 10 ? 'Una de las dos toma pocos valores: τ-b trata los empates de forma explícita.' : 'La muestra es chica: τ tiene una distribución exacta y un significado claro (concordancia).', pc.distinct <= 10 ? 'One of the two takes few values: τ-b handles ties explicitly.' : 'The sample is small: τ has an exact distribution and a clear meaning (concordance).'], 4);
       if (id !== 'pbend' && pc.nOut > 0) add('pbend', 'Flexión porcentual o peso doble', 'Percentage bend or biweight', [`${pc.nOut} punto(s) fuera de la elipse robusta: una correlación robusta sirve de comparación.`, `${pc.nOut} point(s) outside the robust ellipse: a robust correlation is a useful comparison.`], 4);
-      if (!ord && id !== 'pearson') add('pearson', 'r de Pearson (con cautela)', 'Pearson\'s r (with care)', ['Infórmala junto a la recomendada si tu campo la espera, pero mira la nube.', 'Report it alongside the recommended one if your field expects it, but look at the cloud.'], 4, 'avoid');
+      if (!ord && id !== 'pearson') add('pearson', 'r de Pearson (con cautela)', 'Pearson’s r (with care)', ['Infórmala junto a la recomendada si tu campo la espera, pero mira la nube.', 'Report it alongside the recommended one if your field expects it, but look at the cloud.'], 4, 'avoid');
       if (id !== 'dcor') add('dcor', 'Correlación de distancias', 'Distance correlation', ['Como prueba general de independencia, detecta cualquier forma.', 'As a general test of independence, it detects any shape.'], 6);
       if (ord) add('polyserial', 'Poliserial', 'Polyserial', ['Si la ordinal resume una variable continua latente.', 'If the ordinal one summarizes a latent continuous variable.'], 8);
     } else {
-      add(ord ? 'spearman' : 'pearson', ord ? 'ρ de Spearman' : 'r de Pearson', ord ? 'Spearman\'s ρ' : 'Pearson\'s r', ['Muy pocos pares para revisar la forma de la nube.', 'Too few pairs to check the shape of the cloud.'], 4, 'best');
+      add(ord ? 'spearman' : 'pearson', ord ? 'ρ de Spearman' : 'r de Pearson', ord ? 'Spearman’s ρ' : 'Pearson’s r', ['Muy pocos pares para revisar la forma de la nube.', 'Too few pairs to check the shape of the cloud.'], 4, 'best');
     }
   } else if (key === 'oo') {
     const la = A.levels ? A.levels.length : 0, lb = B.levels ? B.levels.length : 0;
-    add(la === lb ? 'kendallB' : 'kendallC', la === lb ? 'τ-b de Kendall' : 'τ-c de Stuart', la === lb ? 'Kendall\'s τ-b' : 'Stuart\'s τ-c', [la === lb ? 'Dos escalas ordinales con el mismo número de niveles.' : 'Escalas con distinto número de niveles: τ-c puede llegar a ±1.', la === lb ? 'Two ordinal scales with the same number of levels.' : 'Scales with different numbers of levels: τ-c can reach ±1.'], 4, 'best');
-    add('spearman', 'ρ de Spearman', 'Spearman\'s ρ', ['La correlación de rangos más conocida.', 'The best-known rank correlation.'], 4);
-    add('gamma', 'γ de Goodman y Kruskal', 'Goodman and Kruskal\'s γ', ['Ignora los empates; exagera con muchos.', 'It ignores ties; it overstates with many.'], 8);
+    add(la === lb ? 'kendallB' : 'kendallC', la === lb ? 'τ-b de Kendall' : 'τ-c de Stuart', la === lb ? 'Kendall’s τ-b' : 'Stuart’s τ-c', [la === lb ? 'Dos escalas ordinales con el mismo número de niveles.' : 'Escalas con distinto número de niveles: τ-c puede llegar a ±1.', la === lb ? 'Two ordinal scales with the same number of levels.' : 'Scales with different numbers of levels: τ-c can reach ±1.'], 4, 'best');
+    add('spearman', 'ρ de Spearman', 'Spearman’s ρ', ['La correlación de rangos más conocida.', 'The best-known rank correlation.'], 4);
+    add('gamma', 'γ de Goodman y Kruskal', 'Goodman and Kruskal’s γ', ['Ignora los empates; exagera con muchos.', 'It ignores ties; it overstates with many.'], 8);
     add('polychoric', 'Policórica', 'Polychoric', ['Si cada escala resume una variable continua latente (reactivos de escala tipo Likert).', 'If each scale summarizes a latent continuous variable (Likert-type items).'], 8);
   } else if (key === 'bc') {
-    add('pointBiserial', 'Biserial puntual', 'Point-biserial', ['Una variable binaria genuina y una continua: es la r de Pearson y equivale a la t de dos grupos.', 'A genuine binary variable and a continuous one: it is Pearson\'s r and equivalent to the two-group t.'], 8, 'best');
+    add('pointBiserial', 'Biserial puntual', 'Point-biserial', ['Una variable binaria genuina y una continua: es la r de Pearson y equivale a la t de dos grupos.', 'A genuine binary variable and a continuous one: it is Pearson’s r and equivalent to the two-group t.'], 8, 'best');
     add('rankBiserial', 'Rango-biserial', 'Rank-biserial', ['Si la continua no es normal o tiene atípicos.', 'If the continuous one is not normal or has outliers.'], 8);
     add('biserial', 'Biserial', 'Biserial', ['Si la binaria es un corte de algo continuo (aprobado/reprobado).', 'If the binary one is a cut of something continuous (pass/fail).'], 8);
   } else if (key === 'bb') {
     add('phi', 'φ', 'φ', ['Dos binarias: su r de Pearson.', 'Two binaries: their Pearson r.'], 8, 'best');
-    add('oddsRatio', 'Razón de momios y Q de Yule', 'Odds ratio and Yule\'s Q', ['No dependen de las marginales.', 'They do not depend on the margins.'], 8);
+    add('oddsRatio', 'Razón de momios y Q de Yule', 'Odds ratio and Yule’s Q', ['No dependen de las marginales.', 'They do not depend on the margins.'], 8);
     add('tetrachoric', 'Tetracórica', 'Tetrachoric', ['Si cada binaria es un corte de una variable continua latente.', 'If each binary is a cut of a latent continuous variable.'], 8);
   } else if (key === 'bn' || key === 'nn' || key === 'bo' || key === 'no') {
-    add('cramer', 'V de Cramér (con corrección de sesgo)', 'Cramér\'s V (bias-corrected)', ['Categorías sin orden en al menos una: la asociación de su tabla.', 'Unordered categories in at least one: the association of their table.'], 8, 'best');
-    add('theilU', 'U de Theil y λ de Goodman y Kruskal', 'Theil\'s U and Goodman–Kruskal\'s λ', ['Asimétricas: cuánto predice una a la otra.', 'Asymmetric: how much one predicts the other.'], 8);
+    add('cramer', 'V de Cramér (con corrección de sesgo)', 'Cramér’s V (bias-corrected)', ['Categorías sin orden en al menos una: la asociación de su tabla.', 'Unordered categories in at least one: the association of their table.'], 8, 'best');
+    add('theilU', 'U de Theil y λ de Goodman y Kruskal', 'Theil’s U and Goodman–Kruskal’s λ', ['Asimétricas: cuánto predice una a la otra.', 'Asymmetric: how much one predicts the other.'], 8);
   } else if (key === 'cn') {
     add('eta', 'Razón de correlación η', 'Correlation ratio η', ['Una nominal (grupos) y una continua: la fracción de la varianza explicada por los grupos.', 'A nominal (groups) and a continuous one: the share of variance explained by the groups.'], 8, 'best');
   } else if (key === 'aa') {
-    add('circJS', 'Correlación circular–circular', 'Circular–circular correlation', ['Dos ángulos: 359° y 1° están juntos y Pearson no lo sabe.', 'Two angles: 359° and 1° are neighbours and Pearson does not know it.'], 10, 'best');
+    add('circJS', 'Correlación circular–circular', 'Circular–circular correlation', ['Dos ángulos: 359° y 1° están juntos y Pearson no lo sabe.', 'Two angles: 359° and 1° are neighbors and Pearson does not know it.'], 10, 'best');
   } else if (key === 'ac' || key === 'ao') {
     add('circLin', 'Correlación circular–lineal', 'Circular–linear correlation', ['Un ángulo y una variable lineal.', 'An angle and a linear variable.'], 10, 'best');
   }
   const comp = ds.comp.some(gp => gp.includes(ka) && gp.includes(kb));
   if (comp) recs.unshift({ id: 'rhoP', es: 'Proporcionalidad ρp', en: 'Proportionality ρp', why: ['Las dos son partes de un mismo todo: su correlación de Pearson es espuria por construcción (Pearson 1897).', 'Both are parts of one whole: their Pearson correlation is spurious by construction (Pearson 1897).'], blk: 10, level: 'best' });
-  if (ds.cols.some(c => c.role === 'coordX') && ds.cols.some(c => c.role === 'coordY')) recs.push({ id: 'dutilleul', es: 't modificada de Dutilleul', en: 'Dutilleul\'s modified t', why: ['Hay coordenadas: si los lugares cercanos se parecen, el valor p habitual es demasiado optimista.', 'There are coordinates: if nearby places resemble each other, the usual p-value is too optimistic.'], blk: 10, level: 'also' });
+  if (ds.cols.some(c => c.role === 'coordX') && ds.cols.some(c => c.role === 'coordY')) recs.push({ id: 'dutilleul', es: 't modificada de Dutilleul', en: 'Dutilleul’s modified t', why: ['Hay coordenadas: si los lugares cercanos se parecen, el valor p habitual es demasiado optimista.', 'There are coordinates: if nearby places resemble each other, the usual p-value is too optimistic.'], blk: 10, level: 'also' });
   if (ds.cols.some(c => c.role === 'time') && key === 'cc') recs.push({ id: 'ccf', es: 'Correlación cruzada con preblanqueo', en: 'Cross-correlation with prewhitening', why: ['Hay una columna de tiempo: dos series con tendencia correlacionan aunque no se relacionen.', 'There is a time column: two trending series correlate even if unrelated.'], blk: 10, level: 'also' });
   return { types: [A.type, B.type], recs, look };
 };

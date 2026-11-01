@@ -51,7 +51,7 @@ B2.fromDataset = function (d) {
 function loadExample(id) {
   const d = Datasets[id];
   if (!d) return;
-  setData(B2.fromDataset(d), L2(`Conjunto «${d.es}»: ${d.n} filas y ${d.vars.length} columnas. ${d.license.es}`, `Dataset «${d.en}»: ${d.n} rows and ${d.vars.length} columns. ${d.license.en}`));
+  setData(B2.fromDataset(d), L2(`Conjunto «${d.es}»: ${d.n} filas y ${d.vars.length} columnas. ${d.license.es}`, `Dataset “${d.en}”: ${d.n} rows and ${d.vars.length} columns. ${d.license.en}`));
 }
 B2.loadExample = loadExample;
 B2.useDataset = (ds, info) => setData(ds, info);
@@ -65,7 +65,7 @@ function readText(text, name, src) {
   const ds = Data.build(t.names, t.columns, { name, missing: missingCodes(), decimal: t.decimal, source: Object.assign({ delimiter: t.delimiter, decimal: t.decimal }, src) });
   const dname = { ',': T('coma', 'comma'), ';': T('punto y coma', 'semicolon'), '\t': T('tabulador', 'tab'), '|': T('barra', 'bar') }[t.delimiter];
   setData(ds, L2(`Leído «${esc(name)}»: ${ds.n} filas y ${ds.cols.length} columnas, separadas por ${dname}, con ${t.decimal === ',' ? 'coma' : 'punto'} decimal${src.encoding ? ' (' + src.encoding + ')' : ''}.`,
-    `Read «${esc(name)}»: ${ds.n} rows and ${ds.cols.length} columns, separated by ${dname}, with a decimal ${t.decimal === ',' ? 'comma' : 'point'}${src.encoding ? ' (' + src.encoding + ')' : ''}.`));
+    `Read “${esc(name)}”: ${ds.n} rows and ${ds.cols.length} columns, separated by ${dname}, with a decimal ${t.decimal === ',' ? 'comma' : 'point'}${src.encoding ? ' (' + src.encoding + ')' : ''}.`));
 }
 async function readFile(file) {
   clearMessages('b2Msgs');
@@ -75,7 +75,7 @@ async function readFile(file) {
     const isBook = /\.(xlsx|xlsm|ods)$/i.test(file.name) || (buf[0] === 0x50 && buf[1] === 0x4b);
     if (isBook) {
       const wb = DataIO.readWorkbook(buf);
-      const use = nm => { const ds = fromRows(wb.sheets[nm].map(r => r.map(v => (typeof v === 'number' ? v : String(v)))), file.name, { kind: 'file', file: file.name, sheet: nm }); setData(ds, L2(`Leída la hoja «${esc(nm)}» de «${esc(file.name)}»: ${ds.n} filas y ${ds.cols.length} columnas.`, `Read sheet «${esc(nm)}» of «${esc(file.name)}»: ${ds.n} rows and ${ds.cols.length} columns.`)); };
+      const use = nm => { const ds = fromRows(wb.sheets[nm].map(r => r.map(v => (typeof v === 'number' ? v : String(v)))), file.name, { kind: 'file', file: file.name, sheet: nm }); setData(ds, L2(`Leída la hoja «${esc(nm)}» de «${esc(file.name)}»: ${ds.n} filas y ${ds.cols.length} columnas.`, `Read sheet “${esc(nm)}” of “${esc(file.name)}”: ${ds.n} rows and ${ds.cols.length} columns.`)); };
       const full = wb.names.filter(nm => wb.sheets[nm].length > 1);
       if (full.length > 1) {
         const box = el('b2SheetPick');
@@ -170,7 +170,7 @@ function paintMissing() {
     ? L2('Por pares se aprovecha cada dato, pero cada correlación de una matriz puede salir de filas distintas y la matriz puede no ser válida (el Bloque 5 lo revisa y la corrige).', 'Pairwise uses every datum, but each correlation of a matrix may come from different rows and the matrix may not be valid (Block 5 checks and corrects it).')
     : L2('Por listas todas las correlaciones salen de las mismas filas, a costa de perder las incompletas.', 'Listwise every correlation comes from the same rows, at the cost of losing the incomplete ones.');
   clearMessages('b2MissMsgs');
-  ds.cols.forEach(c => { const s = Data.sentinels(c); if (s.length) showMessage('b2MissMsgs', 'warn', L2(`«${esc(label(c))}» tiene el valor ${s.join(', ')}, muy lejos de los demás: ¿es un código de «sin dato»? Si lo es, escríbelo en «Otros códigos de faltante» y vuelve a abrir el archivo.`, `«${esc(label(c))}» has the value ${s.join(', ')}, far from the others: is it a «no data» code? If so, write it in «Other missing codes» and open the file again.`)); });
+  ds.cols.forEach(c => { const s = Data.sentinels(c); if (s.length) showMessage('b2MissMsgs', 'warn', L2(`«${esc(label(c))}» tiene el valor ${s.join(', ')}, muy lejos de los demás: ¿es un código de «sin dato»? Si lo es, escríbelo en «Otros códigos de faltante» y vuelve a abrir el archivo.`, `“${esc(label(c))}” has the value ${s.join(', ')}, far from the others: is it a “no data” code? If so, write it in “Other missing codes” and open the file again.`)); });
 }
 function paintTransform() {
   const ds = state.data, sc = el('b2TrCol'), cur = sc.value;
@@ -295,7 +295,7 @@ document.addEventListener('DOMContentLoaded', () => {
     try {
       const nc = Data.transform(state.data, el('b2TrCol').value, el('b2TrOp').value);
       changed('transform');
-      showMessage('b2TrMsgs', 'ok', L2(`Columna «${esc(nc.name)}» creada.`, `Column «${esc(nc.name)}» created.`));
+      showMessage('b2TrMsgs', 'ok', L2(`Columna «${esc(nc.name)}» creada.`, `Column “${esc(nc.name)}” created.`));
     } catch (e) { showMessage('b2TrMsgs', 'error', esc(err2msg(e))); }
   });
   el('b2TrList').addEventListener('click', e => {

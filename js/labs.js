@@ -200,7 +200,7 @@ function sameReset() {
 }
 function sameBuild(host) {
   host.innerHTML = `<p class="lab-intro">${L2('Los puntos se mueven poco a poco hacia la figura que elijas, pero un movimiento sólo se acepta si las <b>medias</b>, las <b>desviaciones estándar</b> y la <b>r de Pearson</b> siguen iguales a dos decimales. Al final tienes nubes completamente distintas con los mismos números: por eso <b>siempre hay que ver los datos</b> (Anscombe 1973). El método es el recocido simulado de Matejka y Fitzmaurice (2017); las figuras son de esta app.',
-    'The points drift towards the figure you pick, but a move is only accepted if the <b>means</b>, the <b>standard deviations</b> and <b>Pearson\'s r</b> stay equal to two decimals. You end up with completely different clouds with the same numbers: that is why <b>one must always look at the data</b> (Anscombe 1973). The method is the simulated annealing of Matejka and Fitzmaurice (2017); the figures are this app\'s own.')}</p>` +
+    'The points drift toward the figure you pick, but a move is only accepted if the <b>means</b>, the <b>standard deviations</b> and <b>Pearson’s r</b> stay equal to two decimals. You end up with completely different clouds with the same numbers: that is why <b>one must always look at the data</b> (Anscombe 1973). The method is the simulated annealing of Matejka and Fitzmaurice (2017); the figures are this app’s own.')}</p>` +
     `<div class="pg-controls"><div class="preset-row" id="sameShapes">${Object.entries(SHAPES).map(([k, v]) => `<button type="button" class="chip${k === Same.target ? ' on' : ''}" data-shape="${k}">${L2(v[0], v[1])}</button>`).join('')}</div>` +
     `<button type="button" class="btn btn-primary btn-sm" id="sameGo">${L2('Transformar', 'Morph')}</button><button type="button" class="btn btn-ghost btn-sm" id="sameReset">${L2('Volver a la nube', 'Back to the cloud')}</button></div>` +
     `<div class="lab-grid"><div class="pg-pane"><div id="sameSvg"></div></div><div><div class="score-tiles" id="sameStats"></div><p class="pg-status" id="sameStatus"></p></div></div>`;
@@ -285,7 +285,7 @@ function guessNew() {
 }
 function guessBuild(host) {
   host.innerHTML = `<p class="lab-intro">${L2('¿Qué tan bien lees una nube? Mueve el control hasta la <i>r</i> que creas y pulsa «Comprobar». La puntuación no cuenta el error a secas: lo divide entre la diferencia que el ojo alcanza a notar, que es grande cerca de cero y chica cerca de ±1. Diez rondas.',
-    'How well do you read a cloud? Move the control to the <i>r</i> you believe and press «Check». The score does not count the raw error: it divides it by the difference the eye can notice, which is large near zero and small near ±1. Ten rounds.')}</p>` +
+    'How well do you read a cloud? Move the control to the <i>r</i> you believe and press “Check”. The score does not count the raw error: it divides it by the difference the eye can notice, which is large near zero and small near ±1. Ten rounds.')}</p>` +
     `<div class="lab-grid"><div class="pg-pane"><div id="guessSvg"></div></div><div>` +
     `<div class="lab-big" id="guessVal">.00</div><input type="range" class="guess-range" id="guessIn" min="-1" max="1" step="0.01" value="0" aria-label="${esc(T('Tu estimación de r', 'Your estimate of r'))}">` +
     `<div class="btn-row"><button type="button" class="btn btn-primary" id="guessCheck">${L2('Comprobar', 'Check')}</button><button type="button" class="btn btn-secondary" id="guessNext">${L2('Otra nube', 'Another cloud')}</button><button type="button" class="btn btn-ghost" id="guessRestart">${L2('Empezar de nuevo', 'Start over')}</button></div>` +
@@ -340,7 +340,7 @@ function detData(k, n, seed) {
 const Det = { n: 150, seed: 1 };
 function detectBuild(host) {
   host.innerHTML = `<p class="lab-intro">${L2('Nueve formas de relación, siete coeficientes. Pearson sólo ve la recta; Spearman y Kendall, lo monótono; la correlación de distancias, la ξ de Chatterjee y la D de Hoeffding detectan también la parábola, el seno, el círculo y la equis. El color es el valor absoluto; con asterisco, los significativos al 5 %.',
-    'Nine shapes of relation, seven coefficients. Pearson only sees the line; Spearman and Kendall, what is monotonic; distance correlation, Chatterjee\'s ξ and Hoeffding\'s D also detect the parabola, the sine, the circle and the X. Colour is the absolute value; with an asterisk, those significant at 5 %.')}</p>` +
+    'Nine shapes of relation, seven coefficients. Pearson only sees the line; Spearman and Kendall, what is monotonic; distance correlation, Chatterjee’s ξ and Hoeffding’s D also detect the parabola, the sine, the circle and the X. Color is the absolute value; with an asterisk, those significant at 5 %.')}</p>` +
     `<div class="pg-controls"><label class="inline-label" for="detN">n = <b id="detNv">150</b></label><input type="range" id="detN" min="20" max="400" step="10" value="150" style="width:200px"><button type="button" class="btn btn-secondary btn-sm" id="detAgain">${L2('Otra muestra', 'Another sample')}</button></div>` +
     `<div class="detect-wrap" id="detTable"></div><p class="lab-note">${L2('Valores p: Pearson y Spearman por t, Kendall normal, Blomqvist normal, dCor por su prueba t, ξ asintótica, Hoeffding por 199 permutaciones.', 'p-values: Pearson and Spearman by t, Kendall normal, Blomqvist normal, dCor by its t test, ξ asymptotic, Hoeffding by 199 permutations.')}</p>`;
   const inp = el('detN');
@@ -375,7 +375,7 @@ function detectPaint() {
 const Dance = { rho: 0.5, n: 20, list: [], hist: new Array(40).fill(0), total: 0, cover: 0, raf: null, run: false, seed: 1, last: 0 };
 function danceBuild(host) {
   host.innerHTML = `<p class="lab-intro">${L2('Cada fila es una muestra nueva de la misma población, con su <i>r</i> y su intervalo del 95 %. Mira cuánto «baila» <i>r</i> con muestras chicas y cuántos intervalos tocan la ρ verdadera (la línea dorada): a la larga, el 95 %. Al lado se junta la distribución de <i>r</i> (Cumming 2008).',
-    'Each row is a new sample from the same population, with its <i>r</i> and its 95 % interval. See how much <i>r</i> «dances» with small samples and how many intervals touch the true ρ (the gold line): in the long run, 95 %. Alongside, the distribution of <i>r</i> builds up (Cumming 2008).')}</p>` +
+    'Each row is a new sample from the same population, with its <i>r</i> and its 95 % interval. See how much <i>r</i> “dances” with small samples and how many intervals touch the true ρ (the gold line): in the long run, 95 %. Alongside, the distribution of <i>r</i> builds up (Cumming 2008).')}</p>` +
     `<div class="pg-controls"><label class="inline-label" for="danceRho">ρ = <b id="danceRhov">.50</b></label><input type="range" id="danceRho" min="-0.95" max="0.95" step="0.05" value="0.5" style="width:160px">` +
     `<label class="inline-label" for="danceN">n = <b id="danceNv">20</b></label><input type="range" id="danceN" min="5" max="200" step="1" value="20" style="width:160px">` +
     `<button type="button" class="btn btn-primary btn-sm" id="danceGo">${L2('Bailar', 'Dance')}</button><button type="button" class="btn btn-ghost btn-sm" id="danceClear">${L2('Borrar', 'Clear')}</button></div>` +
@@ -440,7 +440,7 @@ function dancePaint() {
   el('danceHist').innerHTML = h + '</svg>';
   const pc = Dance.total ? Math.round(100 * Dance.cover / Dance.total) : 0;
   el('danceMsg').innerHTML = Dance.total ? L2(`${Dance.total} muestras de n = ${Dance.n}: el ${pc} % de los intervalos contiene ρ = ${Fmt.bounded(Dance.rho, 2)}. La curva roja es la distribución teórica de <i>r</i> por la <i>z</i> de Fisher.`,
-    `${Dance.total} samples of n = ${Dance.n}: ${pc}% of the intervals contain ρ = ${Fmt.bounded(Dance.rho, 2)}. The red curve is the theoretical distribution of <i>r</i> through Fisher's <i>z</i>.`) : L2('Pulsa «Bailar».', 'Press «Dance».');
+    `${Dance.total} samples of n = ${Dance.n}: ${pc}% of the intervals contain ρ = ${Fmt.bounded(Dance.rho, 2)}. The red curve is the theoretical distribution of <i>r</i> through Fisher’s <i>z</i>.`) : L2('Pulsa «Bailar».', 'Press “Dance”.');
 }
 
 /* ================= lab 6: range restriction and measurement error ================= */
@@ -452,7 +452,7 @@ function rangeData() {
 }
 function rangeBuild(host) {
   host.innerHTML = `<p class="lab-intro">${L2('Dos maneras de que una correlación real salga más chica. <b>Restricción de rango</b>: si sólo observas parte de los valores de x (por ejemplo, sólo las plantas que sobrevivieron), <i>r</i> baja; la corrección de Thorndike (caso II) la recupera. <b>Error de medición</b>: si x y y se miden con ruido, <i>r</i> se «atenúa»; la corrección de Spearman la recupera si conoces la fiabilidad.',
-    'Two ways a real correlation comes out smaller. <b>Range restriction</b>: if you only observe part of the values of x (e.g. only the plants that survived), <i>r</i> drops; Thorndike\'s correction (case II) recovers it. <b>Measurement error</b>: if x and y are measured with noise, <i>r</i> is «attenuated»; Spearman\'s correction recovers it if the reliability is known.')}</p>` +
+    'Two ways a real correlation comes out smaller. <b>Range restriction</b>: if you only observe part of the values of x (e.g. only the plants that survived), <i>r</i> drops; Thorndike’s correction (case II) recovers it. <b>Measurement error</b>: if x and y are measured with noise, <i>r</i> is “attenuated”; Spearman’s correction recovers it if the reliability is known.')}</p>` +
     `<div class="pg-controls"><label class="inline-label" for="rngLo">${L2('Se observan los percentiles de x de', 'Observed percentiles of x from')} <b id="rngLov">0</b></label><input type="range" id="rngLo" min="0" max="90" step="5" value="0" style="width:130px">` +
     `<label class="inline-label" for="rngHi">${L2('a', 'to')} <b id="rngHiv">100</b></label><input type="range" id="rngHi" min="10" max="100" step="5" value="100" style="width:130px">` +
     `<label class="inline-label" for="rngRel">${L2('Fiabilidad de cada medición', 'Reliability of each measurement')} <b id="rngRelv">1.00</b></label><input type="range" id="rngRel" min="0.3" max="1" step="0.05" value="1" style="width:130px"></div>` +
@@ -490,7 +490,7 @@ function rangePaint() {
   el('rngTiles').innerHTML = [[T('ρ verdadera', 'True ρ'), Rng.rho], [T('r con todos', 'r with all'), rAll], [T('r observada', 'Observed r'), rObs], [T('corregida por rango', 'range-corrected'), rTh], [T('y por atenuación', 'and for attenuation'), rSp]]
     .map(([t, v]) => `<div><small>${t}</small><b>${Fmt.bounded(v, 2)}</b></div>`).join('');
   el('rngMsg').innerHTML = L2(`Con ${kx.length} de 400 plantas, la <i>r</i> observada es ${Fmt.bounded(rObs, 2)}. La corrección de Thorndike usa la razón de desviaciones <i>U</i> = ${Fmt.num(U, 2)}; la de Spearman divide entre la fiabilidad (${Fmt.num(Rng.rel, 2)}). Ninguna corrección es mejor que la información que se le da.`,
-    `With ${kx.length} of 400 plants the observed <i>r</i> is ${Fmt.bounded(rObs, 2)}. Thorndike's correction uses the ratio of deviations <i>U</i> = ${Fmt.num(U, 2)}; Spearman's divides by the reliability (${Fmt.num(Rng.rel, 2)}). No correction is better than the information it is given.`);
+    `With ${kx.length} of 400 plants the observed <i>r</i> is ${Fmt.bounded(rObs, 2)}. Thorndike’s correction uses the ratio of deviations <i>U</i> = ${Fmt.num(U, 2)}; Spearman’s divides by the reliability (${Fmt.num(Rng.rel, 2)}). No correction is better than the information it is given.`);
 }
 
 /* ================= the tabs ================= */

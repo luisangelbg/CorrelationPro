@@ -227,7 +227,7 @@ math[display="block"] { margin: 6px 0; }
 .coef-row { display: grid; grid-template-columns: minmax(0, 1.3fr) minmax(48px, 2fr) 46px 60px; gap: 6px; align-items: center; font-size: 0.82rem; padding: 3px 6px; border-radius: 8px; }
 .coef-row:hover { background: var(--bg-soft); }
 .coef-row .cn { font-weight: 600; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
-.coef-row .cn small { display: block; font-weight: 500; color: var(--text-muted); font-size: 0.68rem; }
+.coef-row .cn small { display: block; font-weight: 500; color: var(--text-muted); font-size: 0.68rem; white-space: normal; line-height: 1.2; } /* long names wrap instead of being cut */
 .coef-row .cv { font-family: var(--mono); font-variant-numeric: tabular-nums; text-align: right; font-weight: 700; }
 .coef-row .cp { font-family: var(--mono); font-size: 0.74rem; text-align: right; color: var(--text-muted); }
 .coef-row .cp.sig { color: var(--primary-text); font-weight: 700; }
