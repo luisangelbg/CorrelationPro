@@ -57,7 +57,7 @@
 
   <!-- 2.3 -->
   <h2 id="s2-3"><span class="num">2.3</span>Your data at a glance</h2>
-  <p>When you open some data, a message says what was read—“Read «pasted data»: 12 rows and 4 columns, separated by tab, with a decimal point.”—and the <span class="ui">Your data</span> card shows five figures and the table.</p>
+  <p>When you open some data, a message says what was read—<i>Read “pasted data”: 12 rows and 4 columns, separated by tab, with a decimal point.</i>—and the <span class="ui">Your data</span> card shows five figures and the table.</p>
   <figure class="w80">
     <div class="marco"><img src="../img/en/b2-datos.png" alt="The Your data card with Switzerland, 1888"></div>
     <figcaption><b>Figure 2.3.</b> Switzerland, 1888: 47 rows, 7 columns of which 6 are in use (the district is an identifier), all complete. Under the name of each column goes its kind.</figcaption>
@@ -139,13 +139,13 @@
     <thead><tr><th style="width:2.2in">Transformation</th><th>What for</th></tr></thead>
     <tbody>
       <tr><td>Ranks (average for ties)</td><td>Working with the order; Pearson on the ranks is Spearman</td></tr>
-      <tr><td>Standardize (<i>z</i>) · Centre on the mean</td><td>Putting the variables on the same scale; they do not change any correlation</td></tr>
+      <tr><td>Standardize (<i>z</i>) · Center on the mean</td><td>Putting the variables on the same scale; they do not change any correlation</td></tr>
       <tr><td>Natural logarithm · Base-10 logarithm · log(<i>x</i> + 1)</td><td>Multiplicative relations and long right tails; the last one allows zeros</td></tr>
       <tr><td>Square root · Inverse 1/<i>x</i></td><td>Counts and rates</td></tr>
       <tr><td>Box–Cox (estimated λ)</td><td>The power that brings the variable closest to the normal (Box and Cox, 1964)</td></tr>
       <tr><td>Normal scores</td><td>The ranks turned into normal quantiles: the basis of the Gaussian rank correlation</td></tr>
       <tr><td>Reverse the scale</td><td>Making “more” mean the same thing on two scales</td></tr>
-      <tr><td>Centred log-ratio</td><td>The parts of a whole (compositional data), before correlating them</td></tr>
+      <tr><td>Centered log-ratio</td><td>The parts of a whole (compositional data), before correlating them</td></tr>
     </tbody>
   </table>
   <p class="small">The menu only offers the transformations that make sense for the chosen column: the logarithm, for example, does not appear if there are zeros or negative values.</p>
