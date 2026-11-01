@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>CorrelationPro · Manual de usuario · Capítulo 3</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,500;0,600;1,500&family=Crimson+Pro:ital,wght@0,400;0,600;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../interior.css">
+<script src="../paginar.js"></script>
+</head>
+<body>
+
+<section class="capitulo" id="cap-3" data-pestana="3" data-orden="3" style="--acento: var(--b3)">
+  <div class="cap-apertura">
+    <div class="cap-num">3</div>
+    <div class="cap-etiqueta">Capítulo tres · Bloque 3</div>
+    <h1 data-corto="Exploración">Exploración y supuestos</h1>
+    <div class="cap-regla"></div>
+    <p class="cap-resumen">Un coeficiente resume una nube de puntos en un solo número, y ese número sólo es fiel si la nube es como el coeficiente supone. Este bloque mira antes de medir: la forma de cada variable, la del conjunto y la de cada par; busca los atípicos, la curvatura, el abanico, los puntos que deciden solos y los grupos que invierten una relación, y para cada par dice qué coeficiente lo describe mejor y por qué.</p>
+    <div class="cap-franja"><span class="k3"></span><span class="k3"></span><span class="k4"></span><span class="k10"></span></div>
+    <ul class="cap-contenido">
+      <li><b>3.1</b>Qué explorar</li>
+      <li><b>3.2</b>La matriz de dispersión</li>
+      <li><b>3.3</b>La forma de cada variable</li>
+      <li><b>3.4</b>Normalidad conjunta y atípicos multivariados</li>
+      <li><b>3.5</b>Los supuestos de cada par</li>
+      <li><b>3.6</b>El par elegido, de cerca</li>
+      <li><b>3.7</b>Del Bloque 3 a los demás</li>
+    </ul>
+  </div>
+
+  <!-- 3.1 -->
+  <h2 id="s3-1"><span class="num">3.1</span>Qué explorar</h2>
+  <p class="lead">El bloque trabaja con las columnas numéricas —continuas y ordinales— que tienen papel de variable en el Bloque 2. No hay que pulsar nada para calcular: cada cambio vuelve a hacer todas las cuentas.</p>
+  <p>Las variables aparecen como botones. Al abrir unos datos quedan elegidas las ocho primeras; un clic quita o pone una, siempre queda al menos una y caben hasta diez a la vez (para más, la matriz del Bloque 5). Las ordinales llevan la marca <span class="ui">ord.</span>, porque cambian la recomendación de sus pares.</p>
+  <p><span class="ui">Colorear por grupo</span> ofrece las columnas nominales o binarias con dos a ocho categorías; si alguna tiene papel de grupo, queda elegida sola. El grupo colorea los puntos de todas las nubes, añade la <i>r</i> dentro de cada grupo y activa la búsqueda de la paradoja de Simpson. <span class="ui">Línea en cada nube</span> decide qué se dibuja en las nubes de la matriz: el <span class="ui">Suavizado LOWESS</span> (la opción de omisión), la <span class="ui">Recta de mínimos cuadrados</span> o <span class="ui">Ninguna</span>.</p>
+
+  <figure>
+    <div class="marco"><img src="../img/b3-que.png" alt="La tarjeta Qué explorar con las cuatro medidas de los lirios, la especie como grupo y el suavizado LOWESS"></div>
+    <figcaption><b>Figura 3.1.</b> Los lirios: las cuatro medidas elegidas, la especie como grupo (con sus tres categorías entre paréntesis) y el suavizado LOWESS en las nubes.</figcaption>
+  </figure>
+  <div class="caja nota">
+    <div class="caja-t"><span class="ico">i</span>Con muchos datos</div>
+    <p>Las cuentas usan siempre todas las filas. Para que la página siga ágil, las nubes de la matriz dibujan a lo más 1&nbsp;500 puntos elegidos al azar, y una nota lo dice debajo. Con más de 400 filas o más de seis variables aparece una espera mientras se calcula.</p>
+  </div>
+
+  <!-- 3.2 -->
+  <h2 id="s3-2"><span class="num">3.2</span>La matriz de dispersión</h2>
+  <p>Cada par de variables tiene dos celdas. <b>Abajo</b> de la diagonal va su nube, con la variable de la fila en el eje vertical y la de la columna en el horizontal, y la línea elegida. En la <b>diagonal</b>, el histograma de cada variable. <b>Arriba</b>, la <i>r</i> de Pearson con sus estrellas (* <i>p</i> &lt; .05, ** <i>p</i> &lt; .01, *** <i>p</i> &lt; .001) y, debajo, la ρ de Spearman; el color de la <i>r</i> sigue la paleta elegida en el Bloque 1 y su tamaño crece con |<i>r</i>|, de modo que las correlaciones fuertes saltan a la vista. Con un grupo, al pie de cada celda de arriba van, en el color de cada grupo, las <i>r</i> dentro de los grupos.</p>
+  <p>Un clic en una celda de arriba o de abajo lleva ese par a la sección <span class="ui">El par elegido</span> (sección 3.6) y lo enmarca en rojo en sus dos celdas; un clic en la diagonal lleva esa variable a <span class="ui">Cada variable</span>.</p>
+
+  <figure class="w80">
+    <div class="marco"><img src="../img/b3-splom.png" alt="La matriz de dispersión de los lirios coloreada por especie"></div>
+    <figcaption><b>Figura 3.2.</b> La matriz de los lirios por especie. Entre el largo y el ancho del sépalo (celdas enmarcadas), <i>r</i> = −.12, sin estrellas; dentro de cada especie, .74, .53 y .46. Juntar las tres especies invierte el signo: es la paradoja de Simpson, a simple vista.</figcaption>
+  </figure>
+  <div class="caja ejemplo">
+    <div class="caja-t"><span class="ico">▸</span>Ejemplo · lo que la matriz enseña de los lirios</div>
+    <p>El histograma del largo del pétalo tiene un hueco: las setosas, de pétalos cortos, quedan aparte de las otras dos especies. Juntando todo, el largo y el ancho del pétalo dan <i>r</i> = .96; dentro de cada especie, .33, .79 y .32. Casi toda esa correlación tan alta viene de que las especies difieren en tamaño, no de que dentro de una especie las flores de pétalos largos los tengan también anchos.</p>
+  </div>
+
+  <!-- 3.3 -->
+  <h2 id="s3-3"><span class="num">3.3</span>La forma de cada variable</h2>
+  <p>La tabla <span class="ui">Cada variable</span> da, para cada una, el número de datos, la media, la desviación estándar (DE), la asimetría <i>g</i><sub>1</sub> y la curtosis en exceso <i>g</i><sub>2</sub>, la prueba de Shapiro–Wilk (<i>W</i> y su valor <i>p</i>), la de Anderson–Darling (<i>A</i>² y su valor <i>p</i>), una gráfica Q–Q en miniatura y una <span class="ui">Lectura</span> en palabras. Los valores <i>p</i> van en rojo por debajo de .01, en ámbar entre .01 y .05 y en verde desde .05; <i>g</i><sub>1</sub> va en ámbar si pasa de 1 en valor absoluto, y <i>g</i><sub>2</sub> si pasa de 2.</p>
+  <p>Un clic en una fila (o <code>Intro</code> sobre ella) dibuja debajo el histograma de esa variable con la curva normal de su misma media y DE, y su gráfica Q–Q normal: si los datos fueran normales, los puntos seguirían la diagonal punteada.</p>
+
+  <figure class="w80">
+    <div class="marco"><img src="../img/b3-variable.png" alt="La tabla de normalidad de las cuatro medidas de los lirios con el histograma y la gráfica Q–Q del largo del sépalo"></div>
+    <figcaption><b>Figura 3.3.</b> Las cuatro medidas de los lirios. El largo del sépalo da <i>W</i> = 0.976 y <i>p</i> = .010, en ámbar: «no normal», aunque su Q–Q sólo se aparta en los extremos. El ancho del sépalo «parece normal» (<i>p</i> = .101) aunque Anderson–Darling dé .020: la lectura sigue a Shapiro–Wilk. Los dos pétalos, con <i>p</i> &lt; .001, tienen una Q–Q escalonada: las setosas, aparte.</figcaption>
+  </figure>
+
+  <p>La tabla 3.1 dice cuándo aparece cada lectura. Las que no son normales van en rojo si <i>p</i> &lt; .01 y en ámbar si <i>p</i> está entre .01 y .05.</p>
+  <table class="compacta">
+    <caption><b>Tabla 3.1.</b> La lectura de cada variable</caption>
+    <thead><tr><th style="width:1.9in">Lectura</th><th>Cuándo aparece</th></tr></thead>
+    <tbody>
+      <tr><td><b>parece normal</b></td><td>el valor <i>p</i> de Shapiro–Wilk es de .05 o más</td></tr>
+      <tr><td><b>se aparta poco (n grande)</b></td><td><i>p</i> &lt; .05, pero con más de 300 datos, |<i>g</i><sub>1</sub>| ≤ 1 y |<i>g</i><sub>2</sub>| ≤ 2: la prueba detecta una desviación que no importa</td></tr>
+      <tr><td><b>sesgada a la derecha · a la izquierda</b></td><td><i>p</i> &lt; .05 y <i>g</i><sub>1</sub> &gt; 1 · <i>g</i><sub>1</sub> &lt; −1</td></tr>
+      <tr><td><b>colas pesadas · colas ligeras</b></td><td><i>p</i> &lt; .05, |<i>g</i><sub>1</sub>| ≤ 1 y <i>g</i><sub>2</sub> &gt; 2 · <i>g</i><sub>2</sub> &lt; −2</td></tr>
+      <tr><td><b>no normal</b></td><td><i>p</i> &lt; .05 sin una asimetría o una curtosis grande que lo explique (por ejemplo, una mezcla de grupos)</td></tr>
+    </tbody>
+  </table>
+
+  <div class="caja importante">
+    <div class="caja-t"><span class="ico">!</span>La r de Pearson no pide normalidad para describir</div>
+    <p>Como resumen de cuánto se alinea una nube, <i>r</i> no supone nada. Lo que pide normalidad —la de las dos variables juntas— es su prueba clásica y su intervalo de Fisher. Y con muestras grandes las pruebas de normalidad rechazan desviaciones sin importancia práctica: manda la gráfica Q–Q. Si dudas, el Bloque 4 da el valor <i>p</i> por permutación y el intervalo por bootstrap, que no dependen de la normalidad.</p>
+  </div>
+  <div class="caja teoria">
+    <div class="caja-t"><span class="ico">θ</span>Teoría en breve · las pruebas de normalidad</div>
+    <p><b>Shapiro–Wilk</b> (1965) compara los datos ordenados con lo que se esperaría de una normal; <i>W</i> cerca de 1 es normal. Su valor <i>p</i> sigue la aproximación de Royston (1995), válida de 3 a 5&nbsp;000 datos; fuera de ese recorrido la tabla pone «—». <b>Anderson–Darling</b> mide la distancia entre la distribución acumulada de los datos y la normal ajustada, con más peso en las colas; su valor <i>p</i> es el de Stephens (D’Agostino y Stephens 1986) y necesita al menos 8 datos. La <b>asimetría</b> <i>g</i><sub>1</sub> y la <b>curtosis</b> en exceso <i>g</i><sub>2</sub> dicen en qué se aparta: |<i>g</i><sub>1</sub>| &gt; 1 o |<i>g</i><sub>2</sub>| &gt; 2 ya importan para la prueba de <i>r</i>.</p>
+  </div>
+
+  <!-- 3.4 -->
+  <h2 id="s3-4"><span class="num">3.4</span>Normalidad conjunta y atípicos multivariados</h2>
+  <p>Que cada variable sea normal no basta: la normal multivariada pide además que todas sus combinaciones lo sean. Esta tarjeta usa las filas completas en todas las variables elegidas (hacen falta al menos dos variables y cuatro filas completas más que variables) y muestra cinco cifras:</p>
+  <ul>
+    <li><b>Filas completas</b>, con el número de variables.</li>
+    <li><b>Asimetría de Mardia</b>, con su χ² y sus <i>p</i>(<i>p</i>+1)(<i>p</i>+2)/6 grados de libertad (con menos de 20 filas, corregida).</li>
+    <li><b>Curtosis de Mardia</b>, con su <i>z</i>.</li>
+    <li><b>Henze–Zirkler</b>, una prueba de conjunto que detecta cualquier alejamiento de la normal.</li>
+    <li><b>Atípicos robustos</b>: las filas que pasan el corte con la distancia robusta, y cuántas con la clásica.</li>
+  </ul>
+  <p>Mardia y Henze–Zirkler se calculan hasta con 2&nbsp;500 filas. El borde de color de cada cifra sigue la escala de los valores <i>p</i> de la tabla anterior: rojo, ámbar o verde.</p>
+  <p>La gráfica compara las distancias de Mahalanobis al cuadrado de cada fila —la clásica en gris, la robusta en rojo— con los cuantiles de χ² con tantos grados de libertad como variables; en una normal, los puntos siguen la diagonal. La línea punteada horizontal es el corte χ²(0.975). A su lado, la tabla <span class="ui">Filas más alejadas</span> da las ocho filas que más pasan el corte robusto, con sus dos distancias, y cuántas más hay. Las filas en gris y cursiva son las que la distancia clásica no ve: el <b>enmascaramiento</b>.</p>
+
+  <figure class="w80">
+    <div class="marco"><img src="../img/b3-conjunta.png" alt="Las pruebas de normalidad conjunta de los lirios, la gráfica de distancias frente a χ² y la tabla de filas alejadas"></div>
+    <figcaption><b>Figura 3.4.</b> Las cuatro medidas de los lirios juntas. La asimetría de Mardia (67.43 con 20 grados de libertad) y Henze–Zirkler (2.336) dan <i>p</i> &lt; .001: el conjunto no es normal, aunque la curtosis sí lo parezca (<i>p</i> = .818). Pasan el corte (11.14) 21 filas con la distancia robusta y sólo 6 con la clásica; las filas 146 y 145 sólo las ve la robusta.</figcaption>
+  </figure>
+  <div class="caja teoria">
+    <div class="caja-t"><span class="ico">θ</span>Teoría en breve · clásica frente a robusta</div>
+    <p>La distancia clásica usa la media y la covarianza de todos los datos, y los atípicos las inflan hasta esconderse: es el efecto de enmascaramiento. La robusta usa el estimador ortogonalizado de Gnanadesikan y Kettenring (Maronna y Zamar 2002) con escalas τ y un repesado que deja fuera lo que pasa del corte, de modo que los atípicos quedan lejos. <b>Mardia</b> (1970) prueba la asimetría y la curtosis multivariadas; <b>Henze y Zirkler</b> (1990) comparan la función característica de los datos con la de la normal, y su prueba es consistente contra cualquier alternativa.</p>
+  </div>
+  <div class="caja importante">
+    <div class="caja-t"><span class="ico">!</span>Un atípico no es un error</div>
+    <p>Antes de quitar una fila, mírala: puede ser un error de captura, un código de faltante o una observación real y valiosa. Y cuando se mezclan grupos distintos, como las tres especies de lirios, los «atípicos» pueden ser simplemente un grupo lejos de los demás; en ese caso, lo que corresponde es analizar dentro de los grupos.</p>
+  </div>
+
+  <!-- 3.5 -->
+  <h2 id="s3-5"><span class="num">3.5</span>Los supuestos de cada par</h2>
+  <p>La tabla <span class="ui">Cada par</span> revisa todos los pares a la vez, cada uno con sus filas completas en las dos variables (por eso su <i>n</i> puede variar). Para cada par da <i>n</i>, <i>r</i> y ρ, y cuatro diagnósticos:</p>
+  <ul>
+    <li><span class="ui">Curva</span>: el valor <i>p</i> de añadir un término cuadrático a la recta.</li>
+    <li><span class="ui">Abanico</span>: el de la prueba de Breusch y Pagan en su forma estudentizada (Koenker 1981), que mira si la dispersión cambia a lo largo de la recta.</li>
+    <li><span class="ui">Fuera</span>: cuántos puntos quedan fuera de la elipse robusta del 97.5&nbsp;%.</li>
+    <li><span class="ui">Mayor |Δr|</span>: lo más que cambia <i>r</i> al quitar un solo punto.</li>
+  </ul>
+  <p>Con ellos, la tabla da las <span class="ui">Señales</span> de la tabla 3.2 y una <span class="ui">Recomendada</span>: el coeficiente que mejor describe el par. Un clic en una fila lleva el par a la sección siguiente. Un par con menos de cinco filas completas dice «muy pocos pares completos».</p>
+
+  <figure>
+    <div class="marco"><img src="../img/b3-pares.png" alt="La tabla de supuestos de los seis pares de medidas de los lirios"></div>
+    <figcaption><b>Figura 3.5.</b> Los seis pares de los lirios con la especie como grupo. Cinco piden analizar <span class="ui">Por grupos</span>: en tres la relación cambia de signo dentro de las especies (Simpson) y en dos juntar las especies la infla. Sólo el largo del sépalo con el largo del pétalo, que se curva, recibe la ρ de Spearman.</figcaption>
+  </figure>
+
+  <table class="compacta">
+    <caption><b>Tabla 3.2.</b> Las señales de cada par</caption>
+    <thead><tr><th style="width:1.35in">Señal</th><th>Aparece cuando…</th></tr></thead>
+    <tbody>
+      <tr><td><b>curva</b></td><td>el término cuadrático da <i>p</i> &lt; .01</td></tr>
+      <tr><td><b>abanico</b></td><td>Breusch–Pagan da <i>p</i> &lt; .01</td></tr>
+      <tr><td><b>no normal</b></td><td>Shapiro–Wilk da <i>p</i> &lt; .05 en al menos una de las dos variables</td></tr>
+      <tr><td><b>punto influyente</b></td><td>el mayor |Δ<i>r</i>| pasa el límite de la sección 3.6 y hay al menos un punto fuera de la elipse robusta</td></tr>
+      <tr><td><b>pocos valores</b></td><td>una de las dos toma diez valores distintos o menos</td></tr>
+      <tr><td><b>no monótona</b></td><td>la correlación de distancias pasa a |ρ| en más de 0.25: la nube sube y baja (se calcula hasta con 2&nbsp;000 pares)</td></tr>
+      <tr><td><b>Simpson</b></td><td>con un grupo: en al menos la mitad de los grupos con cinco casos o más, <i>r</i> tiene el signo contrario y |<i>r</i>| ≥ .3</td></tr>
+      <tr><td><b>grupos</b></td><td>con un grupo y sin Simpson: la <i>r</i> media dentro de los grupos difiere en 0.3 o más de la <i>r</i> juntando todo</td></tr>
+    </tbody>
+  </table>
+
+  <p>La recomendación sigue un orden fijo: gana la primera regla que se cumple. Las razones del orden son de sentido común: si los grupos cambian la relación, ningún coeficiente calculado juntando todo la describe; si la nube sube y baja, ningún coeficiente monótono la ve; y sólo cuando la nube es recta tiene sentido preguntar por los puntos que deciden solos.</p>
+  <table class="compacta">
+    <caption><b>Tabla 3.3.</b> Cómo se elige el coeficiente recomendado</caption>
+    <thead><tr><th style="width:0.3in">#</th><th style="width:2.6in">Si…</th><th>recomienda</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>hay Simpson o efecto de los grupos</td><td><b>Por grupos</b>: analizar dentro de los grupos (Bloque 10)</td></tr>
+      <tr><td>2</td><td>la relación no es monótona</td><td><b>dCor o ξ</b>: la correlación de distancias o la ξ de Chatterjee (Bloque 6)</td></tr>
+      <tr><td>3</td><td>al menos una de las dos es ordinal</td><td><b>ρ de Spearman</b>, o <b>τ-b de Kendall</b> si hay diez valores distintos o menos</td></tr>
+      <tr><td>4</td><td>hay curva, o <i>r</i> y ρ difieren en 0.1 o más</td><td><b>ρ de Spearman</b> (o τ-b, con pocos valores)</td></tr>
+      <tr><td>5</td><td>hay un punto influyente</td><td><b>Flexión porcentual</b>, una correlación robusta (Bloque 4)</td></tr>
+      <tr><td>6</td><td>nada de lo anterior</td><td><b>r de Pearson</b>; si alguna no es normal o hay abanico, con la nota de usar la permutación o el bootstrap del Bloque 4</td></tr>
+    </tbody>
+  </table>
+  <p>La etiqueta de la recomendación es verde cuando es la <i>r</i> de Pearson sin notas, ámbar cuando es Pearson con una nota y dorada cuando el par pide otro coeficiente.</p>
+  <div class="caja ejemplo">
+    <div class="caja-t"><span class="ico">▸</span>Ejemplo · quince pares de una economía</div>
+    <p>Las seis series anuales de la economía de Estados Unidos de 1947 a 1962 (figura 3.6) dan las tres clases de respuesta. Ocho pares reciben la <i>r</i> de Pearson. Tres, la ρ: dos porque se curvan, y el de los desempleados con las fuerzas armadas porque <i>r</i> = −.18 y ρ = −.34 difieren en más de 0.1. Y cuatro de los cinco pares con las fuerzas armadas, que crecen de golpe en 1951 con la guerra de Corea y luego bajan poco a poco, son «no monótona»: dCor o ξ.</p>
+  </div>
+
+  <figure class="w70">
+    <div class="marco"><img src="../img/b3-longley.png" alt="La tabla de supuestos de los quince pares de la economía de Estados Unidos de 1947 a 1962"></div>
+    <figcaption><b>Figura 3.6.</b> La economía de Estados Unidos de 1947 a 1962: dieciséis años, seis variables y quince pares, con las tres clases de recomendación.</figcaption>
+  </figure>
+
+  <!-- 3.6 -->
+  <h2 id="s3-6"><span class="num">3.6</span>El par elegido, de cerca</h2>
+  <p>La última tarjeta estudia un par: el que se eligió en la matriz o en la tabla, o el que se pone en <span class="ui">X</span> y <span class="ui">Y</span>. La orientación importa para la recta, los residuos y la prueba de Breusch–Pagan, que son de <i>Y</i> sobre <i>X</i>; <i>r</i>, ρ y la recomendación son simétricas.</p>
+  <p>Siete cifras resumen el par: <i>n</i> (y cuántas filas no tienen el par completo), <i>r</i> con su valor <i>p</i>, ρ, la correlación de distancias dCor («cualquier forma»: en la población vale cero sólo si las dos son independientes), la <span class="ui">Curvatura</span> con su <i>F</i>, la <span class="ui">Dispersión (BP)</span> con su χ² y el <span class="ui">Mayor |Δr|</span> con la fila que lo causa y el límite. Debajo, <span class="ui">Para este par</span> da la recomendación con su razón y sus notas; si la recomendación es una medida del catálogo, <span class="ui">¿Qué es?</span> abre su ficha.</p>
+
+  <figure class="w70">
+    <div class="marco"><img src="../img/b3-par-a.png" alt="El par largo y ancho del sépalo: siete cifras, la recomendación Por grupos, la nube con sus dos elipses y los residuos"></div>
+    <figcaption><b>Figura 3.7.</b> El largo y el ancho del sépalo. Ni curva (<i>p</i> = .057) ni abanico (<i>p</i> = .098), y ningún punto decide (0.033, por debajo del límite 0.081); pero dentro de las especies la <i>r</i> media es .58 frente a −.12 juntando todo, y la recomendación es <span class="ui">Por grupos</span>. Los ocho puntos fuera de la elipse robusta llevan su número de fila.</figcaption>
+  </figure>
+  <p>Tres gráficas muestran por qué:</p>
+  <ul>
+    <li><b>La nube con sus elipses.</b> La recta en negro, el LOWESS en dorado, la elipse clásica del 97.5&nbsp;% punteada y la robusta en rojo. Los puntos fuera de la robusta van rodeados, y los ocho más alejados llevan su número de fila.</li>
+    <li><b>Los residuos de la recta</b>, con su propio LOWESS. Si la línea dorada se curva, la relación se curva; si los puntos se abren hacia un lado, hay abanico.</li>
+    <li><b>La influencia.</b> Para cada punto, en el orden de las filas, cuánto cambia <i>r</i> si se quita. Las líneas punteadas marcan el límite, y los cuatro puntos que más mueven a <i>r</i> llevan su fila.</li>
+  </ul>
+  <p>El límite de la influencia es, más o menos, un error estándar de <i>r</i>: un punto que por sí solo mueve <i>r</i> más que eso decide demasiado.</p>
+  <div class="formula">límite = máx ( 0.02 ,  (1 − <i>r</i>²) / √(<i>n</i> − 1) )</div>
+
+  <figure class="w80">
+    <div class="marco"><img src="../img/b3-par-b.png" alt="La gráfica de influencia del largo y el ancho del sépalo y el botón que lleva el par al Bloque 4"></div>
+    <figcaption><b>Figura 3.8.</b> La influencia en el mismo par. El punto que más mueve a <i>r</i>, la fila 132, la cambia en 0.033, menos de la mitad del límite: ninguna flor decide sola.</figcaption>
+  </figure>
+  <p><span class="ui">Medir este par a fondo en el Bloque 4 →</span> lleva el par al bloque de las medidas de un par, con todos sus coeficientes, intervalos, permutaciones y bootstrap. Allá el coeficiente que se estudia a fondo es, mientras no elijas otro, el recomendado aquí; con <span class="ui">Por grupos</span> es la <i>r</i> de Pearson, porque el análisis dentro de los grupos es del Bloque 10.</p>
+
+  <div class="caja ejemplo">
+    <div class="caja-t"><span class="ico">▸</span>Ejemplo · un par que pide Pearson, con una nota</div>
+    <p>La velocidad y la distancia de frenado de 50 autos (Ezekiel 1930): <i>r</i> = .807 y ρ = .830; ni curva (<i>p</i> = .136) ni abanico (<i>p</i> = .073), y el punto más influyente, la fila 23, mueve <i>r</i> en 0.027, por debajo del límite de 0.050. La recomendación es la <i>r</i> de Pearson, pero la distancia de frenado no es normal, así que la nota pide el valor <i>p</i> por permutación o el intervalo por bootstrap.</p>
+  </div>
+  <figure class="w80">
+    <div class="marco"><img src="../img/b3-cars.png" alt="Las cifras y la recomendación del par velocidad y distancia de frenado"></div>
+    <figcaption><b>Figura 3.9.</b> El frenado de los autos: las tres pruebas en verde y la recomendación <span class="ui">r de Pearson</span>, con su nota.</figcaption>
+  </figure>
+
+  <div class="caja teoria">
+    <div class="caja-t"><span class="ico">θ</span>Teoría en breve · por qué cada supuesto</div>
+    <p><b>Linealidad.</b> <i>r</i> mide sólo la parte recta de la relación; si la nube se curva pero sigue subiendo, ρ o τ la miden completa; si sube y baja, ni <i>r</i> ni ρ la ven (Anscombe 1973). <b>Dispersión constante.</b> Cuando la nube se abre en abanico, el error estándar de <i>r</i> que da la fórmula clásica es incorrecto; el valor <i>p</i> por permutación y el intervalo por bootstrap no dependen de ello. <b>Atípicos e influencia.</b> Un solo punto puede crear o borrar una correlación; si <i>r</i> cambia más de un error estándar al quitarlo, ese punto decide demasiado. <b>Grupos.</b> Juntar grupos con medias distintas puede inflar, esconder o invertir la relación (Simpson 1951). La app trae esta misma explicación en la nota plegable <span class="ui">Por qué cada supuesto</span>, al pie de la tarjeta.</p>
+  </div>
+
+  <!-- 3.7 -->
+  <h2 id="s3-7"><span class="num">3.7</span>Del Bloque 3 a los demás</h2>
+  <p>El bloque no calcula nada que se publique: decide qué calcular. Lo que encuentra lo usan el Bloque 4, que abre con el coeficiente recomendado, y los métodos redactados del Bloque 13, que describen las pruebas con que se revisaron los supuestos y citan sus referencias.</p>
+
+  <div class="caja regla">
+    <div class="caja-t"><span class="ico">✓</span>Antes de salir del Bloque 3</div>
+    <table class="compacta"><tbody>
+      <tr><td style="width:44%"><b>Si</b> la recomendación es <span class="ui">Por grupos</span>…</td><td>analiza dentro de los grupos en el Bloque 10, y no publiques la <i>r</i> juntando todo sin decirlo.</td></tr>
+      <tr><td><b>Si</b> es <span class="ui">dCor o ξ</span>…</td><td>mira la nube: la relación sube y baja. Mídela en el Bloque 6; <i>r</i> y ρ cerca de cero no significan independencia.</td></tr>
+      <tr><td><b>Si</b> es la ρ de Spearman o la τ-b de Kendall…</td><td>úsala en el Bloque 4; si de todos modos informas <i>r</i>, di que la relación se curva.</td></tr>
+      <tr><td><b>Si</b> es la <span class="ui">Flexión porcentual</span>…</td><td>busca el punto en la nube y averigua qué es antes de decidir; compara con las robustas del Bloque 4.</td></tr>
+      <tr><td><b>Si</b> es la <i>r</i> de Pearson con una nota…</td><td>da el valor <i>p</i> por permutación o el intervalo por bootstrap del Bloque 4.</td></tr>
+      <tr><td><b>Si</b> las pruebas de normalidad rechazan con muchos datos…</td><td>mira la gráfica Q–Q antes de cambiar de coeficiente.</td></tr>
+    </tbody></table>
+    <p class="regla-pie">Son guías para interpretar, no leyes: lo que sabes del fenómeno, del diseño y de cómo se midió siempre manda.</p>
+  </div>
+</section>
+
+</body>
+</html>

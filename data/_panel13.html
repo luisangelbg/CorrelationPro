@@ -1,0 +1,120 @@
+<!-- ==================== BLOCK 13 · FIGURES, PALETTES AND REPORT ==================== -->
+<section class="step-panel" id="panel-13">
+  <div class="panel-title"><div class="pt-num">13</div><div><h2><span data-l="es">Figuras, paletas e informe</span><span data-l="en">Figures, palettes and report</span></h2><p><span data-l="es">Lo que se lleva al artículo: las figuras a tamaño de revista, una paleta propia que se lea con cualquier visión, la tabla, los métodos redactados con lo que corriste y sus referencias</span><span data-l="en">What goes into the paper: the figures at journal size, a palette of your own that reads with any vision, the table, the methods written from what you ran and their references</span></p></div></div>
+
+  <div class="b12-bar" role="group" aria-label="Sección">
+    <button type="button" class="chip on" data-sec="figs"><span data-l="es">Figuras</span><span data-l="en">Figures</span></button>
+    <button type="button" class="chip" data-sec="pal"><span data-l="es">Diseñar una paleta</span><span data-l="en">Design a palette</span></button>
+    <button type="button" class="chip" data-sec="table"><span data-l="es">Tabla para publicar</span><span data-l="en">Table to publish</span></button>
+    <button type="button" class="chip" data-sec="methods"><span data-l="es">Métodos y referencias</span><span data-l="en">Methods and references</span></button>
+    <button type="button" class="chip" data-sec="project"><span data-l="es">Proyecto e informe</span><span data-l="en">Project and report</span></button>
+  </div>
+
+  <!-- ===== figures ===== -->
+  <div class="b12-sec" id="b13Sec-figs">
+    <div class="card">
+      <h2><span data-l="es">Las figuras que has hecho</span><span data-l="en">The figures you have made</span></h2>
+      <p class="hint"><span data-l="es">Cada figura que dibujaron los bloques. «Exportar» la abre en el estudio de figuras: anchos de revista (85, 114 y 180 mm), resolución, PNG, SVG, PDF vectorial y TIFF, con el aviso si alguna letra queda por debajo de los 7 pt. Marca las que quieras en el informe.</span><span data-l="en">Every figure the blocks drew. «Export» opens it in the figure studio: journal widths (85, 114 and 180 mm), resolution, PNG, SVG, vector PDF and TIFF, with a warning if any text falls below 7 pt. Tick the ones you want in the report.</span></p>
+      <div class="form-grid">
+        <div class="field"><label for="b13Font"><span data-l="es">Letra de las figuras</span><span data-l="en">Typeface of the figures</span></label>
+          <select id="b13Font"><option value="sans" data-es="Sin serifa (la del sistema)" data-en="Sans serif (the system’s)">Sin serifa (la del sistema)</option><option value="serif" data-es="Con serifa" data-en="Serif">Con serifa</option><option value="mono" data-es="Monoespaciada" data-en="Monospaced">Monoespaciada</option></select></div>      </div>
+      <div class="messages" id="b13FMsgs"></div>
+      <div class="b13-gallery" id="b13Gallery"></div>
+    </div>
+  </div>
+
+  <!-- ===== palette designer ===== -->
+  <div class="b12-sec" id="b13Sec-pal" hidden>
+    <div class="card">
+      <h2><span data-l="es">Diseñar una paleta divergente</span><span data-l="en">Design a diverging palette</span></h2>
+      <p class="hint"><span data-l="es">Dos tonos, uno para las correlaciones positivas y otro para las negativas, que se encuentran en un centro claro. Se construye en OKLab, un espacio donde distancias iguales se ven iguales, así que el color crece al mismo paso que |r|. Las pruebas de la derecha dicen si la paleta cabe en la pantalla, si es uniforme, si el signo se distingue con las tres formas comunes de daltonismo y si funciona impresa en gris.</span><span data-l="en">Two hues, one for positive correlations and one for negative ones, meeting at a light centre. It is built in OKLab, a space where equal distances look equal, so the colour grows at the same pace as |r|. The checks on the right say whether the palette fits the screen, whether it is uniform, whether the sign can be told apart with the three common forms of colour blindness and whether it works printed in grey.</span></p>
+      <div class="b13-pal">
+        <div>
+          <div class="form-grid">
+            <div class="field"><label for="b13HPos"><span data-l="es">Tono de <span class="nc">r</span> positiva</span><span data-l="en">Hue of positive <span class="nc">r</span></span> <b id="b13HPosV"></b></label><input type="range" id="b13HPos" min="0" max="359" step="1" value="268"></div>
+            <div class="field"><label for="b13HNeg"><span data-l="es">Tono de <span class="nc">r</span> negativa</span><span data-l="en">Hue of negative <span class="nc">r</span></span> <b id="b13HNegV"></b></label><input type="range" id="b13HNeg" min="0" max="359" step="1" value="33"></div>
+            <div class="field"><label for="b13L1"><span data-l="es">Luminosidad de los extremos</span><span data-l="en">Lightness of the ends</span> <b id="b13L1V"></b></label><input type="range" id="b13L1" min="0.32" max="0.7" step="0.01" value="0.46"></div>
+            <div class="field"><label for="b13C1"><span data-l="es">Croma (intensidad)</span><span data-l="en">Chroma (intensity)</span> <b id="b13C1V"></b></label><input type="range" id="b13C1" min="0.3" max="1" step="0.01" value="0.95"></div>
+            <div class="field"><label for="b13PName"><span data-l="es">Nombre</span><span data-l="en">Name</span></label><input type="text" id="b13PName" maxlength="40" value="Mi paleta"></div>
+            <div class="field"><label for="b13PFrom"><span data-l="es">Empezar desde</span><span data-l="en">Start from</span></label><select id="b13PFrom"></select></div>
+          </div>
+          <div class="b13-ramps" id="b13Ramps"></div>
+          <div class="btn-row"><button type="button" class="btn btn-primary btn-sm" id="b13PUse"><span data-l="es">Usar en toda la app</span><span data-l="en">Use across the app</span></button>
+            <button type="button" class="btn btn-ghost btn-sm" id="b13PAuto"><span data-l="es">Buscar el mejor tono para r negativa</span><span data-l="en">Find the best hue for negative r</span></button>
+            <button type="button" class="btn btn-ghost btn-sm" id="b13PInv"><span data-l="es">Invertir el sentido</span><span data-l="en">Swap the direction</span></button></div>
+          <div class="messages" id="b13PMsgs"></div>
+        </div>
+        <div>
+          <div class="b13-checks" id="b13Checks"></div>
+          <div class="pg-pane" id="b13PSamplePane"><div class="pg-title"><span data-l="es">La matriz de los lirios con esta paleta</span><span data-l="en">The iris matrix with this palette</span></div><div id="b13PSample"></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== publication table ===== -->
+  <div class="b12-sec" id="b13Sec-table" hidden>
+    <div class="card">
+      <h2><span data-l="es">Tabla de correlaciones para publicar</span><span data-l="en">Correlation table to publish</span></h2>
+      <div id="b13TEmpty"><p class="hint"><span data-l="es">Abre unos datos en el Bloque 2 (o calcula una matriz en el Bloque 5) para armar la tabla.</span><span data-l="en">Open some data in Block 2 (or compute a matrix in Block 5) to build the table.</span></p>
+        <div class="btn-row"><button type="button" class="btn btn-ghost btn-sm" id="b13TIris"><span data-l="es">Usar iris</span><span data-l="en">Use iris</span></button></div></div>
+      <div id="b13TMain" hidden>
+        <div class="chip-row" id="b13TVars"></div>
+        <div class="form-grid">
+          <div class="field"><label for="b13TCoef"><span data-l="es">Coeficiente</span><span data-l="en">Coefficient</span></label><select id="b13TCoef"><option value="pearson">Pearson</option><option value="spearman">Spearman</option><option value="kendall">Kendall</option></select></div>
+          <div class="field"><label for="b13TSig"><span data-l="es">Significancia</span><span data-l="en">Significance</span></label><select id="b13TSig"><option value="stars" data-es="Asteriscos" data-en="Asterisks">Asteriscos</option><option value="ci" data-es="IC 95 % debajo de cada r" data-en="95% CI under each r">IC 95 % debajo de cada r</option><option value="p" data-es="Valor p debajo de cada r" data-en="p-value under each r">Valor p debajo de cada r</option><option value="none" data-es="Nada" data-en="Nothing">Nada</option></select></div>
+          <div class="field"><label for="b13TAdj"><span data-l="es">Corrección por pruebas múltiples</span><span data-l="en">Multiple-testing correction</span></label><select id="b13TAdj"><option value="none" data-es="Ninguna" data-en="None">Ninguna</option><option value="holm">Holm</option><option value="BH">Benjamini–Hochberg</option><option value="bonferroni">Bonferroni</option></select></div>
+          <div class="field"><label for="b13TDig"><span data-l="es">Decimales</span><span data-l="en">Decimals</span></label><select id="b13TDig"><option value="2">2</option><option value="3">3</option></select></div>
+          <div class="field"><label for="b13TStyle"><span data-l="es">Estilo de los números</span><span data-l="en">Style of the numbers</span></label><select id="b13TStyle"><option value="apa" data-es="Ciencias sociales (APA 7)" data-en="Social sciences (APA 7)">Ciencias sociales (APA 7)</option><option value="sampl" data-es="Biomédico (SAMPL)" data-en="Biomedical (SAMPL)">Biomédico (SAMPL)</option><option value="nom" data-es="Normativo, punto decimal" data-en="Standard, decimal point">Normativo, punto decimal</option><option value="nomc" data-es="Normativo, coma decimal" data-en="Standard, decimal comma">Normativo, coma decimal</option></select></div>
+          <div class="field"><label for="b13TDesc"><span data-l="es">Descriptivos</span><span data-l="en">Descriptives</span></label><select id="b13TDesc"><option value="msd" data-es="Media y DE" data-en="Mean and SD">Media y DE</option><option value="mdn" data-es="Mediana y RIC" data-en="Median and IQR">Mediana y RIC</option><option value="none" data-es="Ninguno" data-en="None">Ninguno</option></select></div>
+        </div>
+        <p class="hint"><span data-l="es">El estilo de los números (cero inicial, coma o punto decimal, «p < .001») vale para toda la app: es el mismo de «Estilos de reporte» en el Inicio.</span><span data-l="en">The style of the numbers (leading zero, decimal comma or point, «p < .001») applies to the whole app: it is the same as «Reporting styles» on Home.</span></p>
+        <div class="b13-tbox" id="b13Table"></div>
+        <div class="btn-row"><button type="button" class="btn btn-secondary btn-sm" id="b13TCopy"><span data-l="es">Copiar para el procesador de textos</span><span data-l="en">Copy for the word processor</span></button>
+          <button type="button" class="btn btn-ghost btn-sm" id="b13TCsv"><span data-l="es">Descargar CSV</span><span data-l="en">Download CSV</span></button>
+          <button type="button" class="btn btn-ghost btn-sm" id="b13THtml"><span data-l="es">Descargar HTML</span><span data-l="en">Download HTML</span></button></div>
+        <div class="messages" id="b13TMsgs"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== methods and references ===== -->
+  <div class="b12-sec" id="b13Sec-methods" hidden>
+    <div class="card">
+      <h2><span data-l="es">Métodos, redactados con lo que corriste</span><span data-l="en">Methods, written from what you ran</span></h2>
+      <p class="hint"><span data-l="es">Un párrafo por bloque que usaste en esta sesión, con los coeficientes, las pruebas, las correcciones y los ajustes que elegiste, y la cita de cada método. Revísalo: la app escribe lo que hizo, pero el porqué lo pones tú.</span><span data-l="en">A paragraph for each block you used in this session, with the coefficients, tests, corrections and settings you chose, and the citation of each method. Check it: the app writes what it did, but the why is yours.</span></p>
+      <div class="b13-methods" id="b13Methods"></div>
+      <div class="btn-row"><button type="button" class="btn btn-secondary btn-sm" id="b13MCopy"><span data-l="es">Copiar los métodos</span><span data-l="en">Copy the methods</span></button>
+        <button type="button" class="btn btn-ghost btn-sm" id="b13MRefresh"><span data-l="es">Volver a redactar</span><span data-l="en">Write again</span></button></div>
+    </div>
+    <div class="card">
+      <h2><span data-l="es">Referencias de los métodos usados</span><span data-l="en">References of the methods used</span></h2>
+      <ol class="b13-refs" id="b13Refs"></ol>
+      <div class="btn-row"><button type="button" class="btn btn-secondary btn-sm" id="b13RCopy"><span data-l="es">Copiar las referencias</span><span data-l="en">Copy the references</span></button></div>
+      <div class="messages" id="b13MMsgs"></div>
+    </div>
+  </div>
+
+  <!-- ===== project and report ===== -->
+  <div class="b12-sec" id="b13Sec-project" hidden>
+    <div class="card">
+      <h2><span data-l="es">El informe</span><span data-l="en">The report</span></h2>
+      <p class="hint"><span data-l="es">Un documento con los datos usados, los resultados de cada bloque, la tabla, las figuras que marcaste, los métodos y las referencias, con los colores del tema claro. Se abre en una pestaña lista para imprimir o guardar como PDF, o se descarga como HTML.</span><span data-l="en">A document with the data used, the results of each block, the table, the figures you ticked, the methods and the references, in the colours of the light theme. It opens in a tab ready to print or save as PDF, or downloads as HTML.</span></p>
+      <div class="form-grid">
+        <div class="field"><label for="b13RTitle"><span data-l="es">Título</span><span data-l="en">Title</span></label><input type="text" id="b13RTitle" maxlength="160"></div>
+        <div class="field"><label for="b13RAuthor"><span data-l="es">Autoría (opcional)</span><span data-l="en">Authorship (optional)</span></label><input type="text" id="b13RAuthor" maxlength="160"></div>
+      </div>
+      <div id="b13RSummary"></div>
+      <div class="btn-row"><button type="button" class="btn btn-primary btn-sm" id="b13ROpen"><span data-l="es">Abrir el informe para imprimir</span><span data-l="en">Open the report to print</span></button>
+        <button type="button" class="btn btn-secondary btn-sm" id="b13RDown"><span data-l="es">Descargar el informe (HTML)</span><span data-l="en">Download the report (HTML)</span></button></div>
+      <div class="messages" id="b13RMsgs"></div>
+    </div>
+    <div class="card">
+      <h2><span data-l="es">El paquete del proyecto</span><span data-l="en">The project package</span></h2>
+      <p class="hint"><span data-l="es">Un archivo .json con los datos tal como los leíste, el tipo y el papel de cada columna, el manejo de faltantes, la paleta (también la tuya) y el estilo de reporte. Al abrirlo, los bloques se recalculan con esos datos: nada sale de tu equipo.</span><span data-l="en">A .json file with the data as you read them, the kind and role of each column, the handling of missing values, the palette (yours too) and the reporting style. When it is opened, the blocks recompute on those data: nothing leaves your computer.</span></p>
+      <div class="btn-row"><button type="button" class="btn btn-secondary btn-sm" id="b13PkSave"><span data-l="es">Guardar el proyecto</span><span data-l="en">Save the project</span></button>
+        <label class="btn btn-ghost btn-sm b13-file"><input type="file" id="b13PkOpen" accept=".json,application/json" hidden><span data-l="es">Abrir un proyecto</span><span data-l="en">Open a project</span></label></div>
+      <div class="messages" id="b13PkMsgs"></div>
+    </div>
+  </div>
+</section>

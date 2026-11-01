@@ -1,0 +1,53 @@
+<!-- ==================== BLOCK 8 · CATEGORICAL, ORDINAL AND MIXED ==================== -->
+<section class="step-panel" id="panel-8">
+  <div class="panel-title"><div class="pt-num">8</div><div><h2><span data-l="es">Categóricas, ordinales y mixtas</span><span data-l="en">Categorical, ordinal and mixed</span></h2><p><span data-l="es">Asociación en tablas, correlaciones latentes y el coeficiente adecuado a cada par de tipos</span><span data-l="en">Association in tables, latent correlations and the right coefficient for each pair of kinds</span></p></div></div>
+
+  <div class="card" id="b8Empty">
+    <p class="hint"><span data-l="es">Primero abre unos datos en el Bloque 2 (o usa un conjunto de ejemplo).</span><span data-l="en">First open some data in Block 2 (or use an example dataset).</span></p>
+    <div class="btn-row"><button type="button" class="btn btn-secondary btn-sm" data-go="2"><span data-l="es">← Ir a Datos</span><span data-l="en">← Go to Data</span></button>
+      <button type="button" class="btn btn-ghost btn-sm" id="b8Titanic"><span data-l="es">Usar el Titanic</span><span data-l="en">Use the Titanic</span></button></div>
+  </div>
+
+  <div id="b8Main" hidden>
+    <div class="card">
+      <h2><span data-l="es">Dos variables categóricas</span><span data-l="en">Two categorical variables</span></h2>
+      <div class="form-grid">
+        <div class="field"><label for="b8R"><span data-l="es">Filas</span><span data-l="en">Rows</span></label><select id="b8R"></select></div>
+        <div class="field"><label for="b8C"><span data-l="es">Columnas</span><span data-l="en">Columns</span></label><select id="b8C"></select></div>
+        <div class="field"><label for="b8Cell"><span data-l="es">En cada celda</span><span data-l="en">In each cell</span></label>
+          <select id="b8Cell"><option value="n" data-es="Frecuencia" data-en="Count">Frecuencia</option><option value="row" data-es="% de la fila" data-en="Row %">% de la fila</option><option value="col" data-es="% de la columna" data-en="Column %">% de la columna</option><option value="res" data-es="Residuo estandarizado" data-en="Standardized residual">Residuo estandarizado</option></select></div>
+      </div>
+      <div class="messages" id="b8Msgs"></div>
+      <div class="two-figs">
+        <div class="table-wrap" id="b8Table"></div>
+        <div class="pg-pane" id="b8MosPane"><div class="pg-title"><span data-l="es">Mosaico (color: residuo de Pearson)</span><span data-l="en">Mosaic (colour: Pearson residual)</span></div><div id="b8Mos"></div></div>
+      </div>
+      <div id="b8Tiles"></div>
+      <div class="table-wrap" id="b8Measures"></div>
+      <details class="theory-note"><summary><span data-l="es">Qué medida para qué tabla</span><span data-l="en">Which measure for which table</span></summary>
+        <p><span data-l="es">χ² dice si hay asociación; su tamaño lo dan V de Cramér (0 a 1; la corregida de Bergsma 2013 quita el sesgo de las muestras chicas), C de Pearson (nunca llega a 1) o T de Tschuprow. λ, τ y U son asimétricas: cuánto mejora la predicción de una variable al conocer la otra (Goodman y Kruskal 1954; Theil 1970). En 2 × 2, φ es la r de Pearson de dos binarias y la razón de momios no depende de las marginales (Q y Y de Yule la llevan a −1…1). Con categorías ordenadas, γ, d de Somers y τ usan el orden. Si cada variable es un corte de una normal latente, la tetracórica (2 × 2) o la policórica estiman la correlación de esas normales.</span><span data-l="en">χ² says whether there is association; its size is given by Cramér’s V (0 to 1; Bergsma’s 2013 correction removes the bias of small samples), Pearson’s C (it never reaches 1) or Tschuprow’s T. λ, τ and U are asymmetric: how much the prediction of one variable improves by knowing the other (Goodman and Kruskal 1954; Theil 1970). In 2 × 2, φ is the Pearson r of two binaries and the odds ratio does not depend on the margins (Yule’s Q and Y bring it to −1…1). With ordered categories, γ, Somers’ d and τ use the order. If each variable is a cut of a latent normal, the tetrachoric (2 × 2) or polychoric correlation estimates the correlation of those normals.</span></p>
+      </details>
+    </div>
+
+    <div class="card">
+      <h2><span data-l="es">Una continua y una categórica</span><span data-l="en">A continuous and a categorical one</span></h2>
+      <div class="form-grid">
+        <div class="field"><label for="b8X"><span data-l="es">Continua</span><span data-l="en">Continuous</span></label><select id="b8X"></select></div>
+        <div class="field"><label for="b8G"><span data-l="es">Categórica</span><span data-l="en">Categorical</span></label><select id="b8G"></select></div>
+      </div>
+      <div id="b8MTiles"></div>
+      <div class="two-figs">
+        <div class="pg-pane" id="b8StripPane"><div class="pg-title"><span data-l="es">Los valores en cada categoría</span><span data-l="en">The values in each category</span></div><div id="b8Strip"></div></div>
+        <div class="b8-text" id="b8MText"></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2><span data-l="es">La matriz heterogénea</span><span data-l="en">The heterogeneous matrix</span></h2>
+      <p class="hint"><span data-l="es">Cada par con el coeficiente que piden sus tipos: Pearson (continua–continua), poliserial (continua–ordinal o binaria), policórica o tetracórica (ordinales o binarias), η (con una nominal) y V de Cramér corregida (nominal con categórica). La letra de cada celda dice cuál se usó.</span><span data-l="en">Each pair with the coefficient its kinds ask for: Pearson (continuous–continuous), polyserial (continuous–ordinal or binary), polychoric or tetrachoric (ordinals or binaries), η (with a nominal one) and bias-corrected Cramér’s V (nominal with categorical). The letter in each cell says which was used.</span></p>
+      <div class="chip-row" id="b8Vars"></div>
+      <div class="pg-pane" id="b8HetPane"><div class="pg-title"><span data-l="es">Matriz heterogénea</span><span data-l="en">Heterogeneous matrix</span></div><div class="matrix-scroll" id="b8Het"></div><div class="fig-legend" id="b8HetLegend"></div></div>
+      <p class="hint" id="b8HetNote"></p>
+    </div>
+  </div>
+</section>

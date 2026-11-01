@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>CorrelationPro · Manual de usuario · Capítulo 8</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,500;0,600;1,500&family=Crimson+Pro:ital,wght@0,400;0,600;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../interior.css">
+<script src="../paginar.js"></script>
+</head>
+<body>
+
+<section class="capitulo" id="cap-8" data-pestana="8" data-orden="8" style="--acento: var(--b8)">
+  <div class="cap-apertura">
+    <div class="cap-num">8</div>
+    <div class="cap-etiqueta">Capítulo ocho · Bloque 8</div>
+    <h1 data-corto="Categóricas">Categóricas, ordinales y mixtas</h1>
+    <div class="cap-regla"></div>
+    <p class="cap-resumen">No todo se mide con números. Este bloque analiza la asociación en una tabla de contingencia —con su prueba, su mosaico y una veintena de medidas—, la relación entre una variable continua y una categórica, las correlaciones latentes (tetracórica, policórica y poliserial) y la matriz heterogénea, en la que cada par recibe el coeficiente que piden sus tipos.</p>
+    <div class="cap-franja"><span class="k8"></span><span class="k8"></span><span class="k2"></span><span class="k5"></span></div>
+    <ul class="cap-contenido">
+      <li><b>8.1</b>Dos variables categóricas</li>
+      <li><b>8.2</b>Las pruebas y las medidas de una tabla</li>
+      <li><b>8.3</b>La tabla de 2 × 2</li>
+      <li><b>8.4</b>Una continua y una categórica</li>
+      <li><b>8.5</b>La matriz heterogénea</li>
+    </ul>
+  </div>
+
+  <!-- 8.1 -->
+  <h2 id="s8-1"><span class="num">8.1</span>Dos variables categóricas</h2>
+  <p class="lead">Se eligen las <span class="ui">Filas</span> y las <span class="ui">Columnas</span> entre las variables binarias, nominales u ordinales (de 2 a 30 categorías; el número va entre paréntesis), y la app arma la tabla de contingencia.</p>
+  <p><span class="ui">En cada celda</span> decide qué se ve: la <span class="ui">Frecuencia</span>, el <span class="ui">% de la fila</span>, el <span class="ui">% de la columna</span> o el <span class="ui">Residuo estandarizado</span> (el ajustado de Haberman). Sea cual sea la elección, el fondo de cada celda dice si tiene más casos de los que habría si las dos variables fueran independientes (azul) o menos (rojo), cuando el residuo ajustado pasa de 1.96, y más intenso cuando pasa de 2.58. Si alguna frecuencia esperada es menor que 5, una nota lo avisa y pide el valor <i>p</i> exacto o de Monte Carlo.</p>
+  <figure class="w80">
+    <div class="marco"><img src="../img/b8-tabla.png" alt="La tabla de la clase y la supervivencia del Titanic y su mosaico"></div>
+    <figcaption><b>Figura 8.1.</b> El Titanic, el ejemplo con que abre el bloque: la clase y la supervivencia de 2&nbsp;201 personas. En primera clase sobrevivieron más de los esperados (203, azul); en tercera y en la tripulación, menos (rojo). El mosaico lo dibuja: el alto de cada franja es el tamaño de la clase y el ancho de cada rectángulo, la proporción dentro de ella.</figcaption>
+  </figure>
+  <p>En el <b>mosaico</b> cada fila de la tabla es una franja horizontal, con un alto proporcional a su total, y dentro de ella cada columna ocupa el ancho de su proporción. El color es el residuo de Pearson de la celda, en la paleta del Bloque 1: azul cuando hay más casos de los esperados, rojo cuando hay menos.</p>
+
+  <!-- 8.2 -->
+  <h2 id="s8-2"><span class="num">8.2</span>Las pruebas y las medidas de una tabla</h2>
+  <p>Debajo van las cifras principales: la χ² de Pearson con sus grados de libertad, la razón de verosimilitudes <i>G</i>², el valor <i>p</i> exacto de Fisher (en 2 × 2, con la χ² corregida de Yates) o el de Monte Carlo con 1&nbsp;999 tablas (en tablas mayores, hasta con 5&nbsp;000 casos), y la V de Cramér corregida. La χ² dice <i>si</i> hay asociación; las medidas dicen <i>cuánta</i>.</p>
+  <figure class="w80">
+    <div class="marco"><img src="../img/b8-medidas.png" alt="Las pruebas y las medidas de asociación de la clase y la supervivencia del Titanic"></div>
+    <figcaption><b>Figura 8.2.</b> La clase y la supervivencia: χ² = 190.40 con 3 grados de libertad y V de Cramér = .292. Las medidas asimétricas dicen que conocer la clase mejora algo la predicción de la supervivencia (λ = .114), y que conocer la supervivencia no ayuda nada a predecir la clase (λ = .000).</figcaption>
+  </figure>
+  <table class="compacta">
+    <caption><b>Tabla 8.1.</b> Las medidas de una tabla de contingencia</caption>
+    <thead><tr><th style="width:1.9in">Medida</th><th>Qué dice</th></tr></thead>
+    <tbody>
+      <tr><td><b>V de Cramér</b></td><td>la fuerza de la asociación, de 0 a 1, para cualquier tabla; la corregida (Bergsma 2013) quita el sesgo hacia arriba de las muestras chicas</td></tr>
+      <tr><td><b>C de contingencia</b></td><td>la medida de Pearson; nunca llega a 1, y la app da su máximo posible para esa tabla</td></tr>
+      <tr><td><b>T de Tschuprow</b></td><td>como la V, pero sólo llega a 1 en tablas cuadradas</td></tr>
+      <tr><td><b>λ de Goodman y Kruskal</b></td><td>cuánto baja el error de adivinar una variable por su categoría más común al conocer la otra; en las dos direcciones y simétrica</td></tr>
+      <tr><td><b>τ de Goodman y Kruskal</b></td><td>lo mismo, pero adivinando al azar con las proporciones; en las dos direcciones</td></tr>
+      <tr><td><b>U de Theil</b></td><td>la parte de la incertidumbre (la entropía) de una variable que quita la otra; en las dos direcciones y simétrica</td></tr>
+      <tr><td><b>γ, d de Somers, τ-b, τ-c</b></td><td>con categorías ordenadas (ninguna nominal): la concordancia en el orden. γ ignora los empates y por eso exagera; τ-c sirve para tablas rectangulares</td></tr>
+      <tr><td><b>Policórica</b></td><td>si cada variable es el corte de una normal latente, la correlación de esas normales, con la prueba de que el modelo normal ajusta</td></tr>
+    </tbody>
+  </table>
+  <div class="caja importante">
+    <div class="caja-t"><span class="ico">!</span>Con muchos casos, todo es significativo</div>
+    <p>Con 2&nbsp;201 personas, una asociación diminuta ya da <i>p</i> &lt; .001. El valor <i>p</i> de la χ² no mide la fuerza: informa siempre una medida —la V corregida, una λ, una razón de momios— y los porcentajes que la explican.</p>
+  </div>
+
+  <!-- 8.3 -->
+  <h2 id="s8-3"><span class="num">8.3</span>La tabla de 2 × 2</h2>
+  <p>Cuando las dos variables son binarias aparecen las medidas propias de la tabla de 2 × 2: φ, que es la <i>r</i> de Pearson de dos variables codificadas 0 y 1; la <b>razón de momios</b> con su intervalo de Woolf, que no depende de las marginales; la <i>Q</i> y la <i>Y</i> de Yule, que llevan la razón de momios a la escala de −1 a 1; el <b>riesgo relativo</b>, y la <b>tetracórica</b>.</p>
+  <figure class="w70">
+    <div class="marco"><img src="../img/b8-2x2.png" alt="Las medidas de la tabla de 2 × 2 del sexo y la supervivencia del Titanic"></div>
+    <figcaption><b>Figura 8.3.</b> El sexo y la supervivencia. Sobrevivió el 73&nbsp;% de las mujeres y el 21&nbsp;% de los hombres: φ = .456 y una razón de momios de 10.15 [8.03, 12.83]. El riesgo relativo, 2.939, compara la primera columna (no sobrevivir) entre la primera fila y la segunda: entre los hombres, la proporción de muertos fue casi tres veces la de las mujeres.</figcaption>
+  </figure>
+  <div class="caja nota">
+    <div class="caja-t"><span class="ico">i</span>El orden de las categorías decide el signo</div>
+    <p>La razón de momios, el riesgo relativo, φ y la tetracórica comparan la primera categoría con la segunda en el orden de la tabla. Aquí el sexo va «Hombre, Mujer» y la supervivencia «No, Sí»: por eso φ es positiva (ser mujer va con sobrevivir). Si inviertes el orden de una variable en el Bloque 2, cambia el signo, no la fuerza.</p>
+  </div>
+  <div class="caja teoria">
+    <div class="caja-t"><span class="ico">θ</span>Teoría en breve · φ frente a la tetracórica</div>
+    <p>φ mide la asociación de las dos binarias tal como son. La tetracórica supone que cada binaria es el corte de una variable continua normal —la propensión a sobrevivir, por ejemplo— y estima la correlación de esas dos normales; por eso es mayor (.698 frente a .456). Úsala sólo si esa variable latente tiene sentido; para dos categorías de verdad, como el sexo, φ o la razón de momios son más honestas.</p>
+  </div>
+
+  <!-- 8.4 -->
+  <h2 id="s8-4"><span class="num">8.4</span>Una continua y una categórica</h2>
+  <p>Se eligen una variable <span class="ui">Continua</span> y una <span class="ui">Categórica</span>. Siempre se calcula la <b>razón de correlación η</b> con su η² y su prueba <i>F</i> (la del análisis de varianza de una vía): qué parte de la variación de la continua explican las categorías. Según el tipo de la categórica se añaden otras:</p>
+  <ul>
+    <li><b>Binaria</b>: la <b>biserial puntual</b>, que es la <i>r</i> de Pearson con la binaria en 0 y 1 y equivale a la prueba <i>t</i> de dos grupos; la <b>biserial</b>, si la binaria es el corte de una normal; la <b>rango-biserial</b>, que no supone normalidad (con la <i>U</i> de Mann y Whitney), y la poliserial.</li>
+    <li><b>Ordinal</b>: la <b>poliserial</b> (Olsson, Drasgow y Dorans 1982), la correlación de la continua con la normal latente que se corta en las categorías, con su error estándar y la estimación ad hoc de los mismos autores.</li>
+    <li><b>Nominal</b>: sólo η, que no tiene signo porque las categorías no tienen orden.</li>
+  </ul>
+  <figure class="w80">
+    <div class="marco"><img src="../img/b8-mixta.png" alt="El largo del pétalo de las tres especies de lirios con η"></div>
+    <figcaption><b>Figura 8.4.</b> El largo del pétalo y la especie de los lirios: η = .970, η² = .941. Las especies explican el 94&nbsp;% de la variación del largo del pétalo. Cada categoría trae sus puntos, su caja (mediana y cuartiles) y su media (la cruz).</figcaption>
+  </figure>
+
+  <!-- 8.5 -->
+  <h2 id="s8-5"><span class="num">8.5</span>La matriz heterogénea</h2>
+  <p>Cuando los datos mezclan tipos, una matriz de Pearson trata como números lo que no lo es. La matriz heterogénea da a cada par el coeficiente que piden sus tipos, y una letra en la esquina de cada celda dice cuál fue:</p>
+  <table class="compacta">
+    <caption><b>Tabla 8.2.</b> El coeficiente de cada par de tipos</caption>
+    <thead><tr><th style="width:2.3in">Par de tipos</th><th style="width:0.5in">Letra</th><th>Coeficiente</th></tr></thead>
+    <tbody>
+      <tr><td>continua y continua</td><td><b>P</b></td><td><i>r</i> de Pearson</td></tr>
+      <tr><td>continua y ordinal o binaria</td><td><b>S</b></td><td>poliserial</td></tr>
+      <tr><td>ordinal o binaria con ordinal</td><td><b>C</b></td><td>policórica</td></tr>
+      <tr><td>binaria y binaria</td><td><b>T</b></td><td>tetracórica</td></tr>
+      <tr><td>nominal y continua</td><td><b>η</b></td><td>razón de correlación</td></tr>
+      <tr><td>nominal y categórica</td><td><b>V</b></td><td>V de Cramér corregida</td></tr>
+    </tbody>
+  </table>
+  <figure class="w70">
+    <div class="marco"><img src="../img/b8-het.png" alt="La matriz heterogénea de las cuatro variables del Titanic"></div>
+    <figcaption><b>Figura 8.5.</b> Las cuatro variables del Titanic: V de Cramér para la clase, que es nominal, y tetracóricas para los pares de binarias. La más fuerte es la del sexo con la supervivencia (.70).</figcaption>
+  </figure>
+  <p>Los botones de arriba eligen las variables, con su tipo al lado (al principio, las doce primeras). Como η y V no tienen signo, una nota recuerda que, mezcladas con las demás, no forman una matriz de correlación definida positiva: la matriz heterogénea sirve para describir. Para un análisis factorial de variables ordinales, lo indicado es una matriz sólo de policóricas.</p>
+
+  <div class="caja regla">
+    <div class="caja-t"><span class="ico">✓</span>Para leer el Bloque 8</div>
+    <table class="compacta"><tbody>
+      <tr><td style="width:44%"><b>Si</b> hay frecuencias esperadas menores que 5…</td><td>informa el valor <i>p</i> exacto de Fisher (2 × 2) o el de Monte Carlo.</td></tr>
+      <tr><td><b>Si</b> la tabla es de 2 × 2…</td><td>informa la razón de momios con su intervalo, y los porcentajes de cada grupo.</td></tr>
+      <tr><td><b>Si</b> quieres predecir una variable a partir de la otra…</td><td>usa una medida asimétrica (λ, τ o <i>U</i>) en esa dirección.</td></tr>
+      <tr><td><b>Si</b> las categorías tienen orden…</td><td>usa τ-b o la policórica; la V ignora el orden.</td></tr>
+      <tr><td><b>Si</b> la tetracórica o la policórica salen muy distintas de φ o de la V…</td><td>recuerda que suponen una normal latente: di si esa suposición es razonable.</td></tr>
+    </tbody></table>
+    <p class="regla-pie">Son guías para interpretar, no leyes: lo que sabes del fenómeno, del diseño y de cómo se midió siempre manda.</p>
+  </div>
+</section>
+
+</body>
+</html>

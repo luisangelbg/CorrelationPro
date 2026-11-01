@@ -1,0 +1,88 @@
+<!-- ==================== BLOCK 4 · ONE PAIR IN DEPTH ==================== -->
+<section class="step-panel" id="panel-4">
+  <div class="panel-title"><div class="pt-num">4</div><div><h2><span data-l="es">Un par a fondo</span><span data-l="en">One pair in depth</span></h2><p><span data-l="es">Todos los coeficientes, sus pruebas, sus intervalos y la evidencia, en palabras</span><span data-l="en">Every coefficient, its tests, its intervals and the evidence, in words</span></p></div></div>
+
+  <div class="card" id="b4Empty">
+    <p class="hint"><span data-l="es">Primero abre unos datos en el Bloque 2 (o usa un conjunto de ejemplo).</span><span data-l="en">First open some data in Block 2 (or use an example dataset).</span></p>
+    <div class="btn-row"><button type="button" class="btn btn-secondary btn-sm" data-go="2"><span data-l="es">← Ir a Datos</span><span data-l="en">← Go to Data</span></button>
+      <button type="button" class="btn btn-ghost btn-sm" id="b4Cars"><span data-l="es">Usar los autos de Ezekiel</span><span data-l="en">Use Ezekiel’s cars</span></button></div>
+  </div>
+
+  <div id="b4Main" hidden>
+    <div class="card">
+      <h2><span data-l="es">El par y la pregunta</span><span data-l="en">The pair and the question</span></h2>
+      <div class="form-grid b4-opts">
+        <div class="field"><label for="b4X">X</label><select id="b4X"></select></div>
+        <div class="field"><label for="b4Y">Y</label><select id="b4Y"></select></div>
+        <div class="field"><label for="b4Coef"><span data-l="es">Coeficiente principal</span><span data-l="en">Main coefficient</span></label><select id="b4Coef"></select></div>
+        <div class="field"><label for="b4Alt"><span data-l="es">Hipótesis alternativa</span><span data-l="en">Alternative hypothesis</span></label>
+          <select id="b4Alt"><option value="two.sided" data-es="Bilateral: ρ ≠ 0" data-en="Two-sided: ρ ≠ 0">Bilateral: ρ ≠ 0</option><option value="greater" data-es="Positiva: ρ &gt; 0" data-en="Positive: ρ &gt; 0">Positiva: ρ &gt; 0</option><option value="less" data-es="Negativa: ρ &lt; 0" data-en="Negative: ρ &lt; 0">Negativa: ρ &lt; 0</option></select></div>
+        <div class="field"><label for="b4Level"><span data-l="es">Nivel de confianza</span><span data-l="en">Confidence level</span></label>
+          <select id="b4Level"><option value="0.9">90 %</option><option value="0.95" selected>95 %</option><option value="0.99">99 %</option></select></div>
+        <div class="field"><label for="b4B"><span data-l="es">Remuestreos</span><span data-l="en">Resamples</span></label>
+          <select id="b4B"><option value="999">999</option><option value="1999" selected>1 999</option><option value="4999">4 999</option><option value="9999">9 999</option></select></div>
+        <div class="field"><label for="b4Seed"><span data-l="es">Semilla</span><span data-l="en">Seed</span></label><input type="number" id="b4Seed" value="2026" min="1" step="1"></div>
+        <div class="field"><label for="b4Scale"><span data-l="es">Escala para el tamaño</span><span data-l="en">Scale for the size</span></label>
+          <select id="b4Scale"><option value="cohen">Cohen (1988)</option><option value="evans">Evans (1996)</option><option value="gignac" data-es="Gignac y Szodorai (2016)" data-en="Gignac and Szodorai (2016)">Gignac y Szodorai (2016)</option></select></div>
+      </div>
+      <div class="messages" id="b4Msgs"></div>
+    </div>
+
+    <div class="card b4-result">
+      <h2><span data-l="es">Resultado</span><span data-l="en">Result</span></h2>
+      <div id="b4Tiles"></div>
+      <div class="b4-reading" id="b4Reading"></div>
+      <div class="b4-report"><div class="b4-report-h"><span data-l="es">Para el informe</span><span data-l="en">For the report</span> <small id="b4StyleName"></small></div><p id="b4Report"></p>
+        <div class="btn-row"><button type="button" class="btn btn-ghost btn-sm" id="b4Copy"><span data-l="es">Copiar</span><span data-l="en">Copy</span></button></div></div>
+    </div>
+
+    <div class="card">
+      <h2><span data-l="es">La nube y sus rangos</span><span data-l="en">The cloud and its ranks</span></h2>
+      <p class="hint"><span data-l="es">A la izquierda los datos con la elipse del 95 %, la recta y el LOWESS; a la derecha los mismos puntos convertidos en rangos (lo que ven ρ y τ): una relación monótona curva se vuelve recta.</span><span data-l="en">On the left the data with the 95% ellipse, the line and LOWESS; on the right the same points turned into ranks (what ρ and τ see): a curved monotonic relation becomes straight.</span></p>
+      <div class="two-figs">
+        <div class="pg-pane" id="b4ScPane"><div class="pg-title"><span data-l="es">Los datos</span><span data-l="en">The data</span></div><div id="b4Sc"></div></div>
+        <div class="pg-pane" id="b4RkPane"><div class="pg-title"><span data-l="es">Los rangos</span><span data-l="en">The ranks</span></div><div id="b4Rk"></div></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2><span data-l="es">Todos los coeficientes, lado a lado</span><span data-l="en">Every coefficient, side by side</span></h2>
+      <p class="hint"><span data-l="es">Cada uno con su prueba propia (exacta, asintótica o por permutación) y su intervalo: analítico donde existe, bootstrap percentil donde no. Las medidas de dependencia (dCor, ξ, D, τ*) van de 0 (independencia) a 1 y no tienen signo; ξ y D pueden quedar un poco por debajo de 0 cuando no hay relación.</span><span data-l="en">Each with its own test (exact, asymptotic or by permutation) and its interval: analytic where one exists, percentile bootstrap where not. The dependence measures (dCor, ξ, D, τ*) run from 0 (independence) to 1 and have no sign; ξ and D can fall slightly below 0 when there is no relation.</span></p>
+      <div class="table-wrap" id="b4Table"></div>
+      <div class="pg-pane" id="b4ForestPane"><div class="pg-title"><span data-l="es">Las estimaciones y sus intervalos</span><span data-l="en">The estimates and their intervals</span></div><div id="b4Forest"></div></div>
+    </div>
+
+    <div class="card">
+      <h2><span data-l="es">Remuestreo: bootstrap y permutación</span><span data-l="en">Resampling: bootstrap and permutation</span></h2>
+      <p class="hint" id="b4ResHint"></p>
+      <div id="b4BootTiles"></div>
+      <div class="two-figs">
+        <div class="pg-pane" id="b4BootPane"><div class="pg-title"><span data-l="es">Distribución bootstrap</span><span data-l="en">Bootstrap distribution</span></div><div id="b4Boot"></div></div>
+        <div class="pg-pane" id="b4PermPane"><div class="pg-title"><span data-l="es">Distribución sin relación (permutación)</span><span data-l="en">Distribution with no relation (permutation)</span></div><div id="b4Perm"></div></div>
+      </div>
+      <details class="theory-note"><summary><span data-l="es">Qué hace cada intervalo</span><span data-l="en">What each interval does</span></summary>
+        <p><span data-l="es">El <b>bootstrap</b> (Efron 1979) remuestrea los pares con reemplazo y recalcula el coeficiente miles de veces: la dispersión de esas réplicas imita la del coeficiente de muestra en muestra. El intervalo <b>percentil</b> toma sus cuantiles; el <b>básico</b> los refleja alrededor de la estimación; el <b>normal</b> usa su error estándar; el <b>BCa</b> (Efron 1987) corrige además el sesgo (z₀) y que la dispersión cambie con el valor (la aceleración a, de la navaja). Con datos normales el intervalo de Fisher cubre lo prometido; con datos muy asimétricos se queda corto y los intervalos bootstrap se acercan más al nivel pedido, sin llegar del todo con muestras chicas (Bishara y Hittner 2017; la simulación de la validación de este bloque lo repite). La <b>permutación</b> (Pitman 1937) baraja Y contra X: rompe cualquier relación y conserva todo lo demás, así que su valor p no supone normalidad.</span><span data-l="en">The <b>bootstrap</b> (Efron 1979) resamples the pairs with replacement and recomputes the coefficient thousands of times: the spread of those replicates imitates that of the coefficient from sample to sample. The <b>percentile</b> interval takes their quantiles; the <b>basic</b> one reflects them around the estimate; the <b>normal</b> one uses their standard error; <b>BCa</b> (Efron 1987) also corrects the bias (z₀) and a spread that changes with the value (the acceleration a, from the jackknife). With normal data Fisher’s interval covers what it promises; with very skewed data it falls short and the bootstrap intervals come closer to the requested level, without quite reaching it in small samples (Bishara and Hittner 2017; the simulation in this block’s validation repeats it). The <b>permutation</b> (Pitman 1937) shuffles Y against X: it breaks any relation and keeps everything else, so its p-value does not assume normality.</span></p>
+      </details>
+    </div>
+
+    <div class="card">
+      <h2><span data-l="es">Factor de Bayes (r de Pearson)</span><span data-l="en">Bayes factor (Pearson’s r)</span></h2>
+      <p class="hint"><span data-l="es">Cuántas veces más probables son los datos si hay correlación que si ρ = 0. La a priori sobre ρ es una beta estirada a (−1, 1); κ controla su ancho.</span><span data-l="en">How many times more probable the data are if there is a correlation than if ρ = 0. The prior on ρ is a beta stretched to (−1, 1); κ controls its width.</span></p>
+      <div class="form-grid"><div class="field"><label for="b4Kappa"><span data-l="es">A priori (<span class="nc">κ</span>)</span><span data-l="en">Prior (<span class="nc">κ</span>)</span></label>
+        <select id="b4Kappa"><option value="0.3333333333333333" data-es="κ = 1/3, la de uso común" data-en="κ = 1/3, the common default">κ = 1/3, la de uso común</option><option value="0.5773502691896258" data-es="κ = 1/√3, más ancha" data-en="κ = 1/√3, wider">κ = 1/√3, más ancha</option><option value="1" data-es="κ = 1, uniforme (Jeffreys)" data-en="κ = 1, uniform (Jeffreys)">κ = 1, uniforme (Jeffreys)</option></select></div></div>
+      <div id="b4BayesTiles"></div>
+      <div class="two-figs">
+        <div class="pg-pane" id="b4BayesPane"><div class="pg-title"><span data-l="es">A priori y posterior de <span class="nc">ρ</span></span><span data-l="en">Prior and posterior of <span class="nc">ρ</span></span></div><div id="b4Bayes"></div></div>
+        <div class="b4-bayes-text" id="b4BayesText"></div>
+      </div>
+      <details class="theory-note"><summary><span data-l="es">Cómo se calcula</span><span data-l="en">How it is computed</span></summary>
+        <p><span data-l="es">Con las medias y varianzas integradas bajo las a priori de Jeffreys, la verosimilitud de ρ depende sólo de r y n: (1 − ρ²)^{(n−1)/2} (1 − ρr)^{3/2 − n} ₂F₁(½, ½; n − ½; (1 + ρr)/2) (Ly, Verhagen y Wagenmakers 2016). El factor de Bayes es su promedio bajo la a priori dividido entre su valor en ρ = 0, y coincide con la razón de densidades posterior/a priori en ρ = 0 (Savage–Dickey): los dos puntos de la gráfica. Las categorías de evidencia son las de Jeffreys (1961) como las tabulan Lee y Wagenmakers (2013).</span><span data-l="en">With the means and variances integrated out under Jeffreys’ priors, the likelihood of ρ depends only on r and n: (1 − ρ²)^{(n−1)/2} (1 − ρr)^{3/2 − n} ₂F₁(½, ½; n − ½; (1 + ρr)/2) (Ly, Verhagen and Wagenmakers 2016). The Bayes factor is its average under the prior divided by its value at ρ = 0, and equals the ratio of posterior to prior densities at ρ = 0 (Savage–Dickey): the two dots of the plot. The categories of evidence are Jeffreys’ (1961) as tabulated by Lee and Wagenmakers (2013).</span></p>
+      </details>
+    </div>
+
+    <div class="card">
+      <h2><span data-l="es">Cómo se calculó</span><span data-l="en">How it was computed</span></h2>
+      <ul class="conv-list" id="b4Conv"></ul>
+    </div>
+  </div>
+</section>

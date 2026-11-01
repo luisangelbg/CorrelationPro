@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>CorrelationPro · Manual de usuario · Capítulo 5</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,500;0,600;1,500&family=Crimson+Pro:ital,wght@0,400;0,600;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../interior.css">
+<script src="../paginar.js"></script>
+</head>
+<body>
+
+<section class="capitulo" id="cap-5" data-pestana="5" data-orden="5" style="--acento: var(--b5)">
+  <div class="cap-apertura">
+    <div class="cap-num">5</div>
+    <div class="cap-etiqueta">Capítulo cinco · Bloque 5</div>
+    <h1 data-corto="Matriz">La matriz de correlación</h1>
+    <div class="cap-regla"></div>
+    <p class="cap-resumen">Todas las variables contra todas: la matriz con sus pruebas corregidas por pruebas múltiples, la figura que se publica con el glifo y el orden que mejor la leen, el diagnóstico que dice si la matriz sirve para lo que sigue —regresión, análisis factorial, simulación—, el KMO y la prueba de Bartlett, y la tabla con medias, desviaciones y correlaciones lista para el artículo.</p>
+    <div class="cap-franja"><span class="k5"></span><span class="k5"></span><span class="k1"></span><span class="k13"></span></div>
+    <ul class="cap-contenido">
+      <li><b>5.1</b>Qué correlacionar</li>
+      <li><b>5.2</b>La matriz</li>
+      <li><b>5.3</b>Las pruebas múltiples</li>
+      <li><b>5.4</b>Cuatro matrices para mostrar</li>
+      <li><b>5.5</b>¿Es una matriz válida?</li>
+      <li><b>5.6</b>KMO y Bartlett</li>
+      <li><b>5.7</b>La tabla para publicar</li>
+      <li><b>5.8</b>Matrices grandes</li>
+    </ul>
+  </div>
+
+  <!-- 5.1 -->
+  <h2 id="s5-1"><span class="num">5.1</span>Qué correlacionar</h2>
+  <p class="lead">Entran las columnas numéricas —continuas y ordinales— con papel de variable. Al abrir unos datos quedan elegidas todas; un clic quita o pone una (siempre quedan al menos dos) y <span class="ui">todas</span> las vuelve a poner.</p>
+  <p><span class="ui">Coeficiente</span> ofrece once de los doce coeficientes del Bloque 4 (todos menos la τ*, que es demasiado lenta para una matriz). <span class="ui">Corrección por pruebas múltiples</span> y <span class="ui">α</span> deciden qué celdas cuentan como significativas (sección 5.3). Cada celda usa las filas completas en sus dos variables, salvo que en el Bloque 2 se hayan elegido los faltantes por listas.</p>
+  <figure>
+    <div class="marco"><img src="../img/b5-que.png" alt="La tarjeta Qué correlacionar con las seis variables de Suiza, 1888"></div>
+    <figcaption><b>Figura 5.1.</b> Suiza, 1888, el ejemplo con que abre el bloque: seis indicadores de 47 distritos francófonos, la <i>r</i> de Pearson y la corrección de Holm al 5&nbsp;%.</figcaption>
+  </figure>
+  <div class="caja nota">
+    <div class="caja-t"><span class="ico">i</span>Medidas costosas y muchas variables</div>
+    <p>La correlación de distancias guarda matrices de <i>n</i> × <i>n</i> y se calcula hasta con 3&nbsp;000 filas. La correlación de distancias, la D de Hoeffding y la ξ de Chatterjee admiten hasta 60 variables cuando hay más de 300 filas. Con más de 30 variables completas, Pearson y Spearman se calculan como productos de columnas estandarizadas, con los valores <i>p</i> de la aproximación <i>t</i>, y un mensaje lo dice.</p>
+  </div>
+
+  <!-- 5.2 -->
+  <h2 id="s5-2"><span class="num">5.2</span>La matriz</h2>
+  <p>La figura tiene dos mitades. <span class="ui">Abajo</span> y <span class="ui">Arriba</span> eligen el glifo de cada una entre los nueve de la sección 1.5 —elipse, círculo, media luna, pastel, cuadrado, barra, sombreado, color y número— o <span class="ui">Nada</span>; al cambiarlo, los glifos de forma se transforman en el nuevo. El color sigue la paleta elegida en el Bloque 1, y la barra de la derecha da su escala de −1 a 1.</p>
+  <ul>
+    <li><span class="ui">Orden</span>: <span class="ui">El de los datos</span>; tres de <span class="ui">Agrupamiento</span> jerárquico (promedio, completo o Ward), con la distancia 1 − <i>r</i>; <span class="ui">Ángulo de los vectores propios</span> (Friendly 2002), que ordena por el ángulo de cada variable en los dos primeros; <span class="ui">Primer componente principal</span>, por la carga en el primero; o <span class="ui">Alfabético</span>.</li>
+    <li><span class="ui">No significativas</span>: las celdas cuyo valor <i>p</i> corregido no llega a α van <span class="ui">Tachadas</span>, <span class="ui">Desvanecidas</span> o <span class="ui">Como las demás</span>.</li>
+    <li><span class="ui">Mostrar</span>: cuál de las cuatro matrices de la sección 5.4 se dibuja.</li>
+  </ul>
+  <p>Al pasar el puntero por una celda se ven sus dos variables, su valor, su <i>p</i> corregido y su <i>n</i>. Un clic la elige: queda enmarcada en sus dos mitades, una línea debajo da su <i>p</i> sin corregir y corregido, y <span class="ui">Estudiar el par elegido en el Bloque 4 →</span> lleva ese par al Bloque 4.</p>
+
+  <figure class="w70">
+    <div class="marco"><img src="../img/b5-matriz.png" alt="La matriz de Suiza, 1888, con elipses abajo, números arriba y un par elegido"></div>
+    <figcaption><b>Figura 5.2.</b> Suiza, 1888, con elipses abajo y números arriba. La educación y la fecundidad (enmarcadas) dan −.66. La agricultura y la fecundidad, con .35, quedan tachadas: sin corregir darían <i>p</i> &lt; .05, pero no pasan la corrección de Holm.</figcaption>
+  </figure>
+  <div class="caja teoria">
+    <div class="caja-t"><span class="ico">θ</span>Teoría en breve · glifos y orden</div>
+    <p>Cada glifo codifica <i>r</i> de otra manera: la elipse es la forma de una nube con esa correlación (Murdoch y Chow 1996), la media luna y el pastel muestran |<i>r</i>| como fracción, el color y el sombreado (Friendly 2002) se leen bien de lejos y el número es exacto. Un buen arreglo combina dos: un glifo que se lea de un vistazo en una mitad y el número en la otra. El orden importa tanto como el glifo: agrupar las variables parecidas revela bloques que el orden de los datos esconde.</p>
+  </div>
+
+  <!-- 5.3 -->
+  <h2 id="s5-3"><span class="num">5.3</span>Las pruebas múltiples</h2>
+  <p>Con <i>p</i> variables hay <i>p</i>(<i>p</i> − 1)/2 pruebas: con seis variables, quince; con treinta, 435. Sin corrección, al 5&nbsp;% se esperan falsos positivos aunque ninguna variable se relacione con otra: uno de cada veinte pares, en promedio. Las correcciones ajustan los valores <i>p</i> de toda la familia de pruebas.</p>
+  <table class="compacta">
+    <caption><b>Tabla 5.1.</b> Las correcciones por pruebas múltiples</caption>
+    <thead><tr><th style="width:1.7in">Corrección</th><th>Qué controla</th></tr></thead>
+    <tbody>
+      <tr><td><b>Holm</b> (la de omisión)</td><td>la probabilidad de tener al menos un falso positivo en toda la matriz (el error de familia), con más potencia que Bonferroni y sin supuestos</td></tr>
+      <tr><td><b>Benjamini–Hochberg</b></td><td>la proporción esperada de falsos positivos entre las celdas significativas (la tasa de falsos descubrimientos); más potente cuando hay muchas pruebas</td></tr>
+      <tr><td><b>Benjamini–Yekutieli</b></td><td>la misma tasa, válida con cualquier dependencia entre las pruebas; más conservadora</td></tr>
+      <tr><td><b>Hochberg</b> · <b>Hommel</b></td><td>el error de familia, con algo más de potencia que Holm; suponen que las pruebas son independientes o se asocian en el mismo sentido</td></tr>
+      <tr><td><b>Bonferroni</b></td><td>el error de familia, multiplicando cada <i>p</i> por el número de pruebas: la más simple y la más conservadora</td></tr>
+      <tr><td><b>Ninguna</b></td><td>nada: cada celda con su propio <i>p</i></td></tr>
+    </tbody>
+  </table>
+  <div class="caja importante">
+    <div class="caja-t"><span class="ico">!</span>Decide la corrección antes de ver la matriz</div>
+    <p>Si la pregunta es de confirmación («¿estas correlaciones son reales?»), usa Holm. Si es de exploración («¿qué pares merece la pena seguir?»), Benjamini–Hochberg. Lo que no se vale es probar varias y quedarse con la que da más estrellas. Y di siempre en el informe cuál usaste: la tabla para publicar lo pone en su nota.</p>
+  </div>
+
+  <!-- 5.4 -->
+  <h2 id="s5-4"><span class="num">5.4</span>Cuatro matrices para mostrar</h2>
+  <ul>
+    <li><span class="ui">La matriz estimada</span>: la de los datos, celda por celda.</li>
+    <li><span class="ui">La definida positiva más cercana</span>: la matriz de correlación válida más parecida a la estimada (sección 5.5).</li>
+    <li><span class="ui">La contraída (Schäfer–Strimmer)</span>: cada correlación encogida hacia cero en la proporción λ que se estima de los datos; útil con pocas filas para muchas variables.</li>
+    <li><span class="ui">Las correlaciones parciales</span>: cada par quitando el efecto lineal de todas las demás variables, con su prueba <i>t</i> de <i>n</i> − <i>p</i> grados de libertad y la misma corrección. Pide una matriz definida positiva.</li>
+  </ul>
+  <div class="caja nota">
+    <div class="caja-t"><span class="ico">i</span>Las parciales de un solo par</div>
+    <p>Esta vista quita a todas las demás variables a la vez. Para controlar sólo por algunas, con su intervalo y su versión robusta, está el Bloque 7.</p>
+  </div>
+
+  <figure class="w70">
+    <div class="marco"><img src="../img/b5-parciales.png" alt="Las correlaciones parciales de Suiza, 1888, ordenadas por agrupamiento, con pasteles abajo y color arriba"></div>
+    <figcaption><b>Figura 5.3.</b> Las correlaciones parciales de Suiza, 1888, ordenadas por agrupamiento, con pasteles abajo y color arriba. Al quitar las demás variables, la educación sigue muy ligada a los católicos y a la fecundidad; el examen y la educación, que daban .70, quedan tachados: casi todo lo que comparten pasa por las otras variables.</figcaption>
+  </figure>
+  <!-- 5.5 -->
+  <h2 id="s5-5"><span class="num">5.5</span>¿Es una matriz válida?</h2>
+  <p>Una matriz de correlación debe ser <b>definida positiva</b>: todos sus valores propios mayores que cero. Calculada celda por celda puede no serlo —con faltantes por pares, con coeficientes robustos o con más variables que filas—, y entonces no sirve para regresión, análisis factorial, ecuaciones estructurales ni simulación. La tarjeta da cinco cifras: si es definida positiva (y, si no, cuántos valores propios son negativos o nulos), el menor y el mayor valor propio (con la parte de la varianza que se lleva el mayor), el número de condición —mayor de 1&nbsp;000 es una matriz casi colineal— y el logaritmo del determinante.</p>
+  <figure class="w80">
+    <div class="marco"><img src="../img/b5-diag.png" alt="El diagnóstico de la matriz de Suiza, 1888, con la gráfica de valores propios y las correcciones"></div>
+    <figcaption><b>Figura 5.4.</b> Suiza, 1888: definida positiva, con el menor valor propio en 0.121 y un número de condición de 26.5. El primer componente se lleva el 53&nbsp;% de la varianza; la línea punteada es el criterio de Kaiser (λ = 1).</figcaption>
+  </figure>
+  <p>La gráfica de los valores propios ayuda a ver cuántas dimensiones tienen los datos. A la derecha, las <span class="ui">Correcciones</span>: <span class="ui">Calcular la definida positiva más cercana</span> aplica el algoritmo de Higham (2002), hasta con 150 variables, y dice cuántas iteraciones usó, la distancia de Frobenius a la estimada y el mayor cambio de una celda; la contracción de Schäfer y Strimmer da su λ y el factor por el que se multiplica cada correlación.</p>
+  <div class="caja regla">
+    <div class="caja-t"><span class="ico">✓</span>Si la matriz no es definida positiva</div>
+    <table class="compacta"><tbody>
+      <tr><td style="width:44%"><b>Si</b> hay faltantes por pares…</td><td>prueba los faltantes por listas en el Bloque 2; si cambian mucho las cosas, los faltantes no son al azar.</td></tr>
+      <tr><td><b>Si</b> el coeficiente es robusto…</td><td>usa la más cercana, y di en el informe que la usaste y cuánto cambió.</td></tr>
+      <tr><td><b>Si</b> hay más variables que filas…</td><td>la matriz es singular por fuerza: usa la contraída, o reduce las variables.</td></tr>
+      <tr><td><b>Si</b> el mayor cambio de la más cercana es grande (más de .05)…</td><td>la matriz estimada tiene un problema de fondo: revisa los datos antes de seguir.</td></tr>
+    </tbody></table>
+  </div>
+
+  <!-- 5.6 -->
+  <h2 id="s5-6"><span class="num">5.6</span>KMO y Bartlett</h2>
+  <p>Antes de un análisis factorial conviene saber si las variables comparten algo. La medida de <b>Kaiser, Meyer y Olkin</b> (KMO) compara las correlaciones con las parciales: si las parciales son chicas frente a las correlaciones, las variables comparten factores. Se da para toda la matriz y, como MSA, para cada variable (hasta 60 variables). La <b>prueba de Bartlett</b> pregunta si la matriz es la identidad, es decir, si nada correlaciona; usa el menor <i>n</i> de la matriz. Las dos piden una matriz definida positiva.</p>
+  <figure class="w80">
+    <div class="marco"><img src="../img/b5-kmo.png" alt="El KMO y la prueba de Bartlett de Suiza, 1888, con la MSA de cada variable"></div>
+    <figcaption><b>Figura 5.5.</b> Suiza, 1888: KMO = .626, «mediocre»; Bartlett rechaza la identidad (χ² = 144.75 con 15 grados de libertad). Los católicos, con MSA = .478, son la variable que menos comparte con las demás.</figcaption>
+  </figure>
+  <table class="compacta">
+    <caption><b>Tabla 5.2.</b> Las palabras del KMO (Kaiser y Rice 1974)</caption>
+    <thead><tr><th style="width:1.4in">KMO o MSA</th><th>Lectura</th></tr></thead>
+    <tbody>
+      <tr><td>.90 o más</td><td>maravillosa</td></tr>
+      <tr><td>.80 a .90</td><td>meritoria</td></tr>
+      <tr><td>.70 a .80</td><td>mediana</td></tr>
+      <tr><td>.60 a .70</td><td>mediocre</td></tr>
+      <tr><td>.50 a .60</td><td>miserable</td></tr>
+      <tr><td>menos de .50</td><td>inaceptable</td></tr>
+    </tbody>
+  </table>
+  <p>En la tabla de cada variable, las etiquetas van en verde desde .60, en ámbar entre .50 y .60 y en rojo por debajo. Una variable inaceptable es la primera candidata a quedar fuera del análisis factorial.</p>
+
+  <!-- 5.7 -->
+  <h2 id="s5-7"><span class="num">5.7</span>La tabla para publicar</h2>
+  <p>La tabla clásica de un artículo: cada variable numerada con su media (M) y su desviación estándar (DE), y debajo de la diagonal las correlaciones con estrellas según el <i>p</i> corregido. La nota al pie da el <i>n</i> (o su intervalo, con faltantes por pares) y la corrección usada. Los números siguen el estilo del Bloque 1. Se arma hasta con 30 variables, y muestra la matriz que esté elegida en <span class="ui">Mostrar</span>.</p>
+  <figure class="w80">
+    <div class="marco"><img src="../img/b5-tabla.png" alt="La tabla de medias, desviaciones estándar y correlaciones de Suiza, 1888"></div>
+    <figcaption><b>Figura 5.6.</b> Suiza, 1888, lista para el artículo. <span class="ui">Copiar la tabla</span> la deja en el portapapeles separada por tabuladores, de modo que al pegarla en un procesador de textos o una hoja de cálculo cada valor cae en su celda.</figcaption>
+  </figure>
+  <p><span class="ui">Descargar r, p y n (CSV)</span> guarda un renglón por par con sus dos variables, <i>r</i>, el <i>p</i> sin corregir, el <i>p</i> corregido y el <i>n</i>: lo que hace falta para un material suplementario o para otro programa, con cualquier número de variables.</p>
+
+  <!-- 5.8 -->
+  <h2 id="s5-8"><span class="num">5.8</span>Matrices grandes</h2>
+  <p>Con más de 40 variables la figura deja los glifos y se vuelve un lienzo de colores, una celda por par. Al pasar el puntero, una <b>lupa</b> muestra los números de la ventana de 9 × 9 celdas que lo rodea, y una línea debajo da el par, su valor, su <i>p</i> corregido y su <i>n</i>; un clic elige el par. Ordenar por agrupamiento es lo que hace legible una matriz grande. <span class="ui">Probar con 300 variables simuladas</span> abre un conjunto de 300 variables y 120 filas en seis módulos —simulado, no son datos reales— para probarlo.</p>
+  <figure class="w50">
+    <div class="marco"><img src="../img/b5-grande.png" alt="La matriz de 300 variables simuladas ordenada por agrupamiento, con la lupa abierta"></div>
+    <figcaption><b>Figura 5.7.</b> Las 300 variables simuladas, ordenadas por agrupamiento: los seis módulos son los bloques sobre la diagonal. La lupa da los números alrededor del puntero.</figcaption>
+  </figure>
+  <p>El diagnóstico se calcula hasta con 400 variables. Con 300 variables y sólo 120 filas, la matriz no puede ser definida positiva: tiene 181 valores propios nulos (300 menos 119), su número de condición es infinito y la más cercana no se calcula con tantas variables. Para un caso así está la contracción: λ = 0.199 multiplica cada correlación por 0.801 y deja una matriz válida.</p>
+  <figure class="w80">
+    <div class="marco"><img src="../img/b5-grande-diag.png" alt="El diagnóstico de la matriz de 300 variables simuladas: singular, con 181 valores propios nulos"></div>
+    <figcaption><b>Figura 5.8.</b> Una matriz con más variables que filas: singular, con 181 valores propios nulos. Los seis primeros valores propios, muy por encima de los demás, son los seis módulos.</figcaption>
+  </figure>
+</section>
+
+</body>
+</html>

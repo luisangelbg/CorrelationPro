@@ -1,0 +1,68 @@
+<!-- ==================== BLOCK 7 · PARTIAL, MULTIPLE AND BETWEEN SETS ==================== -->
+<section class="step-panel" id="panel-7">
+  <div class="panel-title"><div class="pt-num">7</div><div><h2><span data-l="es">Parcial, múltiple y entre conjuntos</span><span data-l="en">Partial, multiple and between sets</span></h2><p><span data-l="es">Controlar terceras variables y correlacionar grupos de variables entre sí</span><span data-l="en">Control third variables and correlate groups of variables with each other</span></p></div></div>
+
+  <div class="card" id="b7Empty">
+    <p class="hint"><span data-l="es">Primero abre unos datos en el Bloque 2 (o usa un conjunto de ejemplo).</span><span data-l="en">First open some data in Block 2 (or use an example dataset).</span></p>
+    <div class="btn-row"><button type="button" class="btn btn-secondary btn-sm" data-go="2"><span data-l="es">← Ir a Datos</span><span data-l="en">← Go to Data</span></button>
+      <button type="button" class="btn btn-ghost btn-sm" id="b7Swiss"><span data-l="es">Usar Suiza, 1888</span><span data-l="en">Use Switzerland, 1888</span></button></div>
+  </div>
+
+  <div id="b7Main" hidden>
+    <div class="card">
+      <h2><span data-l="es">Correlación parcial y semiparcial</span><span data-l="en">Partial and semipartial correlation</span></h2>
+      <p class="hint"><span data-l="es">¿Cuánto queda de la relación entre X e Y cuando se quita lo que ambas comparten con Z? La parcial quita Z de las dos; la semiparcial, sólo de Y.</span><span data-l="en">How much of the relation between X and Y is left once what both share with Z is removed? The partial removes Z from both; the semipartial, from Y only.</span></p>
+      <div class="form-grid">
+        <div class="field"><label for="b7X">X</label><select id="b7X"></select></div>
+        <div class="field"><label for="b7Y">Y</label><select id="b7Y"></select></div>
+        <div class="field"><label for="b7Method"><span data-l="es">Coeficiente</span><span data-l="en">Coefficient</span></label>
+          <select id="b7Method"><option value="pearson" data-es="Pearson" data-en="Pearson">Pearson</option><option value="spearman" data-es="Spearman" data-en="Spearman">Spearman</option><option value="kendall" data-es="Kendall" data-en="Kendall">Kendall</option></select></div>
+      </div>
+      <div class="field-label"><span data-l="es">Controlar por (Z)</span><span data-l="en">Control for (Z)</span></div>
+      <div class="chip-row" id="b7Z"></div>
+      <div class="messages" id="b7PMsgs"></div>
+      <div id="b7PTiles"></div>
+      <div class="two-figs">
+        <div class="pg-pane" id="b7RawPane"><div class="pg-title"><span data-l="es">Sin controlar</span><span data-l="en">Without control</span></div><div id="b7Raw"></div></div>
+        <div class="pg-pane" id="b7AvPane"><div class="pg-title"><span data-l="es">Quitando Z de las dos (gráfica de variable añadida)</span><span data-l="en">Removing Z from both (added-variable plot)</span></div><div id="b7Av"></div></div>
+      </div>
+      <div class="b7-text" id="b7PText"></div>
+    </div>
+
+    <div class="card">
+      <h2><span data-l="es">Correlación múltiple</span><span data-l="en">Multiple correlation</span></h2>
+      <p class="hint"><span data-l="es">La correlación entre Y y la mejor combinación lineal de varias X. Las semiparciales al cuadrado separan lo que aporta cada predictor por sí solo de lo que comparten.</span><span data-l="en">The correlation between Y and the best linear combination of several X. The squared semipartials separate what each predictor adds on its own from what they share.</span></p>
+      <div class="form-grid"><div class="field"><label for="b7MY">Y</label><select id="b7MY"></select></div></div>
+      <div class="field-label"><span data-l="es">Predictores (X)</span><span data-l="en">Predictors (X)</span></div>
+      <div class="chip-row" id="b7MX"></div>
+      <div id="b7MTiles"></div>
+      <div class="table-wrap" id="b7MTable"></div>
+      <div class="pg-pane b7-share" id="b7MBarPane"><div class="pg-title"><span data-l="es">Cómo se reparte R²</span><span data-l="en">How R² is shared</span></div><div id="b7MBar"></div></div>
+    </div>
+
+    <div class="card">
+      <h2><span data-l="es">Correlación canónica</span><span data-l="en">Canonical correlation</span></h2>
+      <p class="hint"><span data-l="es">Dos conjuntos de variables: la mayor correlación posible entre una combinación lineal de cada uno, luego la siguiente, independiente de la primera, y así hasta el tamaño del menor conjunto (Hotelling 1936).</span><span data-l="en">Two sets of variables: the largest possible correlation between a linear combination of each, then the next one, independent of the first, and so on up to the size of the smaller set (Hotelling 1936).</span></p>
+      <div class="sets-grid">
+        <div><div class="field-label"><span data-l="es">Conjunto A</span><span data-l="en">Set A</span></div><div class="chip-row set-a" id="b7A"></div></div>
+        <div><div class="field-label"><span data-l="es">Conjunto B</span><span data-l="en">Set B</span></div><div class="chip-row set-b" id="b7B"></div></div>
+      </div>
+      <div class="messages" id="b7CMsgs"></div>
+      <div class="table-wrap" id="b7CTable"></div>
+      <div class="two-figs">
+        <div class="pg-pane" id="b7CScPane"><div class="pg-title"><span data-l="es">El primer par de variables canónicas</span><span data-l="en">The first pair of canonical variates</span></div><div id="b7CSc"></div></div>
+        <div class="pg-pane" id="b7CircPane"><div class="pg-title"><span data-l="es">Círculo de correlaciones (cargas)</span><span data-l="en">Circle of correlations (loadings)</span></div><div id="b7Circ"></div></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2><span data-l="es">Entre conjuntos: RV, Procrustes y Mantel</span><span data-l="en">Between sets: RV, Procrustes and Mantel</span></h2>
+      <p class="hint"><span data-l="es">Con los mismos conjuntos A y B: el coeficiente RV es una r entre dos tablas (0 a 1); Procrustes gira una configuración para ajustarla a la otra; Mantel correlaciona las distancias entre las filas. Las tres con prueba por permutación (999 barajas, variables estandarizadas).</span><span data-l="en">With the same sets A and B: the RV coefficient is an r between two tables (0 to 1); Procrustes rotates one configuration to fit the other; Mantel correlates the distances between the rows. All three with a permutation test (999 shuffles, standardized variables).</span></p>
+      <div id="b7STiles"></div>
+      <div class="pg-pane" id="b7RvPane"><div class="pg-title"><span data-l="es">RV observado frente a las permutaciones</span><span data-l="en">Observed RV against the permutations</span></div><div id="b7Rv"></div></div>
+      <details class="theory-note"><summary><span data-l="es">Cuándo usar cada una</span><span data-l="en">When to use each one</span></summary>
+        <p><span data-l="es">La canónica busca combinaciones lineales y se rompe con más variables que filas; el RV (Escoufier 1973) resume toda la tabla y es la base del análisis de coinercia; Procrustes (Gower 1975; Peres-Neto y Jackson 2001) compara configuraciones (por ejemplo, dos ordenaciones); Mantel (1967) sirve cuando lo que se tiene son distancias (genéticas, geográficas, ecológicas), aunque su potencia es baja y no corrige la autocorrelación espacial (Guillot y Rousset 2013; Legendre, Fortin y Borcard 2015).</span><span data-l="en">The canonical correlation looks for linear combinations and breaks down with more variables than rows; RV (Escoufier 1973) summarizes the whole table and underlies co-inertia analysis; Procrustes (Gower 1975; Peres-Neto and Jackson 2001) compares configurations (two ordinations, for instance); Mantel (1967) serves when what one has are distances (genetic, geographic, ecological), although its power is low and it does not correct for spatial autocorrelation (Guillot and Rousset 2013; Legendre, Fortin and Borcard 2015).</span></p>
+      </details>
+    </div>
+  </div>
+</section>

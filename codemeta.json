@@ -1,0 +1,30 @@
+{
+  "@context": "https://doi.org/10.5063/schema/codemeta-2.0",
+  "@type": "SoftwareSourceCode",
+  "name": "CorrelationPro",
+  "description": "A self-contained, browser-based platform for correlation analysis of every kind, with its theory. It reads spreadsheets, CSV, TSV and pasted text with its own reader; records the kind and role of each column; checks the assumptions of each pair and recommends a coefficient; computes every coefficient for two variables with exact, asymptotic or permutation tests, analytic and bootstrap intervals and the Bayes factor; builds correlation matrices with multiple-testing corrections, the nearest positive-definite matrix, shrinkage, KMO and nine glyphs for up to a thousand variables; measures nonlinear dependence (dCor, HSIC, MIC, xi, tau*, Hoeffding's D, mutual information, maximal correlation) and fits five copula families; computes partial, semipartial, multiple and canonical correlation, RV, Procrustes, co-inertia and Mantel; categorical, ordinal and latent correlations and the heterogeneous matrix; agreement and reliability (CCC, Bland-Altman, six ICC forms, kappas, Kendall's W, Krippendorff's alpha, Gwet's AC1/AC2); correlation in data with structure (groups and Simpson's paradox, repeated measures, time series, spatial data, phylogenetic contrasts, circular and compositional data); correlation networks; and compares correlations and matrices, corrects for attenuation and range restriction, plans power and sample size and combines correlations by meta-analysis. It ends in publication figures, colour-vision-safe palettes, a correlation table and a methods section written from what was actually run. Spanish and English interface. Every engine of Blocks 1 to 12 was checked against independent implementations in R: 19,334 comparisons with no disagreement.",
+  "version": "1.0.0",
+  "dateCreated": "2026-10-03",
+  "dateModified": "2026-11-01",
+  "license": "https://spdx.org/licenses/GPL-3.0-or-later",
+  "codeRepository": "https://github.com/luisangelbg/CorrelationPro",
+  "url": "https://luisangelbg.github.io/CorrelationPro/",
+  "issueTracker": "https://github.com/luisangelbg/CorrelationPro/issues",
+  "programmingLanguage": ["JavaScript", "HTML", "CSS"],
+  "runtimePlatform": "Any modern web browser",
+  "operatingSystem": "Any",
+  "applicationCategory": "Statistics",
+  "inLanguage": ["es", "en"],
+  "keywords": ["correlation", "association measures", "rank correlation", "robust correlation", "nonlinear dependence", "distance correlation", "copulas", "partial correlation", "canonical correlation", "polychoric correlation", "agreement and reliability", "intraclass correlation", "repeated measures correlation", "correlation networks", "graphical lasso", "meta-analysis of correlations", "statistical power", "bootstrap", "data visualization", "statistics education"],
+  "author": [
+    {
+      "@type": "Person",
+      "givenName": "Luis Ángel",
+      "familyName": "Barrera-Guzmán",
+      "email": "lbarrerag@chapingo.mx",
+      "@id": "https://orcid.org/0000-0001-8057-2583"
+    }
+  ],
+  "softwareRequirements": ["A modern web browser; no installation"],
+  "isAccessibleForFree": true
+}

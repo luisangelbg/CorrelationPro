@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>CorrelationPro · Manual de usuario · Capítulo 11</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,500;0,600;1,500&family=Crimson+Pro:ital,wght@0,400;0,600;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../interior.css">
+<script src="../paginar.js"></script>
+</head>
+<body>
+
+<section class="capitulo" id="cap-11" data-pestana="11" data-orden="11" style="--acento: var(--b11)">
+  <div class="cap-apertura">
+    <div class="cap-num">11</div>
+    <div class="cap-etiqueta">Capítulo once · Bloque 11</div>
+    <h1 data-corto="Redes">Redes de correlación</h1>
+    <div class="cap-regla"></div>
+    <p class="cap-resumen">Una matriz grande se lee mejor como una red: cada variable es un nodo y cada relación, una arista. Este bloque arma la red con correlaciones o con parciales —con o sin regularización—, la dibuja de cinco maneras que se transforman una en otra, mide quién está en el centro y encuentra las comunidades: los grupos de variables que se relacionan más entre sí que con las demás.</p>
+    <div class="cap-franja"><span class="k11"></span><span class="k11"></span><span class="k5"></span><span class="k7"></span></div>
+    <ul class="cap-contenido">
+      <li><b>11.1</b>Qué red</li>
+      <li><b>11.2</b>La red y sus cinco vistas</li>
+      <li><b>11.3</b>Centralidades y comunidades</li>
+    </ul>
+  </div>
+
+  <!-- 11.1 -->
+  <h2 id="s11-1"><span class="num">11.1</span>Qué red</h2>
+  <p class="lead">Entran las variables numéricas con papel de variable; al abrir unos datos quedan elegidas las cuarenta primeras. Hacen falta al menos tres, y la red usa sólo las filas completas en todas.</p>
+  <figure>
+    <div class="marco"><img src="../img/b11-que.png" alt="La tarjeta Qué red con las seis variables de Suiza, 1888"></div>
+    <figcaption><b>Figura 11.1.</b> Suiza, 1888, el ejemplo con que abre el bloque: seis variables, la red de parciales regularizadas, Pearson y γ = 0.5.</figcaption>
+  </figure>
+  <p><span class="ui">Aristas</span> decide qué relaciones se dibujan; <span class="ui">Coeficiente</span>, si se parte de Pearson o de Spearman.</p>
+  <table class="compacta">
+    <caption><b>Tabla 11.1.</b> Las cuatro maneras de armar la red</caption>
+    <thead><tr><th style="width:2.1in">Aristas</th><th>Qué se dibuja</th></tr></thead>
+    <tbody>
+      <tr><td><b>Parciales regularizadas</b> (la de omisión)</td><td>las correlaciones parciales del <b>lazo gráfico</b> (Friedman, Hastie y Tibshirani 2008), que pone en cero las débiles; cuántas, lo elige el criterio EBIC (Foygel y Drton 2010) con su <span class="ui">γ del EBIC</span>: 0.5 da la red más escasa, 0 es el BIC</td></tr>
+      <tr><td><b>Parciales significativas</b></td><td>las correlaciones parciales —cada par quitando a todas las demás— cuyo valor <i>p</i>, corregido por Holm, es menor que .05</td></tr>
+      <tr><td><b>Correlaciones con |r| ≥ umbral</b></td><td>las correlaciones marginales que pasan el <span class="ui">Umbral |r|</span>, de .05 a .90</td></tr>
+      <tr><td><b>Correlaciones significativas</b></td><td>las correlaciones marginales significativas con la corrección de Holm</td></tr>
+    </tbody>
+  </table>
+  <p>Si la matriz no es definida positiva, las dos redes de parciales usan la más cercana (sección 5.5) y un mensaje lo dice. Con menos de tres filas completas por variable, otro mensaje avisa que la red es inestable. Con más de 25 variables, el lazo gráfico recorre sus 100 penalizaciones con una espera.</p>
+  <div class="caja importante">
+    <div class="caja-t"><span class="ico">!</span>Marginal o parcial: dos redes distintas</div>
+    <p>En una red de correlaciones marginales casi todo se conecta con todo, porque muchas variables comparten una causa común. Las parciales muestran sólo las relaciones que quedan al controlar por todas las demás variables: una arista quiere decir «se relacionan aun sabiendo todo lo demás». Las dos son útiles, pero responden preguntas diferentes, y el informe debe decir cuál se dibujó.</p>
+  </div>
+
+  <!-- 11.2 -->
+  <h2 id="s11-2"><span class="num">11.2</span>La red y sus cinco vistas</h2>
+  <p>El título dice cuántos nodos y aristas tiene la red y cómo se armó (con la λ del lazo elegida). El grosor de cada arista es su |peso|, y su color, el signo: azul para las positivas y rojo para las negativas, en la paleta del Bloque 1. El tamaño de cada nodo es su fuerza y su color, su comunidad; los nodos sin aristas van en gris.</p>
+  <figure class="w80">
+    <div class="marco"><img src="../img/b11-red.png" alt="La red de parciales regularizadas de Suiza, 1888, con la educación elegida"></div>
+    <figcaption><b>Figura 11.2.</b> Suiza, 1888: 11 aristas de 15 posibles (λ = 0.065). Con un clic en la educación, sus aristas quedan resaltadas y la línea de abajo da sus vecinos con su peso: fecundidad −.37, examen .33, agricultura −.30 y católicos .24.</figcaption>
+  </figure>
+  <p>Al pasar el puntero sobre un nodo se resaltan sus aristas y sus vecinos; un clic lo deja fijo y escribe debajo su comunidad, su fuerza y sus vecinos ordenados por peso. Los botones de arriba cambian la vista, y el cambio es animado: cada nodo y cada arista viajan a su lugar nuevo.</p>
+  <ul>
+    <li><span class="ui">Fuerzas</span>: los nodos se acomodan como si las aristas fueran resortes (Fruchterman y Reingold 1991): los muy relacionados quedan cerca.</li>
+    <li><span class="ui">Círculo</span>: los nodos en una circunferencia, ordenados por comunidad.</li>
+    <li><span class="ui">Cuerdas agrupadas</span>: el mismo círculo, con las aristas curvadas hacia el centro de su comunidad: las relaciones entre comunidades se ven como haces.</li>
+    <li><span class="ui">Arcos</span>: los nodos en una línea, con las aristas como arcos encima.</li>
+    <li><span class="ui">Matriz</span>: los pesos como celdas de color, en el orden de las comunidades.</li>
+  </ul>
+  <p><span class="ui">▶ Recorrido: matriz → red → cuerdas</span> pasa por la matriz, las fuerzas, el círculo y las cuerdas, una tras otra, para ver que son la misma información dibujada de cuatro maneras.</p>
+  <div class="dos" style="margin-bottom:0.16in">
+    <figure style="margin:0">
+      <div class="marco"><img src="../img/b11-cuerdas.png" alt="La red de parciales regularizadas como cuerdas agrupadas"></div>
+      <figcaption><b>Figura 11.3.</b> La misma red, como cuerdas agrupadas.</figcaption>
+    </figure>
+    <figure style="margin:0">
+      <div class="marco"><img src="../img/b11-marginal.png" alt="La red de correlaciones con |r| de .30 o más, en círculo"></div>
+      <figcaption><b>Figura 11.4.</b> La red marginal con |<i>r</i>| ≥ .30, en círculo.</figcaption>
+    </figure>
+  </div>
+  <p>Las dos figuras de arriba muestran la diferencia de la sección anterior. En la marginal, la agricultura y la fecundidad están unidas (<i>r</i> = .35); en la de parciales regularizadas esa arista no está, porque la correlación pasa por la educación.</p>
+
+  <!-- 11.3 -->
+  <h2 id="s11-3"><span class="num">11.3</span>Centralidades y comunidades</h2>
+  <p>Cuatro cifras resumen la red: las aristas con la densidad (la parte de las aristas posibles que hay), las comunidades con su modularidad <i>Q</i>, el nodo más fuerte y las filas usadas. La tabla da, para cada nodo, ordenados por fuerza, cinco centralidades, y la gráfica de abajo, su fuerza relativa a la del más fuerte, en el color de su comunidad.</p>
+  <figure class="w80">
+    <div class="marco"><img src="../img/b11-cent.png" alt="Las centralidades y las comunidades de la red de Suiza, 1888"></div>
+    <figcaption><b>Figura 11.5.</b> La educación y el examen son los nodos más fuertes; la mortalidad infantil, el más débil. La modularidad es baja (<i>Q</i> = 0.078): con seis variables tan relacionadas, las dos comunidades apenas se separan.</figcaption>
+  </figure>
+  <table class="compacta">
+    <caption><b>Tabla 11.2.</b> Las centralidades</caption>
+    <thead><tr><th style="width:1.5in">Centralidad</th><th>Qué mide</th></tr></thead>
+    <tbody>
+      <tr><td><b>Grado</b></td><td>cuántas aristas tiene el nodo</td></tr>
+      <tr><td><b>Fuerza</b></td><td>la suma de los |pesos| de sus aristas: la más estable y la más usada</td></tr>
+      <tr><td><b>Influencia esperada</b></td><td>la suma de los pesos con su signo: si es negativa, el nodo frena más de lo que impulsa a sus vecinos</td></tr>
+      <tr><td><b>Cercanía</b></td><td>lo cerca que está de todos los demás, con caminos de longitud 1/|peso| (Opsahl, Agneessens y Skvoretz 2010)</td></tr>
+      <tr><td><b>Intermediación</b></td><td>cuántos caminos más cortos entre otros nodos pasan por él (Brandes 2001)</td></tr>
+    </tbody>
+  </table>
+  <p>Las <b>comunidades</b> maximizan la modularidad (Newman 2006) con el método de Louvain (Blondel y colaboradores 2008): la red se parte en grupos de nodos con más aristas dentro que entre ellos. Una modularidad cerca de cero dice que la partición apenas se distingue de una al azar.</p>
+  <div class="caja teoria">
+    <div class="caja-t"><span class="ico">θ</span>Teoría en breve · cuánto creerle a una red</div>
+    <p>Una red estimada con pocas filas cambia mucho de una muestra a otra: aristas débiles aparecen y desaparecen, y el orden de las centralidades se mueve. La fuerza es la centralidad más estable; la cercanía y la intermediación, las menos (Epskamp y Fried 2018). Con muchas variables y pocas filas, el lazo gráfico con γ = 0.5 es conservador a propósito: prefiere perder una arista débil que inventar una.</p>
+  </div>
+  <div class="caja regla">
+    <div class="caja-t"><span class="ico">✓</span>Para leer el Bloque 11</div>
+    <table class="compacta"><tbody>
+      <tr><td style="width:44%"><b>Si</b> la pregunta es qué se relaciona directamente…</td><td>usa una red de parciales, regularizada si hay muchas variables.</td></tr>
+      <tr><td><b>Si</b> hay pocas filas por variable…</td><td>interpreta sólo las aristas fuertes y la fuerza; no la intermediación.</td></tr>
+      <tr><td><b>Si</b> la modularidad es baja…</td><td>no hables de grupos de variables: las comunidades no se distinguen.</td></tr>
+      <tr><td><b>Si</b> vas a publicar la red…</td><td>di cómo se armaron las aristas, el coeficiente, la γ del EBIC o el umbral, y cuántas filas se usaron.</td></tr>
+    </tbody></table>
+    <p class="regla-pie">Son guías para interpretar, no leyes: lo que sabes del fenómeno, del diseño y de cómo se midió siempre manda.</p>
+  </div>
+</section>
+
+</body>
+</html>

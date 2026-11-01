@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>CorrelationPro · Manual de usuario · Capítulo 7</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,500;0,600;1,500&family=Crimson+Pro:ital,wght@0,400;0,600;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../interior.css">
+<script src="../paginar.js"></script>
+</head>
+<body>
+
+<section class="capitulo" id="cap-7" data-pestana="7" data-orden="7" style="--acento: var(--b7)">
+  <div class="cap-apertura">
+    <div class="cap-num">7</div>
+    <div class="cap-etiqueta">Capítulo siete · Bloque 7</div>
+    <h1 data-corto="Parcial y conjuntos">Parcial, múltiple y entre conjuntos</h1>
+    <div class="cap-regla"></div>
+    <p class="cap-resumen">Dos variables casi nunca están solas. Este bloque quita el efecto de terceras variables (la correlación parcial y la semiparcial), mide cuánto explican varias variables juntas de una (la correlación múltiple, con el reparto de su R²) y correlaciona grupos de variables entre sí: la correlación canónica, el coeficiente RV, Procrustes, la prueba de Mantel y la coinercia.</p>
+    <div class="cap-franja"><span class="k7"></span><span class="k7"></span><span class="k5"></span><span class="k11"></span></div>
+    <ul class="cap-contenido">
+      <li><b>7.1</b>Correlación parcial y semiparcial</li>
+      <li><b>7.2</b>Correlación múltiple</li>
+      <li><b>7.3</b>Correlación canónica</li>
+      <li><b>7.4</b>Entre conjuntos: RV, Procrustes, Mantel y coinercia</li>
+    </ul>
+  </div>
+
+  <!-- 7.1 -->
+  <h2 id="s7-1"><span class="num">7.1</span>Correlación parcial y semiparcial</h2>
+  <p class="lead">¿Cuánto queda de la relación entre <i>X</i> y <i>Y</i> cuando se quita lo que las dos comparten con <i>Z</i>? La <b>parcial</b> quita <i>Z</i> de las dos; la <b>semiparcial</b>, sólo de <i>Y</i>.</p>
+  <p>Se eligen <span class="ui">X</span>, <span class="ui">Y</span> y el <span class="ui">Coeficiente</span> —Pearson, Spearman o Kendall—, y en <span class="ui">Controlar por (Z)</span> una o varias variables. Las cifras son la correlación sin controlar, la parcial con su prueba, la semiparcial, la <b>correlación de distancias parcial</b> (Székely y Rizzo 2014), que quita <i>Z</i> sin suponer relaciones lineales, con su valor <i>p</i> por permutación (hasta con 800 filas), y el número de controles con los grados de libertad, <i>n</i> − 2 − <i>k</i>.</p>
+  <figure class="w80">
+    <div class="marco"><img src="../img/b7-parcial.png" alt="La educación y la fecundidad de Suiza, 1888, controlando por los católicos y la agricultura"></div>
+    <figcaption><b>Figura 7.1.</b> La educación y la fecundidad de los distritos suizos, controlando por los católicos y la agricultura. La relación no se debe a ellas: sin controlar −.664, parcial −.724 con 43 grados de libertad. La gráfica de la derecha es la de variable añadida: los residuos de cada una después de quitarles <i>Z</i>.</figcaption>
+  </figure>
+  <p>Las dos gráficas son la clave para entender la parcial. A la izquierda, la nube de siempre; a la derecha, la <b>gráfica de variable añadida</b>: los residuos de <i>X</i> y de <i>Y</i> después de quitarles lo que predice <i>Z</i>. Con Pearson, la parcial es exactamente la <i>r</i> de esa segunda nube. Debajo, una lectura dice qué pasó al controlar: si la relación cae a menos de la mitad, si cambia de signo o crece (un efecto de supresión), o si cambia poco.</p>
+  <div class="caja importante">
+    <div class="caja-t"><span class="ico">!</span>La parcial no decide la causalidad</div>
+    <p>Que la relación baje al controlar por <i>Z</i> puede querer decir dos cosas opuestas: que <i>Z</i> es causa común de <i>X</i> y de <i>Y</i> (y la correlación original era en parte espuria) o que <i>Z</i> es el camino por el que <i>X</i> actúa sobre <i>Y</i> (un mediador). Y si <i>Z</i> es consecuencia de las dos —un <b>colisionador</b>—, controlar por ella crea una correlación que no existe. Elige las variables de control por lo que sabes del fenómeno, no porque cambian el resultado.</p>
+  </div>
+
+  <!-- 7.2 -->
+  <h2 id="s7-2"><span class="num">7.2</span>Correlación múltiple</h2>
+  <p>La correlación entre <i>Y</i> y la mejor combinación lineal de varias <i>X</i>: la <i>R</i> de una regresión múltiple. Se elige <span class="ui">Y</span> y, en <span class="ui">Predictores (X)</span>, las demás. Cuatro cifras la resumen: <i>R</i>, <i>R</i>² con su versión ajustada por el número de predictores, la prueba <i>F</i> de que todos los coeficientes valen cero y la parte <b>compartida</b> de <i>R</i>², la que no es de ningún predictor en particular.</p>
+  <figure class="w80">
+    <div class="marco"><img src="../img/b7-multiple.png" alt="La correlación múltiple de la fecundidad con los otros cinco indicadores de Suiza, 1888"></div>
+    <figcaption><b>Figura 7.2.</b> La fecundidad y los otros cinco indicadores: <i>R</i> = .841, <i>R</i>² = .707. Lo que cada predictor aporta solo (sr²) suma .331; los otros .375 son compartidos. La educación es la que más aporta por sí misma (.162).</figcaption>
+  </figure>
+  <p>La tabla da, para cada predictor, su correlación simple <i>r</i> con <i>Y</i>, su coeficiente estandarizado β con su prueba <i>t</i>, su semiparcial al cuadrado sr² —lo que <i>R</i>² perdería si se quitara ese predictor— y su <b>coeficiente de estructura</b>, <i>r</i>/<i>R</i>, la correlación del predictor con la predicción. La gráfica reparte <i>R</i>² entre lo único de cada predictor y lo compartido.</p>
+  <div class="caja ejemplo">
+    <div class="caja-t"><span class="ico">▸</span>Ejemplo · cuando β y r tienen signos contrarios</div>
+    <p>En la figura 7.2, la agricultura tiene <i>r</i> = .353 con la fecundidad —los distritos más agrícolas tienen más hijos— pero β = −.313. No es un error: entre distritos con la misma educación, el mismo examen, los mismos católicos y la misma mortalidad, más agricultura va con algo menos de fecundidad. La correlación simple estaba cargada por la educación, que es más baja en los distritos agrícolas. Por eso un β no se interpreta sin mirar también <i>r</i> y la estructura.</p>
+  </div>
+
+  <!-- 7.3 -->
+  <h2 id="s7-3"><span class="num">7.3</span>Correlación canónica</h2>
+  <p>Con dos <b>conjuntos</b> de variables, la correlación canónica (Hotelling 1936) busca la combinación lineal de cada conjunto que más se correlaciona con una del otro; luego la siguiente, independiente de la primera, y así hasta el tamaño del conjunto menor. Los conjuntos se arman con los botones de <span class="ui">Conjunto A</span> (en rojo) y <span class="ui">Conjunto B</span> (en dorado); una variable no puede estar en los dos. Hace falta que haya más filas que variables en total.</p>
+  <figure class="w80">
+    <div class="marco"><img src="../img/b7-canonica.png" alt="La correlación canónica entre cuatro indicadores sociales y la fecundidad y la mortalidad infantil de Suiza, 1888"></div>
+    <figcaption><b>Figura 7.3.</b> Cuatro indicadores sociales (A) frente a la fecundidad y la mortalidad infantil (B). La primera dimensión, ρ = .814, es significativa por las tres pruebas; la segunda, .222, no. En el círculo, la primera dimensión opone la fecundidad y los católicos a la educación y el examen.</figcaption>
+  </figure>
+  <p>La tabla da cada correlación canónica con tres pruebas: la lambda de Wilks (con la <i>F</i> de Rao), la traza de Hotelling y Lawley y la de Pillai y Bartlett. Cada fila prueba si las dimensiones desde ésa hasta la última valen cero: si la primera fila es significativa y la segunda no, sólo la primera dimensión es real. Debajo va la mayor raíz de Roy, que es una cota superior y por eso tiende a rechazar de más. La nube muestra el primer par de variables canónicas; el <b>círculo de correlaciones</b> pone cada variable según su correlación con las dos primeras variables canónicas de su conjunto (las cargas de estructura).</p>
+
+  <!-- 7.4 -->
+  <h2 id="s7-4"><span class="num">7.4</span>Entre conjuntos: RV, Procrustes, Mantel y coinercia</h2>
+  <p>Con los mismos conjuntos A y B, cuatro medidas que no buscan combinaciones lineales, sino que comparan las dos tablas enteras. Todas usan las variables estandarizadas y las tres primeras traen prueba por permutación: 999 barajas de las filas (menos con más de 300 filas).</p>
+  <ul>
+    <li><b>RV</b> (Escoufier 1973): una <i>r</i> entre dos tablas, de 0 a 1. La cifra da también lo que valdría sin relación, que no es cero: crece con el número de variables y baja con el de filas.</li>
+    <li><b>Procrustes</b> (Gower 1975; Peres-Neto y Jackson 2001): gira y escala una configuración para ajustarla a la otra; <i>m</i>² es lo que queda sin ajustar y <i>r</i> = √(1 − <i>m</i>²).</li>
+    <li><b>Mantel</b> (1967): la correlación entre las distancias de todas las parejas de filas en una tabla y en la otra (hasta con 400 filas).</li>
+    <li><b>Coinercia</b>: el análisis que busca los ejes en que las dos tablas varían juntas; la cifra dice qué parte de la coinercia se lleva el primer eje y la <i>r</i> entre las puntuaciones de las dos tablas en él.</li>
+  </ul>
+  <figure class="w80">
+    <div class="marco"><img src="../img/b7-conjuntos.png" alt="RV, Procrustes, Mantel y coinercia entre los dos conjuntos de Suiza, 1888, con la distribución de RV bajo permutación"></div>
+    <figcaption><b>Figura 7.4.</b> Los mismos conjuntos: RV = .294 frente a .041 que daría el azar, Procrustes .446 y Mantel .359, los tres con <i>p</i> = .001, el menor posible con 999 barajas. El primer eje se lleva el 98.1&nbsp;% de la coinercia. La gráfica pone el RV observado frente a los de las barajas.</figcaption>
+  </figure>
+  <div class="caja teoria">
+    <div class="caja-t"><span class="ico">θ</span>Teoría en breve · cuándo usar cada una</div>
+    <p>La <b>canónica</b> busca combinaciones lineales y se rompe con muchas variables frente a pocas filas; el <b>RV</b> resume toda la tabla y es la base de la coinercia; <b>Procrustes</b> compara configuraciones, por ejemplo dos ordenaciones de los mismos sitios; <b>Mantel</b> sirve cuando lo que se tiene son distancias —genéticas, geográficas, ecológicas—, aunque su potencia es baja y no corrige la autocorrelación espacial (Guillot y Rousset 2013; Legendre, Fortin y Borcard 2015).</p>
+  </div>
+  <div class="caja regla">
+    <div class="caja-t"><span class="ico">✓</span>Para leer el Bloque 7</div>
+    <table class="compacta"><tbody>
+      <tr><td style="width:44%"><b>Si</b> la relación baja mucho al controlar por <i>Z</i>…</td><td>decide, por lo que sabes, si <i>Z</i> es causa común (la relación era espuria) o mediador (la parcial es el efecto directo).</td></tr>
+      <tr><td><b>Si</b> la relación crece o cambia de signo al controlar…</td><td>hay supresión: informa las dos, la simple y la parcial.</td></tr>
+      <tr><td><b>Si</b> <i>R</i>² es alto pero ningún β es significativo…</td><td>los predictores comparten casi todo: mira la parte compartida y la estructura, no sólo los β.</td></tr>
+      <tr><td><b>Si</b> sólo la primera dimensión canónica es significativa…</td><td>interpreta sólo ésa, con el círculo de correlaciones.</td></tr>
+      <tr><td><b>Si</b> hay casi tantas variables como filas…</td><td>usa el RV o Procrustes en lugar de la canónica.</td></tr>
+    </tbody></table>
+    <p class="regla-pie">Son guías para interpretar, no leyes: lo que sabes del fenómeno, del diseño y de cómo se midió siempre manda.</p>
+  </div>
+</section>
+
+</body>
+</html>

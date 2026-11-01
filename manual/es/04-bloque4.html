@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>CorrelationPro · Manual de usuario · Capítulo 4</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,500;0,600;1,500&family=Crimson+Pro:ital,wght@0,400;0,600;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../interior.css">
+<script src="../paginar.js"></script>
+</head>
+<body>
+
+<section class="capitulo" id="cap-4" data-pestana="4" data-orden="4" style="--acento: var(--b4)">
+  <div class="cap-apertura">
+    <div class="cap-num">4</div>
+    <div class="cap-etiqueta">Capítulo cuatro · Bloque 4</div>
+    <h1 data-corto="Un par">Un par a fondo</h1>
+    <div class="cap-regla"></div>
+    <p class="cap-resumen">Dos variables numéricas, todo lo que se puede decir de su relación: doce coeficientes con su prueba y su intervalo, el bootstrap y la permutación del coeficiente principal, el factor de Bayes de la <i>r</i> de Pearson y una lectura en palabras que termina en la frase lista para el informe.</p>
+    <div class="cap-franja"><span class="k4"></span><span class="k4"></span><span class="k3"></span><span class="k13"></span></div>
+    <ul class="cap-contenido">
+      <li><b>4.1</b>El par y la pregunta</li>
+      <li><b>4.2</b>El resultado, en cifras y en palabras</li>
+      <li><b>4.3</b>La nube y sus rangos</li>
+      <li><b>4.4</b>Todos los coeficientes, lado a lado</li>
+      <li><b>4.5</b>Bootstrap y permutación</li>
+      <li><b>4.6</b>El factor de Bayes</li>
+      <li><b>4.7</b>Cómo se calculó</li>
+    </ul>
+  </div>
+
+  <!-- 4.1 -->
+  <h2 id="s4-1"><span class="num">4.1</span>El par y la pregunta</h2>
+  <p class="lead">El par llega de tres maneras: desde el botón <span class="ui">Medir este par a fondo en el Bloque 4 →</span> del Bloque 3, desde el asistente del Bloque 2, o eligiéndolo aquí en <span class="ui">X</span> y <span class="ui">Y</span>. Los menús ofrecen las columnas continuas y ordinales que no estén marcadas como «no se usa».</p>
+  <p>La primera tarjeta reúne las ocho decisiones del análisis. Cada cambio vuelve a calcular todo; si la cuenta tarda (muchas filas o muchos remuestreos), aparece una espera.</p>
+
+  <figure>
+    <div class="marco"><img src="../img/b4-par.png" alt="La tarjeta El par y la pregunta con la velocidad y la distancia de frenado de los autos"></div>
+    <figcaption><b>Figura 4.1.</b> El frenado de los autos, el ejemplo con que abre el bloque, con las opciones de omisión.</figcaption>
+  </figure>
+  <ul>
+    <li><span class="ui">Coeficiente principal</span>: el que se estudia a fondo. <span class="ui">Recomendado (Bloque 3)</span> deja que lo elija la revisión de supuestos de la sección 3.5; también se puede fijar cualquiera de los doce de la sección 4.4.</li>
+    <li><span class="ui">Hipótesis alternativa</span>: <span class="ui">Bilateral: ρ ≠ 0</span>, <span class="ui">Positiva: ρ &gt; 0</span> o <span class="ui">Negativa: ρ &lt; 0</span>. Elige una unilateral sólo si la dirección se decidió antes de ver los datos. Las medidas de dependencia no tienen signo, y su prueba es siempre de valores grandes.</li>
+    <li><span class="ui">Nivel de confianza</span>: 90, 95 o 99&nbsp;% para todos los intervalos; el complemento (10, 5 o 1&nbsp;%) es el nivel de significación de la lectura.</li>
+    <li><span class="ui">Remuestreos</span>: 999, 1&nbsp;999, 4&nbsp;999 o 9&nbsp;999 para el bootstrap y para la permutación. Con un coeficiente costoso y muchos datos la app usa menos y lo avisa.</li>
+    <li><span class="ui">Semilla</span>: el punto de partida del generador de números aleatorios. Con la misma semilla salen exactamente los mismos números; anótala si vas a publicar resultados de remuestreo.</li>
+    <li><span class="ui">Escala para el tamaño</span>: las palabras con que la lectura califica la fuerza de la relación (tabla 4.1).</li>
+  </ul>
+
+  <table class="compacta">
+    <caption><b>Tabla 4.1.</b> Las tres escalas para el tamaño de una correlación (por |<i>r</i>|)</caption>
+    <thead><tr><th style="width:1.75in">Escala</th><th>Cortes y palabras</th></tr></thead>
+    <tbody>
+      <tr><td><b>Cohen (1988)</b></td><td>despreciable &lt; .10 ≤ pequeña &lt; .30 ≤ mediana &lt; .50 ≤ grande</td></tr>
+      <tr><td><b>Evans (1996)</b></td><td>muy débil &lt; .20 ≤ débil &lt; .40 ≤ moderada &lt; .60 ≤ fuerte &lt; .80 ≤ muy fuerte</td></tr>
+      <tr><td><b>Gignac y Szodorai (2016)</b></td><td>muy pequeña &lt; .10 ≤ pequeña &lt; .20 ≤ típica &lt; .30 ≤ grande</td></tr>
+    </tbody>
+  </table>
+  <div class="caja nota">
+    <div class="caja-t"><span class="ico">i</span>Qué escala elegir</div>
+    <p>Las de Cohen y de Evans son convenciones generales. La de Gignac y Szodorai sale de las correlaciones que de verdad se publican en psicología: allí una <i>r</i> de .30 ya es grande. Lo mejor es comparar con lo que se sabe del fenómeno en tu disciplina, y decir en el informe qué escala usaste.</p>
+  </div>
+
+  <!-- 4.2 -->
+  <h2 id="s4-2"><span class="num">4.2</span>El resultado, en cifras y en palabras</h2>
+  <p>La tarjeta <span class="ui">Resultado</span> resume el análisis en seis cifras: el coeficiente principal con la palabra de su tamaño (y la marca <span class="ui">elegido por el Bloque 3</span> si lo eligió la revisión de supuestos), su intervalo de confianza con el método que lo dio, su prueba propia con el estadístico y los grados de libertad, el valor <i>p</i> por permutación, el intervalo bootstrap y el factor de Bayes BF<sub>10</sub>. En las pruebas, el borde verde quiere decir significativo al nivel elegido y el ámbar, no; en el factor de Bayes, verde es evidencia a favor de la correlación y ámbar, a favor de ρ = 0.</p>
+
+  <figure class="w80">
+    <div class="marco"><img src="../img/b4-resultado.png" alt="La tarjeta Resultado del frenado de los autos con seis cifras, la lectura y la frase para el informe"></div>
+    <figcaption><b>Figura 4.2.</b> El frenado de los autos: <i>r</i> = .807, «grande» según Cohen, con intervalo de Fisher [.68, .89], <i>t</i> = 9.46 con 48 grados de libertad, permutación e intervalo BCa de acuerdo y un factor de Bayes de 1.7&nbsp;×&nbsp;10<sup>9</sup>. La línea en ámbar es la nota del Bloque 3.</figcaption>
+  </figure>
+  <p>Debajo, la lectura dice lo mismo en palabras, en cinco párrafos cortos:</p>
+  <ol class="pasos">
+    <li><b>La dirección y el tamaño</b>, con el intervalo: «hay una correlación positiva grande según Cohen (1988)». Para una medida de dependencia, que no tiene signo, dice su valor en la escala de 0 (independencia) a 1.</li>
+    <li><b>La prueba</b>: con qué probabilidad saldría un valor así si no hubiera relación, con la de la permutación entre paréntesis, y si se rechaza la independencia. Si no se rechaza, lo dice con cuidado: los datos no bastan para descartarla, lo que no prueba que no haya relación.</li>
+    <li><b>La evidencia bayesiana</b> de la <i>r</i> de Pearson, en las palabras de la sección 4.6.</li>
+    <li><b>La varianza compartida</b>, sólo con Pearson: <i>r</i>² = .65 quiere decir que, en sentido lineal, las dos variables comparten el 65&nbsp;% de su varianza.</li>
+    <li><b>El recordatorio</b> de que una correlación no dice cuál variable causa a la otra, ni si las dos dependen de una tercera.</li>
+  </ol>
+  <p>En ámbar van las notas: las del Bloque 3 para este par y, si elegiste un coeficiente distinto del recomendado, cuál recomienda el Bloque 3 y por qué.</p>
+  <p><span class="ui">Para el informe</span> da la frase con el estilo de números elegido en el Bloque 1 —«<i>r</i>(48) = .81, IC 95&nbsp;% [.68, .89], <i>p</i> &lt; .001; <i>p</i> por permutación &lt; .001 (B = 1999); BF<sub>10</sub> = 1.7&nbsp;×&nbsp;10<sup>9</sup>»— y <span class="ui">Copiar</span> la deja en el portapapeles.</p>
+
+  <div class="caja ejemplo">
+    <div class="caja-t"><span class="ico">▸</span>Ejemplo · cuando el principal es una medida de dependencia</div>
+    <p>En la economía de 1947 a 1962, el Bloque 3 recomienda la correlación de distancias para las fuerzas armadas con los empleados, porque su nube sube y luego baja (sección 3.5). Aquí, dCor = .76 con intervalo BCa [.68, .86] y <i>p</i> &lt; .001 por las dos vías. El factor de Bayes, que siempre es de la <i>r</i> de Pearson, sólo da 1.70: evidencia anecdótica. Las dos cifras no se contradicen: la relación es fuerte, pero no es una recta.</p>
+  </div>
+  <figure class="w80">
+    <div class="marco"><img src="../img/b4-dep.png" alt="La tarjeta Resultado con la correlación de distancias de las fuerzas armadas y los empleados"></div>
+    <figcaption><b>Figura 4.3.</b> La correlación de distancias como coeficiente principal. Para una medida sin signo, la lectura da su valor en la escala de 0 a 1 en lugar de una dirección y un tamaño.</figcaption>
+  </figure>
+
+  <!-- 4.3 -->
+  <h2 id="s4-3"><span class="num">4.3</span>La nube y sus rangos</h2>
+  <p>Dos gráficas del mismo par. A la izquierda, los datos con la elipse del 95&nbsp;%, la recta en negro, el LOWESS en dorado y, sobre los ejes, una marca por cada dato. A la derecha, los mismos puntos convertidos en rangos (divididos entre <i>n</i>&nbsp;+&nbsp;1, para que vayan de 0 a 1): es lo que ven la ρ de Spearman y la τ de Kendall. Una relación monótona pero curva se vuelve recta en los rangos; un punto muy alejado en los datos se vuelve uno más en los rangos.</p>
+  <figure class="w80">
+    <div class="marco"><img src="../img/b4-nube.png" alt="Las gráficas de los datos y de los rangos de la velocidad y la distancia de frenado"></div>
+    <figcaption><b>Figura 4.4.</b> El frenado de los autos. En los datos, la distancia crece algo más rápido que la recta en las velocidades altas (el LOWESS se curva hacia arriba) y se dispersa más; en los rangos la curva desaparece y la nube queda recta.</figcaption>
+  </figure>
+
+  <!-- 4.4 -->
+  <h2 id="s4-4"><span class="num">4.4</span>Todos los coeficientes, lado a lado</h2>
+  <p>La tabla calcula los doce coeficientes que se aplican a dos variables numéricas, cada uno con su prueba propia —exacta, asintótica o por permutación— y su intervalo: el analítico donde existe y, donde no, uno bootstrap percentil con 499 remuestreos. El principal lleva la etiqueta <span class="ui">principal</span>; <span class="ui">Hacer principal</span> cambia el principal sin volver al menú, y <span class="ui">?</span> abre la ficha del catálogo. Los valores <i>p</i> significativos van en verde.</p>
+
+  <div class="caja importante">
+    <div class="caja-t"><span class="ico">!</span>No elijas el coeficiente después de ver la tabla</div>
+    <p>Con doce coeficientes a la vista es tentador informar el que dio el valor más alto o el <i>p</i> más chico. Eso infla los resultados. Elige el coeficiente por la forma de los datos —es lo que hace el Bloque 3— o antes de verlos, e informa ése; la tabla sirve para ver si la conclusión depende de la elección.</p>
+  </div>
+
+  <figure class="w80">
+    <div class="marco"><img src="../img/b4-tabla.png" alt="La tabla de los doce coeficientes del frenado de los autos"></div>
+    <figcaption><b>Figura 4.5.</b> Los doce coeficientes del frenado de los autos. Los de rangos y los robustos quedan entre .66 y .85; las medidas de dependencia, en su propia escala. La D de Hoeffding y la τ* no traen prueba en la tabla.</figcaption>
+  </figure>
+
+  <table class="compacta">
+    <caption><b>Tabla 4.2.</b> Los doce coeficientes del Bloque 4</caption>
+    <thead><tr><th style="width:1.45in">Coeficiente</th><th>Qué mide</th><th style="width:1.75in">Prueba · intervalo</th></tr></thead>
+    <tbody>
+      <tr><td><b><i>r</i> de Pearson</b></td><td>la relación lineal</td><td><i>t</i> con <i>n</i> − 2 gl · Fisher</td></tr>
+      <tr><td><b>ρ de Spearman</b></td><td>la relación monótona: Pearson sobre los rangos</td><td>exacta sin empates, si no <i>t</i> · Fieller</td></tr>
+      <tr><td><b>τ-b de Kendall</b></td><td>la concordancia de los pares de observaciones, corregida por empates</td><td>exacta sin empates (<i>n</i> &lt; 50), si no <i>z</i> · Fieller</td></tr>
+      <tr><td><b>Rangos gaussianos</b> <i>r</i><sub>G</sub></td><td>Pearson sobre las puntuaciones normales de los rangos</td><td><i>t</i> · Fisher</td></tr>
+      <tr><td><b>β de Blomqvist</b></td><td>la concordancia respecto de las dos medianas</td><td><i>z</i> · percentil</td></tr>
+      <tr><td><b>Peso doble</b> <i>r</i><sub>bw</sub></td><td>robusta: pesa menos los datos lejos de la mediana</td><td><i>t</i> · Fisher</td></tr>
+      <tr><td><b>Flexión porcentual</b> <i>r</i><sub>pb</sub></td><td>robusta: acota el 20&nbsp;% más alejado de cada variable</td><td><i>t</i> · percentil</td></tr>
+      <tr><td><b>Winsorizada</b> <i>r</i><sub>w</sub></td><td>robusta: Pearson tras llevar el 20&nbsp;% de cada cola a su límite</td><td><i>t</i> con <i>n</i> − 2<i>g</i> − 2 gl · percentil</td></tr>
+      <tr><td><b>Correlación de distancias</b> dCor</td><td>cualquier dependencia; 0 sólo con independencia</td><td><i>T</i> con <i>n</i>(<i>n</i> − 3)/2 − 1 gl · percentil</td></tr>
+      <tr><td><b>ξ de Chatterjee</b></td><td>cuánto <i>Y</i> es función de <i>X</i> (no es simétrica)</td><td><i>z</i> · percentil</td></tr>
+      <tr><td><b>D de Hoeffding</b></td><td>la distancia entre la distribución conjunta y la de independencia (escala 30·D)</td><td>— · percentil</td></tr>
+      <tr><td><b>τ* de Bergsma–Dassios</b></td><td>cualquier dependencia, con un estadístico sobre todos los grupos de cuatro puntos; sólo hasta <i>n</i> = 80</td><td>— · —</td></tr>
+    </tbody>
+  </table>
+  <p>Las medidas de dependencia (dCor, ξ, D, τ*) van de 0 a 1 y no tienen signo; ξ y D pueden quedar un poco por debajo de cero cuando no hay relación. La D y la τ* no traen prueba propia en la tabla: hechas principales, la permutación da su valor <i>p</i>. La correlación de distancias se calcula hasta con 3&nbsp;000 pares.</p>
+
+  <figure class="w80">
+    <div class="marco"><img src="../img/b4-forest.png" alt="La gráfica de las doce estimaciones con sus intervalos"></div>
+    <figcaption><b>Figura 4.6.</b> Las doce estimaciones con sus intervalos en una sola escala de −1 a 1. El principal va en rojo y más grande; los demás, con el color de su familia: de rangos, robustos y de dependencia.</figcaption>
+  </figure>
+  <!-- 4.5 -->
+  <h2 id="s4-5"><span class="num">4.5</span>Bootstrap y permutación</h2>
+  <p>Dos maneras de hacer inferencia sin suponer normalidad, las dos sobre el coeficiente principal. El <b>bootstrap</b> remuestrea los pares con reemplazo y recalcula el coeficiente en cada remuestreo; la dispersión de esas réplicas imita la del coeficiente de una muestra a otra. La <b>permutación</b> baraja <i>Y</i> contra <i>X</i>, lo que rompe cualquier relación y conserva todo lo demás; su valor <i>p</i> es la proporción de barajas que dan un valor tan alejado de cero como el observado.</p>
+  <p>Seis cifras resumen el bootstrap: su error estándar, su sesgo (con la corrección <i>z</i><sub>0</sub> y la aceleración <i>a</i> del BCa) y cuatro intervalos: percentil, básico, normal y BCa (éste, cuando el coeficiente no es demasiado costoso de recalcular). Las dos gráficas muestran las réplicas: en la del bootstrap, la franja es el intervalo BCa, la línea continua la estimación y las punteadas los límites del percentil; en la de la permutación, la línea continua es el valor observado y la punteada su reflejo, que también cuenta en la prueba bilateral.</p>
+
+  <figure class="w80">
+    <div class="marco"><img src="../img/b4-remuestreo.png" alt="Las cifras del bootstrap y las distribuciones bootstrap y de permutación del frenado de los autos"></div>
+    <figcaption><b>Figura 4.7.</b> El frenado de los autos con 1&nbsp;999 remuestreos y la semilla 2026. La distribución bootstrap tiene la cola larga hacia la izquierda, y el BCa [.67, .87] se corre en esa dirección respecto del percentil [.70, .89]. Ninguna de las 1&nbsp;999 barajas se acerca a .81.</figcaption>
+  </figure>
+  <div class="caja teoria">
+    <div class="caja-t"><span class="ico">θ</span>Teoría en breve · qué hace cada intervalo</div>
+    <p>El intervalo <b>percentil</b> toma los cuantiles de las réplicas; el <b>básico</b> los refleja alrededor de la estimación; el <b>normal</b> usa su error estándar; el <b>BCa</b> (Efron 1987) corrige además el sesgo (<i>z</i><sub>0</sub>) y que la dispersión cambie con el valor (la aceleración <i>a</i>, que se estima con la navaja). Con datos normales el intervalo de Fisher cubre lo que promete; con datos muy asimétricos se queda corto, y los bootstrap se acercan más al nivel pedido, sin llegar del todo con muestras chicas (Bishara y Hittner 2017). La permutación (Pitman 1937) da <i>p</i> = (<i>k</i> + 1)/(<i>B</i> + 1), donde <i>k</i> es el número de barajas tan extremas como lo observado: nunca da cero.</p>
+  </div>
+  <div class="caja nota">
+    <div class="caja-t"><span class="ico">i</span>Cuántos remuestreos</div>
+    <p>Con 1&nbsp;999 el valor <i>p</i> más chico posible es 1/2000 = .0005, y los límites del intervalo se estabilizan en la segunda cifra. Para un intervalo al 99&nbsp;% o para publicar un valor <i>p</i> cercano a .05, usa 4&nbsp;999 o 9&nbsp;999.</p>
+  </div>
+
+  <!-- 4.6 -->
+  <h2 id="s4-6"><span class="num">4.6</span>El factor de Bayes</h2>
+  <p>El factor de Bayes BF<sub>10</sub> dice cuántas veces más probables son los datos si hay correlación que si ρ = 0; su recíproco BF<sub>01</sub>, lo contrario. A diferencia del valor <i>p</i>, puede dar evidencia a favor de que no hay relación. Se calcula siempre para la <i>r</i> de Pearson, sea cual sea el coeficiente principal.</p>
+  <p>La distribución a priori de ρ es una beta estirada al intervalo de −1 a 1, y <span class="ui">A priori (κ)</span> controla su ancho: <span class="ui">κ = 1/3, la de uso común</span>, <span class="ui">κ = 1/√3, más ancha</span> o <span class="ui">κ = 1, uniforme (Jeffreys)</span>. Las cifras son BF<sub>10</sub>, BF<sub>01</sub>, los dos unilaterales (BF<sub>+0</sub> para ρ &gt; 0 y BF<sub>−0</sub> para ρ &lt; 0; con una alternativa unilateral, sólo el suyo), la mediana y la media de la posterior de ρ y su intervalo creíble central al nivel elegido.</p>
+
+  <figure class="w80">
+    <div class="marco"><img src="../img/b4-bayes.png" alt="El factor de Bayes del frenado de los autos con la a priori, la posterior y la tabla de evidencia"></div>
+    <figcaption><b>Figura 4.8.</b> El frenado de los autos. La posterior de ρ (en rojo) se concentra alrededor de .77, con intervalo creíble [.63, .86]; en ρ = 0 su densidad es prácticamente nula frente a 0.938 de la a priori, y la razón de las dos es el factor de Bayes: evidencia extrema.</figcaption>
+  </figure>
+  <table class="compacta">
+    <caption><b>Tabla 4.3.</b> Las palabras de la evidencia (Jeffreys 1961, según Lee y Wagenmakers 2013)</caption>
+    <thead><tr><th style="width:1.4in">BF<sub>10</sub></th><th>Evidencia a favor de que hay correlación</th></tr></thead>
+    <tbody>
+      <tr><td>1 a 3</td><td>anecdótica</td></tr>
+      <tr><td>3 a 10</td><td>moderada</td></tr>
+      <tr><td>10 a 30</td><td>fuerte</td></tr>
+      <tr><td>30 a 100</td><td>muy fuerte</td></tr>
+      <tr><td>más de 100</td><td>extrema</td></tr>
+    </tbody>
+  </table>
+  <p>Los recíprocos (de 1/3 a 1, de 1/10 a 1/3 y así) son la misma escala de evidencia a favor de ρ = 0.</p>
+  <div class="caja teoria">
+    <div class="caja-t"><span class="ico">θ</span>Teoría en breve · cómo se calcula</div>
+    <p>Con las medias y las varianzas integradas bajo las a priori de Jeffreys, la verosimilitud de ρ depende sólo de <i>r</i> y de <i>n</i> (Ly, Verhagen y Wagenmakers 2016). El factor de Bayes es su promedio bajo la a priori dividido entre su valor en ρ = 0, y coincide con la razón de las densidades a priori y posterior en ρ = 0 (la razón de Savage y Dickey): son los dos puntos de la gráfica. La app usa esa forma exacta y la integra numéricamente, con un método adaptativo.</p>
+  </div>
+
+  <!-- 4.7 -->
+  <h2 id="s4-7"><span class="num">4.7</span>Cómo se calculó</h2>
+  <p>La última tarjeta da, en una lista, los convenios de este cálculo: la prueba y el intervalo del coeficiente principal, el bootstrap con su número de remuestreos y su semilla, la permutación con la suya (la semilla más uno), la a priori del factor de Bayes y cuántas filas quedaron fuera por faltantes. Es lo que hace falta para la sección de métodos, y lo que el Bloque 13 redacta por ti.</p>
+  <figure>
+    <div class="marco"><img src="../img/b4-como.png" alt="La lista de convenios del cálculo del frenado de los autos"></div>
+    <figcaption><b>Figura 4.9.</b> Los convenios del frenado de los autos con la <i>r</i> de Pearson como principal.</figcaption>
+  </figure>
+
+  <div class="caja regla">
+    <div class="caja-t"><span class="ico">✓</span>Para leer y escribir un par</div>
+    <table class="compacta"><tbody>
+      <tr><td style="width:44%"><b>Si</b> la prueba clásica y la permutación coinciden…</td><td>informa la clásica; la permutación confirma que no depende de la normalidad.</td></tr>
+      <tr><td><b>Si</b> no coinciden…</td><td>informa la permutación y el intervalo bootstrap, y di por qué.</td></tr>
+      <tr><td><b>Si</b> el intervalo incluye valores pequeños y grandes…</td><td>la muestra no basta para saber cuán fuerte es la relación; dilo, aunque <i>p</i> sea pequeño.</td></tr>
+      <tr><td><b>Si</b> <i>p</i> no es significativo…</td><td>no escribas «no hay relación»: mira el intervalo y el factor de Bayes, que sí pueden apoyar a ρ = 0.</td></tr>
+      <tr><td><b>Si</b> el principal no es la <i>r</i> de Pearson…</td><td>recuerda que el factor de Bayes y <i>r</i>² son de Pearson, no del principal.</td></tr>
+      <tr><td><b>Si</b> usaste remuestreo…</td><td>informa el número de remuestreos y la semilla.</td></tr>
+    </tbody></table>
+    <p class="regla-pie">Son guías para interpretar, no leyes: lo que sabes del fenómeno, del diseño y de cómo se midió siempre manda.</p>
+  </div>
+</section>
+
+</body>
+</html>

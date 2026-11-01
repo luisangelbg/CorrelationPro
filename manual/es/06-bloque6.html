@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>CorrelationPro · Manual de usuario · Capítulo 6</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,500;0,600;1,500&family=Crimson+Pro:ital,wght@0,400;0,600;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../interior.css">
+<script src="../paginar.js"></script>
+</head>
+<body>
+
+<section class="capitulo" id="cap-6" data-pestana="6" data-orden="6" style="--acento: var(--b6)">
+  <div class="cap-apertura">
+    <div class="cap-num">6</div>
+    <div class="cap-etiqueta">Capítulo seis · Bloque 6</div>
+    <h1 data-corto="No lineal">Dependencia no lineal y cópulas</h1>
+    <div class="cap-regla"></div>
+    <p class="cap-resumen">La <i>r</i> de Pearson mide rectas y la ρ de Spearman, curvas que siempre suben o siempre bajan. Una relación en U, en campana o con ciclos se les escapa. Este bloque reúne las medidas que valen cero sólo cuando no hay ninguna relación, rastrea todos los pares para encontrar los que Pearson no ve y ajusta cinco cópulas que dicen si los valores extremos ocurren juntos.</p>
+    <div class="cap-franja"><span class="k6"></span><span class="k6"></span><span class="k4"></span><span class="k5"></span></div>
+    <ul class="cap-contenido">
+      <li><b>6.1</b>Un par: lo que ve cada medida</li>
+      <li><b>6.2</b>La nube y la escala común</li>
+      <li><b>6.3</b>MIC y su matriz característica</li>
+      <li><b>6.4</b>El rastreo: lo que Pearson no ve</li>
+      <li><b>6.5</b>Las cópulas: la forma de la dependencia</li>
+    </ul>
+  </div>
+
+  <!-- 6.1 -->
+  <h2 id="s6-1"><span class="num">6.1</span>Un par: lo que ve cada medida</h2>
+  <p class="lead">Se eligen dos variables numéricas en <span class="ui">X</span> y <span class="ui">Y</span> y el bloque calcula, de una vez, nueve cifras: la <i>r</i> de Pearson, la ρ de Spearman y las medidas de dependencia que ven cualquier forma. La τ de Kendall aparece en la gráfica de la sección 6.2.</p>
+  <p>Hacen falta al menos 10 pares completos. <span class="ui">Permutaciones para MIC</span> calcula el valor <i>p</i> de MIC barajando <i>Y</i> 199, 499 o 999 veces; como MIC es lento, viene apagado (<span class="ui">No calcular su valor p</span>). Con más de 250 filas o con permutaciones aparece una espera.</p>
+  <figure>
+    <div class="marco"><img src="../img/b6-cifras.png" alt="Las nueve cifras del año y las fuerzas armadas de Estados Unidos de 1947 a 1962"></div>
+    <figcaption><b>Figura 6.1.</b> El año y las fuerzas armadas de Estados Unidos, 1947 a 1962, el ejemplo con que abre el bloque. Ni <i>r</i> (.417, <i>p</i> = .108) ni ρ (.226) son significativas; la correlación de distancias (.737), la ξ y el HSIC sí, con <i>p</i> &lt; .001.</figcaption>
+  </figure>
+
+  <table class="compacta">
+    <caption><b>Tabla 6.1.</b> Las medidas del Bloque 6</caption>
+    <thead><tr><th style="width:1.6in">Medida</th><th>Qué mide</th><th style="width:1.45in">Prueba · límite</th></tr></thead>
+    <tbody>
+      <tr><td><b><i>r</i>, ρ, τ</b></td><td>la parte lineal (<i>r</i>) y la parte monótona (ρ, τ) de la relación</td><td>las del Bloque 4</td></tr>
+      <tr><td><b>dCor</b></td><td>cualquier dependencia; en la población vale 0 sólo con independencia (Székely, Rizzo y Bakirov 2007)</td><td><i>T</i> · hasta 3&nbsp;000 filas</td></tr>
+      <tr><td><b>ξ(X→Y) · ξ(Y→X)</b></td><td>cuánto <i>Y</i> es función de <i>X</i>, y al revés: no es simétrica (Chatterjee 2021)</td><td><i>z</i> · sin límite</td></tr>
+      <tr><td><b>HSIC</b></td><td>la dependencia medida en un espacio de funciones, con núcleos gaussianos (Gretton y colaboradores 2005)</td><td>aproximación gamma · hasta 1&nbsp;500</td></tr>
+      <tr><td><b>MIC</b></td><td>la mayor información mutua que capta una rejilla, normalizada para que una función sin ruido de cualquier forma valga 1 (Reshef y colaboradores 2011)</td><td>permutación, si se pide · hasta 1&nbsp;200</td></tr>
+      <tr><td><b>Información mutua</b></td><td>cuánta incertidumbre sobre <i>Y</i> quita conocer <i>X</i>, en nats; con el coeficiente de Linfoot pasa a la escala de una correlación (Kraskov, Stögbauer y Grassberger 2004)</td><td>— · hasta 3&nbsp;000</td></tr>
+      <tr><td><b>Correlación máxima</b></td><td>la mayor <i>r</i> que se obtiene transformando <i>X</i> y <i>Y</i> con cualquier función (Gebelein 1941; Rényi 1959), sobre clases de cuantiles</td><td>— · sin límite</td></tr>
+      <tr><td><b>D · τ*</b></td><td>la D de Hoeffding y la τ* de Bergsma y Dassios, como en el Bloque 4</td><td>— · τ* hasta 80</td></tr>
+    </tbody>
+  </table>
+  <div class="caja nota">
+    <div class="caja-t"><span class="ico">i</span>La información mutua, en unidades estándar</div>
+    <p>El estimador de vecinos cercanos mide distancias con la norma del máximo, así que la app estandariza antes las dos variables: en sus propias unidades, la de mayor dispersión decidiría sola qué puntos son vecinos. El coeficiente de Linfoot, √(1 − e<sup>−2<i>I</i></sup>), coincide con |ρ| cuando las dos variables son normales.</p>
+  </div>
+
+  <!-- 6.2 -->
+  <h2 id="s6-2"><span class="num">6.2</span>La nube y la escala común</h2>
+  <p>A la izquierda, la nube con la recta y el LOWESS. A la derecha, las nueve medidas en una sola escala de 0 (independencia) a 1, con el color de su familia: <i>r</i> en rojo, las de rangos en dorado, las de dependencia en turquesa y la correlación máxima en violeta. Cuando las de dependencia quedan muy a la derecha de |<i>r</i>|, hay una relación que una recta no ve.</p>
+  <figure>
+    <div class="marco"><img src="../img/b6-nube.png" alt="La nube del año y las fuerzas armadas y las nueve medidas en una escala de 0 a 1"></div>
+    <figcaption><b>Figura 6.2.</b> Las fuerzas armadas crecen de golpe en 1951, con la guerra de Corea, y luego bajan poco a poco. La recta apenas lo capta; la correlación de distancias (.74), la ξ (.62 y .51) y la correlación máxima (.92) sí.</figcaption>
+  </figure>
+  <p>Debajo, la lectura en palabras compara la correlación de distancias con |<i>r</i>|: si la supera en más de 0.2, hay dependencia que una recta no capta; si no, casi toda la dependencia que se detecta la capta también una recta. Si las dos ξ difieren en más de 0.15, lo dice y explica en qué dirección es más fuerte: en una parábola, <i>Y</i> es función de <i>X</i> pero no al revés. Y da el índice de no linealidad de MIC, MIC − <i>r</i>².</p>
+  <div class="caja importante">
+    <div class="caja-t"><span class="ico">!</span>Con pocos datos, no todas las medidas sirven</div>
+    <p>Con los 16 años de este ejemplo, MIC sólo puede usar una rejilla de 2 × 2 y la correlación máxima, tres clases por variable, que tienden a dar valores altos. La correlación de distancias, la ξ y el HSIC funcionan bien con pocos datos y traen su prueba; MIC y la información mutua piden, al menos, unos 50.</p>
+  </div>
+
+  <!-- 6.3 -->
+  <h2 id="s6-3"><span class="num">6.3</span>MIC y su matriz característica</h2>
+  <p>MIC prueba muchas rejillas sobre la nube —de 2 × 2 a las que tienen hasta <i>n</i><sup>0.6</sup> celdas— y en cada una mide la información mutua entre la columna y la fila en que cae cada punto, normalizada por el logaritmo del lado menor. La <b>matriz característica</b> muestra ese valor para cada combinación de columnas y filas; MIC es su máximo, enmarcado en rojo. Con muy pocos datos sólo cabe la rejilla de 2 × 2, y la app lo dice en lugar de dibujar una matriz de una celda.</p>
+  <figure class="w80">
+    <div class="marco"><img src="../img/b6-mic-iris.png" alt="La matriz característica de MIC del ancho del sépalo y el largo del pétalo de los lirios"></div>
+    <figcaption><b>Figura 6.3.</b> El ancho del sépalo y el largo del pétalo de los lirios. El máximo está en la rejilla de 2 columnas por 10 filas: MIC = .439 frente a <i>r</i>² = .184. La ξ es asimétrica: el largo del pétalo dice mucho del ancho del sépalo (.321), y no al revés (.071), porque con un mismo ancho de sépalo hay pétalos cortos y largos.</figcaption>
+  </figure>
+  <div class="caja teoria">
+    <div class="caja-t"><span class="ico">θ</span>Teoría en breve · qué ve cada una</div>
+    <p>La correlación de distancias compara las distancias entre todos los pares de puntos en <i>X</i> con las de <i>Y</i>; el HSIC hace lo mismo con las semejanzas que da un núcleo gaussiano, cuyo ancho se fija con la mediana de las distancias. Las dos valen cero sólo con independencia. La ξ ordena los datos por <i>X</i> y mira cuánto saltan los rangos de <i>Y</i> de un vecino al siguiente: si <i>Y</i> es función de <i>X</i>, casi no saltan. MIC y la información mutua vienen de la teoría de la información; la correlación máxima, de buscar las mejores transformaciones de las dos variables.</p>
+  </div>
+
+  <!-- 6.4 -->
+  <h2 id="s6-4"><span class="num">6.4</span>El rastreo: lo que Pearson no ve</h2>
+  <p><span class="ui">Rastrear</span> calcula, para todos los pares de las variables numéricas (hasta 30 variables), <i>r</i>, ρ, la correlación de distancias y la ξ en su dirección más fuerte, y los ordena por <b>dCor − |<i>r</i>|</b>: arriba quedan las relaciones curvas, en U o con ciclos. <span class="ui">Incluir MIC (más lento)</span> añade MIC y MIC − <i>r</i>². Los seis primeros pares aparecen como tarjetas con una nube en miniatura; la tabla muestra hasta 40, con la diferencia en ámbar cuando pasa de 0.2. Un clic en una tarjeta o en una fila lleva ese par al estudio de la sección 6.1.</p>
+  <figure class="w80">
+    <div class="marco"><img src="../img/b6-rastreo.png" alt="El rastreo de los 21 pares de la economía de Estados Unidos, con las seis primeras nubes y la tabla"></div>
+    <figcaption><b>Figura 6.4.</b> Los 21 pares de la economía de Estados Unidos. Los seis primeros son los de las fuerzas armadas, que suben y luego bajan frente a las demás series; las series que crecen juntas quedan abajo, con dCor − |<i>r</i>| cerca de cero.</figcaption>
+  </figure>
+  <div class="caja ejemplo">
+    <div class="caja-t"><span class="ico">▸</span>Ejemplo · para qué sirve el rastreo</div>
+    <p>En una matriz de 20 variables hay 190 pares, y nadie mira 190 nubes. El rastreo pone delante los pocos pares en que una matriz de Pearson —la del Bloque 5— engaña, porque dice «poca relación» donde hay mucha. Esos pares merecen una nube en el informe, y una medida de dependencia en lugar de <i>r</i>.</p>
+  </div>
+
+  <!-- 6.5 -->
+  <h2 id="s6-5"><span class="num">6.5</span>Las cópulas: la forma de la dependencia</h2>
+  <p>El teorema de Sklar (1959) separa cada variable de su dependencia: al pasar los datos a rangos divididos entre <i>n</i>&nbsp;+&nbsp;1 —las pseudo-observaciones— queda sólo la <b>cópula</b>, la dependencia sin las marginales. Dos pares con la misma τ de Kendall pueden tener cópulas muy distintas, y la diferencia está sobre todo en las colas: ¿los valores extremos ocurren juntos?</p>
+  <p>El bloque ajusta cinco familias al par elegido, cada una con dos estimaciones de su parámetro θ: la que da la inversión de la τ de Kendall y la de máxima pseudoverosimilitud (Genest, Ghoudi y Rivest 1995). Da su log-verosimilitud, su AIC —la de menor AIC lleva la etiqueta <span class="ui">menor AIC</span>— y su dependencia en la cola inferior y en la superior. Clayton y Gumbel sólo se ajustan con dependencia positiva.</p>
+  <figure class="w80">
+    <div class="marco"><img src="../img/b6-copulas.png" alt="Las cinco cópulas del examen y la educación de Suiza, 1888, con los datos en rangos, una muestra de la de Gumbel y las colas empíricas"></div>
+    <figcaption><b>Figura 6.5.</b> El examen y la educación de los distritos de Suiza, 1888 (τ = .529). Gana la de Gumbel, con la dependencia concentrada arriba (λ<sub>sup</sub> = .615): los distritos con más reclutas de nota alta son también los de más educación. A la derecha, una muestra de la cópula ajustada para compararla con los datos.</figcaption>
+  </figure>
+  <table class="compacta">
+    <caption><b>Tabla 6.2.</b> Las cinco familias y sus colas</caption>
+    <thead><tr><th style="width:1.3in">Familia</th><th>Colas</th></tr></thead>
+    <tbody>
+      <tr><td><b>Gaussiana</b></td><td>sin dependencia en las colas: los extremos se vuelven independientes</td></tr>
+      <tr><td><b>t de Student</b></td><td>la misma dependencia en las dos colas, mayor cuanto menos grados de libertad (ν)</td></tr>
+      <tr><td><b>Clayton</b></td><td>dependencia abajo: los valores bajos ocurren juntos</td></tr>
+      <tr><td><b>Gumbel</b></td><td>dependencia arriba: los valores altos ocurren juntos</td></tr>
+      <tr><td><b>Frank</b></td><td>sin dependencia en las colas, simétrica; admite dependencia negativa</td></tr>
+    </tbody>
+  </table>
+  <p>Debajo, cuatro cifras dan las colas de los datos mismos: la probabilidad de que <i>Y</i> esté en su 10&nbsp;% inferior cuando <i>X</i> lo está, la del 10&nbsp;% superior, lo que valdrían las dos si fueran independientes (0.1) y la τ de Kendall que fija cada familia.</p>
+  <div class="caja teoria">
+    <div class="caja-t"><span class="ico">θ</span>Teoría en breve · la dependencia en las colas</div>
+    <p>La dependencia en la cola superior λ<sub>sup</sub> es el límite de la probabilidad de que <i>V</i> pase de <i>u</i> cuando <i>U</i> pasa de <i>u</i>, con <i>u</i> acercándose a 1 (Joe 1997); la inferior, lo mismo abajo. Importa en riesgos: si las sequías de dos regiones, las caídas de dos precios o las plagas de dos cultivos tienen cola común, ocurren juntas más de lo que una gaussiana con la misma correlación haría creer. La inversión de τ da un valor de partida que no depende de las marginales; la pseudoverosimilitud lo afina.</p>
+  </div>
+  <div class="caja regla">
+    <div class="caja-t"><span class="ico">✓</span>Para leer el Bloque 6</div>
+    <table class="compacta"><tbody>
+      <tr><td style="width:44%"><b>Si</b> dCor supera mucho a |<i>r</i>|…</td><td>mira la nube e informa una medida de dependencia, no <i>r</i>; describe la forma con palabras.</td></tr>
+      <tr><td><b>Si</b> las dos ξ difieren mucho…</td><td>una variable es casi función de la otra, pero no al revés: di en qué dirección.</td></tr>
+      <tr><td><b>Si</b> hay menos de unos 50 datos…</td><td>confía en dCor, ξ y HSIC; toma MIC, la información mutua y la correlación máxima como orientación.</td></tr>
+      <tr><td><b>Si</b> la mejor cópula tiene cola…</td><td>los extremos ocurren juntos: tenlo en cuenta en cualquier simulación o análisis de riesgo.</td></tr>
+      <tr><td><b>Si</b> dos familias quedan cerca en AIC…</td><td>los datos no alcanzan para elegir: con pocos datos, las colas empíricas descansan en muy pocos puntos.</td></tr>
+    </tbody></table>
+    <p class="regla-pie">Son guías para interpretar, no leyes: lo que sabes del fenómeno, del diseño y de cómo se midió siempre manda.</p>
+  </div>
+</section>
+
+</body>
+</html>

@@ -1,0 +1,165 @@
+<!-- ==================== BLOCK 12 · COMPARE, CORRECT, PLAN AND COMBINE ==================== -->
+<section class="step-panel" id="panel-12">
+  <div class="panel-title"><div class="pt-num">12</div><div><h2><span data-l="es">Comparar, corregir, planear y combinar</span><span data-l="en">Compare, correct, plan and combine</span></h2><p><span data-l="es">Las preguntas que vienen después de calcular una correlación: ¿es distinta de otra?, ¿cuánto vale sin el error de medida?, ¿cuántos casos necesito?, ¿qué dicen todos los estudios juntos?</span><span data-l="en">The questions that come after computing a correlation: is it different from another?, what is it worth without measurement error?, how many cases do I need?, what do all the studies say together?</span></p></div></div>
+
+  <div class="b12-bar" role="group" aria-label="Sección">
+    <button type="button" class="chip on" data-sec="cmp"><span data-l="es">Comparar dos correlaciones</span><span data-l="en">Compare two correlations</span></button>
+    <button type="button" class="chip" data-sec="mat"><span data-l="es">Comparar matrices</span><span data-l="en">Compare matrices</span></button>
+    <button type="button" class="chip" data-sec="cor"><span data-l="es">Corregir</span><span data-l="en">Correct</span></button>
+    <button type="button" class="chip" data-sec="plan"><span data-l="es">Potencia y tamaño de muestra</span><span data-l="en">Power and sample size</span></button>
+    <button type="button" class="chip" data-sec="meta"><span data-l="es">Metaanálisis</span><span data-l="en">Meta-analysis</span></button>
+  </div>
+
+  <!-- ===== two correlations ===== -->
+  <div class="b12-sec" id="b12Sec-cmp">
+    <div class="card">
+      <h2><span data-l="es">Qué correlaciones</span><span data-l="en">Which correlations</span></h2>
+      <div class="form-grid">
+        <div class="field"><label for="b12Design"><span data-l="es">Diseño</span><span data-l="en">Design</span></label>
+          <select id="b12Design"><option value="indep" data-es="Dos grupos independientes" data-en="Two independent groups">Dos grupos independientes</option><option value="overlap" data-es="Mismos casos, una variable en común: r(j, k) frente a r(j, h)" data-en="Same cases, one variable in common: r(j, k) against r(j, h)">Mismos casos, una variable en común: r(j, k) frente a r(j, h)</option><option value="nonoverlap" data-es="Mismos casos, sin variable en común: r(j, k) frente a r(h, m)" data-en="Same cases, no variable in common: r(j, k) against r(h, m)">Mismos casos, sin variable en común: r(j, k) frente a r(h, m)</option></select></div>
+        <div class="field"><label for="b12Alt"><span data-l="es">Hipótesis alternativa</span><span data-l="en">Alternative hypothesis</span></label>
+          <select id="b12Alt"><option value="two.sided" data-es="Distintas (dos colas)" data-en="Different (two-sided)">Distintas (dos colas)</option><option value="greater" data-es="La primera mayor" data-en="The first greater">La primera mayor</option><option value="less" data-es="La primera menor" data-en="The first smaller">La primera menor</option></select></div>
+        <div class="field"><label for="b12Conf"><span data-l="es">Confianza</span><span data-l="en">Confidence</span></label>
+          <select id="b12Conf"><option value="0.95">95 %</option><option value="0.9">90 %</option><option value="0.99">99 %</option></select></div>
+      </div>
+      <div class="form-grid b12-nums" id="b12Nums"></div>
+      <details class="b12-from" id="b12From"><summary><span data-l="es">Tomarlas de los datos abiertos</span><span data-l="en">Take them from the open data</span></summary>
+        <div class="form-grid" id="b12FromGrid"></div>
+        <div class="btn-row"><button type="button" class="btn btn-secondary btn-sm" id="b12FromGo"><span data-l="es">Calcular desde los datos</span><span data-l="en">Compute from the data</span></button>
+          <button type="button" class="btn btn-ghost btn-sm" id="b12Iris"><span data-l="es">Ejemplo: iris por especie</span><span data-l="en">Example: iris by species</span></button></div>
+      </details>
+      <div class="messages" id="b12CMsgs"></div>
+    </div>
+    <div class="card">
+      <h2><span data-l="es">¿Son distintas?</span><span data-l="en">Are they different?</span></h2>
+      <div id="b12CTiles"></div>
+      <div class="table-wrap" id="b12CTable"></div>
+      <div class="pg-pane" id="b12CFigPane"><div class="pg-title"><span data-l="es">Las dos correlaciones y su diferencia</span><span data-l="en">The two correlations and their difference</span></div><div id="b12CFig"></div></div>
+      <details class="theory-note"><summary><span data-l="es">Por qué importa el diseño</span><span data-l="en">Why the design matters</span></summary>
+        <p><span data-l="es">Con grupos independientes basta la diferencia de las z de Fisher (Fisher 1925). Si las dos correlaciones se calcularon en los mismos casos, están correlacionadas entre sí y la prueba debe usar la correlación entre ellas: con una variable en común (r<sub>jk</sub> frente a r<sub>jh</sub>) cuenta r<sub>kh</sub>; sin variable en común, las cuatro correlaciones cruzadas. Hay una decena de propuestas (Steiger 1980; Meng, Rosenthal y Rubin 1992); en simulaciones las más fieles al nivel nominal son la t de Williams (1959) y la z de Hittner, May y Silver (2003) para el caso traslapado, y la de Silver, Hittner y May (2004) para el no traslapado. El intervalo de Zou (2007) da además el tamaño de la diferencia, no sólo su significancia.</span><span data-l="en">With independent groups the difference of Fisher’s z is enough (Fisher 1925). If both correlations were computed on the same cases, they are correlated with each other and the test must use the correlation between them: with one variable in common (r<sub>jk</sub> against r<sub>jh</sub>) r<sub>kh</sub> counts; with none, the four cross correlations. There are a dozen proposals (Steiger 1980; Meng, Rosenthal and Rubin 1992); in simulations the most faithful to the nominal level are Williams’ t (1959) and Hittner, May and Silver’s z (2003) for the overlapping case, and Silver, Hittner and May’s (2004) for the non-overlapping one. Zou’s interval (2007) also gives the size of the difference, not only its significance.</span></p>
+      </details>
+    </div>
+  </div>
+
+  <!-- ===== two matrices ===== -->
+  <div class="b12-sec" id="b12Sec-mat" hidden>
+    <div class="card">
+      <h2><span data-l="es">Dos matrices de correlación</span><span data-l="en">Two correlation matrices</span></h2>
+      <div id="b12MEmpty"><p class="hint"><span data-l="es">Se comparan las matrices de dos grupos de casos: abre en el Bloque 2 unos datos con una columna de grupo.</span><span data-l="en">The matrices of two groups of cases are compared: open in Block 2 some data with a grouping column.</span></p>
+        <div class="btn-row"><button type="button" class="btn btn-ghost btn-sm" id="b12MIris"><span data-l="es">Usar iris (tres especies)</span><span data-l="en">Use iris (three species)</span></button></div></div>
+      <div id="b12MMain" hidden>
+        <div class="form-grid">
+          <div class="field"><label for="b12MGroup"><span data-l="es">Columna de grupo</span><span data-l="en">Grouping column</span></label><select id="b12MGroup"></select></div>
+          <div class="field"><label for="b12MA"><span data-l="es">Grupo A</span><span data-l="en">Group A</span></label><select id="b12MA"></select></div>
+          <div class="field"><label for="b12MB"><span data-l="es">Grupo B</span><span data-l="en">Group B</span></label><select id="b12MB"></select></div>
+          <div class="field"><label for="b12MCoef"><span data-l="es">Coeficiente</span><span data-l="en">Coefficient</span></label><select id="b12MCoef"><option value="pearson">Pearson</option><option value="spearman">Spearman</option></select></div>
+        </div>
+        <div class="chip-row" id="b12MVars"></div>
+      </div>
+      <div class="messages" id="b12MMsgs"></div>
+    </div>
+    <div class="card" id="b12MRes" hidden>
+      <h2><span data-l="es">¿La estructura es la misma?</span><span data-l="en">Is the structure the same?</span></h2>
+      <div id="b12MTiles"></div>
+      <div class="b12-tri" id="b12MFigs"></div>
+      <div class="table-wrap" id="b12MTable"></div>
+      <details class="theory-note"><summary><span data-l="es">La prueba de Jennrich y las comparaciones celda por celda</span><span data-l="en">Jennrich’s test and the cell-by-cell comparisons</span></summary>
+        <p><span data-l="es">La prueba de Jennrich (1970) compara las dos matrices completas con un χ² de p(p − 1)/2 grados de libertad que toma en cuenta que las correlaciones de una misma matriz dependen unas de otras. Sumar los z² de cada celda sólo da un χ² cuando todas las correlaciones son casi cero: con variables correlacionadas rechaza de más (en nuestra simulación, 11 % en vez de 5 %), por eso aquí sirve sólo para leer celda por celda, con la corrección de Holm.</span><span data-l="en">Jennrich’s test (1970) compares the two whole matrices with a χ² on p(p − 1)/2 degrees of freedom that takes into account that the correlations of one matrix depend on each other. Summing the z² of each cell gives a χ² only when all correlations are near zero: with correlated variables it rejects too often (in our simulation, 11% instead of 5%), so here it serves only to read cell by cell, with Holm’s correction.</span></p>
+      </details>
+    </div>
+  </div>
+
+  <!-- ===== corrections ===== -->
+  <div class="b12-sec" id="b12Sec-cor" hidden>
+    <div class="card">
+      <h2><span data-l="es">Corregir por atenuación</span><span data-l="en">Correct for attenuation</span></h2>
+      <p class="hint"><span data-l="es">Si las dos medidas tienen error, la correlación observada subestima la de los valores verdaderos: r / √(r<sub>xx</sub> · r<sub>yy</sub>) (Spearman 1904), con r<sub>xx</sub> y r<sub>yy</sub> las fiabilidades (α, test–retest o un ICC del Bloque 9).</span><span data-l="en">If both measures carry error, the observed correlation underestimates that of the true scores: r / √(r<sub>xx</sub> · r<sub>yy</sub>) (Spearman 1904), with r<sub>xx</sub> and r<sub>yy</sub> the reliabilities (α, test–retest or an ICC from Block 9).</span></p>
+      <div class="form-grid">
+        <div class="field"><label for="b12AR"><span data-l="es"><span class="nc">r</span> observada</span><span data-l="en">Observed <span class="nc">r</span></span></label><input type="number" id="b12AR" value="0.42" step="0.01" min="-1" max="1"></div>
+        <div class="field"><label for="b12AX"><span data-l="es">Fiabilidad de <span class="nc">x</span> (<span class="nc">r<sub>xx</sub></span>)</span><span data-l="en">Reliability of <span class="nc">x</span> (<span class="nc">r<sub>xx</sub></span>)</span></label><input type="number" id="b12AX" value="0.80" step="0.01" min="0.01" max="1"></div>
+        <div class="field"><label for="b12AY"><span data-l="es">Fiabilidad de <span class="nc">y</span> (<span class="nc">r<sub>yy</sub></span>)</span><span data-l="en">Reliability of <span class="nc">y</span> (<span class="nc">r<sub>yy</sub></span>)</span></label><input type="number" id="b12AY" value="0.70" step="0.01" min="0.01" max="1"></div>
+      </div>
+      <div id="b12ATiles"></div>
+    </div>
+    <div class="card">
+      <h2><span data-l="es">Corregir por rango restringido</span><span data-l="en">Correct for range restriction</span></h2>
+      <p class="hint"><span data-l="es">Si sólo se observaron casos con valores de x dentro de un intervalo (los admitidos, los sobrevivientes, los seleccionados), la correlación sale más baja que en la población completa. El caso II corrige la selección directa sobre x; el caso III, la selección sobre una tercera variable z (Thorndike 1949). U es el cociente de la desviación estándar sin restricción entre la restringida.</span><span data-l="en">If only cases with x inside an interval were observed (the admitted, the survivors, the selected), the correlation comes out lower than in the whole population. Case II corrects direct selection on x; case III, selection on a third variable z (Thorndike 1949). U is the unrestricted standard deviation divided by the restricted one.</span></p>
+      <div class="form-grid">
+        <div class="field"><label for="b12RR"><span data-l="es"><span class="nc">r</span> en la muestra restringida</span><span data-l="en"><span class="nc">r</span> in the restricted sample</span></label><input type="number" id="b12RR" value="0.30" step="0.01" min="-1" max="1"></div>
+        <div class="field"><label for="b12Rs"><span data-l="es">DE restringida (<span class="nc">s</span>)</span><span data-l="en">Restricted SD (<span class="nc">s</span>)</span></label><input type="number" id="b12Rs" value="6" step="0.1" min="0.0001"></div>
+        <div class="field"><label for="b12RS"><span data-l="es">DE sin restricción (S)</span><span data-l="en">Unrestricted SD (S)</span></label><input type="number" id="b12RS" value="10" step="0.1" min="0.0001"></div>
+        <div class="field"><label for="b12RCase"><span data-l="es">Selección</span><span data-l="en">Selection</span></label><select id="b12RCase"><option value="II" data-es="Caso II: sobre x" data-en="Case II: on x">Caso II: sobre x</option><option value="III" data-es="Caso III: sobre otra z" data-en="Case III: on another z">Caso III: sobre otra z</option></select></div>
+        <div class="field b12-c3"><label for="b12Rxz"><span data-l="es"><span class="nc">r<sub>xz</sub></span> restringida</span><span data-l="en">Restricted <span class="nc">r<sub>xz</sub></span></span></label><input type="number" id="b12Rxz" value="0.50" step="0.01" min="-1" max="1"></div>
+        <div class="field b12-c3"><label for="b12Ryz"><span data-l="es"><span class="nc">r<sub>yz</sub></span> restringida</span><span data-l="en">Restricted <span class="nc">r<sub>yz</sub></span></span></label><input type="number" id="b12Ryz" value="0.40" step="0.01" min="-1" max="1"></div>
+      </div>
+      <div id="b12RTiles"></div>
+      <div class="pg-pane" id="b12RFigPane"><div class="pg-title"><span data-l="es">La corrección del caso II según U</span><span data-l="en">The case II correction by U</span></div><div id="b12RFig"></div></div>
+      <details class="theory-note"><summary><span data-l="es">Precauciones</span><span data-l="en">Cautions</span></summary>
+        <p><span data-l="es">Las dos correcciones suponen relación lineal y homocedástica y que la selección fue la que se dice; una corrección mayor que 1 indica que alguna fiabilidad está subestimada o que el error no es independiente. Corregir no crea información: el intervalo corregido es el intervalo observado transformado con la misma fórmula, más ancho en la misma proporción (Hunter y Schmidt 2004; Sackett y Yang 2000).</span><span data-l="en">Both corrections assume a linear, homoscedastic relation and that the selection was the one stated; a correction above 1 means that some reliability is underestimated or that the error is not independent. Correcting creates no information: the corrected interval is the observed one transformed by the same formula, wider in the same proportion (Hunter and Schmidt 2004; Sackett and Yang 2000).</span></p>
+      </details>
+    </div>
+  </div>
+
+  <!-- ===== power and sample size ===== -->
+  <div class="b12-sec" id="b12Sec-plan" hidden>
+    <div class="card">
+      <h2><span data-l="es">Planear un estudio</span><span data-l="en">Plan a study</span></h2>
+      <div class="form-grid">
+        <div class="field"><label for="b12PR"><span data-l="es"><span class="nc">ρ</span> esperada</span><span data-l="en">Expected <span class="nc">ρ</span></span> <b id="b12PRv">0.30</b></label><input type="range" id="b12PR" min="0.05" max="0.9" step="0.01" value="0.3"></div>
+        <div class="field"><label for="b12PN"><span class="nc">n</span> <b id="b12PNv">50</b></label><input type="range" id="b12PN" min="5" max="500" step="1" value="50"></div>
+        <div class="field"><label for="b12PA"><span class="nc">α</span></label><select id="b12PA"><option value="0.05">0.05</option><option value="0.01">0.01</option><option value="0.005">0.005</option><option value="0.1">0.10</option></select></div>
+        <div class="field"><label for="b12PAlt"><span data-l="es">Prueba</span><span data-l="en">Test</span></label><select id="b12PAlt"><option value="two.sided" data-es="Dos colas" data-en="Two-sided">Dos colas</option><option value="greater" data-es="Una cola (ρ > 0)" data-en="One-sided (ρ > 0)">Una cola (ρ > 0)</option></select></div>
+        <div class="field"><label for="b12PPow"><span data-l="es">Potencia deseada</span><span data-l="en">Desired power</span></label><select id="b12PPow"><option value="0.8">80 %</option><option value="0.9">90 %</option><option value="0.95">95 %</option></select></div>
+        <div class="field"><label for="b12PW"><span data-l="es">Semiamplitud del IC deseada</span><span data-l="en">Desired CI half-width</span></label><select id="b12PW"><option value="0.1">± 0.10</option><option value="0.05">± 0.05</option><option value="0.15">± 0.15</option><option value="0.2">± 0.20</option></select></div>
+      </div>
+      <div id="b12PTiles"></div>
+      <div class="two-figs">
+        <div class="pg-pane" id="b12PDistPane"><div class="pg-title"><span data-l="es">La distribución exacta de <span class="nc">r</span> bajo H₀ y bajo <span class="nc">ρ</span></span><span data-l="en">The exact distribution of <span class="nc">r</span> under H₀ and under <span class="nc">ρ</span></span></div><div id="b12PDist"></div></div>
+        <div class="pg-pane" id="b12PCurvePane"><div class="pg-title"><span data-l="es">Potencia según <span class="nc">n</span></span><span data-l="en">Power by <span class="nc">n</span></span></div><div id="b12PCurve"></div></div>
+      </div>
+      <details class="theory-note"><summary><span data-l="es">Exacta y aproximada</span><span data-l="en">Exact and approximate</span></summary>
+        <p><span data-l="es">La potencia exacta integra la densidad de r cuando la verdadera es ρ (Fisher 1915; Hotelling 1953) sobre la región donde la prueba t rechaza; la aproximada usa la z de Fisher con la corrección de sesgo ρ/(2(n − 1)) y se aparta unas milésimas con n pequeño. Con ρ = 0 la potencia exacta es α, como debe ser. Planear por la amplitud del intervalo, y no sólo por la potencia, garantiza una estimación útil aunque el efecto resulte pequeño (Bonett y Wright 2000).</span><span data-l="en">The exact power integrates the density of r when the true value is ρ (Fisher 1915; Hotelling 1953) over the region where the t test rejects; the approximate one uses Fisher’s z with the bias correction ρ/(2(n − 1)) and departs by a few thousandths with small n. With ρ = 0 the exact power is α, as it should. Planning by the width of the interval, and not only by power, guarantees a useful estimate even if the effect turns out small (Bonett and Wright 2000).</span></p>
+      </details>
+    </div>
+    <div class="card">
+      <h2><span data-l="es">Factor de Bayes de una r publicada</span><span data-l="en">Bayes factor of a published r</span></h2>
+      <p class="hint"><span data-l="es">Con sólo r y n: la evidencia a favor de ρ ≠ 0 frente a ρ = 0, con la previa beta extendida de ancho κ (Ly, Verhagen y Wagenmakers 2016).</span><span data-l="en">With only r and n: the evidence for ρ ≠ 0 against ρ = 0, with the stretched beta prior of width κ (Ly, Verhagen and Wagenmakers 2016).</span></p>
+      <div class="form-grid">
+        <div class="field"><label for="b12BR"><span class="nc">r</span></label><input type="number" id="b12BR" value="0.25" step="0.01" min="-0.999" max="0.999"></div>
+        <div class="field"><label for="b12BN"><span class="nc">n</span></label><input type="number" id="b12BN" value="60" step="1" min="4"></div>
+        <div class="field"><label for="b12BK"><span data-l="es">Ancho de la previa <span class="nc">κ</span></span><span data-l="en">Prior width <span class="nc">κ</span></span></label><select id="b12BK"><option value="0.3333333333333333">1/3</option><option value="0.5">1/2</option><option value="1" data-es="1 (uniforme)" data-en="1 (uniform)">1 (uniforme)</option></select></div>
+      </div>
+      <div id="b12BTiles"></div>
+    </div>
+  </div>
+
+  <!-- ===== meta-analysis ===== -->
+  <div class="b12-sec" id="b12Sec-meta" hidden>
+    <div class="card">
+      <h2><span data-l="es">Los estudios</span><span data-l="en">The studies</span></h2>
+      <p class="hint"><span data-l="es">Un estudio por renglón: nombre; r; n (separados por punto y coma o tabulador). Se combinan en la escala z de Fisher con varianza 1/(n − 3).</span><span data-l="en">One study per line: name; r; n (separated by semicolon or tab). They are combined on Fisher’s z scale with variance 1/(n − 3).</span></p>
+      <textarea id="b12MetaTxt" rows="9" spellcheck="false" aria-label="Estudios"></textarea>
+      <div class="form-grid">
+        <div class="field"><label for="b12MetaModel"><span data-l="es">Modelo</span><span data-l="en">Model</span></label><select id="b12MetaModel"><option value="reml" data-es="Efectos aleatorios (REML)" data-en="Random effects (REML)">Efectos aleatorios (REML)</option><option value="dl" data-es="Efectos aleatorios (DerSimonian–Laird)" data-en="Random effects (DerSimonian–Laird)">Efectos aleatorios (DerSimonian–Laird)</option><option value="hsz" data-es="Efectos aleatorios (Hunter–Schmidt)" data-en="Random effects (Hunter–Schmidt)">Efectos aleatorios (Hunter–Schmidt)</option><option value="fixed" data-es="Efecto fijo" data-en="Fixed effect">Efecto fijo</option></select></div>
+      </div>
+      <div class="btn-row"><button type="button" class="btn btn-secondary btn-sm" id="b12MetaGo"><span data-l="es">Combinar</span><span data-l="en">Combine</span></button>
+        <button type="button" class="btn btn-ghost btn-sm" id="b12MetaEx"><span data-l="es">Ejemplo simulado: 16 estudios</span><span data-l="en">Simulated example: 16 studies</span></button>
+        <button type="button" class="btn btn-ghost btn-sm" id="b12MetaData"><span data-l="es">Usar columnas de los datos</span><span data-l="en">Use columns of the data</span></button></div>
+      <div class="form-grid" id="b12MetaCols" hidden></div>
+      <div class="messages" id="b12MetaMsgs"></div>
+    </div>
+    <div class="card" id="b12MetaRes" hidden>
+      <h2><span data-l="es">Lo que dicen juntos</span><span data-l="en">What they say together</span></h2>
+      <div id="b12MetaTiles"></div>
+      <div class="pg-pane" id="b12ForestPane"><div class="pg-title"><span data-l="es">Gráfico de bosque</span><span data-l="en">Forest plot</span></div><div id="b12Forest"></div></div>
+      <div class="two-figs">
+        <div class="pg-pane" id="b12FunnelPane"><div class="pg-title"><span data-l="es">Embudo: efecto frente a precisión</span><span data-l="en">Funnel: effect against precision</span></div><div id="b12Funnel"></div></div>
+        <div class="b12-text" id="b12MetaText"></div>
+      </div>
+      <div class="table-wrap" id="b12MetaTable"></div>
+      <details class="theory-note"><summary><span data-l="es">Efecto fijo, efectos aleatorios y heterogeneidad</span><span data-l="en">Fixed effect, random effects and heterogeneity</span></summary>
+        <p><span data-l="es">El efecto fijo supone que todos los estudios estiman la misma ρ; los efectos aleatorios, que cada uno estima la suya, alrededor de un promedio, con varianza τ² (DerSimonian y Laird 1986; REML de Viechtbauer 2005). Q prueba si hay heterogeneidad; I² dice qué parte de la variación entre estudios no es azar (Higgins y Thompson 2002); el intervalo de predicción dice dónde caería la ρ de un estudio nuevo (Higgins, Thompson y Spiegelhalter 2009) y suele ser mucho más ancho que el de confianza. La prueba de Egger et al. (1997) busca asimetría en el embudo, que puede venir del sesgo de publicación o de que los estudios pequeños son distintos. El método de Hunter y Schmidt (2004) trabaja sobre r y dice qué porcentaje de la varianza observada explica el error de muestreo.</span><span data-l="en">The fixed effect assumes that all studies estimate the same ρ; random effects, that each estimates its own, around an average, with variance τ² (DerSimonian and Laird 1986; REML in Viechtbauer 2005). Q tests whether there is heterogeneity; I² says which part of the variation between studies is not chance (Higgins and Thompson 2002); the prediction interval says where the ρ of a new study would fall (Higgins, Thompson and Spiegelhalter 2009) and is usually much wider than the confidence interval. Egger et al.’s test (1997) looks for asymmetry in the funnel, which may come from publication bias or from small studies being different. Hunter and Schmidt’s method (2004) works on r and says which percentage of the observed variance sampling error explains.</span></p>
+      </details>
+    </div>
+  </div>
+</section>

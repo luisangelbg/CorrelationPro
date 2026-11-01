@@ -1,0 +1,165 @@
+<main id="main" tabindex="-1">
+
+<!-- ==================== BLOCK 1 · HOME ==================== -->
+<section class="step-panel active" id="panel-1">
+
+  <div class="hero">
+    <div class="hero-inner">
+      <div>
+        <div class="eyebrow"><span data-l="es">Análisis de correlación de todo tipo</span><span data-l="en">Correlation analysis of every kind</span></div>
+        <h1><span data-l="es">Mide <span class="rojo">cómo se mueven juntas</span> tus variables, y <span class="oro">dilo bien</span></span><span data-l="en">Measure <span class="rojo">how your variables move together</span>, and <span class="oro">say it right</span></span></h1>
+        <p class="lead"><span data-l="es">Más de <b>ochenta medidas</b> calculadas, y casi cien explicadas, en un solo lugar: de Pearson, Spearman y Kendall a las <b>robustas</b>, las de
+          <b>dependencia no lineal</b>, las <b>parciales</b>, las de <b>variables categóricas y latentes</b>, las de <b>acuerdo</b> y las de datos
+          en el <b>tiempo</b>, el <b>espacio</b> o los <b>círculos</b>. Cada resultado dice qué convenio usó, cada fórmula se explica, y las figuras
+          salen listas para publicar. Todo en tu navegador: sin instalar nada y sin que tus datos salgan de tu computadora.</span><span data-l="en">More than <b>eighty measures</b> computed, and nearly a hundred explained, in one place: from Pearson, Spearman and Kendall to the <b>robust</b> ones, those of
+          <b>nonlinear dependence</b>, the <b>partial</b> ones, those for <b>categorical and latent variables</b>, those of <b>agreement</b>
+          and those for data in <b>time</b>, <b>space</b> or on the <b>circle</b>. Every result says which convention it used, every formula is
+          explained, and the figures come out ready to publish. All in your browser: nothing to install and your data never leave your computer.</span></p>
+        <div class="hero-cta">
+          <button type="button" class="btn btn-primary btn-lg" id="startBtn"><span data-l="es">Empezar con mis datos →</span><span data-l="en">Start with my data →</span></button>
+          <button type="button" class="btn btn-secondary btn-lg" id="labsBtn"><span data-l="es">Probar los laboratorios</span><span data-l="en">Try the labs</span></button>
+          <button type="button" class="btn btn-ghost btn-lg" id="catalogBtn"><span data-l="es">Ver las medidas</span><span data-l="en">See the measures</span></button>
+          <button type="button" class="btn btn-ghost btn-lg" id="citeBtn"><span data-l="es">Cómo citar</span><span data-l="en">How to cite</span></button>
+        </div>
+        <div class="badge-row">
+          <span class="badge ok"><span data-l="es">Funciona completo en tu navegador</span><span data-l="en">Runs entirely in your browser</span></span>
+          <span class="badge ok"><span data-l="es">Validado contra implementaciones independientes</span><span data-l="en">Validated against independent implementations</span></span>
+          <span class="badge ok"><span data-l="es">Paletas propias seguras para el daltonismo</span><span data-l="en">Own colour-blind-safe palettes</span></span>
+          <span class="badge ok"><span data-l="es">Español e inglés</span><span data-l="en">Spanish and English</span></span>
+        </div>
+      </div>
+      <div class="hero-art" id="heroArt" role="img" data-es-title="La paradoja de Simpson en los lirios de Anderson: la correlación de todas las flores es negativa y la de cada especie, positiva" data-en-title="Simpson's paradox in Anderson's irises: the correlation of all the flowers is negative and that of each species, positive" aria-label="La paradoja de Simpson en los lirios de Anderson: la correlación de todas las flores es negativa y la de cada especie, positiva"></div>
+    </div>
+  </div>
+
+  <div class="messages" id="homeMessages"></div>
+
+  <h2 class="section-title"><span data-l="es">Cómo funciona</span><span data-l="en">How it works</span></h2>
+  <p class="section-sub"><span data-l="es">La ruta es la de un análisis de correlación bien hecho, en el orden en que se hace. Cada bloque explica la
+    idea, revisa si tus datos la sostienen y dice qué conviene hacer después.</span><span data-l="en">The route is that of a correlation analysis done right, in the order it is done. Each block explains
+    the idea, checks whether your data can support it and says what to do next.</span></p>
+  <div class="workflow" id="workflow"></div>
+
+  <!-- ---------- Interactive labs ---------- -->
+  <h2 class="section-title" id="labs"><span data-l="es">Pruébalo: seis laboratorios que calculan de verdad</span><span data-l="en">Try it: six labs that really compute</span></h2>
+  <p class="section-sub"><span data-l="es">Nada de esto es una animación grabada: cada movimiento recalcula, con el mismo motor que la app usará con tus
+    datos, cada coeficiente y su valor p.</span><span data-l="en">None of this is a recorded animation: every move recomputes, with the same engine the app will use on your
+    data, every coefficient and its p-value.</span></p>
+  <div class="playground">
+    <div class="lab-tabs" role="tablist" id="labTabs" data-es-title="Laboratorios" data-en-title="Labs" aria-label="Laboratorios"></div>
+    <div id="labHost"></div>
+  </div>
+
+  <!-- ---------- The thirteen blocks ---------- -->
+  <h2 class="section-title"><span data-l="es">Los trece bloques</span><span data-l="en">The thirteen blocks</span></h2>
+  <p class="section-sub"><span data-l="es">Un bloque es un paso del análisis y un capítulo del manual: se recorren en orden, y cada uno dice si conviene volver a uno anterior.</span><span data-l="en">A block is a step of the analysis and a chapter of the manual: they are walked in order, and each one says when it is worth going back to an earlier one.</span></p>
+  <div class="feature-grid" id="blockGrid" data-lnav-skip></div>
+
+  <!-- ---------- Kinds of data ---------- -->
+  <h2 class="section-title"><span data-l="es">Qué medida para qué datos</span><span data-l="en">Which measure for which data</span></h2>
+  <p class="section-sub"><span data-l="es">El tipo de las dos variables decide qué coeficientes tienen sentido. El asistente del Bloque 2 lo propone
+    solo; aquí está el mapa completo.</span><span data-l="en">The kind of the two variables decides which coefficients make sense. The assistant of Block 2 proposes it
+    on its own; here is the whole map.</span></p>
+  <div class="material-strip" id="typeStrip"></div>
+
+  <!-- ---------- Glyphs ---------- -->
+  <h2 class="section-title" id="glyphs"><span data-l="es">Nueve formas de dibujar una correlación</span><span data-l="en">Nine ways to draw a correlation</span></h2>
+  <p class="section-sub"><span data-l="es">En una matriz, cada celda es un glifo. Todos llevan el signo también en su forma, no sólo en el color:
+    con una paleta divergente, +r y −r se imprimen con el mismo gris. La <b>media luna</b> es propia de esta app: un disco de tamaño fijo cuya parte
+    iluminada es exactamente |r|, creciente si r &gt; 0 y menguante si r &lt; 0. Mueve el control para ver los nueve con el mismo r.</span><span data-l="en">In a matrix, each cell is a glyph. All of them carry the sign in their shape too, not only in the colour:
+    with a divergent palette, +r and −r print as the same grey. The <b>moon</b> is this app's own: a disk of fixed size whose lit part is exactly
+    |r|, waxing if r &gt; 0 and waning if r &lt; 0. Move the control to see all nine with the same r.</span></p>
+  <div class="pg-controls">
+    <label class="inline-label" for="glyphR">r = <b id="glyphRv">.60</b></label>
+    <input type="range" id="glyphR" min="-1" max="1" step="0.01" value="0.6" style="width:280px">
+    <button type="button" class="btn btn-secondary btn-sm" id="glyphMorph"><span data-l="es">Ver la transformación</span><span data-l="en">See the morph</span></button>
+  </div>
+  <div class="glyph-strip" id="glyphStrip"></div>
+
+  <!-- ---------- Palettes ---------- -->
+  <h2 class="section-title" id="palettes"><span data-l="es">Paletas propias, probadas</span><span data-l="en">Own palettes, tested</span></h2>
+  <p class="section-sub"><span data-l="es">Diecinueve paletas diseñadas para esta app en un espacio de color perceptual (pasos iguales de r se ven como
+    pasos iguales de color), con nombres de plantas, lugares y artesanías de México. Cada una pasa cinco controles: que todo su recorrido quepa en la
+    pantalla, que sus pasos sean uniformes, que el signo se distinga con los tres tipos de daltonismo, que +r y −r tengan el mismo gris y que sus extremos
+    contrasten con el fondo. Elige una: se usará en toda la app.</span><span data-l="en">Nineteen palettes designed for this app in a perceptual colour space (equal steps of r look like equal steps of
+    colour), named after plants, places and crafts of Mexico. Each one passes five checks: its whole ramp fits the screen, its steps are uniform, the
+    sign is told apart with the three kinds of colour blindness, +r and −r have the same grey and its ends contrast with the background. Pick one: it
+    will be used throughout the app.</span></p>
+  <div class="pal-tools">
+    <label class="inline-label" for="palVision"><span data-l="es">Ver como</span><span data-l="en">See as</span>
+      <select id="palVision">
+        <option value="none" data-es="Visión habitual" data-en="Usual vision">Visión habitual</option>
+        <option value="protan" data-es="Protanopía (sin conos L)" data-en="Protanopia (no L cones)">Protanopía (sin conos L)</option>
+        <option value="deutan" data-es="Deuteranopía (sin conos M)" data-en="Deuteranopia (no M cones)">Deuteranopía (sin conos M)</option>
+        <option value="tritan" data-es="Tritanopía (sin conos S)" data-en="Tritanopia (no S cones)">Tritanopía (sin conos S)</option>
+        <option value="grey" data-es="Escala de grises" data-en="Greyscale">Escala de grises</option>
+      </select></label>
+    <label class="checkbox-label"><input type="checkbox" id="palInvert"> <span data-l="es">Invertir el signo (rojo positivo)</span><span data-l="en">Invert the sign (red positive)</span></label>
+  </div>
+  <div class="pal-grid" id="palGrid"></div>
+  <div class="pal-sample pg-pane" id="palSample"></div>
+
+  <!-- ---------- Report styles ---------- -->
+  <h2 class="section-title" id="styles"><span data-l="es">Cómo se escriben los números</span><span data-l="en">How the numbers are written</span></h2>
+  <p class="section-sub"><span data-l="es">Los manuales de estilo no se ponen de acuerdo: el de psicología quita el cero inicial (r = .45), las guías
+    biomédicas lo conservan y escriben P mayúscula, y la norma mexicana de unidades exige el cero y admite la coma decimal. Elige el tuyo: la app
+    escribe así cada número, en la pantalla y en el informe.</span><span data-l="en">Style manuals do not agree: the psychology manual drops the leading zero (r = .45), the biomedical guidelines
+    keep it and write a capital P, and the Mexican standard of units requires the zero and admits the decimal comma. Pick yours: the app writes every
+    number that way, on screen and in the report.</span></p>
+  <div class="style-cards" id="styleCards"></div>
+
+  <!-- ---------- Catalogue ---------- -->
+  <h2 class="section-title" id="catalog"><span data-l="es">Las medidas y de dónde vienen</span><span data-l="en">The measures and where they come from</span></h2>
+  <p class="section-sub"><span data-l="es">Cada ficha trae su fórmula, qué mide, su prueba, su intervalo, sus trampas y el artículo que la define. El
+    informe del Bloque 13 cita sólo las que hayas usado.</span><span data-l="en">Each card has its formula, what it measures, its test, its interval, its pitfalls and the paper that defines it.
+    The report of Block 13 cites only those you used.</span></p>
+  <input type="search" class="method-search" id="methodSearch" data-es-ph="Buscar una medida (p. ej. Kendall, cópula, acuerdo)" data-en-ph="Search a measure (e.g. Kendall, copula, agreement)" placeholder="Buscar una medida (p. ej. Kendall, cópula, acuerdo)" aria-label="Buscar una medida">
+  <div class="method-filter" id="methodFilter"></div>
+  <div class="method-gallery" id="methodGallery"></div>
+  <p class="method-count" id="methodCount"></p>
+  <dialog class="mdlg" id="methodDialog" aria-labelledby="mdlgTitle"></dialog>
+
+  <!-- ---------- Theory ---------- -->
+  <h2 class="section-title" id="theory"><span data-l="es">La teoría, en lenguaje llano</span><span data-l="en">The theory, in plain words</span></h2>
+  <p class="section-sub"><span data-l="es">Las ideas que sostienen todo lo demás. Cada una dice en qué bloque se usa.</span><span data-l="en">The ideas that hold up everything else. Each one says in which block it is used.</span></p>
+  <div class="card theory-card" id="theoryHost"></div>
+
+  <!-- ---------- Limits ---------- -->
+  <h2 class="section-title"><span data-l="es">Qué tan grandes pueden ser tus datos</span><span data-l="en">How large your data can be</span></h2>
+  <p class="section-sub"><span data-l="es">Medido en una computadora de escritorio con el mismo motor que corre en tu navegador.</span><span data-l="en">Measured on a desktop computer with the same engine that runs in your browser.</span></p>
+  <div class="limits" id="limitsTable"></div>
+  <h3 style="margin:22px 0 10px"><span data-l="es">Lo que este programa no hace</span><span data-l="en">What this program does not do</span></h3>
+  <div class="notdo">
+    <div><b><span data-l="es">Causalidad</span><span data-l="en">Causation</span></b><span data-l="es">Una correlación no dice qué causa qué. La app lo recuerda donde importa, pero no hace inferencia causal.</span><span data-l="en">A correlation does not say what causes what. The app reminds you where it matters, but it does no causal inference.</span></div>
+    <div><b><span data-l="es">Modelos de regresión completos</span><span data-l="en">Full regression models</span></b><span data-l="es">Aquí se mide la asociación; para modelos lineales y mixtos con sus diagnósticos está SigmaPro, de la misma suite.</span><span data-l="en">Here association is measured; for linear and mixed models with their diagnostics there is SigmaPro, in the same suite.</span></div>
+    <div><b><span data-l="es">Análisis factorial y de componentes</span><span data-l="en">Factor and component analysis</span></b><span data-l="es">La matriz de correlación es su punto de partida; el análisis mismo está en PCAPro.</span><span data-l="en">The correlation matrix is their starting point; the analysis itself is in PCAPro.</span></div>
+    <div><b><span data-l="es">Datos que no caben en memoria</span><span data-l="en">Data that do not fit in memory</span></b><span data-l="es">Hasta decenas de miles de filas y mil variables; más allá, la app avisa antes de empezar.</span><span data-l="en">Up to tens of thousands of rows and a thousand variables; beyond that, the app warns before starting.</span></div>
+  </div>
+
+  <!-- ---------- References ---------- -->
+  <h2 class="section-title"><span data-l="es">Referencias</span><span data-l="en">References</span></h2>
+  <p class="section-sub"><span data-l="es">Los artículos y libros que definen cada medida, cada prueba, cada figura y cada convenio de la app.</span><span data-l="en">The papers and books that define every measure, test, figure and convention of the app.</span></p>
+  <details class="refs-box" id="refsBox"><summary id="refsSummary"><span data-l="es">Ver todas las referencias</span><span data-l="en">See every reference</span></summary>
+    <div class="ref-tools" id="refTools"></div>
+    <ol class="ref-list" id="refList"></ol>
+  </details>
+
+  <!-- ---------- Cite ---------- -->
+  <h2 class="section-title" id="cite"><span data-l="es">Cómo citar</span><span data-l="en">How to cite</span></h2>
+  <div class="cite-box">
+    <p style="margin:0 0 8px"><span data-l="es">Si este programa te sirvió para un trabajo publicado, cítalo así:</span><span data-l="en">If this program helped with a published work, cite it as:</span></p>
+    <div class="cite-ref" id="citeApa"></div>
+    <button type="button" class="btn btn-secondary btn-sm" id="copyApa"><span data-l="es">Copiar la cita</span><span data-l="en">Copy the citation</span></button>
+    <details style="margin-top:12px"><summary><span data-l="es">BibTeX</span><span data-l="en">BibTeX</span></summary>
+      <pre class="cite-ref" id="citeBib"></pre>
+      <button type="button" class="btn btn-ghost btn-sm" id="copyBib"><span data-l="es">Copiar BibTeX</span><span data-l="en">Copy BibTeX</span></button>
+    </details>
+  </div>
+
+  <p class="footer-note"><span data-l="es">CorrelationPro · © 2026 Luis Ángel Barrera-Guzmán · Software libre bajo la licencia GPL-3.0 · Parte de la LABG Suite</span><span data-l="en">CorrelationPro · © 2026 Luis Ángel Barrera-Guzmán · Free software under the GPL-3.0 licence · Part of the LABG Suite</span></p>
+</section>
+
+<!-- ==================== BLOCKS 2–13: arrive in the next stages ==================== -->
+<div id="soonPanels"></div>
+
+</main>

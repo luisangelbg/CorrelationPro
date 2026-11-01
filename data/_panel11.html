@@ -1,0 +1,51 @@
+<!-- ==================== BLOCK 11 · CORRELATION NETWORKS ==================== -->
+<section class="step-panel" id="panel-11">
+  <div class="panel-title"><div class="pt-num">11</div><div><h2><span data-l="es">Redes de correlación</span><span data-l="en">Correlation networks</span></h2><p><span data-l="es">Cada variable un nodo, cada relación una arista: quién se conecta con quién, quién está en el centro y qué grupos se forman</span><span data-l="en">Each variable a node, each relation an edge: who connects to whom, who is at the centre and which groups form</span></p></div></div>
+
+  <div class="card" id="b11Empty">
+    <p class="hint"><span data-l="es">Primero abre unos datos en el Bloque 2 (o usa un conjunto de ejemplo).</span><span data-l="en">First open some data in Block 2 (or use an example dataset).</span></p>
+    <div class="btn-row"><button type="button" class="btn btn-secondary btn-sm" data-go="2"><span data-l="es">← Ir a Datos</span><span data-l="en">← Go to Data</span></button>
+      <button type="button" class="btn btn-ghost btn-sm" id="b11Swiss"><span data-l="es">Usar Suiza, 1888</span><span data-l="en">Use Switzerland, 1888</span></button></div>
+  </div>
+
+  <div id="b11Main" hidden>
+    <div class="card">
+      <h2><span data-l="es">Qué red</span><span data-l="en">Which network</span></h2>
+      <div class="chip-row" id="b11Vars"></div>
+      <div class="form-grid b11-opts">
+        <div class="field"><label for="b11Kind"><span data-l="es">Aristas</span><span data-l="en">Edges</span></label>
+          <select id="b11Kind"><option value="lasso" data-es="Parciales regularizadas (lazo gráfico + EBIC)" data-en="Regularized partials (graphical lasso + EBIC)">Parciales regularizadas (lazo gráfico + EBIC)</option><option value="partial" data-es="Parciales significativas" data-en="Significant partials">Parciales significativas</option><option value="marginal" data-es="Correlaciones con |r| ≥ umbral" data-en="Correlations with |r| ≥ threshold">Correlaciones con |r| ≥ umbral</option><option value="msig" data-es="Correlaciones significativas" data-en="Significant correlations">Correlaciones significativas</option></select></div>
+        <div class="field"><label for="b11Coef"><span data-l="es">Coeficiente</span><span data-l="en">Coefficient</span></label>
+          <select id="b11Coef"><option value="pearson">Pearson</option><option value="spearman">Spearman</option></select></div>
+        <div class="field" id="b11ThrField"><label for="b11Thr"><span data-l="es">Umbral |r|</span><span data-l="en">Threshold |r|</span> <b id="b11ThrV">.30</b></label><input type="range" id="b11Thr" min="0.05" max="0.9" step="0.05" value="0.3"></div>
+        <div class="field" id="b11GamField"><label for="b11Gam"><span data-l="es"><span class="nc">γ</span> del EBIC</span><span data-l="en">EBIC <span class="nc">γ</span></span></label>
+          <select id="b11Gam"><option value="0.5" data-es="0.5 (red más escasa)" data-en="0.5 (sparser network)">0.5 (red más escasa)</option><option value="0.25">0.25</option><option value="0" data-es="0 (BIC)" data-en="0 (BIC)">0 (BIC)</option></select></div>
+      </div>
+      <div class="messages" id="b11Msgs"></div>
+    </div>
+
+    <div class="card">
+      <h2><span data-l="es">La red</span><span data-l="en">The network</span></h2>
+      <div class="b11-bar" role="group" aria-label="Vista">
+        <button type="button" class="chip" data-view="force"><span data-l="es">Fuerzas</span><span data-l="en">Forces</span></button>
+        <button type="button" class="chip" data-view="circle"><span data-l="es">Círculo</span><span data-l="en">Circle</span></button>
+        <button type="button" class="chip" data-view="bundle"><span data-l="es">Cuerdas agrupadas</span><span data-l="en">Bundled chords</span></button>
+        <button type="button" class="chip" data-view="arc"><span data-l="es">Arcos</span><span data-l="en">Arcs</span></button>
+        <button type="button" class="chip" data-view="matrix"><span data-l="es">Matriz</span><span data-l="en">Matrix</span></button>
+        <button type="button" class="btn btn-secondary btn-sm" id="b11Tour"><span data-l="es">▶ Recorrido: matriz → red → cuerdas</span><span data-l="en">▶ Tour: matrix → network → chords</span></button>
+      </div>
+      <div class="pg-pane b11-pane" id="b11NetPane"><div class="pg-title" id="b11Title"></div><div id="b11Net"></div><div class="fig-legend" id="b11Leg"></div></div>
+      <div class="b11-info" id="b11Info"></div>
+      <details class="theory-note"><summary><span data-l="es">Cómo leer una red de correlación</span><span data-l="en">How to read a correlation network</span></summary>
+        <p><span data-l="es">En una red de correlaciones marginales casi todo se conecta con todo; las correlaciones parciales muestran sólo las relaciones que quedan al controlar por todas las demás variables, y el lazo gráfico (Friedman, Hastie y Tibshirani 2008) pone en cero las débiles, eligiendo cuántas con el EBIC (Foygel y Drton 2010; Epskamp y Fried 2018). La fuerza de un nodo es la suma de sus |w|; la cercanía y la intermediación usan caminos de longitud 1/|w| (Opsahl, Agneessens y Skvoretz 2010) y son las menos estables entre muestras. Las comunidades maximizan la modularidad (Newman 2006) con el método de Louvain (Blondel et al. 2008).</span><span data-l="en">In a network of marginal correlations almost everything connects to everything; partial correlations show only the relations left after controlling for all the other variables, and the graphical lasso (Friedman, Hastie and Tibshirani 2008) sets the weak ones to zero, choosing how many with the EBIC (Foygel and Drton 2010; Epskamp and Fried 2018). A node’s strength is the sum of its |w|; closeness and betweenness use paths of length 1/|w| (Opsahl, Agneessens and Skvoretz 2010) and are the least stable across samples. The communities maximize modularity (Newman 2006) with the Louvain method (Blondel et al. 2008).</span></p>
+      </details>
+    </div>
+
+    <div class="card">
+      <h2><span data-l="es">Centralidades y comunidades</span><span data-l="en">Centralities and communities</span></h2>
+      <div id="b11CTiles"></div>
+      <div class="table-wrap" id="b11Cent"></div>
+      <div class="pg-pane b7-share" id="b11CBarPane"><div class="pg-title"><span data-l="es">Fuerza de cada nodo</span><span data-l="en">Strength of each node</span></div><div id="b11CBar"></div></div>
+    </div>
+  </div>
+</section>

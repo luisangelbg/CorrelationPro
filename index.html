@@ -1,0 +1,1296 @@
+<!DOCTYPE html>
+<!--
+  CorrelationPro — correlation analysis of every kind, in the browser.
+  Copyright (C) 2026  Luis Ángel Barrera-Guzmán
+
+  This program is free software: you can redistribute it and/or modify it under
+  the terms of the GNU General Public License as published by the Free Software
+  Foundation, either version 3 of the License, or (at your option) any later
+  version.
+
+  This program is distributed in the hope that it will be useful, but WITHOUT
+  ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS
+  FOR A PARTICULAR PURPOSE.  See the GNU General Public License for more details.
+
+  You should have received a copy of the GNU General Public License along with
+  this program, in the file LICENSE.  If not, see <https://www.gnu.org/licenses/>.
+
+  This notice covers the whole program: index.html, css/ and the files in js/.
+  This file is assembled by data/armar_index.js.
+-->
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title data-es="CorrelationPro — Análisis de correlación de todo tipo" data-en="CorrelationPro — Correlation analysis of every kind">CorrelationPro — Análisis de correlación de todo tipo</title>
+<meta name="description" content="Correlation analysis of every kind in the browser: classical, robust, nonlinear, partial, categorical and latent, agreement, structured and circular data, with tests, intervals, theory and publication figures.">
+<meta name="labg-repo" content="CorrelationPro">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%230B0909'/%3E%3Cellipse cx='16' cy='16' rx='12' ry='5.2' transform='rotate(-45 16 16)' fill='none' stroke='%23D4A848' stroke-width='2.2'/%3E%3Ccircle cx='9.5' cy='22.5' r='2.3' fill='%23E2384C'/%3E%3Ccircle cx='15' cy='16.5' r='2.3' fill='%23E2384C'/%3E%3Ccircle cx='21.5' cy='10' r='2.3' fill='%23E2384C'/%3E%3C/svg%3E">
+<link rel="stylesheet" href="css/labg-base.css">
+<link rel="stylesheet" href="css/style.css">
+<script src="js/i18n.js"></script>
+</head>
+<body class="on-home">
+
+<a class="skip-link" href="#main"><span data-l="es">Saltar al contenido</span><span data-l="en">Skip to content</span></a>
+<header class="topbar">
+  <div class="topbar-inner">
+    <div class="topbar-row">
+      <div class="brand" id="brand" data-es-title="Inicio" data-en-title="Home"><span id="brandLogo"></span><span>Correlation<span class="brand-pro">Pro</span></span>
+        <span class="brand-sub">· <span data-l="es">correlación de todo tipo, con su teoría</span><span data-l="en">correlation of every kind, with its theory</span></span></div>
+      <div class="top-tools">
+        <a class="suite-link" href="https://luisangelbg.github.io/" data-es-title="Volver al portal de la LABG Suite" data-en-title="Back to the LABG Suite portal" title="Volver al portal de la LABG Suite" aria-label="Volver al portal de la LABG Suite">
+          <svg class="labg-iso" viewBox="0 0 828 946.2" aria-hidden="true" focusable="false"><defs><linearGradient id="labgIsoHo" gradientUnits="userSpaceOnUse" x1="0" y1="473.1" x2="828" y2="413.1"><stop offset="0" stop-color="#BF8B3C"/><stop offset=".3" stop-color="#C99C49"/><stop offset=".55" stop-color="#D9B05C"/><stop offset=".78" stop-color="#E6C470"/><stop offset="1" stop-color="#F6D985"/></linearGradient><linearGradient id="labgIsoHb"><stop offset="0" stop-color="#FFF8E6" stop-opacity="0"/><stop offset=".5" stop-color="#FFF8E6" stop-opacity=".95"/><stop offset="1" stop-color="#FFF8E6" stop-opacity="0"/></linearGradient><clipPath id="labgIsoHc"><path clip-rule="evenodd" d="M440.8 246.5L421.7 257.7L404.8 247.9L424 236.8ZM318.9 256.4L301.7 266.3L285.7 257.1L302.9 247.2ZM522.2 260.9L438.6 309.1L420.1 298.5L503.7 250.2ZM392.5 269.9L373.4 280.9L356.1 271L375.3 260ZM277 277.3L235 301.6L219.9 292.9L261.9 268.6ZM576.1 291.8L398.2 394.4L380.4 384.1L558.3 281.5ZM348.1 295.6L287.5 330.5L270.1 320.5L330.6 285.6ZM404.3 419.1L577.9 318.9L579.2 318.1C579.6 318 580.7 317.9 581.5 317.6C582.2 317.4 583 317 583.8 316.6C584.5 316.2 585.3 315.8 586 315.5C586.8 315.1 587.6 314.8 588.3 314.4C589 314.1 589.8 313.8 590.6 313.5C591.4 313.2 592.2 313 593 312.9C593.8 312.6 594.6 312.5 595.5 312.4C596.3 312.2 597.1 312.2 597.9 312.1C598.9 312.1 599.7 312.1 600.4 312.1C601.4 312.1 602.2 312.1 603 312.2C603.9 312.3 604.7 312.4 605.5 312.5C606.3 312.7 607.1 313 607.9 313.2C608.7 313.5 609.5 313.9 610.1 314.2C610.9 314.6 611.6 315 612.4 315.5C613.1 315.8 613.8 316.3 614.5 316.7C615.2 317.3 615.8 317.8 616.5 318.3C617.1 318.8 617.8 319.4 618.3 319.9C618.9 320.6 619.5 321.2 620.1 321.9C620.6 322.4 621.1 323.1 621.7 323.8C622.1 324.5 622.6 325.2 623 325.8C623.5 326.5 623.9 327.2 624.4 328C624.8 328.7 625.2 329.4 625.6 330.2C626 330.9 626.4 331.7 626.8 332.3C627.1 333.1 627.5 333.8 627.9 334.6C628.3 335.4 628.6 336.1 628.9 336.9C629.3 337.7 629.6 338.4 630 339.2C630.3 340 630.7 340.7 630.9 341.5C631.2 342.3 631.6 343.1 631.9 343.9C632.1 344.5 632.5 345.3 632.7 346.1C632.9 346.9 633.3 347.7 633.5 348.5C633.7 349.3 634 350.1 634.3 350.9C634.5 351.7 634.8 352.5 635.1 353.3C635.3 354.1 635.7 354.9 635.9 355.7C636.1 356.5 636.5 357.3 636.7 358.1C636.9 358.9 637.2 359.7 637.3 360.5C637.5 361.3 637.7 362.1 638 362.9C638.1 363.8 638.3 364.6 638.5 365.4C638.6 366.2 638.9 367 639.1 367.8C639.2 368.6 639.4 369.4 639.7 370.3C639.9 371.1 640 371.9 640.2 372.7C640.3 373.5 640.5 374.3 640.7 375.2C640.8 376 640.9 376.8 641 377.6C641.1 378.5 641.3 379.3 641.4 380.1C641.5 381 641.5 381.8 641.6 382.6C641.7 383.4 641.7 384.3 641.8 385.1C641.9 385.9 641.9 386.8 642.1 387.6C642.1 388.4 642.2 389.3 642.3 390.1C642.3 390.9 642.4 391.9 642.4 392.7C642.5 393.5 642.6 394.2 642.6 395.2C642.7 396 642.7 396.8 642.9 397.7C642.9 398.5 642.9 399.3 642.9 400.2C642.9 401 642.9 401.8 642.9 402.7C642.9 403.5 642.9 404.3 642.7 405.2C642.6 406 642.6 406.8 642.5 407.7C642.4 408.5 642.3 409.3 642.2 410.1C642.1 411 641.9 411.8 641.7 412.6C641.6 413.4 641.5 414.2 641.3 415.1C641.1 415.9 640.9 416.7 640.8 417.5C640.6 418.3 640.3 419.1 640.2 420C640 420.8 639.8 421.6 639.6 422.4C639.4 423.2 639.2 424 638.9 424.8C638.6 425.6 638.4 426.4 638.2 427.2C637.8 428 637.6 428.8 637.3 429.6C637 430.4 636.8 431.2 636.6 432C636.4 432.8 636.2 433.6 636.1 434.5C636.1 435.3 636.2 436.1 636.4 436.9C636.5 437.8 636.8 438.6 637 439.3C637.4 440.1 637.8 440.9 638.2 441.6C638.6 442.2 639.1 442.9 639.6 443.7C640 444.4 640.5 445.1 640.9 445.8C641.4 446.5 641.8 447.1 642.3 447.9C642.6 448.6 643.1 449.3 643.4 450.1C643.9 450.8 644.2 451.6 644.6 452.4C644.9 453.1 645.3 453.9 645.6 454.7C645.9 455.5 646.2 456.2 646.5 456.9C646.8 457.7 647.1 458.5 647.4 459.3C647.6 460.1 647.9 460.9 648.2 461.7C648.4 462.5 648.7 463.3 648.9 464.1C649.1 464.9 649.2 465.7 649.5 466.5C649.7 467.3 649.8 468.2 650 469C650.2 469.8 650.4 470.6 650.5 471.4C650.6 472.3 650.8 473.1 651 473.9C651.1 474.7 651.3 475.5 651.4 476.4C651.5 477.2 651.7 478 651.9 478.8C652 479.6 652.1 480.5 652.2 481.3C652.3 482.1 652.4 483.1 652.5 483.9C652.7 484.7 652.7 485.4 652.8 486.4C652.8 487.2 652.9 488 652.9 488.9C652.9 489.7 653 490.5 653 491.4C653 492.2 653 493 653 493.9C653 494.7 653 495.5 653 496.4C653 497.2 653 498 653 498.9C653 499.7 653 500.5 652.9 501.4C652.9 502.2 652.9 503 652.9 503.9C652.9 504.7 652.8 505.5 652.8 506.4C652.7 507.2 652.7 508 652.5 508.9C652.5 509.7 652.4 510.5 652.3 511.4C652.3 512.2 652.2 513 652.1 513.8C652 514.7 651.9 515.5 651.7 516.3C651.6 517.1 651.5 518.1 651.3 518.9C651.2 519.6 651.1 520.4 651 521.4C650.8 522.2 650.6 523 650.5 523.8C650.4 524.7 650.3 525.5 650 526.3C649.9 527.1 649.7 527.9 649.6 528.8C649.4 529.6 649.2 530.4 649 531.2C648.9 532 648.7 532.8 648.6 533.7C648.3 534.5 648.1 535.3 648 536.1C647.8 536.9 647.5 537.7 647.3 538.5C647.2 539.3 647 540.2 646.7 541C646.4 541.8 646.2 542.6 645.9 543.4C645.7 544 645.4 544.8 645 545.6C644.8 546.4 644.5 547.2 644.1 548C643.8 548.7 643.5 549.5 643.2 550.3C642.9 551.1 642.5 551.8 642.2 552.6C641.8 553.4 641.6 554.2 641.3 554.9C640.9 555.7 640.6 556.5 640.2 557.3C639.9 558 639.6 558.8 639.2 559.5C638.8 560.2 638.4 561 638 561.7C637.6 562.4 637.2 563.2 636.7 563.9C636.4 564.6 635.9 565.4 635.4 566C635 566.7 634.5 567.4 634 568.1C633.5 568.8 633.1 569.5 632.5 570.2C632 570.7 631.5 571.4 630.9 572.1C630.4 572.7 629.9 573.3 629.3 573.9C628.7 574.6 628.2 575.2 627.6 575.7C626.9 576.3 626.3 576.9 625.6 577.4C625.1 578 624.4 578.5 623.7 579C623 579.5 622.3 580 621.7 580.4C621 581 620.3 581.4 619.6 581.9C618.9 582.3 618 582.9 617.5 583.4C617.2 583.8 617.3 584.4 617.2 584.6L403.2 708.2L380.8 695.3L380.8 575.7L220.4 483.2L218.9 482.3C218.5 482.1 217.4 481.9 216.6 481.7C215.9 481.3 215.1 480.9 214.3 480.5C213.6 480.3 212.8 479.9 212.1 479.7C211.3 479.5 210.3 479.4 209.5 479.4C208.7 479.5 207.5 479.7 207 479.9C206.7 479.9 207 479.9 207 479.9L207 596.8L175.1 578.4L175.1 319.8L203.6 303.3L404.3 419.1ZM400.8 328.5L342.4 362.2L325.6 352.6L384.1 318.8ZM381.2 446.6L381.2 536.9L206.8 436.2L206.8 345.9ZM440.3 521.4L440.3 561.1L605.9 465.6L606.9 464.9C607.2 465.3 607.7 466.4 608.3 467C608.9 467.7 609.7 468 610.4 468.5C610.9 469 611.7 469.5 612.3 470.1C612.9 470.6 613.4 471.2 614 471.9C614.5 472.6 614.9 473.3 615.4 473.9C615.8 474.7 616.2 475.4 616.5 476.2C616.9 476.9 617.2 477.7 617.5 478.5C617.9 479.3 618.1 480.1 618.3 480.9C618.7 481.7 618.9 482.5 619.1 483.3C619.4 484.1 619.6 484.9 619.8 485.7C619.9 486.5 620.2 487.3 620.3 488.1C620.4 489 620.6 489.8 620.7 490.6C620.9 491.4 621 492.3 621 493.1C621.1 493.9 621.2 494.8 621.3 495.6C621.3 496.4 621.4 497.2 621.4 498.1C621.5 498.9 621.5 499.7 621.7 500.6C621.7 501.4 621.8 502.2 621.8 503.1C621.8 503.9 621.8 504.7 621.8 505.6C621.8 506.4 621.8 507.2 621.8 508.1C621.8 508.9 621.7 509.7 621.7 510.6C621.7 511.4 621.5 512.2 621.4 513.2C621.4 513.9 621.3 514.7 621.2 515.5C621.1 516.5 621.1 517.3 621 518.1C620.9 519 620.7 519.8 620.6 520.6C620.5 521.4 620.5 522.3 620.3 523.1C620.2 523.9 620.1 524.8 619.9 525.6C619.7 526.4 619.5 527.2 619.4 528C619.1 528.8 618.8 529.6 618.6 530.4C618.2 531.2 618 532 617.7 532.8C617.3 533.4 617 534.2 616.6 535C616.3 535.8 616 536.5 615.6 537.3C615.3 538.1 614.9 538.8 614.6 539.6C614.1 540.3 613.8 541.1 613.3 541.8C612.9 542.4 612.4 543.1 612 543.8C611.5 544.5 610.9 545.2 610.4 545.8C609.8 546.4 609.2 547 608.7 547.6C608.1 548.1 607.4 548.7 606.7 549.3C606.1 549.7 605.5 550.3 604.8 550.8C604.1 551.3 603.4 552 602.8 552.4C602.2 552.6 601.1 552.8 600.8 552.8C600.4 552.8 600.6 552.6 600.6 552.6L415.5 659.3L415.5 455.6L595.9 351.5L597.6 350.6C597.8 350.8 598.6 351.8 599.3 352.3C600 352.6 600.9 352.6 601.7 352.9C602.5 353.1 603.3 353.6 604 353.9C604.7 354.3 605.4 354.8 606 355.4C606.6 355.9 607.2 356.5 607.7 357.2C608.3 357.9 608.8 358.6 609.2 359.3C609.7 359.9 610.1 360.6 610.5 361.4C610.9 362.1 611.3 362.9 611.6 363.6C612 364.4 612.3 365.2 612.6 366C612.9 366.7 613.2 367.5 613.4 368.3C613.8 369.1 614 369.9 614.4 370.7C614.6 371.4 614.8 372.2 615 373C615.2 373.8 615.4 374.8 615.5 375.6C615.7 376.4 615.8 377.1 616 377.9C616.1 378.9 616.2 379.7 616.3 380.5C616.3 381.4 616.4 382.2 616.5 383C616.5 383.8 616.6 384.7 616.6 385.5C616.8 386.3 616.8 387.2 616.9 388C616.9 388.8 616.9 389.7 616.9 390.5C616.9 391.3 616.9 392.2 616.9 393C616.8 393.8 616.8 394.7 616.8 395.5C616.6 396.3 616.5 397.2 616.5 398C616.4 398.8 616.3 399.6 616.2 400.5C616.1 401.3 615.8 402.1 615.7 402.9C615.5 403.8 615.4 404.6 615.2 405.4C614.9 406.2 614.7 407 614.5 407.8C614.2 408.6 614.1 409.4 613.8 410.2C613.6 411 613.3 411.8 613 412.6C612.8 413.4 612.4 414.2 612.1 414.9C611.7 415.7 611.3 416.5 610.9 417.2C610.5 417.8 610 418.5 609.6 419.2C609 419.9 608.5 420.6 608 421.3C607.4 421.8 606.8 422.5 606.3 423.1C605.7 423.7 605.1 424.3 604.6 424.9C604 425.5 603.4 426.2 602.8 426.7C602.3 427.3 601.6 428 601 428.4C600.6 428.9 600 429.1 599.8 429.2L440.3 521.4ZM596.1 417.6L576.9 428.8L531 402.3L550.4 391.2ZM353.9 441L293.6 475.8L276.3 465.7L336.5 431ZM498.1 481.7L478.6 492.9L423.7 461.3L443.2 450ZM374.5 483.1L343.5 501L326.6 491.3L357.6 473.4ZM603.5 540.4L584 551.7L531.7 521.5L551.2 510.2ZM272.6 534.1L272.6 633.6L255.3 623.6L255.3 524.1ZM320.8 561.3L320.8 596.5L303.7 586.6L303.7 551.5ZM363.7 585.2L363.7 684.2L348.4 675.4L348.4 576.4ZM320.8 609.7L320.8 629.8L302.9 619.4L302.9 599.3ZM320.8 642.9L320.8 661.4L303.3 651.2L303.3 632.9Z"/></clipPath></defs><path fill="url(#labgIsoHo)" fill-rule="evenodd" d="M414 0L828 232.9L828 713.3L414 946.2L0 713.3L0 232.9ZM414 36.6L796 251.5L796 694.7L414 909.6L32 694.7L32 251.5Z"/><path fill="#000" d="M414 36.6L796 251.5L796 694.7L414 909.6L32 694.7L32 251.5Z"/><path class="iso-cubo" fill="url(#labgIsoHo)" fill-rule="evenodd" d="M440.8 246.5L421.7 257.7L404.8 247.9L424 236.8ZM318.9 256.4L301.7 266.3L285.7 257.1L302.9 247.2ZM522.2 260.9L438.6 309.1L420.1 298.5L503.7 250.2ZM392.5 269.9L373.4 280.9L356.1 271L375.3 260ZM277 277.3L235 301.6L219.9 292.9L261.9 268.6ZM576.1 291.8L398.2 394.4L380.4 384.1L558.3 281.5ZM348.1 295.6L287.5 330.5L270.1 320.5L330.6 285.6ZM404.3 419.1L577.9 318.9L579.2 318.1C579.6 318 580.7 317.9 581.5 317.6C582.2 317.4 583 317 583.8 316.6C584.5 316.2 585.3 315.8 586 315.5C586.8 315.1 587.6 314.8 588.3 314.4C589 314.1 589.8 313.8 590.6 313.5C591.4 313.2 592.2 313 593 312.9C593.8 312.6 594.6 312.5 595.5 312.4C596.3 312.2 597.1 312.2 597.9 312.1C598.9 312.1 599.7 312.1 600.4 312.1C601.4 312.1 602.2 312.1 603 312.2C603.9 312.3 604.7 312.4 605.5 312.5C606.3 312.7 607.1 313 607.9 313.2C608.7 313.5 609.5 313.9 610.1 314.2C610.9 314.6 611.6 315 612.4 315.5C613.1 315.8 613.8 316.3 614.5 316.7C615.2 317.3 615.8 317.8 616.5 318.3C617.1 318.8 617.8 319.4 618.3 319.9C618.9 320.6 619.5 321.2 620.1 321.9C620.6 322.4 621.1 323.1 621.7 323.8C622.1 324.5 622.6 325.2 623 325.8C623.5 326.5 623.9 327.2 624.4 328C624.8 328.7 625.2 329.4 625.6 330.2C626 330.9 626.4 331.7 626.8 332.3C627.1 333.1 627.5 333.8 627.9 334.6C628.3 335.4 628.6 336.1 628.9 336.9C629.3 337.7 629.6 338.4 630 339.2C630.3 340 630.7 340.7 630.9 341.5C631.2 342.3 631.6 343.1 631.9 343.9C632.1 344.5 632.5 345.3 632.7 346.1C632.9 346.9 633.3 347.7 633.5 348.5C633.7 349.3 634 350.1 634.3 350.9C634.5 351.7 634.8 352.5 635.1 353.3C635.3 354.1 635.7 354.9 635.9 355.7C636.1 356.5 636.5 357.3 636.7 358.1C636.9 358.9 637.2 359.7 637.3 360.5C637.5 361.3 637.7 362.1 638 362.9C638.1 363.8 638.3 364.6 638.5 365.4C638.6 366.2 638.9 367 639.1 367.8C639.2 368.6 639.4 369.4 639.7 370.3C639.9 371.1 640 371.9 640.2 372.7C640.3 373.5 640.5 374.3 640.7 375.2C640.8 376 640.9 376.8 641 377.6C641.1 378.5 641.3 379.3 641.4 380.1C641.5 381 641.5 381.8 641.6 382.6C641.7 383.4 641.7 384.3 641.8 385.1C641.9 385.9 641.9 386.8 642.1 387.6C642.1 388.4 642.2 389.3 642.3 390.1C642.3 390.9 642.4 391.9 642.4 392.7C642.5 393.5 642.6 394.2 642.6 395.2C642.7 396 642.7 396.8 642.9 397.7C642.9 398.5 642.9 399.3 642.9 400.2C642.9 401 642.9 401.8 642.9 402.7C642.9 403.5 642.9 404.3 642.7 405.2C642.6 406 642.6 406.8 642.5 407.7C642.4 408.5 642.3 409.3 642.2 410.1C642.1 411 641.9 411.8 641.7 412.6C641.6 413.4 641.5 414.2 641.3 415.1C641.1 415.9 640.9 416.7 640.8 417.5C640.6 418.3 640.3 419.1 640.2 420C640 420.8 639.8 421.6 639.6 422.4C639.4 423.2 639.2 424 638.9 424.8C638.6 425.6 638.4 426.4 638.2 427.2C637.8 428 637.6 428.8 637.3 429.6C637 430.4 636.8 431.2 636.6 432C636.4 432.8 636.2 433.6 636.1 434.5C636.1 435.3 636.2 436.1 636.4 436.9C636.5 437.8 636.8 438.6 637 439.3C637.4 440.1 637.8 440.9 638.2 441.6C638.6 442.2 639.1 442.9 639.6 443.7C640 444.4 640.5 445.1 640.9 445.8C641.4 446.5 641.8 447.1 642.3 447.9C642.6 448.6 643.1 449.3 643.4 450.1C643.9 450.8 644.2 451.6 644.6 452.4C644.9 453.1 645.3 453.9 645.6 454.7C645.9 455.5 646.2 456.2 646.5 456.9C646.8 457.7 647.1 458.5 647.4 459.3C647.6 460.1 647.9 460.9 648.2 461.7C648.4 462.5 648.7 463.3 648.9 464.1C649.1 464.9 649.2 465.7 649.5 466.5C649.7 467.3 649.8 468.2 650 469C650.2 469.8 650.4 470.6 650.5 471.4C650.6 472.3 650.8 473.1 651 473.9C651.1 474.7 651.3 475.5 651.4 476.4C651.5 477.2 651.7 478 651.9 478.8C652 479.6 652.1 480.5 652.2 481.3C652.3 482.1 652.4 483.1 652.5 483.9C652.7 484.7 652.7 485.4 652.8 486.4C652.8 487.2 652.9 488 652.9 488.9C652.9 489.7 653 490.5 653 491.4C653 492.2 653 493 653 493.9C653 494.7 653 495.5 653 496.4C653 497.2 653 498 653 498.9C653 499.7 653 500.5 652.9 501.4C652.9 502.2 652.9 503 652.9 503.9C652.9 504.7 652.8 505.5 652.8 506.4C652.7 507.2 652.7 508 652.5 508.9C652.5 509.7 652.4 510.5 652.3 511.4C652.3 512.2 652.2 513 652.1 513.8C652 514.7 651.9 515.5 651.7 516.3C651.6 517.1 651.5 518.1 651.3 518.9C651.2 519.6 651.1 520.4 651 521.4C650.8 522.2 650.6 523 650.5 523.8C650.4 524.7 650.3 525.5 650 526.3C649.9 527.1 649.7 527.9 649.6 528.8C649.4 529.6 649.2 530.4 649 531.2C648.9 532 648.7 532.8 648.6 533.7C648.3 534.5 648.1 535.3 648 536.1C647.8 536.9 647.5 537.7 647.3 538.5C647.2 539.3 647 540.2 646.7 541C646.4 541.8 646.2 542.6 645.9 543.4C645.7 544 645.4 544.8 645 545.6C644.8 546.4 644.5 547.2 644.1 548C643.8 548.7 643.5 549.5 643.2 550.3C642.9 551.1 642.5 551.8 642.2 552.6C641.8 553.4 641.6 554.2 641.3 554.9C640.9 555.7 640.6 556.5 640.2 557.3C639.9 558 639.6 558.8 639.2 559.5C638.8 560.2 638.4 561 638 561.7C637.6 562.4 637.2 563.2 636.7 563.9C636.4 564.6 635.9 565.4 635.4 566C635 566.7 634.5 567.4 634 568.1C633.5 568.8 633.1 569.5 632.5 570.2C632 570.7 631.5 571.4 630.9 572.1C630.4 572.7 629.9 573.3 629.3 573.9C628.7 574.6 628.2 575.2 627.6 575.7C626.9 576.3 626.3 576.9 625.6 577.4C625.1 578 624.4 578.5 623.7 579C623 579.5 622.3 580 621.7 580.4C621 581 620.3 581.4 619.6 581.9C618.9 582.3 618 582.9 617.5 583.4C617.2 583.8 617.3 584.4 617.2 584.6L403.2 708.2L380.8 695.3L380.8 575.7L220.4 483.2L218.9 482.3C218.5 482.1 217.4 481.9 216.6 481.7C215.9 481.3 215.1 480.9 214.3 480.5C213.6 480.3 212.8 479.9 212.1 479.7C211.3 479.5 210.3 479.4 209.5 479.4C208.7 479.5 207.5 479.7 207 479.9C206.7 479.9 207 479.9 207 479.9L207 596.8L175.1 578.4L175.1 319.8L203.6 303.3L404.3 419.1ZM400.8 328.5L342.4 362.2L325.6 352.6L384.1 318.8ZM381.2 446.6L381.2 536.9L206.8 436.2L206.8 345.9ZM440.3 521.4L440.3 561.1L605.9 465.6L606.9 464.9C607.2 465.3 607.7 466.4 608.3 467C608.9 467.7 609.7 468 610.4 468.5C610.9 469 611.7 469.5 612.3 470.1C612.9 470.6 613.4 471.2 614 471.9C614.5 472.6 614.9 473.3 615.4 473.9C615.8 474.7 616.2 475.4 616.5 476.2C616.9 476.9 617.2 477.7 617.5 478.5C617.9 479.3 618.1 480.1 618.3 480.9C618.7 481.7 618.9 482.5 619.1 483.3C619.4 484.1 619.6 484.9 619.8 485.7C619.9 486.5 620.2 487.3 620.3 488.1C620.4 489 620.6 489.8 620.7 490.6C620.9 491.4 621 492.3 621 493.1C621.1 493.9 621.2 494.8 621.3 495.6C621.3 496.4 621.4 497.2 621.4 498.1C621.5 498.9 621.5 499.7 621.7 500.6C621.7 501.4 621.8 502.2 621.8 503.1C621.8 503.9 621.8 504.7 621.8 505.6C621.8 506.4 621.8 507.2 621.8 508.1C621.8 508.9 621.7 509.7 621.7 510.6C621.7 511.4 621.5 512.2 621.4 513.2C621.4 513.9 621.3 514.7 621.2 515.5C621.1 516.5 621.1 517.3 621 518.1C620.9 519 620.7 519.8 620.6 520.6C620.5 521.4 620.5 522.3 620.3 523.1C620.2 523.9 620.1 524.8 619.9 525.6C619.7 526.4 619.5 527.2 619.4 528C619.1 528.8 618.8 529.6 618.6 530.4C618.2 531.2 618 532 617.7 532.8C617.3 533.4 617 534.2 616.6 535C616.3 535.8 616 536.5 615.6 537.3C615.3 538.1 614.9 538.8 614.6 539.6C614.1 540.3 613.8 541.1 613.3 541.8C612.9 542.4 612.4 543.1 612 543.8C611.5 544.5 610.9 545.2 610.4 545.8C609.8 546.4 609.2 547 608.7 547.6C608.1 548.1 607.4 548.7 606.7 549.3C606.1 549.7 605.5 550.3 604.8 550.8C604.1 551.3 603.4 552 602.8 552.4C602.2 552.6 601.1 552.8 600.8 552.8C600.4 552.8 600.6 552.6 600.6 552.6L415.5 659.3L415.5 455.6L595.9 351.5L597.6 350.6C597.8 350.8 598.6 351.8 599.3 352.3C600 352.6 600.9 352.6 601.7 352.9C602.5 353.1 603.3 353.6 604 353.9C604.7 354.3 605.4 354.8 606 355.4C606.6 355.9 607.2 356.5 607.7 357.2C608.3 357.9 608.8 358.6 609.2 359.3C609.7 359.9 610.1 360.6 610.5 361.4C610.9 362.1 611.3 362.9 611.6 363.6C612 364.4 612.3 365.2 612.6 366C612.9 366.7 613.2 367.5 613.4 368.3C613.8 369.1 614 369.9 614.4 370.7C614.6 371.4 614.8 372.2 615 373C615.2 373.8 615.4 374.8 615.5 375.6C615.7 376.4 615.8 377.1 616 377.9C616.1 378.9 616.2 379.7 616.3 380.5C616.3 381.4 616.4 382.2 616.5 383C616.5 383.8 616.6 384.7 616.6 385.5C616.8 386.3 616.8 387.2 616.9 388C616.9 388.8 616.9 389.7 616.9 390.5C616.9 391.3 616.9 392.2 616.9 393C616.8 393.8 616.8 394.7 616.8 395.5C616.6 396.3 616.5 397.2 616.5 398C616.4 398.8 616.3 399.6 616.2 400.5C616.1 401.3 615.8 402.1 615.7 402.9C615.5 403.8 615.4 404.6 615.2 405.4C614.9 406.2 614.7 407 614.5 407.8C614.2 408.6 614.1 409.4 613.8 410.2C613.6 411 613.3 411.8 613 412.6C612.8 413.4 612.4 414.2 612.1 414.9C611.7 415.7 611.3 416.5 610.9 417.2C610.5 417.8 610 418.5 609.6 419.2C609 419.9 608.5 420.6 608 421.3C607.4 421.8 606.8 422.5 606.3 423.1C605.7 423.7 605.1 424.3 604.6 424.9C604 425.5 603.4 426.2 602.8 426.7C602.3 427.3 601.6 428 601 428.4C600.6 428.9 600 429.1 599.8 429.2L440.3 521.4ZM596.1 417.6L576.9 428.8L531 402.3L550.4 391.2ZM353.9 441L293.6 475.8L276.3 465.7L336.5 431ZM498.1 481.7L478.6 492.9L423.7 461.3L443.2 450ZM374.5 483.1L343.5 501L326.6 491.3L357.6 473.4ZM603.5 540.4L584 551.7L531.7 521.5L551.2 510.2ZM272.6 534.1L272.6 633.6L255.3 623.6L255.3 524.1ZM320.8 561.3L320.8 596.5L303.7 586.6L303.7 551.5ZM363.7 585.2L363.7 684.2L348.4 675.4L348.4 576.4ZM320.8 609.7L320.8 629.8L302.9 619.4L302.9 599.3ZM320.8 642.9L320.8 661.4L303.3 651.2L303.3 632.9Z"/><g clip-path="url(#labgIsoHc)"><rect class="iso-brillo" x="-300" y="-40" width="220" height="1030" fill="url(#labgIsoHb)" transform="skewX(-18)"/></g></svg>
+          <span class="suite-text">LABG Suite</span>
+        </a>
+        <div class="seg lang-seg" role="group" aria-label="Idioma / Language">
+          <button type="button" data-lang="es" title="Español">ES</button><button type="button" data-lang="en" title="English">EN</button>
+        </div>
+        <button type="button" class="icon-btn theme-btn" id="themeBtn" title="Cambiar entre tema claro y oscuro" aria-label="Cambiar entre tema claro y oscuro">
+          <svg class="sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2v2.5M12 19.5V22M2 12h2.5M19.5 12H22M4.9 4.9l1.8 1.8M17.3 17.3l1.8 1.8M4.9 19.1l1.8-1.8M17.3 6.7l1.8-1.8"/></svg>
+          <svg class="moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 14.5A8.5 8.5 0 1 1 9.5 4a7 7 0 0 0 10.5 10.5z"/></svg>
+        </button>
+        <button type="button" class="icon-btn" id="helpBtn" data-es-title="Atajos de teclado (?)" data-en-title="Keyboard shortcuts (?)" title="Atajos de teclado (?)" aria-label="Atajos de teclado (?)">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M9.6 9.3a2.5 2.5 0 0 1 4.8.9c0 1.7-2.4 2.2-2.4 3.6"/><circle cx="12" cy="17" r=".6" fill="currentColor"/></svg>
+        </button>
+      </div>
+    </div>
+    <nav class="stepper" id="stepper" aria-label="Bloques"></nav>
+  </div>
+</header>
+
+<main id="main" tabindex="-1">
+
+<!-- ==================== BLOCK 1 · HOME ==================== -->
+<section class="step-panel active" id="panel-1">
+
+  <div class="hero">
+    <div class="hero-inner">
+      <div>
+        <div class="eyebrow"><span data-l="es">Análisis de correlación de todo tipo</span><span data-l="en">Correlation analysis of every kind</span></div>
+        <h1><span data-l="es">Mide <span class="rojo">cómo se mueven juntas</span> tus variables, y <span class="oro">dilo bien</span></span><span data-l="en">Measure <span class="rojo">how your variables move together</span>, and <span class="oro">say it right</span></span></h1>
+        <p class="lead"><span data-l="es">Más de <b>ochenta medidas</b> calculadas, y casi cien explicadas, en un solo lugar: de Pearson, Spearman y Kendall a las <b>robustas</b>, las de
+          <b>dependencia no lineal</b>, las <b>parciales</b>, las de <b>variables categóricas y latentes</b>, las de <b>acuerdo</b> y las de datos
+          en el <b>tiempo</b>, el <b>espacio</b> o los <b>círculos</b>. Cada resultado dice qué convenio usó, cada fórmula se explica, y las figuras
+          salen listas para publicar. Todo en tu navegador: sin instalar nada y sin que tus datos salgan de tu computadora.</span><span data-l="en">More than <b>eighty measures</b> computed, and nearly a hundred explained, in one place: from Pearson, Spearman and Kendall to the <b>robust</b> ones, those of
+          <b>nonlinear dependence</b>, the <b>partial</b> ones, those for <b>categorical and latent variables</b>, those of <b>agreement</b>
+          and those for data in <b>time</b>, <b>space</b> or on the <b>circle</b>. Every result says which convention it used, every formula is
+          explained, and the figures come out ready to publish. All in your browser: nothing to install and your data never leave your computer.</span></p>
+        <div class="hero-cta">
+          <button type="button" class="btn btn-primary btn-lg" id="startBtn"><span data-l="es">Empezar con mis datos →</span><span data-l="en">Start with my data →</span></button>
+          <button type="button" class="btn btn-secondary btn-lg" id="labsBtn"><span data-l="es">Probar los laboratorios</span><span data-l="en">Try the labs</span></button>
+          <button type="button" class="btn btn-ghost btn-lg" id="catalogBtn"><span data-l="es">Ver las medidas</span><span data-l="en">See the measures</span></button>
+          <button type="button" class="btn btn-ghost btn-lg" id="citeBtn"><span data-l="es">Cómo citar</span><span data-l="en">How to cite</span></button>
+        </div>
+        <div class="badge-row">
+          <span class="badge ok"><span data-l="es">Funciona completo en tu navegador</span><span data-l="en">Runs entirely in your browser</span></span>
+          <span class="badge ok"><span data-l="es">Validado contra implementaciones independientes</span><span data-l="en">Validated against independent implementations</span></span>
+          <span class="badge ok"><span data-l="es">Paletas propias seguras para el daltonismo</span><span data-l="en">Own colour-blind-safe palettes</span></span>
+          <span class="badge ok"><span data-l="es">Español e inglés</span><span data-l="en">Spanish and English</span></span>
+        </div>
+      </div>
+      <div class="hero-art" id="heroArt" role="img" data-es-title="La paradoja de Simpson en los lirios de Anderson: la correlación de todas las flores es negativa y la de cada especie, positiva" data-en-title="Simpson's paradox in Anderson's irises: the correlation of all the flowers is negative and that of each species, positive" aria-label="La paradoja de Simpson en los lirios de Anderson: la correlación de todas las flores es negativa y la de cada especie, positiva"></div>
+    </div>
+  </div>
+
+  <div class="messages" id="homeMessages"></div>
+
+  <h2 class="section-title"><span data-l="es">Cómo funciona</span><span data-l="en">How it works</span></h2>
+  <p class="section-sub"><span data-l="es">La ruta es la de un análisis de correlación bien hecho, en el orden en que se hace. Cada bloque explica la
+    idea, revisa si tus datos la sostienen y dice qué conviene hacer después.</span><span data-l="en">The route is that of a correlation analysis done right, in the order it is done. Each block explains
+    the idea, checks whether your data can support it and says what to do next.</span></p>
+  <div class="workflow" id="workflow"></div>
+
+  <!-- ---------- Interactive labs ---------- -->
+  <h2 class="section-title" id="labs"><span data-l="es">Pruébalo: seis laboratorios que calculan de verdad</span><span data-l="en">Try it: six labs that really compute</span></h2>
+  <p class="section-sub"><span data-l="es">Nada de esto es una animación grabada: cada movimiento recalcula, con el mismo motor que la app usará con tus
+    datos, cada coeficiente y su valor p.</span><span data-l="en">None of this is a recorded animation: every move recomputes, with the same engine the app will use on your
+    data, every coefficient and its p-value.</span></p>
+  <div class="playground">
+    <div class="lab-tabs" role="tablist" id="labTabs" data-es-title="Laboratorios" data-en-title="Labs" aria-label="Laboratorios"></div>
+    <div id="labHost"></div>
+  </div>
+
+  <!-- ---------- The thirteen blocks ---------- -->
+  <h2 class="section-title"><span data-l="es">Los trece bloques</span><span data-l="en">The thirteen blocks</span></h2>
+  <p class="section-sub"><span data-l="es">Un bloque es un paso del análisis y un capítulo del manual: se recorren en orden, y cada uno dice si conviene volver a uno anterior.</span><span data-l="en">A block is a step of the analysis and a chapter of the manual: they are walked in order, and each one says when it is worth going back to an earlier one.</span></p>
+  <div class="feature-grid" id="blockGrid" data-lnav-skip></div>
+
+  <!-- ---------- Kinds of data ---------- -->
+  <h2 class="section-title"><span data-l="es">Qué medida para qué datos</span><span data-l="en">Which measure for which data</span></h2>
+  <p class="section-sub"><span data-l="es">El tipo de las dos variables decide qué coeficientes tienen sentido. El asistente del Bloque 2 lo propone
+    solo; aquí está el mapa completo.</span><span data-l="en">The kind of the two variables decides which coefficients make sense. The assistant of Block 2 proposes it
+    on its own; here is the whole map.</span></p>
+  <div class="material-strip" id="typeStrip"></div>
+
+  <!-- ---------- Glyphs ---------- -->
+  <h2 class="section-title" id="glyphs"><span data-l="es">Nueve formas de dibujar una correlación</span><span data-l="en">Nine ways to draw a correlation</span></h2>
+  <p class="section-sub"><span data-l="es">En una matriz, cada celda es un glifo. Todos llevan el signo también en su forma, no sólo en el color:
+    con una paleta divergente, +r y −r se imprimen con el mismo gris. La <b>media luna</b> es propia de esta app: un disco de tamaño fijo cuya parte
+    iluminada es exactamente |r|, creciente si r &gt; 0 y menguante si r &lt; 0. Mueve el control para ver los nueve con el mismo r.</span><span data-l="en">In a matrix, each cell is a glyph. All of them carry the sign in their shape too, not only in the colour:
+    with a divergent palette, +r and −r print as the same grey. The <b>moon</b> is this app's own: a disk of fixed size whose lit part is exactly
+    |r|, waxing if r &gt; 0 and waning if r &lt; 0. Move the control to see all nine with the same r.</span></p>
+  <div class="pg-controls">
+    <label class="inline-label" for="glyphR">r = <b id="glyphRv">.60</b></label>
+    <input type="range" id="glyphR" min="-1" max="1" step="0.01" value="0.6" style="width:280px">
+    <button type="button" class="btn btn-secondary btn-sm" id="glyphMorph"><span data-l="es">Ver la transformación</span><span data-l="en">See the morph</span></button>
+  </div>
+  <div class="glyph-strip" id="glyphStrip"></div>
+
+  <!-- ---------- Palettes ---------- -->
+  <h2 class="section-title" id="palettes"><span data-l="es">Paletas propias, probadas</span><span data-l="en">Own palettes, tested</span></h2>
+  <p class="section-sub"><span data-l="es">Diecinueve paletas diseñadas para esta app en un espacio de color perceptual (pasos iguales de r se ven como
+    pasos iguales de color), con nombres de plantas, lugares y artesanías de México. Cada una pasa cinco controles: que todo su recorrido quepa en la
+    pantalla, que sus pasos sean uniformes, que el signo se distinga con los tres tipos de daltonismo, que +r y −r tengan el mismo gris y que sus extremos
+    contrasten con el fondo. Elige una: se usará en toda la app.</span><span data-l="en">Nineteen palettes designed for this app in a perceptual colour space (equal steps of r look like equal steps of
+    colour), named after plants, places and crafts of Mexico. Each one passes five checks: its whole ramp fits the screen, its steps are uniform, the
+    sign is told apart with the three kinds of colour blindness, +r and −r have the same grey and its ends contrast with the background. Pick one: it
+    will be used throughout the app.</span></p>
+  <div class="pal-tools">
+    <label class="inline-label" for="palVision"><span data-l="es">Ver como</span><span data-l="en">See as</span>
+      <select id="palVision">
+        <option value="none" data-es="Visión habitual" data-en="Usual vision">Visión habitual</option>
+        <option value="protan" data-es="Protanopía (sin conos L)" data-en="Protanopia (no L cones)">Protanopía (sin conos L)</option>
+        <option value="deutan" data-es="Deuteranopía (sin conos M)" data-en="Deuteranopia (no M cones)">Deuteranopía (sin conos M)</option>
+        <option value="tritan" data-es="Tritanopía (sin conos S)" data-en="Tritanopia (no S cones)">Tritanopía (sin conos S)</option>
+        <option value="grey" data-es="Escala de grises" data-en="Greyscale">Escala de grises</option>
+      </select></label>
+    <label class="checkbox-label"><input type="checkbox" id="palInvert"> <span data-l="es">Invertir el signo (rojo positivo)</span><span data-l="en">Invert the sign (red positive)</span></label>
+  </div>
+  <div class="pal-grid" id="palGrid"></div>
+  <div class="pal-sample pg-pane" id="palSample"></div>
+
+  <!-- ---------- Report styles ---------- -->
+  <h2 class="section-title" id="styles"><span data-l="es">Cómo se escriben los números</span><span data-l="en">How the numbers are written</span></h2>
+  <p class="section-sub"><span data-l="es">Los manuales de estilo no se ponen de acuerdo: el de psicología quita el cero inicial (r = .45), las guías
+    biomédicas lo conservan y escriben P mayúscula, y la norma mexicana de unidades exige el cero y admite la coma decimal. Elige el tuyo: la app
+    escribe así cada número, en la pantalla y en el informe.</span><span data-l="en">Style manuals do not agree: the psychology manual drops the leading zero (r = .45), the biomedical guidelines
+    keep it and write a capital P, and the Mexican standard of units requires the zero and admits the decimal comma. Pick yours: the app writes every
+    number that way, on screen and in the report.</span></p>
+  <div class="style-cards" id="styleCards"></div>
+
+  <!-- ---------- Catalogue ---------- -->
+  <h2 class="section-title" id="catalog"><span data-l="es">Las medidas y de dónde vienen</span><span data-l="en">The measures and where they come from</span></h2>
+  <p class="section-sub"><span data-l="es">Cada ficha trae su fórmula, qué mide, su prueba, su intervalo, sus trampas y el artículo que la define. El
+    informe del Bloque 13 cita sólo las que hayas usado.</span><span data-l="en">Each card has its formula, what it measures, its test, its interval, its pitfalls and the paper that defines it.
+    The report of Block 13 cites only those you used.</span></p>
+  <input type="search" class="method-search" id="methodSearch" data-es-ph="Buscar una medida (p. ej. Kendall, cópula, acuerdo)" data-en-ph="Search a measure (e.g. Kendall, copula, agreement)" placeholder="Buscar una medida (p. ej. Kendall, cópula, acuerdo)" aria-label="Buscar una medida">
+  <div class="method-filter" id="methodFilter"></div>
+  <div class="method-gallery" id="methodGallery"></div>
+  <p class="method-count" id="methodCount"></p>
+  <dialog class="mdlg" id="methodDialog" aria-labelledby="mdlgTitle"></dialog>
+
+  <!-- ---------- Theory ---------- -->
+  <h2 class="section-title" id="theory"><span data-l="es">La teoría, en lenguaje llano</span><span data-l="en">The theory, in plain words</span></h2>
+  <p class="section-sub"><span data-l="es">Las ideas que sostienen todo lo demás. Cada una dice en qué bloque se usa.</span><span data-l="en">The ideas that hold up everything else. Each one says in which block it is used.</span></p>
+  <div class="card theory-card" id="theoryHost"></div>
+
+  <!-- ---------- Limits ---------- -->
+  <h2 class="section-title"><span data-l="es">Qué tan grandes pueden ser tus datos</span><span data-l="en">How large your data can be</span></h2>
+  <p class="section-sub"><span data-l="es">Medido en una computadora de escritorio con el mismo motor que corre en tu navegador.</span><span data-l="en">Measured on a desktop computer with the same engine that runs in your browser.</span></p>
+  <div class="limits" id="limitsTable"></div>
+  <h3 style="margin:22px 0 10px"><span data-l="es">Lo que este programa no hace</span><span data-l="en">What this program does not do</span></h3>
+  <div class="notdo">
+    <div><b><span data-l="es">Causalidad</span><span data-l="en">Causation</span></b><span data-l="es">Una correlación no dice qué causa qué. La app lo recuerda donde importa, pero no hace inferencia causal.</span><span data-l="en">A correlation does not say what causes what. The app reminds you where it matters, but it does no causal inference.</span></div>
+    <div><b><span data-l="es">Modelos de regresión completos</span><span data-l="en">Full regression models</span></b><span data-l="es">Aquí se mide la asociación; para modelos lineales y mixtos con sus diagnósticos está SigmaPro, de la misma suite.</span><span data-l="en">Here association is measured; for linear and mixed models with their diagnostics there is SigmaPro, in the same suite.</span></div>
+    <div><b><span data-l="es">Análisis factorial y de componentes</span><span data-l="en">Factor and component analysis</span></b><span data-l="es">La matriz de correlación es su punto de partida; el análisis mismo está en PCAPro.</span><span data-l="en">The correlation matrix is their starting point; the analysis itself is in PCAPro.</span></div>
+    <div><b><span data-l="es">Datos que no caben en memoria</span><span data-l="en">Data that do not fit in memory</span></b><span data-l="es">Hasta decenas de miles de filas y mil variables; más allá, la app avisa antes de empezar.</span><span data-l="en">Up to tens of thousands of rows and a thousand variables; beyond that, the app warns before starting.</span></div>
+  </div>
+
+  <!-- ---------- References ---------- -->
+  <h2 class="section-title"><span data-l="es">Referencias</span><span data-l="en">References</span></h2>
+  <p class="section-sub"><span data-l="es">Los artículos y libros que definen cada medida, cada prueba, cada figura y cada convenio de la app.</span><span data-l="en">The papers and books that define every measure, test, figure and convention of the app.</span></p>
+  <details class="refs-box" id="refsBox"><summary id="refsSummary"><span data-l="es">Ver todas las referencias</span><span data-l="en">See every reference</span></summary>
+    <div class="ref-tools" id="refTools"></div>
+    <ol class="ref-list" id="refList"></ol>
+  </details>
+
+  <!-- ---------- Cite ---------- -->
+  <h2 class="section-title" id="cite"><span data-l="es">Cómo citar</span><span data-l="en">How to cite</span></h2>
+  <div class="cite-box">
+    <p style="margin:0 0 8px"><span data-l="es">Si este programa te sirvió para un trabajo publicado, cítalo así:</span><span data-l="en">If this program helped with a published work, cite it as:</span></p>
+    <div class="cite-ref" id="citeApa"></div>
+    <button type="button" class="btn btn-secondary btn-sm" id="copyApa"><span data-l="es">Copiar la cita</span><span data-l="en">Copy the citation</span></button>
+    <details style="margin-top:12px"><summary><span data-l="es">BibTeX</span><span data-l="en">BibTeX</span></summary>
+      <pre class="cite-ref" id="citeBib"></pre>
+      <button type="button" class="btn btn-ghost btn-sm" id="copyBib"><span data-l="es">Copiar BibTeX</span><span data-l="en">Copy BibTeX</span></button>
+    </details>
+  </div>
+
+  <p class="footer-note"><span data-l="es">CorrelationPro · © 2026 Luis Ángel Barrera-Guzmán · Software libre bajo la licencia GPL-3.0 · Parte de la LABG Suite</span><span data-l="en">CorrelationPro · © 2026 Luis Ángel Barrera-Guzmán · Free software under the GPL-3.0 licence · Part of the LABG Suite</span></p>
+</section>
+
+<!-- ==================== BLOCKS 2–13: arrive in the next stages ==================== -->
+<!-- ==================== BLOCK 2 · DATA ==================== -->
+<section class="step-panel" id="panel-2">
+  <div class="panel-title"><div class="pt-num">2</div><div><h2><span data-l="es">Datos</span><span data-l="en">Data</span></h2><p><span data-l="es">Cargar, revisar el tipo de cada columna y elegir el coeficiente</span><span data-l="en">Load, check the kind of each column and choose the coefficient</span></p></div></div>
+
+  <div class="card" id="b2Open">
+    <h2><span data-l="es">Abrir datos</span><span data-l="en">Open data</span></h2>
+    <p class="hint"><span data-l="es">Una fila por observación y una columna por variable, con los nombres en la primera fila. Tus datos no salen de tu computadora.</span><span data-l="en">One row per observation and one column per variable, with the names in the first row. Your data never leave your computer.</span></p>
+    <div class="src-grid">
+      <label class="src-tile src-drop" id="b2Drop" tabindex="0">
+        <b><span data-l="es">Un archivo</span><span data-l="en">A file</span></b>
+        <small><span data-l="es">CSV, texto con tabuladores o punto y coma, libros .xlsx y .ods. Arrástralo aquí o haz clic.</span><span data-l="en">CSV, tab- or semicolon-delimited text, .xlsx and .ods workbooks. Drag it here or click.</span></small>
+        <input type="file" id="b2File" accept=".csv,.tsv,.txt,.xlsx,.xlsm,.ods,.dat" hidden>
+      </label>
+      <button type="button" class="src-tile" id="b2PasteBtn"><b><span data-l="es">Pegar</span><span data-l="en">Paste</span></b>
+        <small><span data-l="es">Copia las celdas en tu hoja de cálculo y pégalas aquí.</span><span data-l="en">Copy the cells in your spreadsheet and paste them here.</span></small></button>
+      <button type="button" class="src-tile" id="b2ExamplesBtn"><b><span data-l="es">Un conjunto de ejemplo</span><span data-l="en">An example dataset</span></b>
+        <small><span data-l="es">Nueve conjuntos clásicos de dominio público, de 1876 a 1962.</span><span data-l="en">Nine classic public-domain datasets, from 1876 to 1962.</span></small></button>
+    </div>
+    <details class="b2-opts"><summary><span data-l="es">Opciones de lectura</span><span data-l="en">Reading options</span></summary>
+      <div class="form-grid">
+        <div class="field"><label for="b2Delim"><span data-l="es">Separador</span><span data-l="en">Delimiter</span></label>
+          <select id="b2Delim"><option value="" data-es="Detectar" data-en="Detect">Detectar</option><option value="," data-es="Coma (,)" data-en="Comma (,)">Coma (,)</option><option value=";" data-es="Punto y coma (;)" data-en="Semicolon (;)">Punto y coma (;)</option><option value="&#9;" data-es="Tabulador" data-en="Tab">Tabulador</option><option value="|" data-es="Barra (|)" data-en="Bar (|)">Barra (|)</option></select></div>
+        <div class="field"><label for="b2Dec"><span data-l="es">Decimal</span><span data-l="en">Decimal mark</span></label>
+          <select id="b2Dec"><option value="" data-es="Detectar" data-en="Detect">Detectar</option><option value="." data-es="Punto (1.5)" data-en="Point (1.5)">Punto (1.5)</option><option value="," data-es="Coma (1,5)" data-en="Comma (1,5)">Coma (1,5)</option></select></div>
+        <div class="field"><label for="b2Miss"><span data-l="es">Otros códigos de faltante</span><span data-l="en">Other missing codes</span></label>
+          <input type="text" id="b2Miss" data-es-ph="p. ej. -999, s/i" data-en-ph="e.g. -999, n/i" placeholder="p. ej. -999, s/i"></div>
+        <label class="checkbox-label"><input type="checkbox" id="b2Header" checked> <span data-l="es">La primera fila trae los nombres</span><span data-l="en">The first row has the names</span></label>
+      </div>
+    </details>
+    <div class="paste-box" id="b2PasteBox" hidden>
+      <label for="b2PasteText" class="field-label"><span data-l="es">Pega aquí tus celdas</span><span data-l="en">Paste your cells here</span></label>
+      <textarea id="b2PasteText" rows="8" spellcheck="false"></textarea>
+      <div class="btn-row"><button type="button" class="btn btn-primary btn-sm" id="b2PasteGo"><span data-l="es">Leer lo pegado</span><span data-l="en">Read what was pasted</span></button>
+        <button type="button" class="btn btn-ghost btn-sm" id="b2PasteCancel"><span data-l="es">Cancelar</span><span data-l="en">Cancel</span></button></div>
+    </div>
+    <div class="sheet-pick" id="b2SheetPick" hidden></div>
+    <div class="messages" id="b2Msgs"></div>
+  </div>
+
+  <div class="card" id="b2Examples">
+    <h2><span data-l="es">Conjuntos de dominio público</span><span data-l="en">Public-domain datasets</span></h2>
+    <p class="hint"><span data-l="es">Datos reales, publicados hace mucho o por gobiernos, con su fuente. Cada uno sirve para algo distinto.</span><span data-l="en">Real data, published long ago or by governments, with their source. Each one is good for something different.</span></p>
+    <div class="ex-grid" id="b2ExGrid"></div>
+  </div>
+
+  <div id="b2Loaded" hidden>
+    <div class="card">
+      <h2><span data-l="es">Tus datos</span><span data-l="en">Your data</span></h2>
+      <div id="b2Tiles"></div>
+      <div class="data-grid-wrap" id="b2Grid"></div>
+      <p class="hint" id="b2GridNote"></p>
+    </div>
+
+    <div class="card">
+      <h2><span data-l="es">Tipo y papel de cada columna</span><span data-l="en">Kind and role of each column</span></h2>
+      <p class="hint"><span data-l="es">Cada tipo se dedujo de los datos y de los nombres, y dice por qué. Cámbialo si no es así: el tipo decide qué coeficientes tienen sentido y el papel, cómo se usa la columna.</span><span data-l="en">Each kind was deduced from the data and the names, and says why. Change it if it is not right: the kind decides which coefficients make sense and the role, how the column is used.</span></p>
+      <div class="types-wrap" id="b2Types"></div>
+      <div class="btn-row"><button type="button" class="btn btn-ghost btn-sm" id="b2Restore"><span data-l="es">Volver a lo deducido</span><span data-l="en">Back to what was deduced</span></button></div>
+    </div>
+
+    <div class="card">
+      <h2><span data-l="es">Datos faltantes</span><span data-l="en">Missing data</span></h2>
+      <div id="b2MissTiles"></div>
+      <div class="miss-grid"><div id="b2MissBars"></div><div id="b2MissPatterns"></div></div>
+      <div class="form-grid">
+        <div class="field"><label for="b2Mode"><span data-l="es">Para cada par de variables, usar</span><span data-l="en">For each pair of variables, use</span></label>
+          <select id="b2Mode"><option value="pairwise" data-es="Las filas completas de ese par (por pares)" data-en="The rows complete for that pair (pairwise)">Las filas completas de ese par (por pares)</option><option value="listwise" data-es="Sólo las filas completas en todas (por listas)" data-en="Only the rows complete in every column (listwise)">Sólo las filas completas en todas (por listas)</option></select></div>
+      </div>
+      <p class="hint" id="b2ModeNote"></p>
+      <div class="messages" id="b2MissMsgs"></div>
+    </div>
+
+    <div class="card">
+      <h2><span data-l="es">Transformar</span><span data-l="en">Transform</span></h2>
+      <p class="hint"><span data-l="es">Cada transformación crea una columna nueva y deja la original como estaba.</span><span data-l="en">Each transformation creates a new column and leaves the original as it was.</span></p>
+      <div class="form-grid">
+        <div class="field"><label for="b2TrCol"><span data-l="es">Columna</span><span data-l="en">Column</span></label><select id="b2TrCol"></select></div>
+        <div class="field"><label for="b2TrOp"><span data-l="es">Transformación</span><span data-l="en">Transformation</span></label><select id="b2TrOp"></select></div>
+        <div class="field"><span class="field-spacer">&nbsp;</span><button type="button" class="btn btn-primary btn-sm" id="b2TrGo"><span data-l="es">Crear la columna</span><span data-l="en">Create the column</span></button></div>
+      </div>
+      <div class="messages" id="b2TrMsgs"></div>
+      <div id="b2TrList"></div>
+    </div>
+
+    <div class="card" id="b2Assist">
+      <h2><span data-l="es">¿Qué correlación uso?</span><span data-l="en">Which correlation should I use?</span></h2>
+      <p class="hint"><span data-l="es">Elige dos columnas: el asistente mira su tipo y, si son continuas, la forma de su nube (atípicos, curvatura, empates, si sube y baja), y propone las medidas en orden, con la razón de cada una.</span><span data-l="en">Pick two columns: the assistant looks at their kind and, if they are continuous, the shape of their cloud (outliers, curvature, ties, whether it rises and falls), and proposes the measures in order, with the reason for each.</span></p>
+      <div class="form-grid">
+        <div class="field"><label for="b2AsX">X</label><select id="b2AsX"></select></div>
+        <div class="field"><label for="b2AsY">Y</label><select id="b2AsY"></select></div>
+      </div>
+      <div class="assist-grid"><div id="b2AsPlot" class="pg-pane"></div><div><div id="b2AsLook"></div><div id="b2AsRecs"></div></div></div>
+    </div>
+
+    <div class="card">
+      <h2><span data-l="es">Guardar</span><span data-l="en">Save</span></h2>
+      <p class="hint"><span data-l="es">Los datos con las columnas que creaste, en texto separado por comas (UTF-8).</span><span data-l="en">The data with the columns you created, as comma-separated text (UTF-8).</span></p>
+      <div class="btn-row"><button type="button" class="btn btn-secondary btn-sm" id="b2Csv"><span data-l="es">Descargar CSV</span><span data-l="en">Download CSV</span></button></div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== BLOCK 3 · EXPLORATION AND ASSUMPTIONS ==================== -->
+<section class="step-panel" id="panel-3">
+  <div class="panel-title"><div class="pt-num">3</div><div><h2><span data-l="es">Exploración y supuestos</span><span data-l="en">Exploration and assumptions</span></h2><p><span data-l="es">Mirar antes de medir: la forma de cada variable y de cada par</span><span data-l="en">Look before you measure: the shape of each variable and of each pair</span></p></div></div>
+
+  <div class="card" id="b3Empty">
+    <p class="hint"><span data-l="es">Primero abre unos datos en el Bloque 2 (o usa un conjunto de ejemplo).</span><span data-l="en">First open some data in Block 2 (or use an example dataset).</span></p>
+    <div class="btn-row"><button type="button" class="btn btn-secondary btn-sm" data-go="2"><span data-l="es">← Ir a Datos</span><span data-l="en">← Go to Data</span></button>
+      <button type="button" class="btn btn-ghost btn-sm" id="b3Iris"><span data-l="es">Usar los lirios de Anderson</span><span data-l="en">Use Anderson’s irises</span></button></div>
+  </div>
+
+  <div id="b3Main" hidden>
+    <div class="card">
+      <h2><span data-l="es">Qué explorar</span><span data-l="en">What to explore</span></h2>
+      <p class="hint"><span data-l="es">Las variables numéricas (continuas y ordinales) con papel «variable». Elige hasta diez; un grupo colorea los puntos y muestra la r dentro de cada grupo.</span><span data-l="en">The numeric variables (continuous and ordinal) with the role «variable». Pick up to ten; a group colours the points and shows r within each group.</span></p>
+      <div class="chip-row" id="b3Vars" role="group" aria-label="Variables"></div>
+      <div class="form-grid">
+        <div class="field"><label for="b3Group"><span data-l="es">Colorear por grupo</span><span data-l="en">Colour by group</span></label><select id="b3Group"></select></div>
+        <div class="field"><label for="b3Smooth"><span data-l="es">Línea en cada nube</span><span data-l="en">Line in each cloud</span></label>
+          <select id="b3Smooth"><option value="lowess" data-es="Suavizado LOWESS" data-en="LOWESS smoother">Suavizado LOWESS</option><option value="ols" data-es="Recta de mínimos cuadrados" data-en="Least-squares line">Recta de mínimos cuadrados</option><option value="none" data-es="Ninguna" data-en="None">Ninguna</option></select></div>
+      </div>
+      <div class="messages" id="b3Msgs"></div>
+    </div>
+
+    <div class="card">
+      <h2><span data-l="es">Matriz de dispersión</span><span data-l="en">Scatterplot matrix</span></h2>
+      <p class="hint"><span data-l="es">Abajo, cada nube (la variable de la fila en el eje vertical); en la diagonal, la distribución; arriba, r con sus estrellas (* p &lt; .05, ** &lt; .01, *** &lt; .001) y ρ debajo. Haz clic en una celda para estudiar ese par.</span><span data-l="en">Below, each cloud (the row variable on the vertical axis); on the diagonal, the distribution; above, r with its stars (* p &lt; .05, ** &lt; .01, *** &lt; .001) and ρ underneath. Click a cell to study that pair.</span></p>
+      <div class="pg-pane splom-pane" id="b3SplomPane"><div class="pg-title"><span data-l="es">Matriz de dispersión</span><span data-l="en">Scatterplot matrix</span></div><div class="splom-scroll" id="b3Splom"></div><div class="fig-legend" id="b3SplomLegend"></div></div>
+      <p class="hint" id="b3SplomNote"></p>
+    </div>
+
+    <div class="card">
+      <h2><span data-l="es">Cada variable</span><span data-l="en">Each variable</span></h2>
+      <p class="hint"><span data-l="es">La r de Pearson describe una relación sin pedir normalidad; lo que la pide es su prueba clásica y su intervalo de Fisher (la normalidad conjunta de las dos). Con muestras grandes las pruebas rechazan desviaciones sin importancia: manda la gráfica Q–Q.</span><span data-l="en">Pearson’s r describes a relation without asking for normality; what asks for it is its classical test and its Fisher interval (the joint normality of the two). With large samples the tests reject unimportant departures: the Q–Q plot rules.</span></p>
+      <div class="table-wrap" id="b3UniTable"></div>
+      <div class="two-figs">
+        <div class="pg-pane" id="b3HistPane"><div class="pg-title" id="b3HistTitle"></div><div id="b3Hist"></div></div>
+        <div class="pg-pane" id="b3QQPane"><div class="pg-title" id="b3QQTitle"></div><div id="b3QQ"></div></div>
+      </div>
+      <details class="theory-note"><summary><span data-l="es">Las pruebas, en breve</span><span data-l="en">The tests, briefly</span></summary>
+        <p><span data-l="es"><b>Shapiro–Wilk</b> (1965) compara los datos ordenados con lo que se esperaría de una normal; W cerca de 1 es normal. Su valor p sigue la aproximación de Royston (1995), válida de 3 a 5000 datos. <b>Anderson–Darling</b> mide la distancia entre la distribución empírica y la normal ajustada, con más peso en las colas, y su valor p es el de Stephens (D’Agostino y Stephens 1986). La <b>asimetría</b> g₁ y la <b>curtosis</b> en exceso g₂ dicen en qué se aparta: |g₁| &gt; 1 o |g₂| &gt; 2 ya importan para la prueba de r.</span><span data-l="en"><b>Shapiro–Wilk</b> (1965) compares the ordered data with what a normal would give; W near 1 is normal. Its p-value follows Royston’s approximation (1995), valid for 3 to 5,000 values. <b>Anderson–Darling</b> measures the distance between the empirical distribution and the fitted normal, weighting the tails more, with Stephens’ p-value (D’Agostino and Stephens 1986). <b>Skewness</b> g₁ and excess <b>kurtosis</b> g₂ say how it departs: |g₁| &gt; 1 or |g₂| &gt; 2 already matter for the test of r.</span></p>
+      </details>
+    </div>
+
+    <div class="card">
+      <h2><span data-l="es">Normalidad conjunta y atípicos multivariados</span><span data-l="en">Joint normality and multivariate outliers</span></h2>
+      <p class="hint"><span data-l="es">Que cada variable sea normal no basta: la normal multivariada pide además que sus combinaciones lo sean. La gráfica compara las distancias de Mahalanobis al cuadrado con los cuantiles de χ²: en una normal, los puntos siguen la diagonal.</span><span data-l="en">Each variable being normal is not enough: the multivariate normal also asks that their combinations be normal. The plot compares the squared Mahalanobis distances with the χ² quantiles: under a normal, the points follow the diagonal.</span></p>
+      <div id="b3MvTiles"></div>
+      <div class="two-figs">
+        <div class="pg-pane" id="b3ChiPane"><div class="pg-title"><span data-l="es">Distancias al cuadrado frente a <span class="nc">χ²</span></span><span data-l="en">Squared distances against <span class="nc">χ²</span></span></div><div id="b3Chi"></div></div>
+        <div id="b3MvOut"></div>
+      </div>
+      <details class="theory-note"><summary><span data-l="es">Clásica frente a robusta</span><span data-l="en">Classical against robust</span></summary>
+        <p><span data-l="es">La distancia clásica usa la media y la covarianza de todos los datos, y los atípicos las inflan hasta esconderse (el efecto de enmascaramiento). La robusta usa el estimador ortogonalizado de Gnanadesikan–Kettenring (Maronna y Zamar 2002) con escalas τ y un repesado que deja fuera lo que pasa del corte: los atípicos quedan lejos. <b>Mardia</b> (1970) prueba la asimetría y la curtosis multivariadas; <b>Henze–Zirkler</b> (1990) compara la función característica empírica con la normal y es consistente contra cualquier alternativa.</span><span data-l="en">The classical distance uses the mean and covariance of all the data, and outliers inflate them until they hide (the masking effect). The robust one uses the orthogonalized Gnanadesikan–Kettenring estimator (Maronna and Zamar 2002) with τ-scales and a reweighting that leaves out what passes the cut: outliers stay far. <b>Mardia</b> (1970) tests multivariate skewness and kurtosis; <b>Henze–Zirkler</b> (1990) compares the empirical characteristic function with the normal and is consistent against any alternative.</span></p>
+      </details>
+    </div>
+
+    <div class="card">
+      <h2><span data-l="es">Cada par: supuestos y coeficiente recomendado</span><span data-l="en">Each pair: assumptions and recommended coefficient</span></h2>
+      <p class="hint"><span data-l="es">Curvatura: el término cuadrático sobre la recta. Dispersión: Breusch–Pagan estudentizada. Influencia: lo más que cambia r al quitar un solo punto. Haz clic en una fila para ver el par.</span><span data-l="en">Curvature: the quadratic term over the line. Spread: studentized Breusch–Pagan. Influence: the most r changes when a single point is removed. Click a row to see the pair.</span></p>
+      <div class="table-wrap" id="b3PairTable"></div>
+    </div>
+
+    <div class="card" id="b3PairCard">
+      <h2><span data-l="es">El par elegido</span><span data-l="en">The chosen pair</span></h2>
+      <div class="form-grid">
+        <div class="field"><label for="b3X">X</label><select id="b3X"></select></div>
+        <div class="field"><label for="b3Y">Y</label><select id="b3Y"></select></div>
+      </div>
+      <div id="b3PairTiles"></div>
+      <div id="b3Verdict"></div>
+      <div class="two-figs">
+        <div class="pg-pane" id="b3ScPane"><div class="pg-title"><span data-l="es">Nube con elipses clásica y robusta (97.5 %)</span><span data-l="en">Cloud with classical and robust ellipses (97.5%)</span></div><div id="b3Sc"></div><div class="fig-legend" id="b3ScLegend"></div></div>
+        <div class="pg-pane" id="b3ResPane"><div class="pg-title"><span data-l="es">Residuos de la recta</span><span data-l="en">Residuals from the line</span></div><div id="b3Res"></div></div>
+      </div>
+      <div class="pg-pane" id="b3InfPane"><div class="pg-title"><span data-l="es">Influencia: cuánto cambia <span class="nc">r</span> sin cada punto</span><span data-l="en">Influence: how much <span class="nc">r</span> changes without each point</span></div><div id="b3Inf"></div></div>
+      <div class="btn-row"><button type="button" class="btn btn-primary btn-sm" id="b3ToPair"><span data-l="es">Medir este par a fondo en el Bloque 4 →</span><span data-l="en">Measure this pair in depth in Block 4 →</span></button></div>
+      <details class="theory-note"><summary><span data-l="es">Por qué cada supuesto</span><span data-l="en">Why each assumption</span></summary>
+        <p><span data-l="es"><b>Linealidad.</b> r mide sólo la parte recta de la relación; si la nube se curva pero sigue subiendo, ρ o τ la miden completa; si sube y baja, ni r ni ρ la ven (Anscombe 1973). <b>Dispersión constante.</b> Cuando la nube se abre en abanico, el error estándar de r que da la fórmula clásica es incorrecto: el valor p por permutación y el intervalo por bootstrap no dependen de ello. <b>Atípicos e influencia.</b> Un solo punto puede crear o borrar una correlación; si r cambia más de un error estándar al quitarlo, ese punto decide demasiado. <b>Grupos.</b> Juntar grupos con medias distintas puede invertir el signo de la relación (Simpson 1951).</span><span data-l="en"><b>Linearity.</b> r measures only the straight part of the relation; if the cloud curves but keeps rising, ρ or τ measure all of it; if it rises and falls, neither r nor ρ sees it (Anscombe 1973). <b>Constant spread.</b> When the cloud opens like a fan, the standard error of r given by the classical formula is wrong: the permutation p-value and the bootstrap interval do not depend on it. <b>Outliers and influence.</b> A single point can create or erase a correlation; if r changes by more than one standard error when it is removed, that point decides too much. <b>Groups.</b> Pooling groups with different means can reverse the sign of the relation (Simpson 1951).</span></p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== BLOCK 4 · ONE PAIR IN DEPTH ==================== -->
+<section class="step-panel" id="panel-4">
+  <div class="panel-title"><div class="pt-num">4</div><div><h2><span data-l="es">Un par a fondo</span><span data-l="en">One pair in depth</span></h2><p><span data-l="es">Todos los coeficientes, sus pruebas, sus intervalos y la evidencia, en palabras</span><span data-l="en">Every coefficient, its tests, its intervals and the evidence, in words</span></p></div></div>
+
+  <div class="card" id="b4Empty">
+    <p class="hint"><span data-l="es">Primero abre unos datos en el Bloque 2 (o usa un conjunto de ejemplo).</span><span data-l="en">First open some data in Block 2 (or use an example dataset).</span></p>
+    <div class="btn-row"><button type="button" class="btn btn-secondary btn-sm" data-go="2"><span data-l="es">← Ir a Datos</span><span data-l="en">← Go to Data</span></button>
+      <button type="button" class="btn btn-ghost btn-sm" id="b4Cars"><span data-l="es">Usar los autos de Ezekiel</span><span data-l="en">Use Ezekiel’s cars</span></button></div>
+  </div>
+
+  <div id="b4Main" hidden>
+    <div class="card">
+      <h2><span data-l="es">El par y la pregunta</span><span data-l="en">The pair and the question</span></h2>
+      <div class="form-grid b4-opts">
+        <div class="field"><label for="b4X">X</label><select id="b4X"></select></div>
+        <div class="field"><label for="b4Y">Y</label><select id="b4Y"></select></div>
+        <div class="field"><label for="b4Coef"><span data-l="es">Coeficiente principal</span><span data-l="en">Main coefficient</span></label><select id="b4Coef"></select></div>
+        <div class="field"><label for="b4Alt"><span data-l="es">Hipótesis alternativa</span><span data-l="en">Alternative hypothesis</span></label>
+          <select id="b4Alt"><option value="two.sided" data-es="Bilateral: ρ ≠ 0" data-en="Two-sided: ρ ≠ 0">Bilateral: ρ ≠ 0</option><option value="greater" data-es="Positiva: ρ &gt; 0" data-en="Positive: ρ &gt; 0">Positiva: ρ &gt; 0</option><option value="less" data-es="Negativa: ρ &lt; 0" data-en="Negative: ρ &lt; 0">Negativa: ρ &lt; 0</option></select></div>
+        <div class="field"><label for="b4Level"><span data-l="es">Nivel de confianza</span><span data-l="en">Confidence level</span></label>
+          <select id="b4Level"><option value="0.9">90 %</option><option value="0.95" selected>95 %</option><option value="0.99">99 %</option></select></div>
+        <div class="field"><label for="b4B"><span data-l="es">Remuestreos</span><span data-l="en">Resamples</span></label>
+          <select id="b4B"><option value="999">999</option><option value="1999" selected>1 999</option><option value="4999">4 999</option><option value="9999">9 999</option></select></div>
+        <div class="field"><label for="b4Seed"><span data-l="es">Semilla</span><span data-l="en">Seed</span></label><input type="number" id="b4Seed" value="2026" min="1" step="1"></div>
+        <div class="field"><label for="b4Scale"><span data-l="es">Escala para el tamaño</span><span data-l="en">Scale for the size</span></label>
+          <select id="b4Scale"><option value="cohen">Cohen (1988)</option><option value="evans">Evans (1996)</option><option value="gignac" data-es="Gignac y Szodorai (2016)" data-en="Gignac and Szodorai (2016)">Gignac y Szodorai (2016)</option></select></div>
+      </div>
+      <div class="messages" id="b4Msgs"></div>
+    </div>
+
+    <div class="card b4-result">
+      <h2><span data-l="es">Resultado</span><span data-l="en">Result</span></h2>
+      <div id="b4Tiles"></div>
+      <div class="b4-reading" id="b4Reading"></div>
+      <div class="b4-report"><div class="b4-report-h"><span data-l="es">Para el informe</span><span data-l="en">For the report</span> <small id="b4StyleName"></small></div><p id="b4Report"></p>
+        <div class="btn-row"><button type="button" class="btn btn-ghost btn-sm" id="b4Copy"><span data-l="es">Copiar</span><span data-l="en">Copy</span></button></div></div>
+    </div>
+
+    <div class="card">
+      <h2><span data-l="es">La nube y sus rangos</span><span data-l="en">The cloud and its ranks</span></h2>
+      <p class="hint"><span data-l="es">A la izquierda los datos con la elipse del 95 %, la recta y el LOWESS; a la derecha los mismos puntos convertidos en rangos (lo que ven ρ y τ): una relación monótona curva se vuelve recta.</span><span data-l="en">On the left the data with the 95% ellipse, the line and LOWESS; on the right the same points turned into ranks (what ρ and τ see): a curved monotonic relation becomes straight.</span></p>
+      <div class="two-figs">
+        <div class="pg-pane" id="b4ScPane"><div class="pg-title"><span data-l="es">Los datos</span><span data-l="en">The data</span></div><div id="b4Sc"></div></div>
+        <div class="pg-pane" id="b4RkPane"><div class="pg-title"><span data-l="es">Los rangos</span><span data-l="en">The ranks</span></div><div id="b4Rk"></div></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2><span data-l="es">Todos los coeficientes, lado a lado</span><span data-l="en">Every coefficient, side by side</span></h2>
+      <p class="hint"><span data-l="es">Cada uno con su prueba propia (exacta, asintótica o por permutación) y su intervalo: analítico donde existe, bootstrap percentil donde no. Las medidas de dependencia (dCor, ξ, D, τ*) van de 0 (independencia) a 1 y no tienen signo; ξ y D pueden quedar un poco por debajo de 0 cuando no hay relación.</span><span data-l="en">Each with its own test (exact, asymptotic or by permutation) and its interval: analytic where one exists, percentile bootstrap where not. The dependence measures (dCor, ξ, D, τ*) run from 0 (independence) to 1 and have no sign; ξ and D can fall slightly below 0 when there is no relation.</span></p>
+      <div class="table-wrap" id="b4Table"></div>
+      <div class="pg-pane" id="b4ForestPane"><div class="pg-title"><span data-l="es">Las estimaciones y sus intervalos</span><span data-l="en">The estimates and their intervals</span></div><div id="b4Forest"></div></div>
+    </div>
+
+    <div class="card">
+      <h2><span data-l="es">Remuestreo: bootstrap y permutación</span><span data-l="en">Resampling: bootstrap and permutation</span></h2>
+      <p class="hint" id="b4ResHint"></p>
+      <div id="b4BootTiles"></div>
+      <div class="two-figs">
+        <div class="pg-pane" id="b4BootPane"><div class="pg-title"><span data-l="es">Distribución bootstrap</span><span data-l="en">Bootstrap distribution</span></div><div id="b4Boot"></div></div>
+        <div class="pg-pane" id="b4PermPane"><div class="pg-title"><span data-l="es">Distribución sin relación (permutación)</span><span data-l="en">Distribution with no relation (permutation)</span></div><div id="b4Perm"></div></div>
+      </div>
+      <details class="theory-note"><summary><span data-l="es">Qué hace cada intervalo</span><span data-l="en">What each interval does</span></summary>
+        <p><span data-l="es">El <b>bootstrap</b> (Efron 1979) remuestrea los pares con reemplazo y recalcula el coeficiente miles de veces: la dispersión de esas réplicas imita la del coeficiente de muestra en muestra. El intervalo <b>percentil</b> toma sus cuantiles; el <b>básico</b> los refleja alrededor de la estimación; el <b>normal</b> usa su error estándar; el <b>BCa</b> (Efron 1987) corrige además el sesgo (z₀) y que la dispersión cambie con el valor (la aceleración a, de la navaja). Con datos normales el intervalo de Fisher cubre lo prometido; con datos muy asimétricos se queda corto y los intervalos bootstrap se acercan más al nivel pedido, sin llegar del todo con muestras chicas (Bishara y Hittner 2017; la simulación de la validación de este bloque lo repite). La <b>permutación</b> (Pitman 1937) baraja Y contra X: rompe cualquier relación y conserva todo lo demás, así que su valor p no supone normalidad.</span><span data-l="en">The <b>bootstrap</b> (Efron 1979) resamples the pairs with replacement and recomputes the coefficient thousands of times: the spread of those replicates imitates that of the coefficient from sample to sample. The <b>percentile</b> interval takes their quantiles; the <b>basic</b> one reflects them around the estimate; the <b>normal</b> one uses their standard error; <b>BCa</b> (Efron 1987) also corrects the bias (z₀) and a spread that changes with the value (the acceleration a, from the jackknife). With normal data Fisher’s interval covers what it promises; with very skewed data it falls short and the bootstrap intervals come closer to the requested level, without quite reaching it in small samples (Bishara and Hittner 2017; the simulation in this block’s validation repeats it). The <b>permutation</b> (Pitman 1937) shuffles Y against X: it breaks any relation and keeps everything else, so its p-value does not assume normality.</span></p>
+      </details>
+    </div>
+
+    <div class="card">
+      <h2><span data-l="es">Factor de Bayes (r de Pearson)</span><span data-l="en">Bayes factor (Pearson’s r)</span></h2>
+      <p class="hint"><span data-l="es">Cuántas veces más probables son los datos si hay correlación que si ρ = 0. La a priori sobre ρ es una beta estirada a (−1, 1); κ controla su ancho.</span><span data-l="en">How many times more probable the data are if there is a correlation than if ρ = 0. The prior on ρ is a beta stretched to (−1, 1); κ controls its width.</span></p>
+      <div class="form-grid"><div class="field"><label for="b4Kappa"><span data-l="es">A priori (<span class="nc">κ</span>)</span><span data-l="en">Prior (<span class="nc">κ</span>)</span></label>
+        <select id="b4Kappa"><option value="0.3333333333333333" data-es="κ = 1/3, la de uso común" data-en="κ = 1/3, the common default">κ = 1/3, la de uso común</option><option value="0.5773502691896258" data-es="κ = 1/√3, más ancha" data-en="κ = 1/√3, wider">κ = 1/√3, más ancha</option><option value="1" data-es="κ = 1, uniforme (Jeffreys)" data-en="κ = 1, uniform (Jeffreys)">κ = 1, uniforme (Jeffreys)</option></select></div></div>
+      <div id="b4BayesTiles"></div>
+      <div class="two-figs">
+        <div class="pg-pane" id="b4BayesPane"><div class="pg-title"><span data-l="es">A priori y posterior de <span class="nc">ρ</span></span><span data-l="en">Prior and posterior of <span class="nc">ρ</span></span></div><div id="b4Bayes"></div></div>
+        <div class="b4-bayes-text" id="b4BayesText"></div>
+      </div>
+      <details class="theory-note"><summary><span data-l="es">Cómo se calcula</span><span data-l="en">How it is computed</span></summary>
+        <p><span data-l="es">Con las medias y varianzas integradas bajo las a priori de Jeffreys, la verosimilitud de ρ depende sólo de r y n: (1 − ρ²)^{(n−1)/2} (1 − ρr)^{3/2 − n} ₂F₁(½, ½; n − ½; (1 + ρr)/2) (Ly, Verhagen y Wagenmakers 2016). El factor de Bayes es su promedio bajo la a priori dividido entre su valor en ρ = 0, y coincide con la razón de densidades posterior/a priori en ρ = 0 (Savage–Dickey): los dos puntos de la gráfica. Las categorías de evidencia son las de Jeffreys (1961) como las tabulan Lee y Wagenmakers (2013).</span><span data-l="en">With the means and variances integrated out under Jeffreys’ priors, the likelihood of ρ depends only on r and n: (1 − ρ²)^{(n−1)/2} (1 − ρr)^{3/2 − n} ₂F₁(½, ½; n − ½; (1 + ρr)/2) (Ly, Verhagen and Wagenmakers 2016). The Bayes factor is its average under the prior divided by its value at ρ = 0, and equals the ratio of posterior to prior densities at ρ = 0 (Savage–Dickey): the two dots of the plot. The categories of evidence are Jeffreys’ (1961) as tabulated by Lee and Wagenmakers (2013).</span></p>
+      </details>
+    </div>
+
+    <div class="card">
+      <h2><span data-l="es">Cómo se calculó</span><span data-l="en">How it was computed</span></h2>
+      <ul class="conv-list" id="b4Conv"></ul>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== BLOCK 5 · CORRELATION MATRIX ==================== -->
+<section class="step-panel" id="panel-5">
+  <div class="panel-title"><div class="pt-num">5</div><div><h2><span data-l="es">Matriz de correlación</span><span data-l="en">Correlation matrix</span></h2><p><span data-l="es">Todas contra todas, con sus pruebas, su diagnóstico y la figura que se publica</span><span data-l="en">All against all, with their tests, their diagnosis and the figure that gets published</span></p></div></div>
+
+  <div class="card" id="b5Empty">
+    <p class="hint"><span data-l="es">Primero abre unos datos en el Bloque 2 (o usa un conjunto de ejemplo).</span><span data-l="en">First open some data in Block 2 (or use an example dataset).</span></p>
+    <div class="btn-row"><button type="button" class="btn btn-secondary btn-sm" data-go="2"><span data-l="es">← Ir a Datos</span><span data-l="en">← Go to Data</span></button>
+      <button type="button" class="btn btn-ghost btn-sm" id="b5Swiss"><span data-l="es">Usar Suiza, 1888</span><span data-l="en">Use Switzerland, 1888</span></button></div>
+  </div>
+
+  <div id="b5Main" hidden>
+    <div class="card">
+      <h2><span data-l="es">Qué correlacionar</span><span data-l="en">What to correlate</span></h2>
+      <div class="chip-row" id="b5Vars"></div>
+      <div class="form-grid b5-what">
+        <div class="field"><label for="b5Method"><span data-l="es">Coeficiente</span><span data-l="en">Coefficient</span></label><select id="b5Method"></select></div>
+        <div class="field"><label for="b5Adjust"><span data-l="es">Corrección por pruebas múltiples</span><span data-l="en">Multiple-testing correction</span></label>
+          <select id="b5Adjust"><option value="holm" data-es="Holm (controla el error de familia)" data-en="Holm (controls the familywise error)">Holm (controla el error de familia)</option><option value="BH" data-es="Benjamini–Hochberg (tasa de falsos descubrimientos)" data-en="Benjamini–Hochberg (false discovery rate)">Benjamini–Hochberg (tasa de falsos descubrimientos)</option><option value="BY" data-es="Benjamini–Yekutieli (FDR, dependencia)" data-en="Benjamini–Yekutieli (FDR, dependence)">Benjamini–Yekutieli (FDR, dependencia)</option><option value="hochberg">Hochberg</option><option value="hommel">Hommel</option><option value="bonferroni">Bonferroni</option><option value="none" data-es="Ninguna" data-en="None">Ninguna</option></select></div>
+        <div class="field"><label for="b5Alpha"><span class="nc">α</span></label><select id="b5Alpha"><option value="0.05">.05</option><option value="0.01">.01</option><option value="0.1">.10</option></select></div>
+      </div>
+      <div class="btn-row"><button type="button" class="btn btn-ghost btn-sm" id="b5Big"><span data-l="es">Probar con 300 variables simuladas</span><span data-l="en">Try 300 simulated variables</span></button></div>
+      <div class="messages" id="b5Msgs"></div>
+    </div>
+
+    <div class="card">
+      <h2><span data-l="es">La matriz</span><span data-l="en">The matrix</span></h2>
+      <div class="form-grid b5-view">
+        <div class="field"><label for="b5Lower"><span data-l="es">Abajo</span><span data-l="en">Below</span></label><select id="b5Lower" class="b5-glyph"></select></div>
+        <div class="field"><label for="b5Upper"><span data-l="es">Arriba</span><span data-l="en">Above</span></label><select id="b5Upper" class="b5-glyph"></select></div>
+        <div class="field"><label for="b5Order"><span data-l="es">Orden</span><span data-l="en">Order</span></label>
+          <select id="b5Order"><option value="original" data-es="El de los datos" data-en="As in the data">El de los datos</option><option value="hclust:average" data-es="Agrupamiento (promedio)" data-en="Clustering (average)">Agrupamiento (promedio)</option><option value="hclust:complete" data-es="Agrupamiento (completo)" data-en="Clustering (complete)">Agrupamiento (completo)</option><option value="hclust:ward.D2" data-es="Agrupamiento (Ward)" data-en="Clustering (Ward)">Agrupamiento (Ward)</option><option value="AOE" data-es="Ángulo de los vectores propios" data-en="Angle of the eigenvectors">Ángulo de los vectores propios</option><option value="FPC" data-es="Primer componente principal" data-en="First principal component">Primer componente principal</option><option value="alpha" data-es="Alfabético" data-en="Alphabetical">Alfabético</option></select></div>
+        <div class="field"><label for="b5Insig"><span data-l="es">No significativas</span><span data-l="en">Not significant</span></label>
+          <select id="b5Insig"><option value="cross" data-es="Tachadas" data-en="Crossed out">Tachadas</option><option value="blank" data-es="Desvanecidas" data-en="Faded">Desvanecidas</option><option value="none" data-es="Como las demás" data-en="Like the others">Como las demás</option></select></div>
+        <div class="field"><label for="b5Show"><span data-l="es">Mostrar</span><span data-l="en">Show</span></label>
+          <select id="b5Show"><option value="raw" data-es="La matriz estimada" data-en="The estimated matrix">La matriz estimada</option><option value="near" data-es="La definida positiva más cercana" data-en="The nearest positive-definite one">La definida positiva más cercana</option><option value="shrink" data-es="La contraída (Schäfer–Strimmer)" data-en="The shrunk one (Schäfer–Strimmer)">La contraída (Schäfer–Strimmer)</option><option value="partial" data-es="Las correlaciones parciales" data-en="The partial correlations">Las correlaciones parciales</option></select></div>
+      </div>
+      <div class="pg-pane b5-fig" id="b5FigPane"><div class="pg-title" id="b5FigTitle"></div><div class="matrix-scroll" id="b5Fig"></div><div class="b5-hover" id="b5Hover"></div><div class="b5-lens" id="b5Lens" hidden></div></div>
+      <div class="btn-row"><button type="button" class="btn btn-primary btn-sm" id="b5ToPair" disabled><span data-l="es">Estudiar el par elegido en el Bloque 4 →</span><span data-l="en">Study the chosen pair in Block 4 →</span></button></div>
+      <details class="theory-note"><summary><span data-l="es">Glifos, orden y pruebas múltiples</span><span data-l="en">Glyphs, order and multiple tests</span></summary>
+        <p><span data-l="es">Cada glifo codifica r de otra manera: la elipse es la forma de una nube con esa correlación (Murdoch y Chow 1996), la media luna y el pastel muestran |r| como fracción, el color y el sombreado (Friendly 2002) leen bien a distancia, el número es exacto. El orden importa: agrupar las variables parecidas revela bloques que el orden de los datos esconde. Con p variables hay p(p − 1)/2 pruebas: sin corregir, al 5 % se esperan falsos positivos; Holm controla la probabilidad de tener alguno y Benjamini–Hochberg la proporción entre los descubrimientos.</span><span data-l="en">Each glyph encodes r differently: the ellipse is the shape of a cloud with that correlation (Murdoch and Chow 1996), the moon and the pie show |r| as a fraction, colour and shading (Friendly 2002) read well from afar, the number is exact. Order matters: grouping similar variables reveals blocks that the order of the data hides. With p variables there are p(p − 1)/2 tests: without correction, false positives are expected at 5%; Holm controls the probability of having any and Benjamini–Hochberg their proportion among the discoveries.</span></p>
+      </details>
+    </div>
+
+    <div class="card">
+      <h2><span data-l="es">¿Es una matriz de correlación válida?</span><span data-l="en">Is it a valid correlation matrix?</span></h2>
+      <p class="hint"><span data-l="es">Una matriz de correlación debe ser definida positiva (todos sus valores propios mayores que cero). Con faltantes por pares, con coeficientes robustos o con más variables que filas puede no serlo, y entonces no sirve para regresión, análisis factorial ni simulación.</span><span data-l="en">A correlation matrix must be positive definite (all its eigenvalues above zero). With pairwise missing data, robust coefficients or more variables than rows it may not be, and then it cannot be used for regression, factor analysis or simulation.</span></p>
+      <div id="b5DiagTiles"></div>
+      <div class="two-figs">
+        <div class="pg-pane" id="b5ScreePane"><div class="pg-title"><span data-l="es">Valores propios</span><span data-l="en">Eigenvalues</span></div><div id="b5Scree"></div></div>
+        <div id="b5Fix"></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2><span data-l="es">Para un análisis factorial: KMO y Bartlett</span><span data-l="en">For a factor analysis: KMO and Bartlett</span></h2>
+      <p class="hint"><span data-l="es">La medida de Kaiser–Meyer–Olkin compara las correlaciones con las parciales: si las parciales son chicas, las variables comparten factores. La prueba de Bartlett pregunta si la matriz es la identidad (nada correlaciona).</span><span data-l="en">The Kaiser–Meyer–Olkin measure compares the correlations with the partial ones: if the partials are small, the variables share factors. Bartlett’s test asks whether the matrix is the identity (nothing correlates).</span></p>
+      <div id="b5KmoTiles"></div>
+      <div class="table-wrap" id="b5Kmo"></div>
+    </div>
+
+    <div class="card">
+      <h2><span data-l="es">Tabla para publicar</span><span data-l="en">Table to publish</span></h2>
+      <div class="table-wrap" id="b5Table"></div>
+      <div class="btn-row"><button type="button" class="btn btn-ghost btn-sm" id="b5CopyTable"><span data-l="es">Copiar la tabla</span><span data-l="en">Copy the table</span></button>
+        <button type="button" class="btn btn-ghost btn-sm" id="b5Csv"><span data-l="es">Descargar r, p y n (CSV)</span><span data-l="en">Download r, p and n (CSV)</span></button></div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== BLOCK 6 · NONLINEAR DEPENDENCE AND COPULAS ==================== -->
+<section class="step-panel" id="panel-6">
+  <div class="panel-title"><div class="pt-num">6</div><div><h2><span data-l="es">Dependencia no lineal y cópulas</span><span data-l="en">Nonlinear dependence and copulas</span></h2><p><span data-l="es">Lo que una recta no ve: medidas que detectan cualquier forma y la estructura de la dependencia</span><span data-l="en">What a line does not see: measures that detect any shape and the structure of the dependence</span></p></div></div>
+
+  <div class="card" id="b6Empty">
+    <p class="hint"><span data-l="es">Primero abre unos datos en el Bloque 2 (o usa un conjunto de ejemplo).</span><span data-l="en">First open some data in Block 2 (or use an example dataset).</span></p>
+    <div class="btn-row"><button type="button" class="btn btn-secondary btn-sm" data-go="2"><span data-l="es">← Ir a Datos</span><span data-l="en">← Go to Data</span></button>
+      <button type="button" class="btn btn-ghost btn-sm" id="b6Longley"><span data-l="es">Usar la economía de EE. UU.</span><span data-l="en">Use the US economy</span></button></div>
+  </div>
+
+  <div id="b6Main" hidden>
+    <div class="card">
+      <h2><span data-l="es">Un par: lo que ve cada medida</span><span data-l="en">One pair: what each measure sees</span></h2>
+      <div class="form-grid">
+        <div class="field"><label for="b6X">X</label><select id="b6X"></select></div>
+        <div class="field"><label for="b6Y">Y</label><select id="b6Y"></select></div>
+        <div class="field"><label for="b6Perm"><span data-l="es">Permutaciones para MIC</span><span data-l="en">Permutations for MIC</span></label>
+          <select id="b6Perm"><option value="0" data-es="No calcular su valor p" data-en="Do not compute its p-value">No calcular su valor p</option><option value="199">199</option><option value="499">499</option><option value="999">999</option></select></div>
+      </div>
+      <div class="messages" id="b6Msgs"></div>
+      <div id="b6Tiles"></div>
+      <div class="two-figs">
+        <div class="pg-pane" id="b6ScPane"><div class="pg-title"><span data-l="es">La nube</span><span data-l="en">The cloud</span></div><div id="b6Sc"></div></div>
+        <div class="pg-pane" id="b6BarsPane"><div class="pg-title"><span data-l="es">Todas en la misma escala, de 0 a 1</span><span data-l="en">All on the same scale, from 0 to 1</span></div><div id="b6Bars"></div></div>
+      </div>
+      <div class="two-figs">
+        <div class="pg-pane" id="b6MicPane"><div class="pg-title"><span data-l="es">La matriz característica de MIC</span><span data-l="en">The characteristic matrix of MIC</span></div><div id="b6Mic"></div></div>
+        <div class="b6-text" id="b6Text"></div>
+      </div>
+      <details class="theory-note"><summary><span data-l="es">Qué mide cada una</span><span data-l="en">What each one measures</span></summary>
+        <p><span data-l="es">La <b>correlación de distancias</b> (Székely, Rizzo y Bakirov 2007) es 0 sólo si hay independencia. El <b>HSIC</b> (Gretton et al. 2005) mide lo mismo en un espacio de funciones: con núcleos gaussianos, detecta cualquier relación. El <b>MIC</b> (Reshef et al. 2011) busca la rejilla que más información mutua capta, normalizada para que una función sin ruido de cualquier forma valga 1. La <b>ξ</b> de Chatterjee (2021) mide cuánto Y es función de X (no es simétrica). La <b>información mutua</b> (Kraskov et al. 2004) está en nats; su coeficiente de Linfoot √(1 − e^(−2I)) coincide con |ρ| en la normal bivariada. La <b>correlación máxima</b> (Gebelein 1941; Rényi 1959) es la mayor r entre transformaciones de X y de Y.</span><span data-l="en">The <b>distance correlation</b> (Székely, Rizzo and Bakirov 2007) is 0 only under independence. <b>HSIC</b> (Gretton et al. 2005) measures the same in a space of functions: with Gaussian kernels it detects any relation. <b>MIC</b> (Reshef et al. 2011) looks for the grid that captures the most mutual information, normalized so that a noiseless function of any shape scores 1. Chatterjee’s <b>ξ</b> (2021) measures how much Y is a function of X (it is not symmetric). <b>Mutual information</b> (Kraskov et al. 2004) is in nats; its Linfoot coefficient √(1 − e^(−2I)) equals |ρ| in the bivariate normal. The <b>maximal correlation</b> (Gebelein 1941; Rényi 1959) is the largest r between transformations of X and of Y.</span></p>
+      </details>
+    </div>
+
+    <div class="card">
+      <h2><span data-l="es">Rastreo: lo que Pearson no ve</span><span data-l="en">Sweep: what Pearson misses</span></h2>
+      <p class="hint"><span data-l="es">Todos los pares de las variables numéricas, ordenados por cuánto supera la correlación de distancias a |r|: arriba quedan las relaciones curvas, en U o con ciclos.</span><span data-l="en">Every pair of the numeric variables, ordered by how much the distance correlation exceeds |r|: curved, U-shaped or cyclic relations come first.</span></p>
+      <div class="form-grid"><label class="checkbox-label"><input type="checkbox" id="b6SweepMic"> <span data-l="es">Incluir MIC (más lento)</span><span data-l="en">Include MIC (slower)</span></label>
+        <div class="field"><span class="field-spacer">&nbsp;</span><button type="button" class="btn btn-primary btn-sm" id="b6SweepGo"><span data-l="es">Rastrear</span><span data-l="en">Sweep</span></button></div></div>
+      <div class="b6-gallery" id="b6Gallery"></div>
+      <div class="table-wrap" id="b6Sweep"></div>
+    </div>
+
+    <div class="card">
+      <h2><span data-l="es">Cópulas: la forma de la dependencia</span><span data-l="en">Copulas: the shape of the dependence</span></h2>
+      <p class="hint"><span data-l="es">El teorema de Sklar (1959) separa cada variable de su dependencia: al pasar los datos a rangos (pseudo-observaciones) queda sólo la cópula. Se ajustan cinco familias; difieren sobre todo en las colas: ¿los valores extremos ocurren juntos?</span><span data-l="en">Sklar’s theorem (1959) separates each variable from their dependence: turning the data into ranks (pseudo-observations) leaves only the copula. Five families are fitted; they differ above all in the tails: do extreme values happen together?</span></p>
+      <div class="table-wrap" id="b6CopTable"></div>
+      <div class="two-figs">
+        <div class="pg-pane" id="b6UPane"><div class="pg-title"><span data-l="es">Los datos en rangos</span><span data-l="en">The data as ranks</span></div><div id="b6U"></div></div>
+        <div class="pg-pane" id="b6SimPane"><div class="pg-title" id="b6SimTitle"></div><div id="b6Sim"></div></div>
+      </div>
+      <div id="b6TailTiles"></div>
+      <details class="theory-note"><summary><span data-l="es">Las familias y sus colas</span><span data-l="en">The families and their tails</span></summary>
+        <p><span data-l="es">La <b>gaussiana</b> y la de <b>Frank</b> no tienen dependencia en las colas: los extremos se vuelven independientes. La <b>t de Student</b> tiene la misma en las dos colas, mayor cuanto menos grados de libertad. <b>Clayton</b> concentra la dependencia abajo (caen juntas) y <b>Gumbel</b> arriba (suben juntas). Se estiman por máxima pseudoverosimilitud (Genest, Ghoudi y Rivest 1995) y se comparan por AIC; la inversión de τ de Kendall da un valor de partida que no depende de las marginales. La dependencia en la cola λ es el límite de P(V &gt; u | U &gt; u) cuando u → 1 (Joe 1997); la empírica usa el 10 % superior e inferior.</span><span data-l="en">The <b>Gaussian</b> and <b>Frank</b> copulas have no tail dependence: extremes become independent. <b>Student’s t</b> has the same in both tails, larger with fewer degrees of freedom. <b>Clayton</b> concentrates the dependence at the bottom (they fall together) and <b>Gumbel</b> at the top (they rise together). They are estimated by maximum pseudo-likelihood (Genest, Ghoudi and Rivest 1995) and compared by AIC; the inversion of Kendall’s τ gives a starting value that does not depend on the margins. The tail dependence λ is the limit of P(V &gt; u | U &gt; u) as u → 1 (Joe 1997); the empirical one uses the top and bottom 10%.</span></p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== BLOCK 7 · PARTIAL, MULTIPLE AND BETWEEN SETS ==================== -->
+<section class="step-panel" id="panel-7">
+  <div class="panel-title"><div class="pt-num">7</div><div><h2><span data-l="es">Parcial, múltiple y entre conjuntos</span><span data-l="en">Partial, multiple and between sets</span></h2><p><span data-l="es">Controlar terceras variables y correlacionar grupos de variables entre sí</span><span data-l="en">Control third variables and correlate groups of variables with each other</span></p></div></div>
+
+  <div class="card" id="b7Empty">
+    <p class="hint"><span data-l="es">Primero abre unos datos en el Bloque 2 (o usa un conjunto de ejemplo).</span><span data-l="en">First open some data in Block 2 (or use an example dataset).</span></p>
+    <div class="btn-row"><button type="button" class="btn btn-secondary btn-sm" data-go="2"><span data-l="es">← Ir a Datos</span><span data-l="en">← Go to Data</span></button>
+      <button type="button" class="btn btn-ghost btn-sm" id="b7Swiss"><span data-l="es">Usar Suiza, 1888</span><span data-l="en">Use Switzerland, 1888</span></button></div>
+  </div>
+
+  <div id="b7Main" hidden>
+    <div class="card">
+      <h2><span data-l="es">Correlación parcial y semiparcial</span><span data-l="en">Partial and semipartial correlation</span></h2>
+      <p class="hint"><span data-l="es">¿Cuánto queda de la relación entre X e Y cuando se quita lo que ambas comparten con Z? La parcial quita Z de las dos; la semiparcial, sólo de Y.</span><span data-l="en">How much of the relation between X and Y is left once what both share with Z is removed? The partial removes Z from both; the semipartial, from Y only.</span></p>
+      <div class="form-grid">
+        <div class="field"><label for="b7X">X</label><select id="b7X"></select></div>
+        <div class="field"><label for="b7Y">Y</label><select id="b7Y"></select></div>
+        <div class="field"><label for="b7Method"><span data-l="es">Coeficiente</span><span data-l="en">Coefficient</span></label>
+          <select id="b7Method"><option value="pearson" data-es="Pearson" data-en="Pearson">Pearson</option><option value="spearman" data-es="Spearman" data-en="Spearman">Spearman</option><option value="kendall" data-es="Kendall" data-en="Kendall">Kendall</option></select></div>
+      </div>
+      <div class="field-label"><span data-l="es">Controlar por (Z)</span><span data-l="en">Control for (Z)</span></div>
+      <div class="chip-row" id="b7Z"></div>
+      <div class="messages" id="b7PMsgs"></div>
+      <div id="b7PTiles"></div>
+      <div class="two-figs">
+        <div class="pg-pane" id="b7RawPane"><div class="pg-title"><span data-l="es">Sin controlar</span><span data-l="en">Without control</span></div><div id="b7Raw"></div></div>
+        <div class="pg-pane" id="b7AvPane"><div class="pg-title"><span data-l="es">Quitando Z de las dos (gráfica de variable añadida)</span><span data-l="en">Removing Z from both (added-variable plot)</span></div><div id="b7Av"></div></div>
+      </div>
+      <div class="b7-text" id="b7PText"></div>
+    </div>
+
+    <div class="card">
+      <h2><span data-l="es">Correlación múltiple</span><span data-l="en">Multiple correlation</span></h2>
+      <p class="hint"><span data-l="es">La correlación entre Y y la mejor combinación lineal de varias X. Las semiparciales al cuadrado separan lo que aporta cada predictor por sí solo de lo que comparten.</span><span data-l="en">The correlation between Y and the best linear combination of several X. The squared semipartials separate what each predictor adds on its own from what they share.</span></p>
+      <div class="form-grid"><div class="field"><label for="b7MY">Y</label><select id="b7MY"></select></div></div>
+      <div class="field-label"><span data-l="es">Predictores (X)</span><span data-l="en">Predictors (X)</span></div>
+      <div class="chip-row" id="b7MX"></div>
+      <div id="b7MTiles"></div>
+      <div class="table-wrap" id="b7MTable"></div>
+      <div class="pg-pane b7-share" id="b7MBarPane"><div class="pg-title"><span data-l="es">Cómo se reparte R²</span><span data-l="en">How R² is shared</span></div><div id="b7MBar"></div></div>
+    </div>
+
+    <div class="card">
+      <h2><span data-l="es">Correlación canónica</span><span data-l="en">Canonical correlation</span></h2>
+      <p class="hint"><span data-l="es">Dos conjuntos de variables: la mayor correlación posible entre una combinación lineal de cada uno, luego la siguiente, independiente de la primera, y así hasta el tamaño del menor conjunto (Hotelling 1936).</span><span data-l="en">Two sets of variables: the largest possible correlation between a linear combination of each, then the next one, independent of the first, and so on up to the size of the smaller set (Hotelling 1936).</span></p>
+      <div class="sets-grid">
+        <div><div class="field-label"><span data-l="es">Conjunto A</span><span data-l="en">Set A</span></div><div class="chip-row set-a" id="b7A"></div></div>
+        <div><div class="field-label"><span data-l="es">Conjunto B</span><span data-l="en">Set B</span></div><div class="chip-row set-b" id="b7B"></div></div>
+      </div>
+      <div class="messages" id="b7CMsgs"></div>
+      <div class="table-wrap" id="b7CTable"></div>
+      <div class="two-figs">
+        <div class="pg-pane" id="b7CScPane"><div class="pg-title"><span data-l="es">El primer par de variables canónicas</span><span data-l="en">The first pair of canonical variates</span></div><div id="b7CSc"></div></div>
+        <div class="pg-pane" id="b7CircPane"><div class="pg-title"><span data-l="es">Círculo de correlaciones (cargas)</span><span data-l="en">Circle of correlations (loadings)</span></div><div id="b7Circ"></div></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2><span data-l="es">Entre conjuntos: RV, Procrustes y Mantel</span><span data-l="en">Between sets: RV, Procrustes and Mantel</span></h2>
+      <p class="hint"><span data-l="es">Con los mismos conjuntos A y B: el coeficiente RV es una r entre dos tablas (0 a 1); Procrustes gira una configuración para ajustarla a la otra; Mantel correlaciona las distancias entre las filas. Las tres con prueba por permutación (999 barajas, variables estandarizadas).</span><span data-l="en">With the same sets A and B: the RV coefficient is an r between two tables (0 to 1); Procrustes rotates one configuration to fit the other; Mantel correlates the distances between the rows. All three with a permutation test (999 shuffles, standardized variables).</span></p>
+      <div id="b7STiles"></div>
+      <div class="pg-pane" id="b7RvPane"><div class="pg-title"><span data-l="es">RV observado frente a las permutaciones</span><span data-l="en">Observed RV against the permutations</span></div><div id="b7Rv"></div></div>
+      <details class="theory-note"><summary><span data-l="es">Cuándo usar cada una</span><span data-l="en">When to use each one</span></summary>
+        <p><span data-l="es">La canónica busca combinaciones lineales y se rompe con más variables que filas; el RV (Escoufier 1973) resume toda la tabla y es la base del análisis de coinercia; Procrustes (Gower 1975; Peres-Neto y Jackson 2001) compara configuraciones (por ejemplo, dos ordenaciones); Mantel (1967) sirve cuando lo que se tiene son distancias (genéticas, geográficas, ecológicas), aunque su potencia es baja y no corrige la autocorrelación espacial (Guillot y Rousset 2013; Legendre, Fortin y Borcard 2015).</span><span data-l="en">The canonical correlation looks for linear combinations and breaks down with more variables than rows; RV (Escoufier 1973) summarizes the whole table and underlies co-inertia analysis; Procrustes (Gower 1975; Peres-Neto and Jackson 2001) compares configurations (two ordinations, for instance); Mantel (1967) serves when what one has are distances (genetic, geographic, ecological), although its power is low and it does not correct for spatial autocorrelation (Guillot and Rousset 2013; Legendre, Fortin and Borcard 2015).</span></p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== BLOCK 8 · CATEGORICAL, ORDINAL AND MIXED ==================== -->
+<section class="step-panel" id="panel-8">
+  <div class="panel-title"><div class="pt-num">8</div><div><h2><span data-l="es">Categóricas, ordinales y mixtas</span><span data-l="en">Categorical, ordinal and mixed</span></h2><p><span data-l="es">Asociación en tablas, correlaciones latentes y el coeficiente adecuado a cada par de tipos</span><span data-l="en">Association in tables, latent correlations and the right coefficient for each pair of kinds</span></p></div></div>
+
+  <div class="card" id="b8Empty">
+    <p class="hint"><span data-l="es">Primero abre unos datos en el Bloque 2 (o usa un conjunto de ejemplo).</span><span data-l="en">First open some data in Block 2 (or use an example dataset).</span></p>
+    <div class="btn-row"><button type="button" class="btn btn-secondary btn-sm" data-go="2"><span data-l="es">← Ir a Datos</span><span data-l="en">← Go to Data</span></button>
+      <button type="button" class="btn btn-ghost btn-sm" id="b8Titanic"><span data-l="es">Usar el Titanic</span><span data-l="en">Use the Titanic</span></button></div>
+  </div>
+
+  <div id="b8Main" hidden>
+    <div class="card">
+      <h2><span data-l="es">Dos variables categóricas</span><span data-l="en">Two categorical variables</span></h2>
+      <div class="form-grid">
+        <div class="field"><label for="b8R"><span data-l="es">Filas</span><span data-l="en">Rows</span></label><select id="b8R"></select></div>
+        <div class="field"><label for="b8C"><span data-l="es">Columnas</span><span data-l="en">Columns</span></label><select id="b8C"></select></div>
+        <div class="field"><label for="b8Cell"><span data-l="es">En cada celda</span><span data-l="en">In each cell</span></label>
+          <select id="b8Cell"><option value="n" data-es="Frecuencia" data-en="Count">Frecuencia</option><option value="row" data-es="% de la fila" data-en="Row %">% de la fila</option><option value="col" data-es="% de la columna" data-en="Column %">% de la columna</option><option value="res" data-es="Residuo estandarizado" data-en="Standardized residual">Residuo estandarizado</option></select></div>
+      </div>
+      <div class="messages" id="b8Msgs"></div>
+      <div class="two-figs">
+        <div class="table-wrap" id="b8Table"></div>
+        <div class="pg-pane" id="b8MosPane"><div class="pg-title"><span data-l="es">Mosaico (color: residuo de Pearson)</span><span data-l="en">Mosaic (colour: Pearson residual)</span></div><div id="b8Mos"></div></div>
+      </div>
+      <div id="b8Tiles"></div>
+      <div class="table-wrap" id="b8Measures"></div>
+      <details class="theory-note"><summary><span data-l="es">Qué medida para qué tabla</span><span data-l="en">Which measure for which table</span></summary>
+        <p><span data-l="es">χ² dice si hay asociación; su tamaño lo dan V de Cramér (0 a 1; la corregida de Bergsma 2013 quita el sesgo de las muestras chicas), C de Pearson (nunca llega a 1) o T de Tschuprow. λ, τ y U son asimétricas: cuánto mejora la predicción de una variable al conocer la otra (Goodman y Kruskal 1954; Theil 1970). En 2 × 2, φ es la r de Pearson de dos binarias y la razón de momios no depende de las marginales (Q y Y de Yule la llevan a −1…1). Con categorías ordenadas, γ, d de Somers y τ usan el orden. Si cada variable es un corte de una normal latente, la tetracórica (2 × 2) o la policórica estiman la correlación de esas normales.</span><span data-l="en">χ² says whether there is association; its size is given by Cramér’s V (0 to 1; Bergsma’s 2013 correction removes the bias of small samples), Pearson’s C (it never reaches 1) or Tschuprow’s T. λ, τ and U are asymmetric: how much the prediction of one variable improves by knowing the other (Goodman and Kruskal 1954; Theil 1970). In 2 × 2, φ is the Pearson r of two binaries and the odds ratio does not depend on the margins (Yule’s Q and Y bring it to −1…1). With ordered categories, γ, Somers’ d and τ use the order. If each variable is a cut of a latent normal, the tetrachoric (2 × 2) or polychoric correlation estimates the correlation of those normals.</span></p>
+      </details>
+    </div>
+
+    <div class="card">
+      <h2><span data-l="es">Una continua y una categórica</span><span data-l="en">A continuous and a categorical one</span></h2>
+      <div class="form-grid">
+        <div class="field"><label for="b8X"><span data-l="es">Continua</span><span data-l="en">Continuous</span></label><select id="b8X"></select></div>
+        <div class="field"><label for="b8G"><span data-l="es">Categórica</span><span data-l="en">Categorical</span></label><select id="b8G"></select></div>
+      </div>
+      <div id="b8MTiles"></div>
+      <div class="two-figs">
+        <div class="pg-pane" id="b8StripPane"><div class="pg-title"><span data-l="es">Los valores en cada categoría</span><span data-l="en">The values in each category</span></div><div id="b8Strip"></div></div>
+        <div class="b8-text" id="b8MText"></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2><span data-l="es">La matriz heterogénea</span><span data-l="en">The heterogeneous matrix</span></h2>
+      <p class="hint"><span data-l="es">Cada par con el coeficiente que piden sus tipos: Pearson (continua–continua), poliserial (continua–ordinal o binaria), policórica o tetracórica (ordinales o binarias), η (con una nominal) y V de Cramér corregida (nominal con categórica). La letra de cada celda dice cuál se usó.</span><span data-l="en">Each pair with the coefficient its kinds ask for: Pearson (continuous–continuous), polyserial (continuous–ordinal or binary), polychoric or tetrachoric (ordinals or binaries), η (with a nominal one) and bias-corrected Cramér’s V (nominal with categorical). The letter in each cell says which was used.</span></p>
+      <div class="chip-row" id="b8Vars"></div>
+      <div class="pg-pane" id="b8HetPane"><div class="pg-title"><span data-l="es">Matriz heterogénea</span><span data-l="en">Heterogeneous matrix</span></div><div class="matrix-scroll" id="b8Het"></div><div class="fig-legend" id="b8HetLegend"></div></div>
+      <p class="hint" id="b8HetNote"></p>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== BLOCK 9 · AGREEMENT AND RELIABILITY ==================== -->
+<section class="step-panel" id="panel-9">
+  <div class="panel-title"><div class="pt-num">9</div><div><h2><span data-l="es">Acuerdo y fiabilidad</span><span data-l="en">Agreement and reliability</span></h2><p><span data-l="es">Cuando la pregunta no es si dos medidas se mueven juntas, sino si dicen lo mismo</span><span data-l="en">When the question is not whether two measures move together, but whether they say the same</span></p></div></div>
+
+  <div class="card" id="b9Empty">
+    <p class="hint"><span data-l="es">Primero abre unos datos en el Bloque 2: una columna por evaluador, instrumento o método, y una fila por caso.</span><span data-l="en">First open some data in Block 2: one column per rater, instrument or method, and one row per case.</span></p>
+    <div class="btn-row"><button type="button" class="btn btn-secondary btn-sm" data-go="2"><span data-l="es">← Ir a Datos</span><span data-l="en">← Go to Data</span></button>
+      <button type="button" class="btn btn-ghost btn-sm" id="b9Sleep"><span data-l="es">Usar el sueño de Cushny y Peebles</span><span data-l="en">Use Cushny and Peebles’ sleep</span></button>
+      <button type="button" class="btn btn-ghost btn-sm" id="b9Sim"><span data-l="es">Evaluadores simulados</span><span data-l="en">Simulated raters</span></button></div>
+  </div>
+
+  <div id="b9Main" hidden>
+    <div class="card">
+      <h2><span data-l="es">Qué se compara</span><span data-l="en">What is compared</span></h2>
+      <p class="hint"><span data-l="es">Elige dos o más columnas: los evaluadores, instrumentos o métodos que miden lo mismo en los mismos casos.</span><span data-l="en">Pick two or more columns: the raters, instruments or methods measuring the same thing on the same cases.</span></p>
+      <div class="chip-row" id="b9Cols"></div>
+      <div class="btn-row"><button type="button" class="btn btn-ghost btn-sm" id="b9SimBtn"><span data-l="es">Cargar evaluadores simulados</span><span data-l="en">Load simulated raters</span></button></div>
+      <div class="messages" id="b9Msgs"></div>
+    </div>
+
+    <div class="card" id="b9ContCard">
+      <h2><span data-l="es">Dos métodos: concordancia y Bland–Altman</span><span data-l="en">Two methods: concordance and Bland–Altman</span></h2>
+      <div id="b9CTiles"></div>
+      <div class="two-figs">
+        <div class="pg-pane" id="b9IdPane"><div class="pg-title"><span data-l="es">Contra la línea de igualdad</span><span data-l="en">Against the line of equality</span></div><div id="b9Id"></div></div>
+        <div class="pg-pane" id="b9BAPane"><div class="pg-title"><span data-l="es">Bland–Altman: diferencia frente a promedio</span><span data-l="en">Bland–Altman: difference against mean</span></div><div id="b9BA"></div></div>
+      </div>
+      <div class="b9-text" id="b9CText"></div>
+    </div>
+
+    <div class="card" id="b9IccCard">
+      <h2><span data-l="es">Varios evaluadores: coeficientes intraclase</span><span data-l="en">Several raters: intraclass correlations</span></h2>
+      <p class="hint"><span data-l="es">Elige la forma por el diseño: unidireccional si cada caso lo califican evaluadores distintos; bidireccional si los mismos evaluadores califican todo; «consistencia» si basta con que ordenen igual, «acuerdo absoluto» si deben dar el mismo número; una medida o el promedio de los evaluadores (McGraw y Wong 1996; Koo y Li 2016).</span><span data-l="en">Choose the form by the design: one-way if each case is rated by different raters; two-way if the same raters rate everything; «consistency» if ordering the same is enough, «absolute agreement» if they must give the same number; a single measure or the average of the raters (McGraw and Wong 1996; Koo and Li 2016).</span></p>
+      <div class="table-wrap" id="b9Icc"></div>
+      <div id="b9ITiles"></div>
+      <div class="pg-pane" id="b9ProfPane"><div class="pg-title"><span data-l="es">Cada caso a través de los evaluadores</span><span data-l="en">Each case across the raters</span></div><div id="b9Prof"></div></div>
+    </div>
+
+    <div class="card" id="b9CatCard">
+      <h2><span data-l="es">Categorías: κ y sus parientes</span><span data-l="en">Categories: κ and its relatives</span></h2>
+      <div id="b9KTiles"></div>
+      <div class="two-figs">
+        <div class="table-wrap" id="b9KTable"></div>
+        <div class="pg-pane" id="b9KHeatPane"><div class="pg-title"><span data-l="es">Tabla de acuerdo de los dos primeros</span><span data-l="en">Agreement table of the first two</span></div><div id="b9KHeat"></div></div>
+      </div>
+      <details class="theory-note"><summary><span data-l="es">Por qué una r alta no es acuerdo, y las paradojas de κ</span><span data-l="en">Why a high r is not agreement, and the paradoxes of κ</span></summary>
+        <p><span data-l="es">Dos instrumentos pueden correlacionar a 0.99 y diferir siempre por diez unidades, o uno dar el doble que el otro: r mide asociación, no acuerdo (Bland y Altman 1986). La concordancia de Lin (1989) penaliza los dos desvíos (de ubicación y de escala), y el gráfico de Bland–Altman muestra cuánto pueden diferir en un caso. κ corrige el acuerdo por el azar (Cohen 1960), pero con categorías muy desbalanceadas puede ser bajo aunque el acuerdo sea alto (Feinstein y Cicchetti 1990); AC1 de Gwet (2008) es más estable en ese caso. α de Krippendorff admite cualquier número de evaluadores, faltantes y escalas nominal, ordinal, de intervalo o de razón (Hayes y Krippendorff 2007).</span><span data-l="en">Two instruments can correlate at 0.99 and always differ by ten units, or one give twice the other: r measures association, not agreement (Bland and Altman 1986). Lin’s concordance (1989) penalizes both departures (of location and of scale), and the Bland–Altman plot shows how much they can differ on one case. κ corrects agreement for chance (Cohen 1960), but with very unbalanced categories it can be low although agreement is high (Feinstein and Cicchetti 1990); Gwet’s AC1 (2008) is more stable then. Krippendorff’s α admits any number of raters, missing ratings and nominal, ordinal, interval or ratio scales (Hayes and Krippendorff 2007).</span></p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== BLOCK 10 · STRUCTURED AND SPECIAL DATA ==================== -->
+<section class="step-panel" id="panel-10">
+  <div class="panel-title"><div class="pt-num">10</div><div><h2><span data-l="es">Datos con estructura y datos especiales</span><span data-l="en">Structured and special data</span></h2><p><span data-l="es">Cuando las filas no son independientes, o los números no son una recta</span><span data-l="en">When the rows are not independent, or the numbers are not a line</span></p></div></div>
+
+  <div class="card" id="b10Empty">
+    <p class="hint"><span data-l="es">Primero abre unos datos en el Bloque 2 (o usa un conjunto de ejemplo).</span><span data-l="en">First open some data in Block 2 (or use an example dataset).</span></p>
+    <div class="btn-row"><button type="button" class="btn btn-secondary btn-sm" data-go="2"><span data-l="es">← Ir a Datos</span><span data-l="en">← Go to Data</span></button>
+      <button type="button" class="btn btn-ghost btn-sm" id="b10Iris"><span data-l="es">Usar los lirios (grupos)</span><span data-l="en">Use the irises (groups)</span></button></div>
+  </div>
+
+  <div id="b10Main" hidden>
+    <div class="card">
+      <h2><span data-l="es">Grupos y la paradoja de Simpson</span><span data-l="en">Groups and Simpson’s paradox</span></h2>
+      <div class="form-grid">
+        <div class="field"><label for="b10GX">X</label><select id="b10GX" class="b10-num"></select></div>
+        <div class="field"><label for="b10GY">Y</label><select id="b10GY" class="b10-num"></select></div>
+        <div class="field"><label for="b10GG"><span data-l="es">Grupo</span><span data-l="en">Group</span></label><select id="b10GG"></select></div>
+      </div>
+      <div id="b10GTiles"></div>
+      <div class="two-figs">
+        <div class="pg-pane" id="b10GScPane"><div class="pg-title"><span data-l="es">Rectas dentro de cada grupo y la de todos juntos</span><span data-l="en">Lines within each group and the one for all together</span></div><div id="b10GSc"></div><div class="fig-legend" id="b10GLeg"></div></div>
+        <div><div class="table-wrap" id="b10GTable"></div><div class="b10-text" id="b10GText"></div></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2><span data-l="es">Medidas repetidas</span><span data-l="en">Repeated measures</span></h2>
+      <p class="hint"><span data-l="es">Cuando cada sujeto aporta varias filas, la r de siempre mezcla la relación dentro de los sujetos con las diferencias entre ellos y cuenta de más los grados de libertad. La correlación de medidas repetidas (Bakdash y Marusich 2017) usa sólo la variación dentro de cada sujeto, con una pendiente común.</span><span data-l="en">When each subject contributes several rows, the usual r mixes the relation within subjects with the differences between them and overcounts the degrees of freedom. The repeated measures correlation (Bakdash and Marusich 2017) uses only the variation within each subject, with a common slope.</span></p>
+      <div class="form-grid">
+        <div class="field"><label for="b10RS"><span data-l="es">Sujeto</span><span data-l="en">Subject</span></label><select id="b10RS"></select></div>
+        <div class="field"><label for="b10RX">X</label><select id="b10RX" class="b10-num"></select></div>
+        <div class="field"><label for="b10RY">Y</label><select id="b10RY" class="b10-num"></select></div>
+      </div>
+      <div class="btn-row"><button type="button" class="btn btn-ghost btn-sm" id="b10RSim"><span data-l="es">Ejemplo simulado: 12 sujetos medidos 6 veces</span><span data-l="en">Simulated example: 12 subjects measured 6 times</span></button></div>
+      <div id="b10RTiles"></div>
+      <div class="pg-pane" id="b10RScPane"><div class="pg-title"><span data-l="es">Cada sujeto con su recta (pendiente común)</span><span data-l="en">Each subject with its line (common slope)</span></div><div id="b10RSc"></div></div>
+    </div>
+
+    <div class="card">
+      <h2><span data-l="es">Series de tiempo: correlación cruzada y preblanqueo</span><span data-l="en">Time series: cross-correlation and prewhitening</span></h2>
+      <p class="hint"><span data-l="es">Dos series con tendencia o con memoria correlacionan aunque no tengan nada que ver (Yule 1926). El preblanqueo ajusta un modelo autorregresivo a X, filtra con él las dos series y sólo entonces las correlaciona en cada retardo.</span><span data-l="en">Two series with a trend or a memory correlate even if they have nothing to do with each other (Yule 1926). Prewhitening fits an autoregressive model to X, filters both series with it and only then correlates them at each lag.</span></p>
+      <div class="form-grid">
+        <div class="field"><label for="b10TX">X</label><select id="b10TX" class="b10-num"></select></div>
+        <div class="field"><label for="b10TY">Y</label><select id="b10TY" class="b10-num"></select></div>
+        <div class="field"><label for="b10TT"><span data-l="es">Ordenar por</span><span data-l="en">Order by</span></label><select id="b10TT"></select></div>
+      </div>
+      <div id="b10TTiles"></div>
+      <div class="two-figs">
+        <div class="pg-pane" id="b10TRawPane"><div class="pg-title"><span data-l="es">Correlación cruzada de las series</span><span data-l="en">Cross-correlation of the series</span></div><div id="b10TRaw"></div></div>
+        <div class="pg-pane" id="b10TPwPane"><div class="pg-title"><span data-l="es">Después del preblanqueo</span><span data-l="en">After prewhitening</span></div><div id="b10TPw"></div></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2><span data-l="es">Datos espaciales: la t modificada de Dutilleul</span><span data-l="en">Spatial data: Dutilleul’s modified t</span></h2>
+      <p class="hint"><span data-l="es">Si los lugares cercanos se parecen, hay menos información independiente que filas y el valor p habitual es demasiado optimista. La prueba de Dutilleul (1993) estima el tamaño de muestra efectivo con la autocorrelación de cada variable (I de Moran por clases de distancia).</span><span data-l="en">If nearby places resemble each other, there is less independent information than rows and the usual p-value is too optimistic. Dutilleul’s test (1993) estimates the effective sample size from the autocorrelation of each variable (Moran’s I by distance classes).</span></p>
+      <div class="form-grid">
+        <div class="field"><label for="b10SX">X</label><select id="b10SX" class="b10-num"></select></div>
+        <div class="field"><label for="b10SY">Y</label><select id="b10SY" class="b10-num"></select></div>
+        <div class="field"><label for="b10SCX"><span data-l="es">Coordenada este–oeste</span><span data-l="en">East–west coordinate</span></label><select id="b10SCX" class="b10-num"></select></div>
+        <div class="field"><label for="b10SCY"><span data-l="es">Coordenada norte–sur</span><span data-l="en">North–south coordinate</span></label><select id="b10SCY" class="b10-num"></select></div>
+      </div>
+      <div class="btn-row"><button type="button" class="btn btn-ghost btn-sm" id="b10SSim"><span data-l="es">Ejemplo simulado: 100 parcelas</span><span data-l="en">Simulated example: 100 plots</span></button></div>
+      <div id="b10STiles"></div>
+      <div class="two-figs">
+        <div class="pg-pane" id="b10SMapPane"><div class="pg-title"><span data-l="es">Los lugares, coloreados por X</span><span data-l="en">The places, coloured by X</span></div><div id="b10SMap"></div></div>
+        <div class="pg-pane" id="b10SCorPane"><div class="pg-title"><span data-l="es">Correlograma: I de Moran por distancia</span><span data-l="en">Correlogram: Moran’s I by distance</span></div><div id="b10SCor"></div></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2><span data-l="es">Especies emparentadas: contrastes independientes</span><span data-l="en">Related species: independent contrasts</span></h2>
+      <p class="hint"><span data-l="es">Las especies comparten historia y no son observaciones independientes (Felsenstein 1985). Con el árbol filogenético, cada nodo da un contraste independiente; su correlación pasa por el origen.</span><span data-l="en">Species share history and are not independent observations (Felsenstein 1985). With the phylogenetic tree, each node gives an independent contrast; their correlation goes through the origin.</span></p>
+      <div class="form-grid">
+        <div class="field"><label for="b10PSp"><span data-l="es">Columna con los nombres de las especies</span><span data-l="en">Column with the species names</span></label><select id="b10PSp"></select></div>
+        <div class="field"><label for="b10PX">X</label><select id="b10PX" class="b10-num"></select></div>
+        <div class="field"><label for="b10PY">Y</label><select id="b10PY" class="b10-num"></select></div>
+      </div>
+      <label class="field-label" for="b10PTree"><span data-l="es">Árbol en formato Newick (con longitudes de rama)</span><span data-l="en">Tree in Newick format (with branch lengths)</span></label>
+      <textarea id="b10PTree" rows="3" spellcheck="false" class="b10-newick"></textarea>
+      <div class="btn-row"><button type="button" class="btn btn-primary btn-sm" id="b10PGo"><span data-l="es">Calcular los contrastes</span><span data-l="en">Compute the contrasts</span></button>
+        <button type="button" class="btn btn-ghost btn-sm" id="b10PSim"><span data-l="es">Ejemplo simulado: 30 especies</span><span data-l="en">Simulated example: 30 species</span></button></div>
+      <div class="messages" id="b10PMsgs"></div>
+      <div id="b10PTiles"></div>
+      <div class="pg-pane" id="b10PScPane" hidden><div class="pg-title"><span data-l="es">Los contrastes, por el origen</span><span data-l="en">The contrasts, through the origin</span></div><div id="b10PSc"></div></div>
+    </div>
+
+    <div class="card">
+      <h2><span data-l="es">Datos circulares</span><span data-l="en">Circular data</span></h2>
+      <p class="hint"><span data-l="es">Ángulos, horas, días del año, meses: 359° y 1° están juntos y Pearson no lo sabe. Para dos ángulos, la correlación de Jammalamadaka y SenGupta (1988); para un ángulo y una variable lineal, la de Mardia (1976).</span><span data-l="en">Angles, hours, days of the year, months: 359° and 1° are neighbours and Pearson does not know it. For two angles, the correlation of Jammalamadaka and SenGupta (1988); for an angle and a linear variable, Mardia’s (1976).</span></p>
+      <div class="form-grid">
+        <div class="field"><label for="b10CA"><span data-l="es">Ángulo</span><span data-l="en">Angle</span></label><select id="b10CA"></select></div>
+        <div class="field"><label for="b10CB"><span data-l="es">Con</span><span data-l="en">With</span></label><select id="b10CB"></select></div>
+      </div>
+      <div class="btn-row"><button type="button" class="btn btn-ghost btn-sm" id="b10CSim"><span data-l="es">Ejemplo simulado: viento y temperatura</span><span data-l="en">Simulated example: wind and temperature</span></button></div>
+      <div class="messages" id="b10CMsgs"></div>
+      <div id="b10CTiles"></div>
+      <div class="pg-pane" id="b10CScPane" hidden><div class="pg-title" id="b10CTitle"></div><div id="b10CSc"></div></div>
+    </div>
+
+    <div class="card">
+      <h2><span data-l="es">Composiciones: partes de un todo</span><span data-l="en">Compositions: parts of a whole</span></h2>
+      <p class="hint"><span data-l="es">Si las variables suman una constante (porcentajes, proporciones), su correlación de Pearson es espuria por construcción (Pearson 1897): si una sube, otras tienen que bajar. Se trabaja con log-cocientes centrados (Aitchison 1986) y con la proporcionalidad <span class="nc">ρ<sub>p</sub></span>.</span><span data-l="en">If the variables add up to a constant (percentages, proportions), their Pearson correlation is spurious by construction (Pearson 1897): if one rises, others must fall. One works with centred log-ratios (Aitchison 1986) and with the proportionality <span class="nc">ρ<sub>p</sub></span>.</span></p>
+      <div class="form-grid"><div class="field"><label for="b10KG"><span data-l="es">Grupo composicional</span><span data-l="en">Compositional group</span></label><select id="b10KG"></select></div></div>
+      <div class="btn-row"><button type="button" class="btn btn-ghost btn-sm" id="b10KSim"><span data-l="es">Ejemplo simulado: textura del suelo</span><span data-l="en">Simulated example: soil texture</span></button></div>
+      <div class="messages" id="b10KMsgs"></div>
+      <div class="b10-three" id="b10K"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== BLOCK 11 · CORRELATION NETWORKS ==================== -->
+<section class="step-panel" id="panel-11">
+  <div class="panel-title"><div class="pt-num">11</div><div><h2><span data-l="es">Redes de correlación</span><span data-l="en">Correlation networks</span></h2><p><span data-l="es">Cada variable un nodo, cada relación una arista: quién se conecta con quién, quién está en el centro y qué grupos se forman</span><span data-l="en">Each variable a node, each relation an edge: who connects to whom, who is at the centre and which groups form</span></p></div></div>
+
+  <div class="card" id="b11Empty">
+    <p class="hint"><span data-l="es">Primero abre unos datos en el Bloque 2 (o usa un conjunto de ejemplo).</span><span data-l="en">First open some data in Block 2 (or use an example dataset).</span></p>
+    <div class="btn-row"><button type="button" class="btn btn-secondary btn-sm" data-go="2"><span data-l="es">← Ir a Datos</span><span data-l="en">← Go to Data</span></button>
+      <button type="button" class="btn btn-ghost btn-sm" id="b11Swiss"><span data-l="es">Usar Suiza, 1888</span><span data-l="en">Use Switzerland, 1888</span></button></div>
+  </div>
+
+  <div id="b11Main" hidden>
+    <div class="card">
+      <h2><span data-l="es">Qué red</span><span data-l="en">Which network</span></h2>
+      <div class="chip-row" id="b11Vars"></div>
+      <div class="form-grid b11-opts">
+        <div class="field"><label for="b11Kind"><span data-l="es">Aristas</span><span data-l="en">Edges</span></label>
+          <select id="b11Kind"><option value="lasso" data-es="Parciales regularizadas (lazo gráfico + EBIC)" data-en="Regularized partials (graphical lasso + EBIC)">Parciales regularizadas (lazo gráfico + EBIC)</option><option value="partial" data-es="Parciales significativas" data-en="Significant partials">Parciales significativas</option><option value="marginal" data-es="Correlaciones con |r| ≥ umbral" data-en="Correlations with |r| ≥ threshold">Correlaciones con |r| ≥ umbral</option><option value="msig" data-es="Correlaciones significativas" data-en="Significant correlations">Correlaciones significativas</option></select></div>
+        <div class="field"><label for="b11Coef"><span data-l="es">Coeficiente</span><span data-l="en">Coefficient</span></label>
+          <select id="b11Coef"><option value="pearson">Pearson</option><option value="spearman">Spearman</option></select></div>
+        <div class="field" id="b11ThrField"><label for="b11Thr"><span data-l="es">Umbral |r|</span><span data-l="en">Threshold |r|</span> <b id="b11ThrV">.30</b></label><input type="range" id="b11Thr" min="0.05" max="0.9" step="0.05" value="0.3"></div>
+        <div class="field" id="b11GamField"><label for="b11Gam"><span data-l="es"><span class="nc">γ</span> del EBIC</span><span data-l="en">EBIC <span class="nc">γ</span></span></label>
+          <select id="b11Gam"><option value="0.5" data-es="0.5 (red más escasa)" data-en="0.5 (sparser network)">0.5 (red más escasa)</option><option value="0.25">0.25</option><option value="0" data-es="0 (BIC)" data-en="0 (BIC)">0 (BIC)</option></select></div>
+      </div>
+      <div class="messages" id="b11Msgs"></div>
+    </div>
+
+    <div class="card">
+      <h2><span data-l="es">La red</span><span data-l="en">The network</span></h2>
+      <div class="b11-bar" role="group" aria-label="Vista">
+        <button type="button" class="chip" data-view="force"><span data-l="es">Fuerzas</span><span data-l="en">Forces</span></button>
+        <button type="button" class="chip" data-view="circle"><span data-l="es">Círculo</span><span data-l="en">Circle</span></button>
+        <button type="button" class="chip" data-view="bundle"><span data-l="es">Cuerdas agrupadas</span><span data-l="en">Bundled chords</span></button>
+        <button type="button" class="chip" data-view="arc"><span data-l="es">Arcos</span><span data-l="en">Arcs</span></button>
+        <button type="button" class="chip" data-view="matrix"><span data-l="es">Matriz</span><span data-l="en">Matrix</span></button>
+        <button type="button" class="btn btn-secondary btn-sm" id="b11Tour"><span data-l="es">▶ Recorrido: matriz → red → cuerdas</span><span data-l="en">▶ Tour: matrix → network → chords</span></button>
+      </div>
+      <div class="pg-pane b11-pane" id="b11NetPane"><div class="pg-title" id="b11Title"></div><div id="b11Net"></div><div class="fig-legend" id="b11Leg"></div></div>
+      <div class="b11-info" id="b11Info"></div>
+      <details class="theory-note"><summary><span data-l="es">Cómo leer una red de correlación</span><span data-l="en">How to read a correlation network</span></summary>
+        <p><span data-l="es">En una red de correlaciones marginales casi todo se conecta con todo; las correlaciones parciales muestran sólo las relaciones que quedan al controlar por todas las demás variables, y el lazo gráfico (Friedman, Hastie y Tibshirani 2008) pone en cero las débiles, eligiendo cuántas con el EBIC (Foygel y Drton 2010; Epskamp y Fried 2018). La fuerza de un nodo es la suma de sus |w|; la cercanía y la intermediación usan caminos de longitud 1/|w| (Opsahl, Agneessens y Skvoretz 2010) y son las menos estables entre muestras. Las comunidades maximizan la modularidad (Newman 2006) con el método de Louvain (Blondel et al. 2008).</span><span data-l="en">In a network of marginal correlations almost everything connects to everything; partial correlations show only the relations left after controlling for all the other variables, and the graphical lasso (Friedman, Hastie and Tibshirani 2008) sets the weak ones to zero, choosing how many with the EBIC (Foygel and Drton 2010; Epskamp and Fried 2018). A node’s strength is the sum of its |w|; closeness and betweenness use paths of length 1/|w| (Opsahl, Agneessens and Skvoretz 2010) and are the least stable across samples. The communities maximize modularity (Newman 2006) with the Louvain method (Blondel et al. 2008).</span></p>
+      </details>
+    </div>
+
+    <div class="card">
+      <h2><span data-l="es">Centralidades y comunidades</span><span data-l="en">Centralities and communities</span></h2>
+      <div id="b11CTiles"></div>
+      <div class="table-wrap" id="b11Cent"></div>
+      <div class="pg-pane b7-share" id="b11CBarPane"><div class="pg-title"><span data-l="es">Fuerza de cada nodo</span><span data-l="en">Strength of each node</span></div><div id="b11CBar"></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== BLOCK 12 · COMPARE, CORRECT, PLAN AND COMBINE ==================== -->
+<section class="step-panel" id="panel-12">
+  <div class="panel-title"><div class="pt-num">12</div><div><h2><span data-l="es">Comparar, corregir, planear y combinar</span><span data-l="en">Compare, correct, plan and combine</span></h2><p><span data-l="es">Las preguntas que vienen después de calcular una correlación: ¿es distinta de otra?, ¿cuánto vale sin el error de medida?, ¿cuántos casos necesito?, ¿qué dicen todos los estudios juntos?</span><span data-l="en">The questions that come after computing a correlation: is it different from another?, what is it worth without measurement error?, how many cases do I need?, what do all the studies say together?</span></p></div></div>
+
+  <div class="b12-bar" role="group" aria-label="Sección">
+    <button type="button" class="chip on" data-sec="cmp"><span data-l="es">Comparar dos correlaciones</span><span data-l="en">Compare two correlations</span></button>
+    <button type="button" class="chip" data-sec="mat"><span data-l="es">Comparar matrices</span><span data-l="en">Compare matrices</span></button>
+    <button type="button" class="chip" data-sec="cor"><span data-l="es">Corregir</span><span data-l="en">Correct</span></button>
+    <button type="button" class="chip" data-sec="plan"><span data-l="es">Potencia y tamaño de muestra</span><span data-l="en">Power and sample size</span></button>
+    <button type="button" class="chip" data-sec="meta"><span data-l="es">Metaanálisis</span><span data-l="en">Meta-analysis</span></button>
+  </div>
+
+  <!-- ===== two correlations ===== -->
+  <div class="b12-sec" id="b12Sec-cmp">
+    <div class="card">
+      <h2><span data-l="es">Qué correlaciones</span><span data-l="en">Which correlations</span></h2>
+      <div class="form-grid">
+        <div class="field"><label for="b12Design"><span data-l="es">Diseño</span><span data-l="en">Design</span></label>
+          <select id="b12Design"><option value="indep" data-es="Dos grupos independientes" data-en="Two independent groups">Dos grupos independientes</option><option value="overlap" data-es="Mismos casos, una variable en común: r(j, k) frente a r(j, h)" data-en="Same cases, one variable in common: r(j, k) against r(j, h)">Mismos casos, una variable en común: r(j, k) frente a r(j, h)</option><option value="nonoverlap" data-es="Mismos casos, sin variable en común: r(j, k) frente a r(h, m)" data-en="Same cases, no variable in common: r(j, k) against r(h, m)">Mismos casos, sin variable en común: r(j, k) frente a r(h, m)</option></select></div>
+        <div class="field"><label for="b12Alt"><span data-l="es">Hipótesis alternativa</span><span data-l="en">Alternative hypothesis</span></label>
+          <select id="b12Alt"><option value="two.sided" data-es="Distintas (dos colas)" data-en="Different (two-sided)">Distintas (dos colas)</option><option value="greater" data-es="La primera mayor" data-en="The first greater">La primera mayor</option><option value="less" data-es="La primera menor" data-en="The first smaller">La primera menor</option></select></div>
+        <div class="field"><label for="b12Conf"><span data-l="es">Confianza</span><span data-l="en">Confidence</span></label>
+          <select id="b12Conf"><option value="0.95">95 %</option><option value="0.9">90 %</option><option value="0.99">99 %</option></select></div>
+      </div>
+      <div class="form-grid b12-nums" id="b12Nums"></div>
+      <details class="b12-from" id="b12From"><summary><span data-l="es">Tomarlas de los datos abiertos</span><span data-l="en">Take them from the open data</span></summary>
+        <div class="form-grid" id="b12FromGrid"></div>
+        <div class="btn-row"><button type="button" class="btn btn-secondary btn-sm" id="b12FromGo"><span data-l="es">Calcular desde los datos</span><span data-l="en">Compute from the data</span></button>
+          <button type="button" class="btn btn-ghost btn-sm" id="b12Iris"><span data-l="es">Ejemplo: iris por especie</span><span data-l="en">Example: iris by species</span></button></div>
+      </details>
+      <div class="messages" id="b12CMsgs"></div>
+    </div>
+    <div class="card">
+      <h2><span data-l="es">¿Son distintas?</span><span data-l="en">Are they different?</span></h2>
+      <div id="b12CTiles"></div>
+      <div class="table-wrap" id="b12CTable"></div>
+      <div class="pg-pane" id="b12CFigPane"><div class="pg-title"><span data-l="es">Las dos correlaciones y su diferencia</span><span data-l="en">The two correlations and their difference</span></div><div id="b12CFig"></div></div>
+      <details class="theory-note"><summary><span data-l="es">Por qué importa el diseño</span><span data-l="en">Why the design matters</span></summary>
+        <p><span data-l="es">Con grupos independientes basta la diferencia de las z de Fisher (Fisher 1925). Si las dos correlaciones se calcularon en los mismos casos, están correlacionadas entre sí y la prueba debe usar la correlación entre ellas: con una variable en común (r<sub>jk</sub> frente a r<sub>jh</sub>) cuenta r<sub>kh</sub>; sin variable en común, las cuatro correlaciones cruzadas. Hay una decena de propuestas (Steiger 1980; Meng, Rosenthal y Rubin 1992); en simulaciones las más fieles al nivel nominal son la t de Williams (1959) y la z de Hittner, May y Silver (2003) para el caso traslapado, y la de Silver, Hittner y May (2004) para el no traslapado. El intervalo de Zou (2007) da además el tamaño de la diferencia, no sólo su significancia.</span><span data-l="en">With independent groups the difference of Fisher’s z is enough (Fisher 1925). If both correlations were computed on the same cases, they are correlated with each other and the test must use the correlation between them: with one variable in common (r<sub>jk</sub> against r<sub>jh</sub>) r<sub>kh</sub> counts; with none, the four cross correlations. There are a dozen proposals (Steiger 1980; Meng, Rosenthal and Rubin 1992); in simulations the most faithful to the nominal level are Williams’ t (1959) and Hittner, May and Silver’s z (2003) for the overlapping case, and Silver, Hittner and May’s (2004) for the non-overlapping one. Zou’s interval (2007) also gives the size of the difference, not only its significance.</span></p>
+      </details>
+    </div>
+  </div>
+
+  <!-- ===== two matrices ===== -->
+  <div class="b12-sec" id="b12Sec-mat" hidden>
+    <div class="card">
+      <h2><span data-l="es">Dos matrices de correlación</span><span data-l="en">Two correlation matrices</span></h2>
+      <div id="b12MEmpty"><p class="hint"><span data-l="es">Se comparan las matrices de dos grupos de casos: abre en el Bloque 2 unos datos con una columna de grupo.</span><span data-l="en">The matrices of two groups of cases are compared: open in Block 2 some data with a grouping column.</span></p>
+        <div class="btn-row"><button type="button" class="btn btn-ghost btn-sm" id="b12MIris"><span data-l="es">Usar iris (tres especies)</span><span data-l="en">Use iris (three species)</span></button></div></div>
+      <div id="b12MMain" hidden>
+        <div class="form-grid">
+          <div class="field"><label for="b12MGroup"><span data-l="es">Columna de grupo</span><span data-l="en">Grouping column</span></label><select id="b12MGroup"></select></div>
+          <div class="field"><label for="b12MA"><span data-l="es">Grupo A</span><span data-l="en">Group A</span></label><select id="b12MA"></select></div>
+          <div class="field"><label for="b12MB"><span data-l="es">Grupo B</span><span data-l="en">Group B</span></label><select id="b12MB"></select></div>
+          <div class="field"><label for="b12MCoef"><span data-l="es">Coeficiente</span><span data-l="en">Coefficient</span></label><select id="b12MCoef"><option value="pearson">Pearson</option><option value="spearman">Spearman</option></select></div>
+        </div>
+        <div class="chip-row" id="b12MVars"></div>
+      </div>
+      <div class="messages" id="b12MMsgs"></div>
+    </div>
+    <div class="card" id="b12MRes" hidden>
+      <h2><span data-l="es">¿La estructura es la misma?</span><span data-l="en">Is the structure the same?</span></h2>
+      <div id="b12MTiles"></div>
+      <div class="b12-tri" id="b12MFigs"></div>
+      <div class="table-wrap" id="b12MTable"></div>
+      <details class="theory-note"><summary><span data-l="es">La prueba de Jennrich y las comparaciones celda por celda</span><span data-l="en">Jennrich’s test and the cell-by-cell comparisons</span></summary>
+        <p><span data-l="es">La prueba de Jennrich (1970) compara las dos matrices completas con un χ² de p(p − 1)/2 grados de libertad que toma en cuenta que las correlaciones de una misma matriz dependen unas de otras. Sumar los z² de cada celda sólo da un χ² cuando todas las correlaciones son casi cero: con variables correlacionadas rechaza de más (en nuestra simulación, 11 % en vez de 5 %), por eso aquí sirve sólo para leer celda por celda, con la corrección de Holm.</span><span data-l="en">Jennrich’s test (1970) compares the two whole matrices with a χ² on p(p − 1)/2 degrees of freedom that takes into account that the correlations of one matrix depend on each other. Summing the z² of each cell gives a χ² only when all correlations are near zero: with correlated variables it rejects too often (in our simulation, 11% instead of 5%), so here it serves only to read cell by cell, with Holm’s correction.</span></p>
+      </details>
+    </div>
+  </div>
+
+  <!-- ===== corrections ===== -->
+  <div class="b12-sec" id="b12Sec-cor" hidden>
+    <div class="card">
+      <h2><span data-l="es">Corregir por atenuación</span><span data-l="en">Correct for attenuation</span></h2>
+      <p class="hint"><span data-l="es">Si las dos medidas tienen error, la correlación observada subestima la de los valores verdaderos: r / √(r<sub>xx</sub> · r<sub>yy</sub>) (Spearman 1904), con r<sub>xx</sub> y r<sub>yy</sub> las fiabilidades (α, test–retest o un ICC del Bloque 9).</span><span data-l="en">If both measures carry error, the observed correlation underestimates that of the true scores: r / √(r<sub>xx</sub> · r<sub>yy</sub>) (Spearman 1904), with r<sub>xx</sub> and r<sub>yy</sub> the reliabilities (α, test–retest or an ICC from Block 9).</span></p>
+      <div class="form-grid">
+        <div class="field"><label for="b12AR"><span data-l="es"><span class="nc">r</span> observada</span><span data-l="en">Observed <span class="nc">r</span></span></label><input type="number" id="b12AR" value="0.42" step="0.01" min="-1" max="1"></div>
+        <div class="field"><label for="b12AX"><span data-l="es">Fiabilidad de <span class="nc">x</span> (<span class="nc">r<sub>xx</sub></span>)</span><span data-l="en">Reliability of <span class="nc">x</span> (<span class="nc">r<sub>xx</sub></span>)</span></label><input type="number" id="b12AX" value="0.80" step="0.01" min="0.01" max="1"></div>
+        <div class="field"><label for="b12AY"><span data-l="es">Fiabilidad de <span class="nc">y</span> (<span class="nc">r<sub>yy</sub></span>)</span><span data-l="en">Reliability of <span class="nc">y</span> (<span class="nc">r<sub>yy</sub></span>)</span></label><input type="number" id="b12AY" value="0.70" step="0.01" min="0.01" max="1"></div>
+      </div>
+      <div id="b12ATiles"></div>
+    </div>
+    <div class="card">
+      <h2><span data-l="es">Corregir por rango restringido</span><span data-l="en">Correct for range restriction</span></h2>
+      <p class="hint"><span data-l="es">Si sólo se observaron casos con valores de x dentro de un intervalo (los admitidos, los sobrevivientes, los seleccionados), la correlación sale más baja que en la población completa. El caso II corrige la selección directa sobre x; el caso III, la selección sobre una tercera variable z (Thorndike 1949). U es el cociente de la desviación estándar sin restricción entre la restringida.</span><span data-l="en">If only cases with x inside an interval were observed (the admitted, the survivors, the selected), the correlation comes out lower than in the whole population. Case II corrects direct selection on x; case III, selection on a third variable z (Thorndike 1949). U is the unrestricted standard deviation divided by the restricted one.</span></p>
+      <div class="form-grid">
+        <div class="field"><label for="b12RR"><span data-l="es"><span class="nc">r</span> en la muestra restringida</span><span data-l="en"><span class="nc">r</span> in the restricted sample</span></label><input type="number" id="b12RR" value="0.30" step="0.01" min="-1" max="1"></div>
+        <div class="field"><label for="b12Rs"><span data-l="es">DE restringida (<span class="nc">s</span>)</span><span data-l="en">Restricted SD (<span class="nc">s</span>)</span></label><input type="number" id="b12Rs" value="6" step="0.1" min="0.0001"></div>
+        <div class="field"><label for="b12RS"><span data-l="es">DE sin restricción (S)</span><span data-l="en">Unrestricted SD (S)</span></label><input type="number" id="b12RS" value="10" step="0.1" min="0.0001"></div>
+        <div class="field"><label for="b12RCase"><span data-l="es">Selección</span><span data-l="en">Selection</span></label><select id="b12RCase"><option value="II" data-es="Caso II: sobre x" data-en="Case II: on x">Caso II: sobre x</option><option value="III" data-es="Caso III: sobre otra z" data-en="Case III: on another z">Caso III: sobre otra z</option></select></div>
+        <div class="field b12-c3"><label for="b12Rxz"><span data-l="es"><span class="nc">r<sub>xz</sub></span> restringida</span><span data-l="en">Restricted <span class="nc">r<sub>xz</sub></span></span></label><input type="number" id="b12Rxz" value="0.50" step="0.01" min="-1" max="1"></div>
+        <div class="field b12-c3"><label for="b12Ryz"><span data-l="es"><span class="nc">r<sub>yz</sub></span> restringida</span><span data-l="en">Restricted <span class="nc">r<sub>yz</sub></span></span></label><input type="number" id="b12Ryz" value="0.40" step="0.01" min="-1" max="1"></div>
+      </div>
+      <div id="b12RTiles"></div>
+      <div class="pg-pane" id="b12RFigPane"><div class="pg-title"><span data-l="es">La corrección del caso II según U</span><span data-l="en">The case II correction by U</span></div><div id="b12RFig"></div></div>
+      <details class="theory-note"><summary><span data-l="es">Precauciones</span><span data-l="en">Cautions</span></summary>
+        <p><span data-l="es">Las dos correcciones suponen relación lineal y homocedástica y que la selección fue la que se dice; una corrección mayor que 1 indica que alguna fiabilidad está subestimada o que el error no es independiente. Corregir no crea información: el intervalo corregido es el intervalo observado transformado con la misma fórmula, más ancho en la misma proporción (Hunter y Schmidt 2004; Sackett y Yang 2000).</span><span data-l="en">Both corrections assume a linear, homoscedastic relation and that the selection was the one stated; a correction above 1 means that some reliability is underestimated or that the error is not independent. Correcting creates no information: the corrected interval is the observed one transformed by the same formula, wider in the same proportion (Hunter and Schmidt 2004; Sackett and Yang 2000).</span></p>
+      </details>
+    </div>
+  </div>
+
+  <!-- ===== power and sample size ===== -->
+  <div class="b12-sec" id="b12Sec-plan" hidden>
+    <div class="card">
+      <h2><span data-l="es">Planear un estudio</span><span data-l="en">Plan a study</span></h2>
+      <div class="form-grid">
+        <div class="field"><label for="b12PR"><span data-l="es"><span class="nc">ρ</span> esperada</span><span data-l="en">Expected <span class="nc">ρ</span></span> <b id="b12PRv">0.30</b></label><input type="range" id="b12PR" min="0.05" max="0.9" step="0.01" value="0.3"></div>
+        <div class="field"><label for="b12PN"><span class="nc">n</span> <b id="b12PNv">50</b></label><input type="range" id="b12PN" min="5" max="500" step="1" value="50"></div>
+        <div class="field"><label for="b12PA"><span class="nc">α</span></label><select id="b12PA"><option value="0.05">0.05</option><option value="0.01">0.01</option><option value="0.005">0.005</option><option value="0.1">0.10</option></select></div>
+        <div class="field"><label for="b12PAlt"><span data-l="es">Prueba</span><span data-l="en">Test</span></label><select id="b12PAlt"><option value="two.sided" data-es="Dos colas" data-en="Two-sided">Dos colas</option><option value="greater" data-es="Una cola (ρ > 0)" data-en="One-sided (ρ > 0)">Una cola (ρ > 0)</option></select></div>
+        <div class="field"><label for="b12PPow"><span data-l="es">Potencia deseada</span><span data-l="en">Desired power</span></label><select id="b12PPow"><option value="0.8">80 %</option><option value="0.9">90 %</option><option value="0.95">95 %</option></select></div>
+        <div class="field"><label for="b12PW"><span data-l="es">Semiamplitud del IC deseada</span><span data-l="en">Desired CI half-width</span></label><select id="b12PW"><option value="0.1">± 0.10</option><option value="0.05">± 0.05</option><option value="0.15">± 0.15</option><option value="0.2">± 0.20</option></select></div>
+      </div>
+      <div id="b12PTiles"></div>
+      <div class="two-figs">
+        <div class="pg-pane" id="b12PDistPane"><div class="pg-title"><span data-l="es">La distribución exacta de <span class="nc">r</span> bajo H₀ y bajo <span class="nc">ρ</span></span><span data-l="en">The exact distribution of <span class="nc">r</span> under H₀ and under <span class="nc">ρ</span></span></div><div id="b12PDist"></div></div>
+        <div class="pg-pane" id="b12PCurvePane"><div class="pg-title"><span data-l="es">Potencia según <span class="nc">n</span></span><span data-l="en">Power by <span class="nc">n</span></span></div><div id="b12PCurve"></div></div>
+      </div>
+      <details class="theory-note"><summary><span data-l="es">Exacta y aproximada</span><span data-l="en">Exact and approximate</span></summary>
+        <p><span data-l="es">La potencia exacta integra la densidad de r cuando la verdadera es ρ (Fisher 1915; Hotelling 1953) sobre la región donde la prueba t rechaza; la aproximada usa la z de Fisher con la corrección de sesgo ρ/(2(n − 1)) y se aparta unas milésimas con n pequeño. Con ρ = 0 la potencia exacta es α, como debe ser. Planear por la amplitud del intervalo, y no sólo por la potencia, garantiza una estimación útil aunque el efecto resulte pequeño (Bonett y Wright 2000).</span><span data-l="en">The exact power integrates the density of r when the true value is ρ (Fisher 1915; Hotelling 1953) over the region where the t test rejects; the approximate one uses Fisher’s z with the bias correction ρ/(2(n − 1)) and departs by a few thousandths with small n. With ρ = 0 the exact power is α, as it should. Planning by the width of the interval, and not only by power, guarantees a useful estimate even if the effect turns out small (Bonett and Wright 2000).</span></p>
+      </details>
+    </div>
+    <div class="card">
+      <h2><span data-l="es">Factor de Bayes de una r publicada</span><span data-l="en">Bayes factor of a published r</span></h2>
+      <p class="hint"><span data-l="es">Con sólo r y n: la evidencia a favor de ρ ≠ 0 frente a ρ = 0, con la previa beta extendida de ancho κ (Ly, Verhagen y Wagenmakers 2016).</span><span data-l="en">With only r and n: the evidence for ρ ≠ 0 against ρ = 0, with the stretched beta prior of width κ (Ly, Verhagen and Wagenmakers 2016).</span></p>
+      <div class="form-grid">
+        <div class="field"><label for="b12BR"><span class="nc">r</span></label><input type="number" id="b12BR" value="0.25" step="0.01" min="-0.999" max="0.999"></div>
+        <div class="field"><label for="b12BN"><span class="nc">n</span></label><input type="number" id="b12BN" value="60" step="1" min="4"></div>
+        <div class="field"><label for="b12BK"><span data-l="es">Ancho de la previa <span class="nc">κ</span></span><span data-l="en">Prior width <span class="nc">κ</span></span></label><select id="b12BK"><option value="0.3333333333333333">1/3</option><option value="0.5">1/2</option><option value="1" data-es="1 (uniforme)" data-en="1 (uniform)">1 (uniforme)</option></select></div>
+      </div>
+      <div id="b12BTiles"></div>
+    </div>
+  </div>
+
+  <!-- ===== meta-analysis ===== -->
+  <div class="b12-sec" id="b12Sec-meta" hidden>
+    <div class="card">
+      <h2><span data-l="es">Los estudios</span><span data-l="en">The studies</span></h2>
+      <p class="hint"><span data-l="es">Un estudio por renglón: nombre; r; n (separados por punto y coma o tabulador). Se combinan en la escala z de Fisher con varianza 1/(n − 3).</span><span data-l="en">One study per line: name; r; n (separated by semicolon or tab). They are combined on Fisher’s z scale with variance 1/(n − 3).</span></p>
+      <textarea id="b12MetaTxt" rows="9" spellcheck="false" aria-label="Estudios"></textarea>
+      <div class="form-grid">
+        <div class="field"><label for="b12MetaModel"><span data-l="es">Modelo</span><span data-l="en">Model</span></label><select id="b12MetaModel"><option value="reml" data-es="Efectos aleatorios (REML)" data-en="Random effects (REML)">Efectos aleatorios (REML)</option><option value="dl" data-es="Efectos aleatorios (DerSimonian–Laird)" data-en="Random effects (DerSimonian–Laird)">Efectos aleatorios (DerSimonian–Laird)</option><option value="hsz" data-es="Efectos aleatorios (Hunter–Schmidt)" data-en="Random effects (Hunter–Schmidt)">Efectos aleatorios (Hunter–Schmidt)</option><option value="fixed" data-es="Efecto fijo" data-en="Fixed effect">Efecto fijo</option></select></div>
+      </div>
+      <div class="btn-row"><button type="button" class="btn btn-secondary btn-sm" id="b12MetaGo"><span data-l="es">Combinar</span><span data-l="en">Combine</span></button>
+        <button type="button" class="btn btn-ghost btn-sm" id="b12MetaEx"><span data-l="es">Ejemplo simulado: 16 estudios</span><span data-l="en">Simulated example: 16 studies</span></button>
+        <button type="button" class="btn btn-ghost btn-sm" id="b12MetaData"><span data-l="es">Usar columnas de los datos</span><span data-l="en">Use columns of the data</span></button></div>
+      <div class="form-grid" id="b12MetaCols" hidden></div>
+      <div class="messages" id="b12MetaMsgs"></div>
+    </div>
+    <div class="card" id="b12MetaRes" hidden>
+      <h2><span data-l="es">Lo que dicen juntos</span><span data-l="en">What they say together</span></h2>
+      <div id="b12MetaTiles"></div>
+      <div class="pg-pane" id="b12ForestPane"><div class="pg-title"><span data-l="es">Gráfico de bosque</span><span data-l="en">Forest plot</span></div><div id="b12Forest"></div></div>
+      <div class="two-figs">
+        <div class="pg-pane" id="b12FunnelPane"><div class="pg-title"><span data-l="es">Embudo: efecto frente a precisión</span><span data-l="en">Funnel: effect against precision</span></div><div id="b12Funnel"></div></div>
+        <div class="b12-text" id="b12MetaText"></div>
+      </div>
+      <div class="table-wrap" id="b12MetaTable"></div>
+      <details class="theory-note"><summary><span data-l="es">Efecto fijo, efectos aleatorios y heterogeneidad</span><span data-l="en">Fixed effect, random effects and heterogeneity</span></summary>
+        <p><span data-l="es">El efecto fijo supone que todos los estudios estiman la misma ρ; los efectos aleatorios, que cada uno estima la suya, alrededor de un promedio, con varianza τ² (DerSimonian y Laird 1986; REML de Viechtbauer 2005). Q prueba si hay heterogeneidad; I² dice qué parte de la variación entre estudios no es azar (Higgins y Thompson 2002); el intervalo de predicción dice dónde caería la ρ de un estudio nuevo (Higgins, Thompson y Spiegelhalter 2009) y suele ser mucho más ancho que el de confianza. La prueba de Egger et al. (1997) busca asimetría en el embudo, que puede venir del sesgo de publicación o de que los estudios pequeños son distintos. El método de Hunter y Schmidt (2004) trabaja sobre r y dice qué porcentaje de la varianza observada explica el error de muestreo.</span><span data-l="en">The fixed effect assumes that all studies estimate the same ρ; random effects, that each estimates its own, around an average, with variance τ² (DerSimonian and Laird 1986; REML in Viechtbauer 2005). Q tests whether there is heterogeneity; I² says which part of the variation between studies is not chance (Higgins and Thompson 2002); the prediction interval says where the ρ of a new study would fall (Higgins, Thompson and Spiegelhalter 2009) and is usually much wider than the confidence interval. Egger et al.’s test (1997) looks for asymmetry in the funnel, which may come from publication bias or from small studies being different. Hunter and Schmidt’s method (2004) works on r and says which percentage of the observed variance sampling error explains.</span></p>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ==================== BLOCK 13 · FIGURES, PALETTES AND REPORT ==================== -->
+<section class="step-panel" id="panel-13">
+  <div class="panel-title"><div class="pt-num">13</div><div><h2><span data-l="es">Figuras, paletas e informe</span><span data-l="en">Figures, palettes and report</span></h2><p><span data-l="es">Lo que se lleva al artículo: las figuras a tamaño de revista, una paleta propia que se lea con cualquier visión, la tabla, los métodos redactados con lo que corriste y sus referencias</span><span data-l="en">What goes into the paper: the figures at journal size, a palette of your own that reads with any vision, the table, the methods written from what you ran and their references</span></p></div></div>
+
+  <div class="b12-bar" role="group" aria-label="Sección">
+    <button type="button" class="chip on" data-sec="figs"><span data-l="es">Figuras</span><span data-l="en">Figures</span></button>
+    <button type="button" class="chip" data-sec="pal"><span data-l="es">Diseñar una paleta</span><span data-l="en">Design a palette</span></button>
+    <button type="button" class="chip" data-sec="table"><span data-l="es">Tabla para publicar</span><span data-l="en">Table to publish</span></button>
+    <button type="button" class="chip" data-sec="methods"><span data-l="es">Métodos y referencias</span><span data-l="en">Methods and references</span></button>
+    <button type="button" class="chip" data-sec="project"><span data-l="es">Proyecto e informe</span><span data-l="en">Project and report</span></button>
+  </div>
+
+  <!-- ===== figures ===== -->
+  <div class="b12-sec" id="b13Sec-figs">
+    <div class="card">
+      <h2><span data-l="es">Las figuras que has hecho</span><span data-l="en">The figures you have made</span></h2>
+      <p class="hint"><span data-l="es">Cada figura que dibujaron los bloques. «Exportar» la abre en el estudio de figuras: anchos de revista (85, 114 y 180 mm), resolución, PNG, SVG, PDF vectorial y TIFF, con el aviso si alguna letra queda por debajo de los 7 pt. Marca las que quieras en el informe.</span><span data-l="en">Every figure the blocks drew. «Export» opens it in the figure studio: journal widths (85, 114 and 180 mm), resolution, PNG, SVG, vector PDF and TIFF, with a warning if any text falls below 7 pt. Tick the ones you want in the report.</span></p>
+      <div class="form-grid">
+        <div class="field"><label for="b13Font"><span data-l="es">Letra de las figuras</span><span data-l="en">Typeface of the figures</span></label>
+          <select id="b13Font"><option value="sans" data-es="Sin serifa (la del sistema)" data-en="Sans serif (the system’s)">Sin serifa (la del sistema)</option><option value="serif" data-es="Con serifa" data-en="Serif">Con serifa</option><option value="mono" data-es="Monoespaciada" data-en="Monospaced">Monoespaciada</option></select></div>      </div>
+      <div class="messages" id="b13FMsgs"></div>
+      <div class="b13-gallery" id="b13Gallery"></div>
+    </div>
+  </div>
+
+  <!-- ===== palette designer ===== -->
+  <div class="b12-sec" id="b13Sec-pal" hidden>
+    <div class="card">
+      <h2><span data-l="es">Diseñar una paleta divergente</span><span data-l="en">Design a diverging palette</span></h2>
+      <p class="hint"><span data-l="es">Dos tonos, uno para las correlaciones positivas y otro para las negativas, que se encuentran en un centro claro. Se construye en OKLab, un espacio donde distancias iguales se ven iguales, así que el color crece al mismo paso que |r|. Las pruebas de la derecha dicen si la paleta cabe en la pantalla, si es uniforme, si el signo se distingue con las tres formas comunes de daltonismo y si funciona impresa en gris.</span><span data-l="en">Two hues, one for positive correlations and one for negative ones, meeting at a light centre. It is built in OKLab, a space where equal distances look equal, so the colour grows at the same pace as |r|. The checks on the right say whether the palette fits the screen, whether it is uniform, whether the sign can be told apart with the three common forms of colour blindness and whether it works printed in grey.</span></p>
+      <div class="b13-pal">
+        <div>
+          <div class="form-grid">
+            <div class="field"><label for="b13HPos"><span data-l="es">Tono de <span class="nc">r</span> positiva</span><span data-l="en">Hue of positive <span class="nc">r</span></span> <b id="b13HPosV"></b></label><input type="range" id="b13HPos" min="0" max="359" step="1" value="268"></div>
+            <div class="field"><label for="b13HNeg"><span data-l="es">Tono de <span class="nc">r</span> negativa</span><span data-l="en">Hue of negative <span class="nc">r</span></span> <b id="b13HNegV"></b></label><input type="range" id="b13HNeg" min="0" max="359" step="1" value="33"></div>
+            <div class="field"><label for="b13L1"><span data-l="es">Luminosidad de los extremos</span><span data-l="en">Lightness of the ends</span> <b id="b13L1V"></b></label><input type="range" id="b13L1" min="0.32" max="0.7" step="0.01" value="0.46"></div>
+            <div class="field"><label for="b13C1"><span data-l="es">Croma (intensidad)</span><span data-l="en">Chroma (intensity)</span> <b id="b13C1V"></b></label><input type="range" id="b13C1" min="0.3" max="1" step="0.01" value="0.95"></div>
+            <div class="field"><label for="b13PName"><span data-l="es">Nombre</span><span data-l="en">Name</span></label><input type="text" id="b13PName" maxlength="40" value="Mi paleta"></div>
+            <div class="field"><label for="b13PFrom"><span data-l="es">Empezar desde</span><span data-l="en">Start from</span></label><select id="b13PFrom"></select></div>
+          </div>
+          <div class="b13-ramps" id="b13Ramps"></div>
+          <div class="btn-row"><button type="button" class="btn btn-primary btn-sm" id="b13PUse"><span data-l="es">Usar en toda la app</span><span data-l="en">Use across the app</span></button>
+            <button type="button" class="btn btn-ghost btn-sm" id="b13PAuto"><span data-l="es">Buscar el mejor tono para r negativa</span><span data-l="en">Find the best hue for negative r</span></button>
+            <button type="button" class="btn btn-ghost btn-sm" id="b13PInv"><span data-l="es">Invertir el sentido</span><span data-l="en">Swap the direction</span></button></div>
+          <div class="messages" id="b13PMsgs"></div>
+        </div>
+        <div>
+          <div class="b13-checks" id="b13Checks"></div>
+          <div class="pg-pane" id="b13PSamplePane"><div class="pg-title"><span data-l="es">La matriz de los lirios con esta paleta</span><span data-l="en">The iris matrix with this palette</span></div><div id="b13PSample"></div></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== publication table ===== -->
+  <div class="b12-sec" id="b13Sec-table" hidden>
+    <div class="card">
+      <h2><span data-l="es">Tabla de correlaciones para publicar</span><span data-l="en">Correlation table to publish</span></h2>
+      <div id="b13TEmpty"><p class="hint"><span data-l="es">Abre unos datos en el Bloque 2 (o calcula una matriz en el Bloque 5) para armar la tabla.</span><span data-l="en">Open some data in Block 2 (or compute a matrix in Block 5) to build the table.</span></p>
+        <div class="btn-row"><button type="button" class="btn btn-ghost btn-sm" id="b13TIris"><span data-l="es">Usar iris</span><span data-l="en">Use iris</span></button></div></div>
+      <div id="b13TMain" hidden>
+        <div class="chip-row" id="b13TVars"></div>
+        <div class="form-grid">
+          <div class="field"><label for="b13TCoef"><span data-l="es">Coeficiente</span><span data-l="en">Coefficient</span></label><select id="b13TCoef"><option value="pearson">Pearson</option><option value="spearman">Spearman</option><option value="kendall">Kendall</option></select></div>
+          <div class="field"><label for="b13TSig"><span data-l="es">Significancia</span><span data-l="en">Significance</span></label><select id="b13TSig"><option value="stars" data-es="Asteriscos" data-en="Asterisks">Asteriscos</option><option value="ci" data-es="IC 95 % debajo de cada r" data-en="95% CI under each r">IC 95 % debajo de cada r</option><option value="p" data-es="Valor p debajo de cada r" data-en="p-value under each r">Valor p debajo de cada r</option><option value="none" data-es="Nada" data-en="Nothing">Nada</option></select></div>
+          <div class="field"><label for="b13TAdj"><span data-l="es">Corrección por pruebas múltiples</span><span data-l="en">Multiple-testing correction</span></label><select id="b13TAdj"><option value="none" data-es="Ninguna" data-en="None">Ninguna</option><option value="holm">Holm</option><option value="BH">Benjamini–Hochberg</option><option value="bonferroni">Bonferroni</option></select></div>
+          <div class="field"><label for="b13TDig"><span data-l="es">Decimales</span><span data-l="en">Decimals</span></label><select id="b13TDig"><option value="2">2</option><option value="3">3</option></select></div>
+          <div class="field"><label for="b13TStyle"><span data-l="es">Estilo de los números</span><span data-l="en">Style of the numbers</span></label><select id="b13TStyle"><option value="apa" data-es="Ciencias sociales (APA 7)" data-en="Social sciences (APA 7)">Ciencias sociales (APA 7)</option><option value="sampl" data-es="Biomédico (SAMPL)" data-en="Biomedical (SAMPL)">Biomédico (SAMPL)</option><option value="nom" data-es="Normativo, punto decimal" data-en="Standard, decimal point">Normativo, punto decimal</option><option value="nomc" data-es="Normativo, coma decimal" data-en="Standard, decimal comma">Normativo, coma decimal</option></select></div>
+          <div class="field"><label for="b13TDesc"><span data-l="es">Descriptivos</span><span data-l="en">Descriptives</span></label><select id="b13TDesc"><option value="msd" data-es="Media y DE" data-en="Mean and SD">Media y DE</option><option value="mdn" data-es="Mediana y RIC" data-en="Median and IQR">Mediana y RIC</option><option value="none" data-es="Ninguno" data-en="None">Ninguno</option></select></div>
+        </div>
+        <p class="hint"><span data-l="es">El estilo de los números (cero inicial, coma o punto decimal, «p < .001») vale para toda la app: es el mismo de «Estilos de reporte» en el Inicio.</span><span data-l="en">The style of the numbers (leading zero, decimal comma or point, «p < .001») applies to the whole app: it is the same as «Reporting styles» on Home.</span></p>
+        <div class="b13-tbox" id="b13Table"></div>
+        <div class="btn-row"><button type="button" class="btn btn-secondary btn-sm" id="b13TCopy"><span data-l="es">Copiar para el procesador de textos</span><span data-l="en">Copy for the word processor</span></button>
+          <button type="button" class="btn btn-ghost btn-sm" id="b13TCsv"><span data-l="es">Descargar CSV</span><span data-l="en">Download CSV</span></button>
+          <button type="button" class="btn btn-ghost btn-sm" id="b13THtml"><span data-l="es">Descargar HTML</span><span data-l="en">Download HTML</span></button></div>
+        <div class="messages" id="b13TMsgs"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== methods and references ===== -->
+  <div class="b12-sec" id="b13Sec-methods" hidden>
+    <div class="card">
+      <h2><span data-l="es">Métodos, redactados con lo que corriste</span><span data-l="en">Methods, written from what you ran</span></h2>
+      <p class="hint"><span data-l="es">Un párrafo por bloque que usaste en esta sesión, con los coeficientes, las pruebas, las correcciones y los ajustes que elegiste, y la cita de cada método. Revísalo: la app escribe lo que hizo, pero el porqué lo pones tú.</span><span data-l="en">A paragraph for each block you used in this session, with the coefficients, tests, corrections and settings you chose, and the citation of each method. Check it: the app writes what it did, but the why is yours.</span></p>
+      <div class="b13-methods" id="b13Methods"></div>
+      <div class="btn-row"><button type="button" class="btn btn-secondary btn-sm" id="b13MCopy"><span data-l="es">Copiar los métodos</span><span data-l="en">Copy the methods</span></button>
+        <button type="button" class="btn btn-ghost btn-sm" id="b13MRefresh"><span data-l="es">Volver a redactar</span><span data-l="en">Write again</span></button></div>
+    </div>
+    <div class="card">
+      <h2><span data-l="es">Referencias de los métodos usados</span><span data-l="en">References of the methods used</span></h2>
+      <ol class="b13-refs" id="b13Refs"></ol>
+      <div class="btn-row"><button type="button" class="btn btn-secondary btn-sm" id="b13RCopy"><span data-l="es">Copiar las referencias</span><span data-l="en">Copy the references</span></button></div>
+      <div class="messages" id="b13MMsgs"></div>
+    </div>
+  </div>
+
+  <!-- ===== project and report ===== -->
+  <div class="b12-sec" id="b13Sec-project" hidden>
+    <div class="card">
+      <h2><span data-l="es">El informe</span><span data-l="en">The report</span></h2>
+      <p class="hint"><span data-l="es">Un documento con los datos usados, los resultados de cada bloque, la tabla, las figuras que marcaste, los métodos y las referencias, con los colores del tema claro. Se abre en una pestaña lista para imprimir o guardar como PDF, o se descarga como HTML.</span><span data-l="en">A document with the data used, the results of each block, the table, the figures you ticked, the methods and the references, in the colours of the light theme. It opens in a tab ready to print or save as PDF, or downloads as HTML.</span></p>
+      <div class="form-grid">
+        <div class="field"><label for="b13RTitle"><span data-l="es">Título</span><span data-l="en">Title</span></label><input type="text" id="b13RTitle" maxlength="160"></div>
+        <div class="field"><label for="b13RAuthor"><span data-l="es">Autoría (opcional)</span><span data-l="en">Authorship (optional)</span></label><input type="text" id="b13RAuthor" maxlength="160"></div>
+      </div>
+      <div id="b13RSummary"></div>
+      <div class="btn-row"><button type="button" class="btn btn-primary btn-sm" id="b13ROpen"><span data-l="es">Abrir el informe para imprimir</span><span data-l="en">Open the report to print</span></button>
+        <button type="button" class="btn btn-secondary btn-sm" id="b13RDown"><span data-l="es">Descargar el informe (HTML)</span><span data-l="en">Download the report (HTML)</span></button></div>
+      <div class="messages" id="b13RMsgs"></div>
+    </div>
+    <div class="card">
+      <h2><span data-l="es">El paquete del proyecto</span><span data-l="en">The project package</span></h2>
+      <p class="hint"><span data-l="es">Un archivo .json con los datos tal como los leíste, el tipo y el papel de cada columna, el manejo de faltantes, la paleta (también la tuya) y el estilo de reporte. Al abrirlo, los bloques se recalculan con esos datos: nada sale de tu equipo.</span><span data-l="en">A .json file with the data as you read them, the kind and role of each column, the handling of missing values, the palette (yours too) and the reporting style. When it is opened, the blocks recompute on those data: nothing leaves your computer.</span></p>
+      <div class="btn-row"><button type="button" class="btn btn-secondary btn-sm" id="b13PkSave"><span data-l="es">Guardar el proyecto</span><span data-l="en">Save the project</span></button>
+        <label class="btn btn-ghost btn-sm b13-file"><input type="file" id="b13PkOpen" accept=".json,application/json" hidden><span data-l="es">Abrir un proyecto</span><span data-l="en">Open a project</span></label></div>
+      <div class="messages" id="b13PkMsgs"></div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<script src="js/labg-core.js"></script>
+<script src="js/labg-figure-studio.js" defer></script>
+<script src="js/labg-navigator.js" defer></script>
+<script src="js/num.js"></script>
+<script src="js/coef.js"></script>
+<script src="js/palettes.js"></script>
+<script src="js/fmt.js"></script>
+<script src="js/glyphs.js"></script>
+<script src="js/plot.js"></script>
+<script src="js/datasets.js"></script>
+<script src="js/blocks.js"></script>
+<script src="js/dataio.js"></script>
+<script src="js/table.js"></script>
+<script src="js/assume.js"></script>
+<script src="js/pairstat.js"></script>
+<script src="js/matrix.js"></script>
+<script src="js/nonlin.js"></script>
+<script src="js/partial.js"></script>
+<script src="js/categ.js"></script>
+<script src="js/agree.js"></script>
+<script src="js/struct.js"></script>
+<script src="js/network.js"></script>
+<script src="js/infer.js"></script>
+<script src="js/core.js"></script>
+<script src="js/labg-figedit.js" data-key="correlationpro:figedit"></script>
+<script src="js/catalog.js"></script>
+<script src="js/theory.js"></script>
+<script src="js/art.js"></script>
+<script src="js/home.js"></script>
+<script src="js/labs.js"></script>
+<script src="js/block2.js"></script>
+<script src="js/block3.js"></script>
+<script src="js/block4.js"></script>
+<script src="js/block5.js"></script>
+<script src="js/block6.js"></script>
+<script src="js/block7.js"></script>
+<script src="js/block8.js"></script>
+<script src="js/block9.js"></script>
+<script src="js/block10.js"></script>
+<script src="js/block11.js"></script>
+<script src="js/block12.js"></script>
+<script src="js/block13.js"></script>
+</body>
+</html>

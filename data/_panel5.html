@@ -1,0 +1,68 @@
+<!-- ==================== BLOCK 5 · CORRELATION MATRIX ==================== -->
+<section class="step-panel" id="panel-5">
+  <div class="panel-title"><div class="pt-num">5</div><div><h2><span data-l="es">Matriz de correlación</span><span data-l="en">Correlation matrix</span></h2><p><span data-l="es">Todas contra todas, con sus pruebas, su diagnóstico y la figura que se publica</span><span data-l="en">All against all, with their tests, their diagnosis and the figure that gets published</span></p></div></div>
+
+  <div class="card" id="b5Empty">
+    <p class="hint"><span data-l="es">Primero abre unos datos en el Bloque 2 (o usa un conjunto de ejemplo).</span><span data-l="en">First open some data in Block 2 (or use an example dataset).</span></p>
+    <div class="btn-row"><button type="button" class="btn btn-secondary btn-sm" data-go="2"><span data-l="es">← Ir a Datos</span><span data-l="en">← Go to Data</span></button>
+      <button type="button" class="btn btn-ghost btn-sm" id="b5Swiss"><span data-l="es">Usar Suiza, 1888</span><span data-l="en">Use Switzerland, 1888</span></button></div>
+  </div>
+
+  <div id="b5Main" hidden>
+    <div class="card">
+      <h2><span data-l="es">Qué correlacionar</span><span data-l="en">What to correlate</span></h2>
+      <div class="chip-row" id="b5Vars"></div>
+      <div class="form-grid b5-what">
+        <div class="field"><label for="b5Method"><span data-l="es">Coeficiente</span><span data-l="en">Coefficient</span></label><select id="b5Method"></select></div>
+        <div class="field"><label for="b5Adjust"><span data-l="es">Corrección por pruebas múltiples</span><span data-l="en">Multiple-testing correction</span></label>
+          <select id="b5Adjust"><option value="holm" data-es="Holm (controla el error de familia)" data-en="Holm (controls the familywise error)">Holm (controla el error de familia)</option><option value="BH" data-es="Benjamini–Hochberg (tasa de falsos descubrimientos)" data-en="Benjamini–Hochberg (false discovery rate)">Benjamini–Hochberg (tasa de falsos descubrimientos)</option><option value="BY" data-es="Benjamini–Yekutieli (FDR, dependencia)" data-en="Benjamini–Yekutieli (FDR, dependence)">Benjamini–Yekutieli (FDR, dependencia)</option><option value="hochberg">Hochberg</option><option value="hommel">Hommel</option><option value="bonferroni">Bonferroni</option><option value="none" data-es="Ninguna" data-en="None">Ninguna</option></select></div>
+        <div class="field"><label for="b5Alpha"><span class="nc">α</span></label><select id="b5Alpha"><option value="0.05">.05</option><option value="0.01">.01</option><option value="0.1">.10</option></select></div>
+      </div>
+      <div class="btn-row"><button type="button" class="btn btn-ghost btn-sm" id="b5Big"><span data-l="es">Probar con 300 variables simuladas</span><span data-l="en">Try 300 simulated variables</span></button></div>
+      <div class="messages" id="b5Msgs"></div>
+    </div>
+
+    <div class="card">
+      <h2><span data-l="es">La matriz</span><span data-l="en">The matrix</span></h2>
+      <div class="form-grid b5-view">
+        <div class="field"><label for="b5Lower"><span data-l="es">Abajo</span><span data-l="en">Below</span></label><select id="b5Lower" class="b5-glyph"></select></div>
+        <div class="field"><label for="b5Upper"><span data-l="es">Arriba</span><span data-l="en">Above</span></label><select id="b5Upper" class="b5-glyph"></select></div>
+        <div class="field"><label for="b5Order"><span data-l="es">Orden</span><span data-l="en">Order</span></label>
+          <select id="b5Order"><option value="original" data-es="El de los datos" data-en="As in the data">El de los datos</option><option value="hclust:average" data-es="Agrupamiento (promedio)" data-en="Clustering (average)">Agrupamiento (promedio)</option><option value="hclust:complete" data-es="Agrupamiento (completo)" data-en="Clustering (complete)">Agrupamiento (completo)</option><option value="hclust:ward.D2" data-es="Agrupamiento (Ward)" data-en="Clustering (Ward)">Agrupamiento (Ward)</option><option value="AOE" data-es="Ángulo de los vectores propios" data-en="Angle of the eigenvectors">Ángulo de los vectores propios</option><option value="FPC" data-es="Primer componente principal" data-en="First principal component">Primer componente principal</option><option value="alpha" data-es="Alfabético" data-en="Alphabetical">Alfabético</option></select></div>
+        <div class="field"><label for="b5Insig"><span data-l="es">No significativas</span><span data-l="en">Not significant</span></label>
+          <select id="b5Insig"><option value="cross" data-es="Tachadas" data-en="Crossed out">Tachadas</option><option value="blank" data-es="Desvanecidas" data-en="Faded">Desvanecidas</option><option value="none" data-es="Como las demás" data-en="Like the others">Como las demás</option></select></div>
+        <div class="field"><label for="b5Show"><span data-l="es">Mostrar</span><span data-l="en">Show</span></label>
+          <select id="b5Show"><option value="raw" data-es="La matriz estimada" data-en="The estimated matrix">La matriz estimada</option><option value="near" data-es="La definida positiva más cercana" data-en="The nearest positive-definite one">La definida positiva más cercana</option><option value="shrink" data-es="La contraída (Schäfer–Strimmer)" data-en="The shrunk one (Schäfer–Strimmer)">La contraída (Schäfer–Strimmer)</option><option value="partial" data-es="Las correlaciones parciales" data-en="The partial correlations">Las correlaciones parciales</option></select></div>
+      </div>
+      <div class="pg-pane b5-fig" id="b5FigPane"><div class="pg-title" id="b5FigTitle"></div><div class="matrix-scroll" id="b5Fig"></div><div class="b5-hover" id="b5Hover"></div><div class="b5-lens" id="b5Lens" hidden></div></div>
+      <div class="btn-row"><button type="button" class="btn btn-primary btn-sm" id="b5ToPair" disabled><span data-l="es">Estudiar el par elegido en el Bloque 4 →</span><span data-l="en">Study the chosen pair in Block 4 →</span></button></div>
+      <details class="theory-note"><summary><span data-l="es">Glifos, orden y pruebas múltiples</span><span data-l="en">Glyphs, order and multiple tests</span></summary>
+        <p><span data-l="es">Cada glifo codifica r de otra manera: la elipse es la forma de una nube con esa correlación (Murdoch y Chow 1996), la media luna y el pastel muestran |r| como fracción, el color y el sombreado (Friendly 2002) leen bien a distancia, el número es exacto. El orden importa: agrupar las variables parecidas revela bloques que el orden de los datos esconde. Con p variables hay p(p − 1)/2 pruebas: sin corregir, al 5 % se esperan falsos positivos; Holm controla la probabilidad de tener alguno y Benjamini–Hochberg la proporción entre los descubrimientos.</span><span data-l="en">Each glyph encodes r differently: the ellipse is the shape of a cloud with that correlation (Murdoch and Chow 1996), the moon and the pie show |r| as a fraction, colour and shading (Friendly 2002) read well from afar, the number is exact. Order matters: grouping similar variables reveals blocks that the order of the data hides. With p variables there are p(p − 1)/2 tests: without correction, false positives are expected at 5%; Holm controls the probability of having any and Benjamini–Hochberg their proportion among the discoveries.</span></p>
+      </details>
+    </div>
+
+    <div class="card">
+      <h2><span data-l="es">¿Es una matriz de correlación válida?</span><span data-l="en">Is it a valid correlation matrix?</span></h2>
+      <p class="hint"><span data-l="es">Una matriz de correlación debe ser definida positiva (todos sus valores propios mayores que cero). Con faltantes por pares, con coeficientes robustos o con más variables que filas puede no serlo, y entonces no sirve para regresión, análisis factorial ni simulación.</span><span data-l="en">A correlation matrix must be positive definite (all its eigenvalues above zero). With pairwise missing data, robust coefficients or more variables than rows it may not be, and then it cannot be used for regression, factor analysis or simulation.</span></p>
+      <div id="b5DiagTiles"></div>
+      <div class="two-figs">
+        <div class="pg-pane" id="b5ScreePane"><div class="pg-title"><span data-l="es">Valores propios</span><span data-l="en">Eigenvalues</span></div><div id="b5Scree"></div></div>
+        <div id="b5Fix"></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2><span data-l="es">Para un análisis factorial: KMO y Bartlett</span><span data-l="en">For a factor analysis: KMO and Bartlett</span></h2>
+      <p class="hint"><span data-l="es">La medida de Kaiser–Meyer–Olkin compara las correlaciones con las parciales: si las parciales son chicas, las variables comparten factores. La prueba de Bartlett pregunta si la matriz es la identidad (nada correlaciona).</span><span data-l="en">The Kaiser–Meyer–Olkin measure compares the correlations with the partial ones: if the partials are small, the variables share factors. Bartlett’s test asks whether the matrix is the identity (nothing correlates).</span></p>
+      <div id="b5KmoTiles"></div>
+      <div class="table-wrap" id="b5Kmo"></div>
+    </div>
+
+    <div class="card">
+      <h2><span data-l="es">Tabla para publicar</span><span data-l="en">Table to publish</span></h2>
+      <div class="table-wrap" id="b5Table"></div>
+      <div class="btn-row"><button type="button" class="btn btn-ghost btn-sm" id="b5CopyTable"><span data-l="es">Copiar la tabla</span><span data-l="en">Copy the table</span></button>
+        <button type="button" class="btn btn-ghost btn-sm" id="b5Csv"><span data-l="es">Descargar r, p y n (CSV)</span><span data-l="en">Download r, p and n (CSV)</span></button></div>
+    </div>
+  </div>
+</section>

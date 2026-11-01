@@ -1,0 +1,51 @@
+<!-- ==================== BLOCK 9 · AGREEMENT AND RELIABILITY ==================== -->
+<section class="step-panel" id="panel-9">
+  <div class="panel-title"><div class="pt-num">9</div><div><h2><span data-l="es">Acuerdo y fiabilidad</span><span data-l="en">Agreement and reliability</span></h2><p><span data-l="es">Cuando la pregunta no es si dos medidas se mueven juntas, sino si dicen lo mismo</span><span data-l="en">When the question is not whether two measures move together, but whether they say the same</span></p></div></div>
+
+  <div class="card" id="b9Empty">
+    <p class="hint"><span data-l="es">Primero abre unos datos en el Bloque 2: una columna por evaluador, instrumento o método, y una fila por caso.</span><span data-l="en">First open some data in Block 2: one column per rater, instrument or method, and one row per case.</span></p>
+    <div class="btn-row"><button type="button" class="btn btn-secondary btn-sm" data-go="2"><span data-l="es">← Ir a Datos</span><span data-l="en">← Go to Data</span></button>
+      <button type="button" class="btn btn-ghost btn-sm" id="b9Sleep"><span data-l="es">Usar el sueño de Cushny y Peebles</span><span data-l="en">Use Cushny and Peebles’ sleep</span></button>
+      <button type="button" class="btn btn-ghost btn-sm" id="b9Sim"><span data-l="es">Evaluadores simulados</span><span data-l="en">Simulated raters</span></button></div>
+  </div>
+
+  <div id="b9Main" hidden>
+    <div class="card">
+      <h2><span data-l="es">Qué se compara</span><span data-l="en">What is compared</span></h2>
+      <p class="hint"><span data-l="es">Elige dos o más columnas: los evaluadores, instrumentos o métodos que miden lo mismo en los mismos casos.</span><span data-l="en">Pick two or more columns: the raters, instruments or methods measuring the same thing on the same cases.</span></p>
+      <div class="chip-row" id="b9Cols"></div>
+      <div class="btn-row"><button type="button" class="btn btn-ghost btn-sm" id="b9SimBtn"><span data-l="es">Cargar evaluadores simulados</span><span data-l="en">Load simulated raters</span></button></div>
+      <div class="messages" id="b9Msgs"></div>
+    </div>
+
+    <div class="card" id="b9ContCard">
+      <h2><span data-l="es">Dos métodos: concordancia y Bland–Altman</span><span data-l="en">Two methods: concordance and Bland–Altman</span></h2>
+      <div id="b9CTiles"></div>
+      <div class="two-figs">
+        <div class="pg-pane" id="b9IdPane"><div class="pg-title"><span data-l="es">Contra la línea de igualdad</span><span data-l="en">Against the line of equality</span></div><div id="b9Id"></div></div>
+        <div class="pg-pane" id="b9BAPane"><div class="pg-title"><span data-l="es">Bland–Altman: diferencia frente a promedio</span><span data-l="en">Bland–Altman: difference against mean</span></div><div id="b9BA"></div></div>
+      </div>
+      <div class="b9-text" id="b9CText"></div>
+    </div>
+
+    <div class="card" id="b9IccCard">
+      <h2><span data-l="es">Varios evaluadores: coeficientes intraclase</span><span data-l="en">Several raters: intraclass correlations</span></h2>
+      <p class="hint"><span data-l="es">Elige la forma por el diseño: unidireccional si cada caso lo califican evaluadores distintos; bidireccional si los mismos evaluadores califican todo; «consistencia» si basta con que ordenen igual, «acuerdo absoluto» si deben dar el mismo número; una medida o el promedio de los evaluadores (McGraw y Wong 1996; Koo y Li 2016).</span><span data-l="en">Choose the form by the design: one-way if each case is rated by different raters; two-way if the same raters rate everything; «consistency» if ordering the same is enough, «absolute agreement» if they must give the same number; a single measure or the average of the raters (McGraw and Wong 1996; Koo and Li 2016).</span></p>
+      <div class="table-wrap" id="b9Icc"></div>
+      <div id="b9ITiles"></div>
+      <div class="pg-pane" id="b9ProfPane"><div class="pg-title"><span data-l="es">Cada caso a través de los evaluadores</span><span data-l="en">Each case across the raters</span></div><div id="b9Prof"></div></div>
+    </div>
+
+    <div class="card" id="b9CatCard">
+      <h2><span data-l="es">Categorías: κ y sus parientes</span><span data-l="en">Categories: κ and its relatives</span></h2>
+      <div id="b9KTiles"></div>
+      <div class="two-figs">
+        <div class="table-wrap" id="b9KTable"></div>
+        <div class="pg-pane" id="b9KHeatPane"><div class="pg-title"><span data-l="es">Tabla de acuerdo de los dos primeros</span><span data-l="en">Agreement table of the first two</span></div><div id="b9KHeat"></div></div>
+      </div>
+      <details class="theory-note"><summary><span data-l="es">Por qué una r alta no es acuerdo, y las paradojas de κ</span><span data-l="en">Why a high r is not agreement, and the paradoxes of κ</span></summary>
+        <p><span data-l="es">Dos instrumentos pueden correlacionar a 0.99 y diferir siempre por diez unidades, o uno dar el doble que el otro: r mide asociación, no acuerdo (Bland y Altman 1986). La concordancia de Lin (1989) penaliza los dos desvíos (de ubicación y de escala), y el gráfico de Bland–Altman muestra cuánto pueden diferir en un caso. κ corrige el acuerdo por el azar (Cohen 1960), pero con categorías muy desbalanceadas puede ser bajo aunque el acuerdo sea alto (Feinstein y Cicchetti 1990); AC1 de Gwet (2008) es más estable en ese caso. α de Krippendorff admite cualquier número de evaluadores, faltantes y escalas nominal, ordinal, de intervalo o de razón (Hayes y Krippendorff 2007).</span><span data-l="en">Two instruments can correlate at 0.99 and always differ by ten units, or one give twice the other: r measures association, not agreement (Bland and Altman 1986). Lin’s concordance (1989) penalizes both departures (of location and of scale), and the Bland–Altman plot shows how much they can differ on one case. κ corrects agreement for chance (Cohen 1960), but with very unbalanced categories it can be low although agreement is high (Feinstein and Cicchetti 1990); Gwet’s AC1 (2008) is more stable then. Krippendorff’s α admits any number of raters, missing ratings and nominal, ordinal, interval or ratio scales (Hayes and Krippendorff 2007).</span></p>
+      </details>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,58 @@
+<!-- ==================== BLOCK 6 · NONLINEAR DEPENDENCE AND COPULAS ==================== -->
+<section class="step-panel" id="panel-6">
+  <div class="panel-title"><div class="pt-num">6</div><div><h2><span data-l="es">Dependencia no lineal y cópulas</span><span data-l="en">Nonlinear dependence and copulas</span></h2><p><span data-l="es">Lo que una recta no ve: medidas que detectan cualquier forma y la estructura de la dependencia</span><span data-l="en">What a line does not see: measures that detect any shape and the structure of the dependence</span></p></div></div>
+
+  <div class="card" id="b6Empty">
+    <p class="hint"><span data-l="es">Primero abre unos datos en el Bloque 2 (o usa un conjunto de ejemplo).</span><span data-l="en">First open some data in Block 2 (or use an example dataset).</span></p>
+    <div class="btn-row"><button type="button" class="btn btn-secondary btn-sm" data-go="2"><span data-l="es">← Ir a Datos</span><span data-l="en">← Go to Data</span></button>
+      <button type="button" class="btn btn-ghost btn-sm" id="b6Longley"><span data-l="es">Usar la economía de EE. UU.</span><span data-l="en">Use the US economy</span></button></div>
+  </div>
+
+  <div id="b6Main" hidden>
+    <div class="card">
+      <h2><span data-l="es">Un par: lo que ve cada medida</span><span data-l="en">One pair: what each measure sees</span></h2>
+      <div class="form-grid">
+        <div class="field"><label for="b6X">X</label><select id="b6X"></select></div>
+        <div class="field"><label for="b6Y">Y</label><select id="b6Y"></select></div>
+        <div class="field"><label for="b6Perm"><span data-l="es">Permutaciones para MIC</span><span data-l="en">Permutations for MIC</span></label>
+          <select id="b6Perm"><option value="0" data-es="No calcular su valor p" data-en="Do not compute its p-value">No calcular su valor p</option><option value="199">199</option><option value="499">499</option><option value="999">999</option></select></div>
+      </div>
+      <div class="messages" id="b6Msgs"></div>
+      <div id="b6Tiles"></div>
+      <div class="two-figs">
+        <div class="pg-pane" id="b6ScPane"><div class="pg-title"><span data-l="es">La nube</span><span data-l="en">The cloud</span></div><div id="b6Sc"></div></div>
+        <div class="pg-pane" id="b6BarsPane"><div class="pg-title"><span data-l="es">Todas en la misma escala, de 0 a 1</span><span data-l="en">All on the same scale, from 0 to 1</span></div><div id="b6Bars"></div></div>
+      </div>
+      <div class="two-figs">
+        <div class="pg-pane" id="b6MicPane"><div class="pg-title"><span data-l="es">La matriz característica de MIC</span><span data-l="en">The characteristic matrix of MIC</span></div><div id="b6Mic"></div></div>
+        <div class="b6-text" id="b6Text"></div>
+      </div>
+      <details class="theory-note"><summary><span data-l="es">Qué mide cada una</span><span data-l="en">What each one measures</span></summary>
+        <p><span data-l="es">La <b>correlación de distancias</b> (Székely, Rizzo y Bakirov 2007) es 0 sólo si hay independencia. El <b>HSIC</b> (Gretton et al. 2005) mide lo mismo en un espacio de funciones: con núcleos gaussianos, detecta cualquier relación. El <b>MIC</b> (Reshef et al. 2011) busca la rejilla que más información mutua capta, normalizada para que una función sin ruido de cualquier forma valga 1. La <b>ξ</b> de Chatterjee (2021) mide cuánto Y es función de X (no es simétrica). La <b>información mutua</b> (Kraskov et al. 2004) está en nats; su coeficiente de Linfoot √(1 − e^(−2I)) coincide con |ρ| en la normal bivariada. La <b>correlación máxima</b> (Gebelein 1941; Rényi 1959) es la mayor r entre transformaciones de X y de Y.</span><span data-l="en">The <b>distance correlation</b> (Székely, Rizzo and Bakirov 2007) is 0 only under independence. <b>HSIC</b> (Gretton et al. 2005) measures the same in a space of functions: with Gaussian kernels it detects any relation. <b>MIC</b> (Reshef et al. 2011) looks for the grid that captures the most mutual information, normalized so that a noiseless function of any shape scores 1. Chatterjee’s <b>ξ</b> (2021) measures how much Y is a function of X (it is not symmetric). <b>Mutual information</b> (Kraskov et al. 2004) is in nats; its Linfoot coefficient √(1 − e^(−2I)) equals |ρ| in the bivariate normal. The <b>maximal correlation</b> (Gebelein 1941; Rényi 1959) is the largest r between transformations of X and of Y.</span></p>
+      </details>
+    </div>
+
+    <div class="card">
+      <h2><span data-l="es">Rastreo: lo que Pearson no ve</span><span data-l="en">Sweep: what Pearson misses</span></h2>
+      <p class="hint"><span data-l="es">Todos los pares de las variables numéricas, ordenados por cuánto supera la correlación de distancias a |r|: arriba quedan las relaciones curvas, en U o con ciclos.</span><span data-l="en">Every pair of the numeric variables, ordered by how much the distance correlation exceeds |r|: curved, U-shaped or cyclic relations come first.</span></p>
+      <div class="form-grid"><label class="checkbox-label"><input type="checkbox" id="b6SweepMic"> <span data-l="es">Incluir MIC (más lento)</span><span data-l="en">Include MIC (slower)</span></label>
+        <div class="field"><span class="field-spacer">&nbsp;</span><button type="button" class="btn btn-primary btn-sm" id="b6SweepGo"><span data-l="es">Rastrear</span><span data-l="en">Sweep</span></button></div></div>
+      <div class="b6-gallery" id="b6Gallery"></div>
+      <div class="table-wrap" id="b6Sweep"></div>
+    </div>
+
+    <div class="card">
+      <h2><span data-l="es">Cópulas: la forma de la dependencia</span><span data-l="en">Copulas: the shape of the dependence</span></h2>
+      <p class="hint"><span data-l="es">El teorema de Sklar (1959) separa cada variable de su dependencia: al pasar los datos a rangos (pseudo-observaciones) queda sólo la cópula. Se ajustan cinco familias; difieren sobre todo en las colas: ¿los valores extremos ocurren juntos?</span><span data-l="en">Sklar’s theorem (1959) separates each variable from their dependence: turning the data into ranks (pseudo-observations) leaves only the copula. Five families are fitted; they differ above all in the tails: do extreme values happen together?</span></p>
+      <div class="table-wrap" id="b6CopTable"></div>
+      <div class="two-figs">
+        <div class="pg-pane" id="b6UPane"><div class="pg-title"><span data-l="es">Los datos en rangos</span><span data-l="en">The data as ranks</span></div><div id="b6U"></div></div>
+        <div class="pg-pane" id="b6SimPane"><div class="pg-title" id="b6SimTitle"></div><div id="b6Sim"></div></div>
+      </div>
+      <div id="b6TailTiles"></div>
+      <details class="theory-note"><summary><span data-l="es">Las familias y sus colas</span><span data-l="en">The families and their tails</span></summary>
+        <p><span data-l="es">La <b>gaussiana</b> y la de <b>Frank</b> no tienen dependencia en las colas: los extremos se vuelven independientes. La <b>t de Student</b> tiene la misma en las dos colas, mayor cuanto menos grados de libertad. <b>Clayton</b> concentra la dependencia abajo (caen juntas) y <b>Gumbel</b> arriba (suben juntas). Se estiman por máxima pseudoverosimilitud (Genest, Ghoudi y Rivest 1995) y se comparan por AIC; la inversión de τ de Kendall da un valor de partida que no depende de las marginales. La dependencia en la cola λ es el límite de P(V &gt; u | U &gt; u) cuando u → 1 (Joe 1997); la empírica usa el 10 % superior e inferior.</span><span data-l="en">The <b>Gaussian</b> and <b>Frank</b> copulas have no tail dependence: extremes become independent. <b>Student’s t</b> has the same in both tails, larger with fewer degrees of freedom. <b>Clayton</b> concentrates the dependence at the bottom (they fall together) and <b>Gumbel</b> at the top (they rise together). They are estimated by maximum pseudo-likelihood (Genest, Ghoudi and Rivest 1995) and compared by AIC; the inversion of Kendall’s τ gives a starting value that does not depend on the margins. The tail dependence λ is the limit of P(V &gt; u | U &gt; u) as u → 1 (Joe 1997); the empirical one uses the top and bottom 10%.</span></p>
+      </details>
+    </div>
+  </div>
+</section>

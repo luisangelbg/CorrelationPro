@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>CorrelationPro · Manual de usuario · Capítulo 2</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,500;0,600;1,500&family=Crimson+Pro:ital,wght@0,400;0,600;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../interior.css">
+<script src="../paginar.js"></script>
+</head>
+<body>
+
+<section class="capitulo" id="cap-2" data-pestana="2" data-orden="2" style="--acento: var(--b2)">
+  <div class="cap-apertura">
+    <div class="cap-num">2</div>
+    <div class="cap-etiqueta">Capítulo dos · Bloque 2</div>
+    <h1 data-corto="Datos">Los datos y sus tipos</h1>
+    <div class="cap-regla"></div>
+    <p class="cap-resumen">Todo empieza aquí, y casi todos los errores también. Este bloque abre tus datos, deduce de qué tipo es cada columna y para qué sirve, cuenta los faltantes y decide cómo tratarlos, crea columnas transformadas y, para cada par de variables, propone qué correlación usar y por qué. Lo que se decide aquí lo usan los doce bloques siguientes.</p>
+    <div class="cap-franja"><span class="k2"></span><span class="k2"></span><span class="k3"></span><span class="k4"></span></div>
+    <ul class="cap-contenido">
+      <li><b>2.1</b>Abrir los datos</li>
+      <li><b>2.2</b>Los conjuntos de dominio público</li>
+      <li><b>2.3</b>Tus datos de un vistazo</li>
+      <li><b>2.4</b>El tipo y el papel de cada columna</li>
+      <li><b>2.5</b>Los datos faltantes</li>
+      <li><b>2.6</b>Transformar una columna</li>
+      <li><b>2.7</b>¿Qué correlación uso?</li>
+      <li><b>2.8</b>Guardar</li>
+    </ul>
+  </div>
+
+  <!-- 2.1 -->
+  <h2 id="s2-1"><span class="num">2.1</span>Abrir los datos</h2>
+  <p class="lead">Una fila por observación y una columna por variable, con los nombres en la primera fila. Es la forma «larga» de cualquier hoja de cálculo bien hecha, y la única que el bloque necesita.</p>
+  <p>Hay tres maneras de entrar. <span class="ui">Un archivo</span> acepta texto delimitado (<code>.csv</code>, <code>.tsv</code>, <code>.txt</code>, <code>.dat</code>) y libros de hoja de cálculo (<code>.xlsx</code>, <code>.xlsm</code>, <code>.ods</code>); se arrastra sobre el recuadro o se elige con un clic. <span class="ui">Pegar</span> abre un cuadro donde pegar las celdas copiadas de una hoja de cálculo; <span class="ui">Leer lo pegado</span> las convierte en tabla. <span class="ui">Un conjunto de ejemplo</span> lleva a los nueve conjuntos de la sección siguiente.</p>
+
+  <figure>
+    <div class="marco"><img src="../img/b2-abrir.png" alt="La tarjeta Abrir datos con las opciones de lectura abiertas"></div>
+    <figcaption><b>Figura 2.1.</b> Las tres entradas y, desplegadas, las <span class="ui">Opciones de lectura</span>. Lo normal es dejar todo en <span class="ui">Detectar</span>: la app adivina el separador, el decimal y la codificación, y dice qué eligió.</figcaption>
+  </figure>
+  <p>Las opciones de lectura sólo hacen falta cuando la detección se equivoca. <span class="ui">Separador</span> obliga a coma, punto y coma, tabulador o barra; <span class="ui">Decimal</span>, a punto (1.5) o a coma (1,5); <span class="ui">Otros códigos de faltante</span> agrega los tuyos, separados por comas (por ejemplo <code>-999, s/i</code>); y la casilla <span class="ui">La primera fila trae los nombres</span> se desmarca si tus datos no tienen encabezado. Si un libro tiene varias hojas con datos, la app pregunta cuál abrir.</p>
+  <div class="caja nota">
+    <div class="caja-t"><span class="ico">i</span>Lo que la app reconoce sola como «sin dato»</div>
+    <p>Además de la celda vacía, 28 maneras de escribirlo que se ven en hojas reales, sin importar mayúsculas: <code>NA</code>, <code>N/A</code>, <code>NaN</code>, <code>null</code>, <code>.</code>, <code>-</code>, <code>?</code>, <code>nd</code>, <code>n/d</code>, <code>s/d</code>, <code>sin dato</code>, <code>no disponible</code>, <code>faltante</code>, <code>missing</code> y los errores de hoja de cálculo como <code>#N/A</code>, <code>#VALOR!</code> o <code>#DIV/0!</code>, entre otras.</p>
+  </div>
+
+  <!-- 2.2 -->
+  <h2 id="s2-2"><span class="num">2.2</span>Los conjuntos de dominio público</h2>
+  <p>Nueve conjuntos reales, publicados hace mucho o por gobiernos, cada uno con su fuente, su licencia y para qué sirve (la tabla de la sección I.7 los resume). <span class="ui">Usar este conjunto</span> lo abre como si fueran tus datos, con el tipo y el papel de cada columna ya declarados.</p>
+  <figure class="w80">
+    <div class="marco"><img src="../img/b2-ejemplos.png" alt="Las primeras seis tarjetas de los conjuntos de dominio público"></div>
+    <figcaption><b>Figura 2.2.</b> Seis de los nueve conjuntos. Cada tarjeta dice cuántas filas y columnas tiene, por qué es de dominio público y de qué artículo viene.</figcaption>
+  </figure>
+
+  <!-- 2.3 -->
+  <h2 id="s2-3"><span class="num">2.3</span>Tus datos de un vistazo</h2>
+  <p>Al abrir unos datos, un mensaje dice qué se leyó —«Leído “datos pegados”: 12 filas y 4 columnas, separadas por tabulador, con punto decimal»— y la tarjeta <span class="ui">Tus datos</span> muestra cinco cifras y la tabla.</p>
+  <figure class="w80">
+    <div class="marco"><img src="../img/b2-datos.png" alt="La tarjeta Tus datos con Suiza 1888"></div>
+    <figcaption><b>Figura 2.3.</b> Suiza, 1888: 47 filas, 7 columnas de las que 6 se usan (el distrito es un identificador), todas completas. Bajo el nombre de cada columna va su tipo.</figcaption>
+  </figure>
+  <p><span class="ui">Composicionales</span> avisa cuando la app encuentra tres o más columnas seguidas que suman lo mismo en cada fila —porcentajes de una dieta, fracciones de arena, limo y arcilla—: son partes de un todo, y su correlación de Pearson es engañosa por construcción (capítulo 10). La tabla muestra las primeras filas; si hay más, una nota lo dice.</p>
+
+  <!-- 2.4 -->
+  <h2 id="s2-4"><span class="num">2.4</span>El tipo y el papel de cada columna</h2>
+  <p>Es la tarjeta más importante del bloque. El <b>tipo</b> decide qué coeficientes tienen sentido; el <b>papel</b>, cómo se usa la columna. La app deduce los dos de los valores y del nombre de la columna, y en la última columna de la tabla explica por qué. Si no es así, se cambian con los menús; <span class="ui">Volver a lo deducido</span> deshace los cambios.</p>
+
+
+  <table class="compacta">
+    <caption><b>Tabla 2.1.</b> Los nueve tipos y cuándo los deduce la app</caption>
+    <thead><tr><th style="width:1in">Tipo</th><th>Lo deduce cuando…</th></tr></thead>
+    <tbody>
+      <tr><td><b>continua</b></td><td>son números con muchos valores distintos. Si hay muchos repetidos lo dice, porque los empates importan para Spearman y Kendall.</td></tr>
+      <tr><td><b>ordinal</b></td><td>son enteros con siete valores o menos y un recorrido corto (una escala de 1 a 5), o textos que forman una escala conocida (bajo &lt; medio &lt; alto, nunca &lt; a veces &lt; siempre…), que se ordenan solos.</td></tr>
+      <tr><td><b>binaria</b></td><td>sólo hay dos valores, números o textos.</td></tr>
+      <tr><td><b>nominal</b></td><td>son textos que se repiten, sin orden. Con doce categorías o menos queda con papel de grupo.</td></tr>
+      <tr><td><b>circular</b></td><td>el nombre dice ángulo, dirección, hora, mes o día del año y los valores caben en su recorrido (0 a 360, 0 a 24, 1 a 12, 1 a 366): el final está junto al principio.</td></tr>
+      <tr><td><b>fecha</b></td><td>todos los valores son fechas; se guardan como días desde 1970 y la columna queda con papel de tiempo.</td></tr>
+      <tr><td><b>identificador</b></td><td>el nombre parece una clave (id, folio, código, sujeto, paciente…) o hay un texto distinto en cada fila. Si sus valores se repiten, cada valor es un sujeto medido varias veces.</td></tr>
+      <tr><td><b>texto</b></td><td>hay demasiados textos distintos para ser categorías.</td></tr>
+      <tr><td><b>vacía</b></td><td>no hay ningún dato.</td></tr>
+    </tbody>
+  </table>
+  <figure>
+    <div class="marco"><img src="../img/b2-tipos.png" alt="La tabla del tipo y el papel de cada columna de los lirios"></div>
+    <figcaption><b>Figura 2.4.</b> Los lirios: cuatro columnas continuas con papel de variable y la especie, nominal, con papel de grupo. El resumen da media ± desviación, mínimo y máximo, o las categorías con su frecuencia.</figcaption>
+  </figure>
+
+  <table class="compacta">
+    <caption><b>Tabla 2.2.</b> Los ocho papeles</caption>
+    <thead><tr><th style="width:1.25in">Papel</th><th>Para qué sirve</th></tr></thead>
+    <tbody>
+      <tr><td><b>variable</b></td><td>se analiza: entra en las matrices, los pares y las redes</td></tr>
+      <tr><td><b>grupo</b></td><td>separa los casos: las correlaciones dentro y entre grupos, las matrices por grupo, los colores de las figuras</td></tr>
+      <tr><td><b>sujeto</b></td><td>identifica a quien se midió varias veces: la correlación de medidas repetidas</td></tr>
+      <tr><td><b>tiempo</b></td><td>ordena las filas: las series de tiempo y su correlación cruzada</td></tr>
+      <tr><td><b>coordenada X · Y</b></td><td>la posición en el espacio: la prueba de Dutilleul y el correlograma (la app las reconoce por nombres como longitud, latitud, este, norte)</td></tr>
+      <tr><td><b>peso</b></td><td>un peso muestral o una frecuencia por fila. En esta versión ningún bloque pondera los casos: la columna se conserva pero no se analiza</td></tr>
+      <tr><td><b>no se usa</b></td><td>se conserva pero ningún bloque la toca</td></tr>
+    </tbody>
+  </table>
+  <div class="caja importante">
+    <div class="caja-t"><span class="ico">!</span>Una escala de 1 a 5 no es continua</div>
+    <p>Si tu columna de satisfacción o de daño quedó como continua porque tiene muchos valores, pero en realidad es una escala de categorías ordenadas, cámbiala a ordinal: el Bloque 8 calculará la policórica, que es lo correcto para una variable latente medida en categorías, y el Bloque 3 dejará de recomendarte Pearson.</p>
+  </div>
+  <p>Las columnas circulares tienen además una <b>unidad</b>: grados (0 a 360), radianes, horas (0 a 24), día del año o mes. La app la deduce del nombre y la usa para convertir a ángulos en el Bloque 10.</p>
+
+  <!-- 2.5 -->
+  <h2 id="s2-5"><span class="num">2.5</span>Los datos faltantes</h2>
+  <p>Cuántas celdas faltan, cuántas filas están completas y cuántos <b>patrones</b> distintos hay: qué combinaciones de columnas faltan juntas. Un patrón dominante —siempre falta la misma columna— es menos grave que muchos patrones dispersos.</p>
+  <figure>
+    <div class="marco"><img src="../img/b2-faltantes.png" alt="La tarjeta de datos faltantes con cuatro patrones y el aviso del -999"></div>
+    <figcaption><b>Figura 2.5.</b> Unos datos pegados donde el «sin dato» se escribió de tres maneras (<code>n/d</code>, <code>NA</code> y la celda vacía): la app los reconoció todos. El <code>-999</code>, en cambio, no se toma como faltante sin preguntar: se avisa, porque podría ser un valor real.</figcaption>
+  </figure>
+  <p>El menú <span class="ui">Para cada par de variables, usar</span> decide qué hacer con lo que falta, y vale para todos los bloques:</p>
+  <table class="compacta">
+    <thead><tr><th style="width:2in">Opción</th><th>Ventaja</th><th>Costo</th></tr></thead>
+    <tbody>
+      <tr><td><b>Por pares</b> (la de omisión): las filas completas de ese par</td><td>Aprovecha cada dato</td><td>Cada correlación de una matriz puede salir de filas distintas, y la matriz puede no ser válida; el Bloque 5 lo revisa y la corrige</td></tr>
+      <tr><td><b>Por listas</b>: sólo las filas completas en todas</td><td>Todas las correlaciones salen de los mismos casos; la matriz siempre es válida</td><td>Se pierden las filas con un solo faltante</td></tr>
+    </tbody>
+  </table>
+  <div class="caja error">
+    <div class="caja-t"><span class="ico">✕</span>Error frecuente · un código de faltante tomado como dato</div>
+    <p>Un <code>-999</code> o un <code>99</code> que quedaron como números cambian cualquier correlación: un solo <code>-999</code> en una columna de diámetros hace que Pearson diga lo que quiere ese punto. Cuando la app vea un valor así, lejísimos de los demás, escríbelo en <span class="ui">Otros códigos de faltante</span> y vuelve a abrir el archivo.</p>
+  </div>
+
+  <!-- 2.6 -->
+  <h2 id="s2-6"><span class="num">2.6</span>Transformar una columna</h2>
+  <p>Cada transformación crea una columna nueva y deja la original como estaba; la lista de abajo dice de dónde salió cada una, y <span class="ui">Quitar</span> la elimina.</p>
+  <figure>
+    <div class="marco"><img src="../img/b2-transformar.png" alt="La tarjeta Transformar con una columna Box–Cox creada"></div>
+    <figcaption><b>Figura 2.6.</b> La transformación de Box y Cox del largo del pétalo, con λ estimada por máxima verosimilitud (λ = 0.931).</figcaption>
+  </figure>
+  <table class="compacta">
+    <thead><tr><th style="width:2.2in">Transformación</th><th>Para qué</th></tr></thead>
+    <tbody>
+      <tr><td>Rangos (promedio en empates)</td><td>Trabajar con el orden; Pearson de los rangos es Spearman</td></tr>
+      <tr><td>Estandarizar (<i>z</i>) · Centrar en la media</td><td>Poner las variables en la misma escala; no cambian ninguna correlación</td></tr>
+      <tr><td>Logaritmo natural · base 10 · log(<i>x</i> + 1)</td><td>Relaciones multiplicativas y colas largas a la derecha; la última admite ceros</td></tr>
+      <tr><td>Raíz cuadrada · Inverso 1/<i>x</i></td><td>Conteos y tasas</td></tr>
+      <tr><td>Box–Cox (λ estimada)</td><td>La potencia que más acerca la variable a la normal (Box y Cox, 1964)</td></tr>
+      <tr><td>Puntuaciones normales</td><td>Los rangos llevados a cuantiles de la normal: la base de la correlación de rangos gaussiana</td></tr>
+      <tr><td>Invertir la escala</td><td>Que «más» signifique lo mismo en dos escalas</td></tr>
+      <tr><td>Log-cociente centrado</td><td>Las partes de un todo (datos composicionales), antes de correlacionarlas</td></tr>
+    </tbody>
+  </table>
+  <p class="small">El menú sólo ofrece las transformaciones que tienen sentido para la columna elegida: el logaritmo, por ejemplo, no aparece si hay ceros o negativos.</p>
+
+  <!-- 2.7 -->
+  <h2 id="s2-7"><span class="num">2.7</span>¿Qué correlación uso?</h2>
+  <p>Elige dos columnas en <span class="ui">X</span> y <span class="ui">Y</span>. El asistente mira su tipo y, si las dos son continuas, la forma de su nube: los atípicos (más allá de 3.5 en una escala robusta), la curvatura (la prueba de un término cuadrático), la proporción de empates, la <i>r</i>, la ρ y la correlación de distancias. Con eso propone las medidas en orden, la primera como <span class="ui">Recomendada</span> y las demás como <span class="ui">También</span>, cada una con su razón, el bloque donde se calcula y un enlace <span class="ui">¿Qué es?</span> a su ficha del catálogo.</p>
+
+  <figure class="w70">
+    <div class="marco"><img src="../img/b2-asistente2.png" alt="El asistente con el largo y el ancho del sépalo de los lirios"></div>
+    <figcaption><b>Figura 2.7.</b> El largo y el ancho del sépalo de los lirios: nube recta, sin atípicos, curvatura no significativa (<i>p</i> = .057) y 85&nbsp;% de empates. Recomienda Pearson, y sugiere comprobar el valor <i>p</i> por permutación porque alguna de las dos no es normal.</figcaption>
+  </figure>
+  <p>Con variables que no son continuas la propuesta cambia por completo. Para dos binarias, como el sexo y la supervivencia del Titanic, recomienda φ, y como alternativas la razón de momios con la <i>Q</i> de Yule, que no dependen de las marginales, y la tetracórica, si cada binaria es el corte de una variable continua latente. Para una continua y una categórica, la biserial puntual, la rango-biserial o η; para dos ordinales, Spearman, τ-b o la policórica; para ángulos, las circulares; si una columna es un sujeto, la correlación de medidas repetidas.</p>
+  <div class="caja ejemplo">
+    <div class="caja-t"><span class="ico">▸</span>Ejemplo · cuando la recomendación es «con cautela»</div>
+    <p>Si la nube tiene atípicos, el asistente pone primero la flexión porcentual o el peso doble y deja Pearson como «r de Pearson (con cautela)». Si hay curvatura, propone Spearman y la correlación de distancias. No elige por ti: te dice qué mirar, y el Bloque 3 lo revisa para todos los pares a la vez.</p>
+  </div>
+  <p>Cuando la recomendación se calcula en el Bloque 4, el botón <span class="ui">Estudiar este par en el Bloque 4</span> lleva el par allá.</p>
+
+  <!-- 2.8 -->
+  <h2 id="s2-8"><span class="num">2.8</span>Guardar</h2>
+  <p><span class="ui">Descargar CSV</span> guarda la tabla tal como está ahora, con las columnas transformadas, en texto delimitado por comas que cualquier hoja de cálculo abre. Para guardar además los tipos, los papeles, el manejo de faltantes y las preferencias, y retomar el análisis otro día, está el paquete del proyecto del Bloque 13.</p>
+
+  <div class="caja regla">
+    <div class="caja-t"><span class="ico">✓</span>Antes de salir del Bloque 2</div>
+    <table class="compacta"><tbody>
+      <tr><td style="width:44%"><b>Si</b> una columna quedó con un tipo que no es…</td><td>cámbialo: el tipo decide qué coeficientes ofrecen los demás bloques.</td></tr>
+      <tr><td><b>Si</b> la app avisa de un valor muy lejos de los demás…</td><td>averigua si es un código de faltante antes de seguir.</td></tr>
+      <tr><td><b>Si</b> vas a comparar correlaciones de una misma matriz o a publicar la matriz…</td><td>prefiere los faltantes por listas, o revisa la matriz en el Bloque 5.</td></tr>
+      <tr><td><b>Si</b> los casos se repiten (sujetos, parcelas, años)…</td><td>marca la columna como sujeto o tiempo: el Bloque 10 la necesita.</td></tr>
+    </tbody></table>
+  </div>
+</section>
+
+</body>
+</html>

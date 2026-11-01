@@ -1,0 +1,82 @@
+<!-- ==================== BLOCK 3 · EXPLORATION AND ASSUMPTIONS ==================== -->
+<section class="step-panel" id="panel-3">
+  <div class="panel-title"><div class="pt-num">3</div><div><h2><span data-l="es">Exploración y supuestos</span><span data-l="en">Exploration and assumptions</span></h2><p><span data-l="es">Mirar antes de medir: la forma de cada variable y de cada par</span><span data-l="en">Look before you measure: the shape of each variable and of each pair</span></p></div></div>
+
+  <div class="card" id="b3Empty">
+    <p class="hint"><span data-l="es">Primero abre unos datos en el Bloque 2 (o usa un conjunto de ejemplo).</span><span data-l="en">First open some data in Block 2 (or use an example dataset).</span></p>
+    <div class="btn-row"><button type="button" class="btn btn-secondary btn-sm" data-go="2"><span data-l="es">← Ir a Datos</span><span data-l="en">← Go to Data</span></button>
+      <button type="button" class="btn btn-ghost btn-sm" id="b3Iris"><span data-l="es">Usar los lirios de Anderson</span><span data-l="en">Use Anderson’s irises</span></button></div>
+  </div>
+
+  <div id="b3Main" hidden>
+    <div class="card">
+      <h2><span data-l="es">Qué explorar</span><span data-l="en">What to explore</span></h2>
+      <p class="hint"><span data-l="es">Las variables numéricas (continuas y ordinales) con papel «variable». Elige hasta diez; un grupo colorea los puntos y muestra la r dentro de cada grupo.</span><span data-l="en">The numeric variables (continuous and ordinal) with the role «variable». Pick up to ten; a group colours the points and shows r within each group.</span></p>
+      <div class="chip-row" id="b3Vars" role="group" aria-label="Variables"></div>
+      <div class="form-grid">
+        <div class="field"><label for="b3Group"><span data-l="es">Colorear por grupo</span><span data-l="en">Colour by group</span></label><select id="b3Group"></select></div>
+        <div class="field"><label for="b3Smooth"><span data-l="es">Línea en cada nube</span><span data-l="en">Line in each cloud</span></label>
+          <select id="b3Smooth"><option value="lowess" data-es="Suavizado LOWESS" data-en="LOWESS smoother">Suavizado LOWESS</option><option value="ols" data-es="Recta de mínimos cuadrados" data-en="Least-squares line">Recta de mínimos cuadrados</option><option value="none" data-es="Ninguna" data-en="None">Ninguna</option></select></div>
+      </div>
+      <div class="messages" id="b3Msgs"></div>
+    </div>
+
+    <div class="card">
+      <h2><span data-l="es">Matriz de dispersión</span><span data-l="en">Scatterplot matrix</span></h2>
+      <p class="hint"><span data-l="es">Abajo, cada nube (la variable de la fila en el eje vertical); en la diagonal, la distribución; arriba, r con sus estrellas (* p &lt; .05, ** &lt; .01, *** &lt; .001) y ρ debajo. Haz clic en una celda para estudiar ese par.</span><span data-l="en">Below, each cloud (the row variable on the vertical axis); on the diagonal, the distribution; above, r with its stars (* p &lt; .05, ** &lt; .01, *** &lt; .001) and ρ underneath. Click a cell to study that pair.</span></p>
+      <div class="pg-pane splom-pane" id="b3SplomPane"><div class="pg-title"><span data-l="es">Matriz de dispersión</span><span data-l="en">Scatterplot matrix</span></div><div class="splom-scroll" id="b3Splom"></div><div class="fig-legend" id="b3SplomLegend"></div></div>
+      <p class="hint" id="b3SplomNote"></p>
+    </div>
+
+    <div class="card">
+      <h2><span data-l="es">Cada variable</span><span data-l="en">Each variable</span></h2>
+      <p class="hint"><span data-l="es">La r de Pearson describe una relación sin pedir normalidad; lo que la pide es su prueba clásica y su intervalo de Fisher (la normalidad conjunta de las dos). Con muestras grandes las pruebas rechazan desviaciones sin importancia: manda la gráfica Q–Q.</span><span data-l="en">Pearson’s r describes a relation without asking for normality; what asks for it is its classical test and its Fisher interval (the joint normality of the two). With large samples the tests reject unimportant departures: the Q–Q plot rules.</span></p>
+      <div class="table-wrap" id="b3UniTable"></div>
+      <div class="two-figs">
+        <div class="pg-pane" id="b3HistPane"><div class="pg-title" id="b3HistTitle"></div><div id="b3Hist"></div></div>
+        <div class="pg-pane" id="b3QQPane"><div class="pg-title" id="b3QQTitle"></div><div id="b3QQ"></div></div>
+      </div>
+      <details class="theory-note"><summary><span data-l="es">Las pruebas, en breve</span><span data-l="en">The tests, briefly</span></summary>
+        <p><span data-l="es"><b>Shapiro–Wilk</b> (1965) compara los datos ordenados con lo que se esperaría de una normal; W cerca de 1 es normal. Su valor p sigue la aproximación de Royston (1995), válida de 3 a 5000 datos. <b>Anderson–Darling</b> mide la distancia entre la distribución empírica y la normal ajustada, con más peso en las colas, y su valor p es el de Stephens (D’Agostino y Stephens 1986). La <b>asimetría</b> g₁ y la <b>curtosis</b> en exceso g₂ dicen en qué se aparta: |g₁| &gt; 1 o |g₂| &gt; 2 ya importan para la prueba de r.</span><span data-l="en"><b>Shapiro–Wilk</b> (1965) compares the ordered data with what a normal would give; W near 1 is normal. Its p-value follows Royston’s approximation (1995), valid for 3 to 5,000 values. <b>Anderson–Darling</b> measures the distance between the empirical distribution and the fitted normal, weighting the tails more, with Stephens’ p-value (D’Agostino and Stephens 1986). <b>Skewness</b> g₁ and excess <b>kurtosis</b> g₂ say how it departs: |g₁| &gt; 1 or |g₂| &gt; 2 already matter for the test of r.</span></p>
+      </details>
+    </div>
+
+    <div class="card">
+      <h2><span data-l="es">Normalidad conjunta y atípicos multivariados</span><span data-l="en">Joint normality and multivariate outliers</span></h2>
+      <p class="hint"><span data-l="es">Que cada variable sea normal no basta: la normal multivariada pide además que sus combinaciones lo sean. La gráfica compara las distancias de Mahalanobis al cuadrado con los cuantiles de χ²: en una normal, los puntos siguen la diagonal.</span><span data-l="en">Each variable being normal is not enough: the multivariate normal also asks that their combinations be normal. The plot compares the squared Mahalanobis distances with the χ² quantiles: under a normal, the points follow the diagonal.</span></p>
+      <div id="b3MvTiles"></div>
+      <div class="two-figs">
+        <div class="pg-pane" id="b3ChiPane"><div class="pg-title"><span data-l="es">Distancias al cuadrado frente a <span class="nc">χ²</span></span><span data-l="en">Squared distances against <span class="nc">χ²</span></span></div><div id="b3Chi"></div></div>
+        <div id="b3MvOut"></div>
+      </div>
+      <details class="theory-note"><summary><span data-l="es">Clásica frente a robusta</span><span data-l="en">Classical against robust</span></summary>
+        <p><span data-l="es">La distancia clásica usa la media y la covarianza de todos los datos, y los atípicos las inflan hasta esconderse (el efecto de enmascaramiento). La robusta usa el estimador ortogonalizado de Gnanadesikan–Kettenring (Maronna y Zamar 2002) con escalas τ y un repesado que deja fuera lo que pasa del corte: los atípicos quedan lejos. <b>Mardia</b> (1970) prueba la asimetría y la curtosis multivariadas; <b>Henze–Zirkler</b> (1990) compara la función característica empírica con la normal y es consistente contra cualquier alternativa.</span><span data-l="en">The classical distance uses the mean and covariance of all the data, and outliers inflate them until they hide (the masking effect). The robust one uses the orthogonalized Gnanadesikan–Kettenring estimator (Maronna and Zamar 2002) with τ-scales and a reweighting that leaves out what passes the cut: outliers stay far. <b>Mardia</b> (1970) tests multivariate skewness and kurtosis; <b>Henze–Zirkler</b> (1990) compares the empirical characteristic function with the normal and is consistent against any alternative.</span></p>
+      </details>
+    </div>
+
+    <div class="card">
+      <h2><span data-l="es">Cada par: supuestos y coeficiente recomendado</span><span data-l="en">Each pair: assumptions and recommended coefficient</span></h2>
+      <p class="hint"><span data-l="es">Curvatura: el término cuadrático sobre la recta. Dispersión: Breusch–Pagan estudentizada. Influencia: lo más que cambia r al quitar un solo punto. Haz clic en una fila para ver el par.</span><span data-l="en">Curvature: the quadratic term over the line. Spread: studentized Breusch–Pagan. Influence: the most r changes when a single point is removed. Click a row to see the pair.</span></p>
+      <div class="table-wrap" id="b3PairTable"></div>
+    </div>
+
+    <div class="card" id="b3PairCard">
+      <h2><span data-l="es">El par elegido</span><span data-l="en">The chosen pair</span></h2>
+      <div class="form-grid">
+        <div class="field"><label for="b3X">X</label><select id="b3X"></select></div>
+        <div class="field"><label for="b3Y">Y</label><select id="b3Y"></select></div>
+      </div>
+      <div id="b3PairTiles"></div>
+      <div id="b3Verdict"></div>
+      <div class="two-figs">
+        <div class="pg-pane" id="b3ScPane"><div class="pg-title"><span data-l="es">Nube con elipses clásica y robusta (97.5 %)</span><span data-l="en">Cloud with classical and robust ellipses (97.5%)</span></div><div id="b3Sc"></div><div class="fig-legend" id="b3ScLegend"></div></div>
+        <div class="pg-pane" id="b3ResPane"><div class="pg-title"><span data-l="es">Residuos de la recta</span><span data-l="en">Residuals from the line</span></div><div id="b3Res"></div></div>
+      </div>
+      <div class="pg-pane" id="b3InfPane"><div class="pg-title"><span data-l="es">Influencia: cuánto cambia <span class="nc">r</span> sin cada punto</span><span data-l="en">Influence: how much <span class="nc">r</span> changes without each point</span></div><div id="b3Inf"></div></div>
+      <div class="btn-row"><button type="button" class="btn btn-primary btn-sm" id="b3ToPair"><span data-l="es">Medir este par a fondo en el Bloque 4 →</span><span data-l="en">Measure this pair in depth in Block 4 →</span></button></div>
+      <details class="theory-note"><summary><span data-l="es">Por qué cada supuesto</span><span data-l="en">Why each assumption</span></summary>
+        <p><span data-l="es"><b>Linealidad.</b> r mide sólo la parte recta de la relación; si la nube se curva pero sigue subiendo, ρ o τ la miden completa; si sube y baja, ni r ni ρ la ven (Anscombe 1973). <b>Dispersión constante.</b> Cuando la nube se abre en abanico, el error estándar de r que da la fórmula clásica es incorrecto: el valor p por permutación y el intervalo por bootstrap no dependen de ello. <b>Atípicos e influencia.</b> Un solo punto puede crear o borrar una correlación; si r cambia más de un error estándar al quitarlo, ese punto decide demasiado. <b>Grupos.</b> Juntar grupos con medias distintas puede invertir el signo de la relación (Simpson 1951).</span><span data-l="en"><b>Linearity.</b> r measures only the straight part of the relation; if the cloud curves but keeps rising, ρ or τ measure all of it; if it rises and falls, neither r nor ρ sees it (Anscombe 1973). <b>Constant spread.</b> When the cloud opens like a fan, the standard error of r given by the classical formula is wrong: the permutation p-value and the bootstrap interval do not depend on it. <b>Outliers and influence.</b> A single point can create or erase a correlation; if r changes by more than one standard error when it is removed, that point decides too much. <b>Groups.</b> Pooling groups with different means can reverse the sign of the relation (Simpson 1951).</span></p>
+      </details>
+    </div>
+  </div>
+</section>

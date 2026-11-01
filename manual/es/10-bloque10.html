@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>CorrelationPro · Manual de usuario · Capítulo 10</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,500;0,600;1,500&family=Crimson+Pro:ital,wght@0,400;0,600;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../interior.css">
+<script src="../paginar.js"></script>
+</head>
+<body>
+
+<section class="capitulo" id="cap-10" data-pestana="10" data-orden="10" style="--acento: var(--b10)">
+  <div class="cap-apertura">
+    <div class="cap-num">10</div>
+    <div class="cap-etiqueta">Capítulo diez · Bloque 10</div>
+    <h1 data-corto="Estructura">Datos con estructura y datos especiales</h1>
+    <div class="cap-regla"></div>
+    <p class="cap-resumen">La prueba de la <i>r</i> de Pearson supone filas independientes. Muchos datos no lo son: casos agrupados, sujetos medidos varias veces, años seguidos, parcelas vecinas, especies emparentadas. Y algunos números no son una recta: los ángulos dan la vuelta y los porcentajes suman cien. Este bloque reúne siete herramientas, una para cada uno de esos casos.</p>
+    <div class="cap-franja"><span class="k10"></span><span class="k10"></span><span class="k3"></span><span class="k7"></span></div>
+    <ul class="cap-contenido">
+      <li><b>10.1</b>Grupos y la paradoja de Simpson</li>
+      <li><b>10.2</b>Medidas repetidas</li>
+      <li><b>10.3</b>Series de tiempo</li>
+      <li><b>10.4</b>Datos espaciales</li>
+      <li><b>10.5</b>Especies emparentadas</li>
+      <li><b>10.6</b>Datos circulares</li>
+      <li><b>10.7</b>Composiciones</li>
+    </ul>
+  </div>
+  <p>Cada tarjeta tiene sus propios menús, y casi todas un botón de <b>ejemplo simulado</b>: no hay conjuntos de dominio público para todos los casos, así que la app genera unos datos con la estructura justa para ver la herramienta. Al cargarlos, el título y un mensaje dicen que son simulados y no reales. Al cargar un ejemplo se reemplazan los datos abiertos; para volver a los tuyos, ábrelos de nuevo en el Bloque 2.</p>
+
+  <!-- 10.1 -->
+  <h2 id="s10-1"><span class="num">10.1</span>Grupos y la paradoja de Simpson</h2>
+  <p class="lead">Cuando los casos vienen de grupos distintos, hay tres correlaciones, no una: la de dentro de los grupos, la de entre sus medias y la de juntar todo, que mezcla las otras dos.</p>
+  <p>Se eligen <span class="ui">X</span>, <span class="ui">Y</span> y el <span class="ui">Grupo</span>. Cuatro cifras: la <i>r</i> juntando todo; la <i>r</i> <b>dentro de los grupos</b>, calculada con los datos centrados en las medias de su grupo, con <i>n</i> − <i>K</i> − 1 grados de libertad; la <i>r</i> <b>entre las medias</b> de los <i>K</i> grupos, y la prueba <i>Q</i> de que todos los grupos tienen la misma <i>r</i> (con la <i>z</i> de Fisher).</p>
+  <figure class="w70">
+    <div class="marco"><img src="../img/b10-grupos.png" alt="El largo y el ancho del sépalo de los lirios por especie, con las rectas de cada especie y la de todos juntos"></div>
+    <figcaption><b>Figura 10.1.</b> El sépalo de los lirios, el ejemplo con que abre el bloque. Dentro de cada especie la relación es positiva (.530); entre las medias de las especies, negativa (−.745), y juntando todo sale −.118. La recta punteada es la de todos juntos; los círculos grandes, las medias. La prueba <i>Q</i> (<i>p</i> = .060) no rechaza que las tres especies tengan la misma <i>r</i>.</figcaption>
+  </figure>
+  <p>La tabla da la <i>r</i> de cada grupo. La lectura avisa de la <b>paradoja de Simpson</b> cuando la relación dentro de los grupos tiene el signo contrario a la de juntar todo, y si no, recuerda que la <i>r</i> de todos juntos no describe a ninguno de los dos niveles cuando éstos se parecen poco.</p>
+  <div class="caja importante">
+    <div class="caja-t"><span class="ico">!</span>La pregunta decide cuál informar</div>
+    <p>Si la pregunta es sobre individuos —¿las flores de sépalo más largo lo tienen más ancho?—, la respuesta es la <i>r</i> de dentro. Si es sobre los grupos —¿las especies de sépalo más largo lo tienen más ancho?—, es la de entre las medias, con <i>K</i> casos, no con <i>n</i>. Sacar conclusiones sobre individuos con la correlación de los grupos es la <b>falacia ecológica</b> (Robinson 1950).</p>
+  </div>
+
+  <!-- 10.2 -->
+  <h2 id="s10-2"><span class="num">10.2</span>Medidas repetidas</h2>
+  <p>Cuando cada sujeto aporta varias filas, la <i>r</i> de siempre mezcla la relación dentro de los sujetos con las diferencias entre ellos, y además cuenta los grados de libertad como si cada fila fuera un sujeto nuevo. La <b>correlación de medidas repetidas</b> (Bakdash y Marusich 2017) usa sólo la variación dentro de cada sujeto, con una pendiente común para todos, y tiene <i>N</i> − <i>k</i> − 1 grados de libertad, con <i>N</i> filas y <i>k</i> sujetos.</p>
+  <p>Se eligen la columna del <span class="ui">Sujeto</span> —la que tenga papel de sujeto en el Bloque 2, o cualquiera con valores repetidos— y las dos variables. Las cifras son la correlación con su intervalo, los grados de libertad y la <i>r</i> ignorando a los sujetos, en rojo si tiene el signo contrario. La gráfica pone cada sujeto con su color y su recta, todas con la misma pendiente.</p>
+  <figure class="w70">
+    <div class="marco"><img src="../img/b10-repetidas.png" alt="La correlación de medidas repetidas de 12 sujetos simulados medidos 6 veces"></div>
+    <figcaption><b>Figura 10.2.</b> El ejemplo simulado: 12 estudiantes medidos 6 veces. Dentro de cada uno, más horas de estudio van con mejor calificación (.825, con 59 grados de libertad); ignorando a los sujetos, la relación sale al revés (−.956), porque los que estudian más son los que parten de calificaciones más bajas.</figcaption>
+  </figure>
+
+  <!-- 10.3 -->
+  <h2 id="s10-3"><span class="num">10.3</span>Series de tiempo: correlación cruzada y preblanqueo</h2>
+  <p>Dos series con tendencia o con memoria correlacionan aunque no tengan nada que ver: es la «correlación sin sentido» de Yule (1926). El <b>preblanqueo</b> (Box y Jenkins 1976) ajusta a <i>X</i> un modelo autorregresivo —el orden lo elige el criterio de Akaike—, filtra con él las dos series y sólo entonces las correlaciona, en cada retardo.</p>
+  <p>Se eligen <span class="ui">X</span>, <span class="ui">Y</span> y la columna por la que <span class="ui">Ordenar por</span> (si hay una con papel de tiempo, queda elegida; si no, el orden de las filas). Hacen falta al menos 12 tiempos. Las cifras son la <i>r</i> de las series, el modelo de <i>X</i> con sus coeficientes φ, la <i>r</i> preblanqueada en el retardo cero con su límite y el retardo más fuerte. Las dos gráficas dan la correlación en cada retardo <i>k</i> —con <i>X</i> adelantada <i>k</i> pasos—, antes y después del preblanqueo; la franja es el límite aproximado de ±2/√<i>n</i>, y las barras que lo pasan van en rojo.</p>
+  <figure class="w80">
+    <div class="marco"><img src="../img/b10-series.png" alt="La correlación cruzada del producto nacional y los empleados de Estados Unidos, antes y después del preblanqueo"></div>
+    <figcaption><b>Figura 10.3.</b> El producto nacional y los empleados de Estados Unidos, 1947 a 1962. Sin preblanqueo, las dos series que crecen juntas correlacionan en cinco retardos; después, sólo en el cero (.844): la relación es del mismo año, y no se arrastra de un año al siguiente.</figcaption>
+  </figure>
+
+  <!-- 10.4 -->
+  <h2 id="s10-4"><span class="num">10.4</span>Datos espaciales: la t modificada de Dutilleul</h2>
+  <p>Si los lugares cercanos se parecen, hay menos información independiente que filas, y el valor <i>p</i> habitual es demasiado optimista. La prueba de <b>Dutilleul</b> (1993), que sigue a Clifford, Richardson y Hémon (1989), estima con la autocorrelación de cada variable —la <i>I</i> de Moran por clases de distancia— el <b>tamaño de muestra efectivo</b>: cuántos lugares independientes valen los datos.</p>
+  <p>Se eligen las dos variables y las dos coordenadas (si hay columnas con papel de coordenada, quedan elegidas). Las cifras son <i>r</i>, el valor <i>p</i> habitual, el tamaño efectivo (en ámbar si es menos de la mitad de los lugares) y el valor <i>p</i> de Dutilleul con su <i>F</i>. Se calcula hasta con 1&nbsp;500 lugares. El mapa colorea los lugares por <i>X</i>; el <b>correlograma</b> da la <i>I</i> de Moran de cada variable por distancia: si empieza alta y baja, los lugares cercanos se parecen.</p>
+  <figure class="w70">
+    <div class="marco"><img src="../img/b10-espacio.png" alt="La prueba de Dutilleul de 100 parcelas simuladas, con el mapa y el correlograma"></div>
+    <figcaption><b>Figura 10.4.</b> El ejemplo simulado: 100 parcelas con gradientes de humedad y rendimiento. La <i>r</i> de .781 parece contundente (<i>p</i> &lt; .001), pero los datos valen sólo 7.7 lugares independientes, y el valor <i>p</i> corregido sube a .026.</figcaption>
+  </figure>
+
+  <!-- 10.5 -->
+  <h2 id="s10-5"><span class="num">10.5</span>Especies emparentadas: contrastes independientes</h2>
+  <p>Las especies comparten historia evolutiva: dos especies hermanas se parecen porque vienen del mismo antepasado, no porque sean dos observaciones independientes (Felsenstein 1985). Con el árbol filogenético, cada nodo interno da un <b>contraste independiente</b>: la diferencia entre sus dos ramas, estandarizada por la longitud de las ramas. La correlación de los contrastes, que pasa por el origen (Garland, Harvey e Ives 1992), es la que se prueba.</p>
+  <p>Se elige la <span class="ui">Columna con los nombres de las especies</span>, las dos variables y se pega el árbol en formato Newick, con longitudes de rama, en el recuadro; <span class="ui">Calcular los contrastes</span> hace la cuenta. Los nombres del árbol deben coincidir exactamente con los de la columna; si falta alguno, un mensaje dice cuáles.</p>
+  <figure class="w70">
+    <div class="marco"><img src="../img/b10-filogenia.png" alt="Los contrastes independientes de 30 especies simuladas, con el árbol en formato Newick"></div>
+    <figcaption><b>Figura 10.5.</b> El ejemplo simulado: dos rasgos que evolucionan juntos sobre un árbol de 30 especies. La <i>r</i> de las especies (.549) exagera; la de los 29 contrastes es .430, con 28 grados de libertad.</figcaption>
+  </figure>
+
+  <!-- 10.6 -->
+  <h2 id="s10-6"><span class="num">10.6</span>Datos circulares</h2>
+  <p>Ángulos, horas, días del año, meses: 359° y 1° están juntos, y Pearson no lo sabe. Para dos ángulos, la correlación <b>circular–circular</b> de Jammalamadaka y SenGupta (1988), con su prueba <i>z</i>; para un ángulo y una variable lineal, la <b>circular–lineal</b> de Mardia (1976), que ajusta a la variable una onda de seno y coseno del ángulo. Al lado, la <i>r</i> de Pearson «ingenua», para ver cuánto se equivoca.</p>
+  <p>El menú <span class="ui">Ángulo</span> ofrece las columnas de tipo circular del Bloque 2, con su unidad (grados, radianes, horas, día del año o mes); <span class="ui">Con</span>, otra circular o una continua.</p>
+  <figure class="w70">
+    <div class="marco"><img src="../img/b10-circular.png" alt="La correlación circular de la dirección del viento y la de la racha, en un ejemplo simulado"></div>
+    <figcaption><b>Figura 10.6.</b> El ejemplo simulado: la dirección del viento y la de la racha. Las parejas cerca de 0° y 360° (arriba a la izquierda y abajo a la derecha) son casi iguales, pero Pearson las ve como opuestas. La circular da .656 (<i>p</i> &lt; .001).</figcaption>
+  </figure>
+  <div class="caja nota">
+    <div class="caja-t"><span class="ico">i</span>Un ángulo y una variable lineal</div>
+    <p>Con la temperatura en <span class="ui">Con</span>, el mismo ejemplo da la correlación circular–lineal: la temperatura sigue la dirección del viento con una onda, más alta cuando el viento viene de unos 210°. La gráfica pone la variable lineal frente al ángulo, con la onda ajustada.</p>
+  </div>
+
+  <!-- 10.7 -->
+  <h2 id="s10-7"><span class="num">10.7</span>Composiciones: partes de un todo</h2>
+  <p>Si las variables suman una constante —porcentajes, proporciones—, su correlación de Pearson es espuria por construcción (Pearson 1897): si una sube, otras tienen que bajar, y la media de las correlaciones tiende a ser negativa aunque las partes no se relacionen. Se trabaja con los <b>log-cocientes centrados</b> (Aitchison 1986) y con la <b>proporcionalidad</b> ρ<sub>p</sub> (Lovell y colaboradores 2015; Erb y Notredame 2016).</p>
+  <p>El Bloque 2 detecta solo los grupos de columnas contiguas que suman una constante en cada fila; el menú <span class="ui">Grupo composicional</span> los ofrece. Las tres matrices comparan la Pearson de las partes, la Pearson de los log-cocientes centrados y la proporcionalidad.</p>
+  <figure class="w80">
+    <div class="marco"><img src="../img/b10-composicion.png" alt="Las tres matrices de la arena, el limo y la arcilla de un suelo simulado"></div>
+    <figcaption><b>Figura 10.7.</b> El ejemplo simulado: arena, limo y arcilla que suman 100&nbsp;%, generados de manera independiente antes de cerrarlos a 100. Las tres Pearson de las partes son negativas sólo por la suma constante. El carbono orgánico, que también está en los datos, no forma parte del grupo.</figcaption>
+  </figure>
+  <div class="caja teoria">
+    <div class="caja-t"><span class="ico">θ</span>Teoría en breve · la proporcionalidad</div>
+    <p>Dos partes son proporcionales si su cociente es casi constante de una muestra a otra. Con <i>a</i> y <i>b</i> los log-cocientes centrados de dos partes, ρ<sub>p</sub> = 1 − var(<i>a</i> − <i>b</i>)/(var(<i>a</i>) + var(<i>b</i>)); vale 1 con proporcionalidad perfecta, y como <i>a</i> − <i>b</i> es el logaritmo del cociente de las dos partes, no depende de cómo se cerró la composición. Con sólo tres partes, ninguna medida escapa del todo al cierre: con más partes, los log-cocientes centrados se acercan a lo que cada parte hace por sí misma.</p>
+  </div>
+
+  <div class="caja regla">
+    <div class="caja-t"><span class="ico">✓</span>Para leer el Bloque 10</div>
+    <table class="compacta"><tbody>
+      <tr><td style="width:44%"><b>Si</b> hay grupos…</td><td>informa la <i>r</i> de dentro o la de entre, según la pregunta; nunca sólo la de juntar todo.</td></tr>
+      <tr><td><b>Si</b> cada sujeto aporta varias filas…</td><td>usa la correlación de medidas repetidas, con <i>N</i> − <i>k</i> − 1 grados de libertad.</td></tr>
+      <tr><td><b>Si</b> los datos son series de tiempo…</td><td>preblanquea antes de concluir; una <i>r</i> alta entre dos tendencias no dice nada.</td></tr>
+      <tr><td><b>Si</b> los lugares cercanos se parecen…</td><td>informa el tamaño efectivo y el valor <i>p</i> de Dutilleul.</td></tr>
+      <tr><td><b>Si</b> los casos son especies…</td><td>usa los contrastes independientes con un árbol publicado.</td></tr>
+      <tr><td><b>Si</b> una variable es un ángulo o las partes suman 100…</td><td>usa la correlación circular o los log-cocientes; Pearson engaña por construcción.</td></tr>
+    </tbody></table>
+    <p class="regla-pie">Son guías para interpretar, no leyes: lo que sabes del fenómeno, del diseño y de cómo se midió siempre manda.</p>
+  </div>
+</section>
+
+</body>
+</html>

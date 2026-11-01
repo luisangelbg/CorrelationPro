@@ -1,0 +1,49 @@
+cff-version: 1.2.0
+message: "If you use this software, please cite it as below."
+title: "CorrelationPro: a browser-based platform for correlation analysis of every kind, with its theory"
+abstract: >-
+  CorrelationPro is a self-contained web application for correlation analysis that runs entirely
+  in the browser, with no installation, no server-side computation and no third-party libraries.
+  It reads spreadsheets, CSV, TSV and pasted text with its own reader, records the kind and role of
+  each column, checks the assumptions of each pair and recommends a coefficient for each one. It
+  computes every coefficient that applies to two variables with exact, asymptotic or permutation
+  tests, analytic and bootstrap intervals and the Bayes factor; correlation matrices with
+  multiple-testing corrections, the nearest positive-definite matrix, shrinkage and glyphs for up
+  to a thousand variables; nonlinear dependence and copulas; partial, multiple and canonical
+  correlation, RV, Procrustes, co-inertia and Mantel; categorical, ordinal and latent
+  correlations; agreement and reliability; data with structure (groups, repeated measures, time
+  series, space, phylogeny, angles and compositions); correlation networks; and the comparison of
+  correlations, correction for attenuation and range restriction, power and meta-analysis. A
+  reading in plain words accompanies each number, the home page explains the theory with labs that
+  run the real engine, and the program ends in publication figures, palettes, a correlation table
+  and a methods section written from what was actually run. Every engine of Blocks 1 to 12 was
+  checked against independent implementations in R (19,334 comparisons, no disagreement).
+type: software
+authors:
+  - given-names: "Luis Ángel"
+    family-names: "Barrera-Guzmán"
+    email: lbarrerag@chapingo.mx
+    orcid: "https://orcid.org/0000-0001-8057-2583"
+version: "1.0.0"
+# DOI: when the Zenodo record exists, add here (concept DOI) and the release date:
+# doi: 10.5281/zenodo.XXXXXXXX
+# date-released: "YYYY-MM-DD"
+url: "https://luisangelbg.github.io/CorrelationPro/"
+repository-code: "https://github.com/luisangelbg/CorrelationPro"
+license: GPL-3.0-or-later
+keywords:
+  - correlation
+  - association measures
+  - rank correlation
+  - robust correlation
+  - nonlinear dependence
+  - copulas
+  - partial correlation
+  - canonical correlation
+  - polychoric correlation
+  - agreement and reliability
+  - intraclass correlation
+  - correlation networks
+  - meta-analysis of correlations
+  - statistical power
+  - data visualization

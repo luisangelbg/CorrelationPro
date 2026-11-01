@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>CorrelationPro · Manual de usuario · Capítulo 9</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,500;0,600;1,500&family=Crimson+Pro:ital,wght@0,400;0,600;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../interior.css">
+<script src="../paginar.js"></script>
+</head>
+<body>
+
+<section class="capitulo" id="cap-9" data-pestana="9" data-orden="9" style="--acento: var(--b9)">
+  <div class="cap-apertura">
+    <div class="cap-num">9</div>
+    <div class="cap-etiqueta">Capítulo nueve · Bloque 9</div>
+    <h1 data-corto="Acuerdo">Acuerdo y fiabilidad</h1>
+    <div class="cap-regla"></div>
+    <p class="cap-resumen">A veces la pregunta no es si dos medidas se mueven juntas, sino si dicen lo mismo: dos instrumentos, dos métodos de laboratorio, varios evaluadores que califican los mismos casos. Para eso la correlación no sirve. Este bloque calcula la concordancia de Lin, el gráfico de Bland y Altman, los seis coeficientes intraclase, la κ con sus variantes y sus parientes, y la α de Krippendorff.</p>
+    <div class="cap-franja"><span class="k9"></span><span class="k9"></span><span class="k4"></span><span class="k8"></span></div>
+    <ul class="cap-contenido">
+      <li><b>9.1</b>Qué se compara</li>
+      <li><b>9.2</b>Dos métodos: concordancia y Bland–Altman</li>
+      <li><b>9.3</b>Varios evaluadores: los coeficientes intraclase</li>
+      <li><b>9.4</b>Categorías: κ y sus parientes</li>
+    </ul>
+  </div>
+
+  <!-- 9.1 -->
+  <h2 id="s9-1"><span class="num">9.1</span>Qué se compara</h2>
+  <p class="lead">Los datos van con una fila por caso y una columna por evaluador, instrumento o método. En <span class="ui">Qué se compara</span> se eligen dos o más columnas que midan lo mismo en los mismos casos.</p>
+  <p>Si todas las columnas elegidas son continuas, el bloque muestra la concordancia, el gráfico de Bland y Altman de las dos primeras y los coeficientes intraclase de todas. Si todas son categóricas (binarias, nominales u ordinales), muestra la κ y sus parientes; las columnas deben tener las mismas categorías, porque se comparan por su posición en la escala. Si se mezclan los dos tipos, un mensaje pide quitar los de un tipo.</p>
+  <figure>
+    <div class="marco"><img src="../img/b9-que.png" alt="La tarjeta Qué se compara con cuatro instrumentos y cuatro evaluadores simulados"></div>
+    <figcaption><b>Figura 9.1.</b> Los evaluadores simulados: 40 casos medidos con cuatro instrumentos, cada uno con su sesgo y su ruido, y calificados por cuatro evaluadores en cinco categorías. Son datos simulados, no reales; la app lo dice al cargarlos.</figcaption>
+  </figure>
+  <div class="caja nota">
+    <div class="caja-t"><span class="ico">i</span>Los dos ejemplos del bloque</div>
+    <p>Además de los <span class="ui">Evaluadores simulados</span>, el bloque ofrece un conjunto real: el sueño ganado por diez pacientes con dos fármacos (Cushny y Peebles 1905), los datos con los que Student presentó su prueba <i>t</i>. Sirve para comparar dos mediciones de los mismos pacientes, aunque con sólo diez casos.</p>
+  </div>
+
+  <!-- 9.2 -->
+  <h2 id="s9-2"><span class="num">9.2</span>Dos métodos: concordancia y Bland–Altman</h2>
+  <p>Con las dos primeras columnas, cinco cifras: el <b>coeficiente de concordancia de Lin</b> (CCC) con su intervalo; la <i>r</i> de Pearson y el factor de exactitud <i>C</i><sub>b</sub>, porque CCC = <i>r</i> × <i>C</i><sub>b</sub>; el <b>sesgo medio</b> (la diferencia promedio, con su prueba); los <b>límites de acuerdo</b> del 95&nbsp;%, y el <b>sesgo proporcional</b>, la pendiente de la diferencia sobre el promedio.</p>
+  <figure class="w80">
+    <div class="marco"><img src="../img/b9-dos.png" alt="La concordancia y el gráfico de Bland y Altman de dos instrumentos simulados"></div>
+    <figcaption><b>Figura 9.2.</b> Dos instrumentos simulados: <i>r</i> = .890 pero CCC = .841. El primero da, en promedio, 2.39 unidades menos que el segundo (<i>p</i> &lt; .001), y la diferencia crece con el nivel (pendiente 0.179, <i>p</i> = .027). En un caso cualquiera, el primero puede quedar entre −10.28 y 5.50 unidades del segundo.</figcaption>
+  </figure>
+  <p>A la izquierda, la nube contra la <b>línea de igualdad</b> (punteada): si los dos dijeran lo mismo, los puntos caerían sobre ella, no sólo sobre una recta. A la derecha, el gráfico de <b>Bland y Altman</b>: la diferencia de cada caso frente al promedio de los dos, con el sesgo medio (línea continua), los dos límites de acuerdo (punteadas), las franjas de sus intervalos de confianza y, si lo hay, la recta del sesgo proporcional. Debajo, la lectura dice si la concordancia se aparta de <i>r</i>, si hay sesgo medio o proporcional, y cuánto puede diferir un caso.</p>
+  <div class="caja importante">
+    <div class="caja-t"><span class="ico">!</span>Una r alta no es acuerdo</div>
+    <p>Dos instrumentos pueden correlacionar a .99 y diferir siempre en diez unidades, o uno dar el doble que el otro: <i>r</i> mide asociación, no acuerdo (Bland y Altman 1986). La concordancia de Lin penaliza los dos desvíos —de ubicación y de escala— y el gráfico de Bland y Altman muestra cuánto pueden diferir en un caso. Si esa diferencia es aceptable no lo decide la estadística: lo decide quien usa la medida, antes de ver los datos.</p>
+  </div>
+
+  <!-- 9.3 -->
+  <h2 id="s9-3"><span class="num">9.3</span>Varios evaluadores: los coeficientes intraclase</h2>
+  <p>El coeficiente de correlación intraclase (ICC) mide qué parte de la variación total se debe a las diferencias entre los casos y no a las de los evaluadores. Hay seis formas (McGraw y Wong 1996), y la tabla las da todas, con su intervalo, su prueba <i>F</i> y la lectura de Koo y Li (2016). La forma correcta la decide el diseño, no el resultado:</p>
+  <table class="compacta">
+    <caption><b>Tabla 9.1.</b> Cómo elegir la forma del ICC</caption>
+    <thead><tr><th style="width:2.2in">Si…</th><th>usa</th></tr></thead>
+    <tbody>
+      <tr><td>cada caso lo califican evaluadores distintos, tomados al azar</td><td><b>unidireccional</b>: ICC(1) o, para el promedio de <i>k</i> evaluadores, ICC(<i>k</i>)</td></tr>
+      <tr><td>los mismos evaluadores califican todos los casos, y basta con que los ordenen igual</td><td><b>bidireccional, consistencia</b>: ICC(C,1) o ICC(C,<i>k</i>)</td></tr>
+      <tr><td>los mismos evaluadores califican todo, y deben dar el mismo número</td><td><b>bidireccional, acuerdo absoluto</b>: ICC(A,1) o ICC(A,<i>k</i>)</td></tr>
+      <tr><td>en la práctica se usará la calificación de un solo evaluador</td><td>la forma de <b>una medida</b> (…,1)</td></tr>
+      <tr><td>en la práctica se usará el promedio de los evaluadores</td><td>la forma del <b>promedio</b> (…,<i>k</i>)</td></tr>
+    </tbody>
+  </table>
+  <figure class="w80">
+    <div class="marco"><img src="../img/b9-icc.png" alt="Los seis coeficientes intraclase de los cuatro instrumentos simulados y la gráfica de perfiles"></div>
+    <figcaption><b>Figura 9.3.</b> Los cuatro instrumentos simulados. La consistencia de una medida es buena (ICC(C,1) = .785), pero el acuerdo absoluto baja a moderado (ICC(A,1) = .667), porque los instrumentos tienen sesgos distintos. Promediando los cuatro, las dos formas pasan de .88. En la gráfica, cada línea es un caso a través de los cuatro instrumentos.</figcaption>
+  </figure>
+  <p>Debajo de la tabla, tres cifras más: los casos y evaluadores usados (sólo las filas completas), la <b>W de Kendall</b>, el acuerdo en el orden de los casos con su prueba χ², y la <b>α de Krippendorff</b> de intervalo, que admite calificaciones faltantes. La gráfica de perfiles pone cada caso como una línea a través de los evaluadores, coloreada por su promedio: si los evaluadores coinciden, las líneas son horizontales y no se cruzan.</p>
+  <table class="compacta">
+    <caption><b>Tabla 9.2.</b> La lectura del ICC (Koo y Li 2016)</caption>
+    <thead><tr><th style="width:1.6in">ICC</th><th>Fiabilidad</th></tr></thead>
+    <tbody>
+      <tr><td>menos de .50</td><td>pobre</td></tr>
+      <tr><td>.50 a .75</td><td>moderada</td></tr>
+      <tr><td>.75 a .90</td><td>buena</td></tr>
+      <tr><td>más de .90</td><td>excelente</td></tr>
+    </tbody>
+  </table>
+
+  <!-- 9.4 -->
+  <h2 id="s9-4"><span class="num">9.4</span>Categorías: κ y sus parientes</h2>
+  <p>Con columnas categóricas, la medida principal es la <b>κ</b>: el acuerdo observado corregido por el que se esperaría por azar. Con dos evaluadores es la κ de Cohen (1960) o, si las categorías son ordinales y hay más de dos, la ponderada cuadrática; con tres o más, la de Fleiss. La cifra trae la lectura de Landis y Koch (1977), el acuerdo observado y el esperado por azar, la AC1 de Gwet y la α de Krippendorff, ordinal o nominal según el tipo.</p>
+  <figure class="w80">
+    <div class="marco"><img src="../img/b9-cat.png" alt="La κ de Fleiss, sus parientes y la tabla de acuerdo de dos evaluadores simulados"></div>
+    <figcaption><b>Figura 9.4.</b> Los cuatro evaluadores simulados, en cinco categorías ordenadas. La κ de Fleiss es «leve» (.188): coinciden en la categoría exacta sólo el 35&nbsp;% de las veces. Pero sus desacuerdos suelen ser de una o dos categorías, rara vez de más, y las medidas que usan el orden lo ven: κ cuadrática de los dos primeros .579, AC2 .608, α ordinal .548.</figcaption>
+  </figure>
+  <p>La tabla da todas las variantes, con su error estándar y su valor <i>p</i> cuando existen: la κ de Cohen de los dos primeros evaluadores, sin ponderar, con ponderación lineal y cuadrática; la κ de Fleiss y la exacta de Conger (con tres o más); la AC1 de Gwet y su versión ponderada AC2, y la α de Krippendorff nominal y ordinal. A la derecha, la tabla de acuerdo de los dos primeros evaluadores: la diagonal es el acuerdo exacto.</p>
+  <table class="compacta">
+    <caption><b>Tabla 9.3.</b> La lectura de κ (Landis y Koch 1977)</caption>
+    <thead><tr><th style="width:1.6in">κ</th><th>Acuerdo</th></tr></thead>
+    <tbody>
+      <tr><td>menos de 0</td><td>pobre</td></tr>
+      <tr><td>0 a .20</td><td>leve</td></tr>
+      <tr><td>.21 a .40</td><td>aceptable</td></tr>
+      <tr><td>.41 a .60</td><td>moderado</td></tr>
+      <tr><td>.61 a .80</td><td>considerable</td></tr>
+      <tr><td>.81 a 1</td><td>casi perfecto</td></tr>
+    </tbody>
+  </table>
+  <div class="caja teoria">
+    <div class="caja-t"><span class="ico">θ</span>Teoría en breve · las paradojas de κ</div>
+    <p>κ corrige el acuerdo por el azar, y el azar depende de las marginales. Con categorías muy desbalanceadas —casi todos los casos «sanos», por ejemplo— el acuerdo esperado por azar es alto y κ puede salir baja aunque los evaluadores coincidan casi siempre (Feinstein y Cicchetti 1990). La AC1 de Gwet (2008) calcula el azar de otra manera y es más estable en ese caso. La α de Krippendorff admite cualquier número de evaluadores, calificaciones faltantes y escalas nominales, ordinales, de intervalo o de razón (Hayes y Krippendorff 2007).</p>
+  </div>
+  <div class="caja regla">
+    <div class="caja-t"><span class="ico">✓</span>Para leer el Bloque 9</div>
+    <table class="compacta"><tbody>
+      <tr><td style="width:44%"><b>Si</b> dos instrumentos correlacionan alto…</td><td>no digas que coinciden: informa la concordancia y los límites de acuerdo.</td></tr>
+      <tr><td><b>Si</b> hay sesgo medio o proporcional…</td><td>corrígelo o descríbelo; los límites de acuerdo no bastan.</td></tr>
+      <tr><td><b>Si</b> vas a informar un ICC…</td><td>di cuál de las seis formas, y por qué la pide tu diseño.</td></tr>
+      <tr><td><b>Si</b> las categorías son ordinales…</td><td>informa una κ ponderada, la AC2 o la α ordinal, no la κ sin ponderar.</td></tr>
+      <tr><td><b>Si</b> κ es baja pero el acuerdo observado es alto…</td><td>mira las marginales: puede ser la paradoja de κ; informa también la AC1.</td></tr>
+    </tbody></table>
+    <p class="regla-pie">Son guías para interpretar, no leyes: lo que sabes del fenómeno, del diseño y de cómo se midió siempre manda.</p>
+  </div>
+</section>
+
+</body>
+</html>

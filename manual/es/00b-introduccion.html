@@ -1,0 +1,369 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<title>CorrelationPro · Manual de usuario · Introducción</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,500;0,600;1,500&family=Crimson+Pro:ital,wght@0,400;0,600;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../interior.css">
+<script src="../paginar.js"></script>
+<style>
+  figure.reducida { width: 80%; margin-left: auto; margin-right: auto; }
+</style>
+</head>
+<body>
+
+<!-- ====================================================================== CRÉDITOS -->
+<section class="preliminares creditos" id="creditos">
+  <div class="cred-titulo">CorrelationPro</div>
+  <div class="cred-sub">Manual de usuario · Análisis de correlación de todo tipo, con su teoría</div>
+
+  <dl>
+    <dt>Autor</dt><dd><b>Luis Ángel Barrera-Guzmán</b><br><span class="small">ORCID 0000-0001-8057-2583</span></dd>
+    <dt>Programa</dt><dd>CorrelationPro, versión 1.0.0 (octubre de 2026)</dd>
+    <dt>Manual</dt><dd>Primera edición en español, 2026. Describe la versión 1.0 del programa.</dd>
+    <dt>Licencia del programa</dt><dd>Licencia Pública General de GNU, versión 3 o posterior (GPL-3.0-or-later).</dd>
+    <dt>Derechos del manual</dt><dd>© 2026 Luis Ángel Barrera-Guzmán. Todos los derechos reservados.</dd>
+    <dt>Idioma de la interfaz</dt><dd>Español o inglés, con el selector <span class="ui">ES</span> · <span class="ui">EN</span>. En este manual los nombres de botones, campos y menús se escriben como aparecen en pantalla en español, por ejemplo <span class="ui">Calcular desde los datos</span>.</dd>
+  </dl>
+
+  <h4>Cómo citar el programa</h4>
+  <div class="cita">Barrera-Guzmán, L. Á. (2026). <i>CorrelationPro: análisis de correlación de todo tipo en el navegador</i> (versión 1.0.0) [Programa de cómputo]. https://github.com/luisangelbg/CorrelationPro</div>
+  <h4>Cómo citar este manual</h4>
+  <div class="cita">Barrera-Guzmán, L. Á. (2026). <i>CorrelationPro. Manual de usuario</i> (1.ª ed.). Distribuido con CorrelationPro, versión 1.0.0.</div>
+  <p class="small">La cita del programa aparece también, lista para copiarse en dos formatos, en la sección <span class="ui">Cómo citar</span> de la portada de la app.</p>
+
+  <div class="caja nota">
+    <div class="caja-t"><span class="ico">i</span>Privacidad</div>
+    <p>CorrelationPro funciona por completo dentro de tu navegador. Los archivos que abres se leen en tu computadora y <b>nunca se envían a ningún servidor</b>: puedes analizar los datos de una tesis en curso, de un ensayo clínico o de una encuesta confidencial sin que nada de eso salga de tu equipo. El programa no usa cuentas, no guarda tus datos en ninguna parte fuera de tu equipo y no necesita internet para calcular.</p>
+  </div>
+
+  <p class="small" style="margin-top:0.35in;color:var(--gris)">Las ilustraciones, los diagramas y las capturas de pantalla de este manual son originales: se generaron con el propio programa o con código escrito para el manual. Los nueve conjuntos de datos que se usan como ejemplo son de dominio público; cuando un ejemplo es simulado, el texto lo dice.</p>
+</section>
+
+<!-- ====================================================================== ÍNDICE -->
+<section class="preliminares indice" id="indice" data-nueva-hoja>
+  <h1>Índice</h1>
+  <div class="indice-sub">Contenido general del manual</div>
+
+  <ol class="toc">
+    <li><div class="toc-cap"><span class="chip k0">P</span><a href="#como-leer">Cómo leer este manual</a><a class="pag" href="#como-leer"></a></div></li>
+    <li>
+      <div class="toc-cap"><span class="chip k0">In</span><a href="#cap-intro">Introducción a CorrelationPro</a><a class="pag" href="#cap-intro"></a></div>
+      <ul>
+        <li><span class="n">I.1</span><a href="#si-1"><span class="t">¿Qué es CorrelationPro?</span></a></li>
+        <li><span class="n">I.2</span><a href="#si-2"><span class="t">Preguntas que responde</span></a></li>
+        <li><span class="n">I.3</span><a href="#si-3"><span class="t">Seis ideas que sostienen el manual</span></a></li>
+        <li><span class="n">I.4</span><a href="#si-4"><span class="t">Datos que acepta y qué entrega</span></a></li>
+        <li><span class="n">I.5</span><a href="#si-5"><span class="t">Qué necesitas y cómo abrirlo</span></a></li>
+        <li><span class="n">I.6</span><a href="#si-6"><span class="t">Recorrido por la interfaz</span></a></li>
+        <li><span class="n">I.7</span><a href="#si-7"><span class="t">Los nueve conjuntos de ejemplo</span></a></li>
+        <li><span class="n">I.8</span><a href="#si-8"><span class="t">Cómo se recorre un análisis</span></a></li>
+        <li><span class="n">I.9</span><a href="#si-9"><span class="t">Cómo se comprobó</span></a></li>
+        <li><span class="n">I.10</span><a href="#si-10"><span class="t">Lo que el programa no hace</span></a></li>
+      </ul>
+    </li>
+    <li><div class="toc-cap"><span class="chip k1">1</span><a href="#cap-1">Inicio: la teoría, los laboratorios y el catálogo</a><a class="pag" href="#cap-1"></a></div></li>
+    <li><div class="toc-cap"><span class="chip k2">2</span><a href="#cap-2">Los datos y sus tipos</a><a class="pag" href="#cap-2"></a></div></li>
+    <li><div class="toc-cap"><span class="chip k3">3</span><a href="#cap-3">Exploración y supuestos</a><a class="pag" href="#cap-3"></a></div></li>
+    <li><div class="toc-cap"><span class="chip k4">4</span><a href="#cap-4">Un par a fondo</a><a class="pag" href="#cap-4"></a></div></li>
+    <li><div class="toc-cap"><span class="chip k5">5</span><a href="#cap-5">La matriz de correlación</a><a class="pag" href="#cap-5"></a></div></li>
+    <li><div class="toc-cap"><span class="chip k6">6</span><a href="#cap-6">Dependencia no lineal y cópulas</a><a class="pag" href="#cap-6"></a></div></li>
+    <li><div class="toc-cap"><span class="chip k7">7</span><a href="#cap-7">Parcial, múltiple y entre conjuntos</a><a class="pag" href="#cap-7"></a></div></li>
+    <li><div class="toc-cap"><span class="chip k8">8</span><a href="#cap-8">Categóricas, ordinales y mixtas</a><a class="pag" href="#cap-8"></a></div></li>
+    <li><div class="toc-cap"><span class="chip k9">9</span><a href="#cap-9">Acuerdo y fiabilidad</a><a class="pag" href="#cap-9"></a></div></li>
+    <li><div class="toc-cap"><span class="chip k10">10</span><a href="#cap-10">Datos con estructura y datos especiales</a><a class="pag" href="#cap-10"></a></div></li>
+    <li><div class="toc-cap"><span class="chip k11">11</span><a href="#cap-11">Redes de correlación</a><a class="pag" href="#cap-11"></a></div></li>
+    <li><div class="toc-cap"><span class="chip k12">12</span><a href="#cap-12">Comparar, corregir, planear y combinar</a><a class="pag" href="#cap-12"></a></div></li>
+    <li><div class="toc-cap"><span class="chip k13">13</span><a href="#cap-13">Figuras, paletas e informe</a><a class="pag" href="#cap-13"></a></div></li>
+    <li><div class="toc-cap"><span class="chip kx">A</span><a href="#apendices">Apéndices</a><a class="pag" href="#apendices"></a></div></li>
+  </ol>
+</section>
+
+<!-- ====================================================================== CÓMO LEER ESTE MANUAL -->
+<section class="preliminares" id="como-leer" data-nueva-hoja style="--acento: var(--b0)">
+  <h2 style="margin-top:0.2in">Cómo leer este manual</h2>
+  <p class="lead">El manual sigue el mismo orden que la app: trece bloques numerados que se recorren de arriba abajo en la barra de la izquierda. Cada capítulo explica un bloque y lleva su mismo número —el capítulo 5 es el Bloque 5, y sus secciones, figuras y tablas se numeran 5.1, 5.2…—. La introducción no lleva número: sus secciones son I.1, I.2…</p>
+  <p>Cada capítulo empieza con la idea que el bloque pone a prueba, sigue con lo que hay en pantalla en el orden en que aparece, y cierra con las reglas para leer el resultado y los errores más comunes. No hace falta leerlo de corrido: si ya sabes qué quieres medir, la tabla de la sección 1.4 te dice qué medida usar y en qué bloque está, y el apéndice B reúne las reglas de lectura de todos los bloques.</p>
+
+  <h3>Un color para cada bloque</h3>
+  <p>El color del bloque aparece en la apertura de su capítulo, en el número de cada sección, en la pestaña del borde de la hoja y en el índice, y es el mismo de la franja de la portada.</p>
+  <table class="compacta">
+    <thead><tr><th style="width:0.55in">Bloque</th><th style="width:1.55in">Nombre en la app</th><th>Qué hace</th></tr></thead>
+    <tbody>
+      <tr><td><span class="chip k1">1</span></td><td><span class="ui">Inicio</span></td><td>La idea de correlación en lenguaje llano, seis laboratorios que calculan de verdad, el catálogo de 98 medidas, los glifos, las paletas y los estilos de reporte</td></tr>
+      <tr><td><span class="chip k2">2</span></td><td><span class="ui">Datos</span></td><td>Abrir hojas de cálculo o texto, el tipo y el papel de cada columna, los faltantes, las transformaciones y el asistente «¿qué correlación uso?»</td></tr>
+      <tr><td><span class="chip k3">3</span></td><td><span class="ui">Exploración</span></td><td>Matriz de dispersión, normalidad, linealidad, atípicos, influencia y el coeficiente recomendado para cada par</td></tr>
+      <tr><td><span class="chip k4">4</span></td><td><span class="ui">Un par a fondo</span></td><td>Todos los coeficientes de dos variables, con su prueba, sus intervalos, el bootstrap, la permutación y el factor de Bayes</td></tr>
+      <tr><td><span class="chip k5">5</span></td><td><span class="ui">Matriz</span></td><td>La matriz de muchas variables con sus correcciones por pruebas múltiples, su diagnóstico, nueve glifos y la tabla para publicar</td></tr>
+      <tr><td><span class="chip k6">6</span></td><td><span class="ui">No lineal</span></td><td>Medidas que ven cualquier forma de dependencia, el rastreo de toda la matriz y las cópulas</td></tr>
+      <tr><td><span class="chip k7">7</span></td><td><span class="ui">Parcial y conjuntos</span></td><td>Controlar terceras variables, la correlación múltiple y las correlaciones entre dos conjuntos de variables</td></tr>
+      <tr><td><span class="chip k8">8</span></td><td><span class="ui">Categóricas</span></td><td>Tablas de contingencia, sus medidas, las correlaciones latentes y la matriz con el coeficiente adecuado a cada par</td></tr>
+      <tr><td><span class="chip k9">9</span></td><td><span class="ui">Acuerdo</span></td><td>Concordancia, Bland–Altman, coeficientes intraclase y los κ: cuando la pregunta es si dos medidas dicen lo mismo</td></tr>
+      <tr><td><span class="chip k10">10</span></td><td><span class="ui">Estructura</span></td><td>Grupos, medidas repetidas, series de tiempo, datos espaciales, filogenias, ángulos y composiciones</td></tr>
+      <tr><td><span class="chip k11">11</span></td><td><span class="ui">Redes</span></td><td>Redes de correlación marginal, parcial y regularizada, con centralidades y comunidades</td></tr>
+      <tr><td><span class="chip k12">12</span></td><td><span class="ui">Comparar y planear</span></td><td>Comparar correlaciones y matrices, corregir por atenuación y rango, planear la muestra y combinar estudios</td></tr>
+      <tr><td><span class="chip k13">13</span></td><td><span class="ui">Figuras e informe</span></td><td>Exportar figuras, diseñar una paleta, la tabla para publicar, los métodos redactados, el informe y el proyecto</td></tr>
+    </tbody>
+  </table>
+
+  <h3>Tipos de recuadros</h3>
+  <div class="dos">
+    <div class="caja nota" style="margin:0"><div class="caja-t"><span class="ico">i</span>Nota</div><p>Aclaraciones y consejos prácticos que ahorran tiempo.</p></div>
+    <div class="caja importante" style="margin:0"><div class="caja-t"><span class="ico">!</span>Importante</div><p>Lo que puede cambiar tus conclusiones si se pasa por alto.</p></div>
+    <div class="caja teoria" style="margin:0"><div class="caja-t"><span class="ico">θ</span>Teoría en breve</div><p>La idea detrás de un cálculo, sin fórmulas innecesarias.</p></div>
+    <div class="caja ejemplo" style="margin:0"><div class="caja-t"><span class="ico">▸</span>Ejemplo</div><p>Un caso con los datos incluidos en el programa, con los números que da la app.</p></div>
+  </div>
+  <div class="caja regla" style="margin-top:0.18in">
+    <div class="caja-t"><span class="ico">✓</span>Regla de decisión</div>
+    <table class="compacta"><tbody>
+      <tr><td style="width:40%"><b>Si</b> el resultado cae en este caso…</td><td><b>entonces</b> esta es la lectura recomendada.</td></tr>
+    </tbody></table>
+    <p class="regla-pie">Son guías para interpretar, no leyes: lo que sabes del fenómeno, del diseño y de cómo se midió siempre manda.</p>
+  </div>
+  <div class="caja error">
+    <div class="caja-t"><span class="ico">✕</span>Error frecuente</div>
+    <p>Lo que se ve una y otra vez en artículos y tesis, y cómo evitarlo.</p>
+  </div>
+  <div class="caja dato">
+    <div class="dato-cifra">98</div>
+    <div class="dato-txt"><div class="caja-t">Dato clave</div>Una cifra o un hecho que conviene recordar; por ejemplo, el número de medidas que describe el catálogo del Bloque 1.</div>
+  </div>
+
+  <h3>Convenciones de escritura</h3>
+  <table class="compacta">
+    <thead><tr><th style="width:38%">Así se escribe</th><th>Significa</th></tr></thead>
+    <tbody>
+      <tr><td><span class="ui">Usar en toda la app</span></td><td>Un botón, campo o menú de la app, con su texto tal como aparece en pantalla en español.</td></tr>
+      <tr><td><span class="ruta">Bloque 12<span class="sep">›</span>Metaanálisis</span></td><td>Una ruta: abre lo primero y dentro busca lo segundo.</td></tr>
+      <tr><td><code>sepal_length</code>, <code>.csv</code></td><td>Un nombre de columna, de archivo o un valor que se escribe tal cual.</td></tr>
+      <tr><td><i>r</i>, ρ, τ, <i>n</i>, <i>p</i></td><td>Los símbolos de la estadística, en cursiva cuando son letras latinas; ρ es la correlación de la población y <i>r</i> la de la muestra.</td></tr>
+      <tr><td>.74 · 0.74</td><td>Los números se escriben como los escribe la app en el estilo elegido. En este manual se usa el de las ciencias sociales: sin cero inicial en lo que no puede pasar de 1 (<i>r</i>, <i>p</i>) y con él en lo demás.</td></tr>
+      <tr><td><span class="si">●</span> <span class="parcial">◐</span> <span class="no">—</span></td><td>Disponible · disponible en parte o con condiciones · no aplica.</td></tr>
+    </tbody>
+  </table>
+</section>
+
+<!-- ====================================================================== INTRODUCCIÓN -->
+<section class="capitulo" id="cap-intro" data-pestana="In" data-orden="0" style="--acento: var(--b0)">
+  <div class="cap-apertura">
+    <div class="cap-num">I</div>
+    <div class="cap-etiqueta">Introducción</div>
+    <h1 data-corto="Introducción">Introducción a CorrelationPro</h1>
+    <div class="cap-regla"></div>
+    <p class="cap-resumen">Una correlación parece el cálculo más sencillo de la estadística, y por eso es el que más se usa mal: con datos que no lo sostienen, con el coeficiente equivocado, sin intervalo, sin ver la nube, ignorando que los casos vienen en grupos o en el tiempo. CorrelationPro reúne en un solo lugar las medidas de asociación que la literatura ha propuesto en ciento cuarenta años, con sus pruebas y sus convenios, y recorre contigo el análisis en el orden en que se hace bien.</p>
+    <div class="cap-franja"><span class="k1"></span><span class="k2"></span><span class="k3"></span><span class="k4"></span><span class="k5"></span><span class="k6"></span><span class="k7"></span><span class="k8"></span><span class="k9"></span><span class="k10"></span><span class="k11"></span><span class="k12"></span><span class="k13"></span></div>
+    <ul class="cap-contenido">
+      <li><b>I.1</b>¿Qué es CorrelationPro?</li>
+      <li><b>I.2</b>Preguntas que responde</li>
+      <li><b>I.3</b>Seis ideas que sostienen el manual</li>
+      <li><b>I.4</b>Datos que acepta y qué entrega</li>
+      <li><b>I.5</b>Qué necesitas y cómo abrirlo</li>
+      <li><b>I.6</b>Recorrido por la interfaz</li>
+      <li><b>I.7</b>Los nueve conjuntos de ejemplo</li>
+      <li><b>I.8</b>Cómo se recorre un análisis</li>
+      <li><b>I.9</b>Cómo se comprobó</li>
+      <li><b>I.10</b>Lo que el programa no hace</li>
+    </ul>
+  </div>
+
+  <!-- I.1 -->
+  <h2 id="si-1"><span class="num">I.1</span>¿Qué es CorrelationPro?</h2>
+  <p class="lead">Es un programa para medir, probar, comparar y comunicar la asociación entre variables. Corre en el navegador, sin instalar nada, y trae su propio motor de cálculo escrito desde cero: ninguna parte depende de bibliotecas de otros.</p>
+  <p>Cubre las correlaciones clásicas (Pearson, Spearman, Kendall) y las robustas; las de dependencia no lineal, que ven relaciones en forma de U o de onda que Pearson no ve; las parciales y las que unen dos conjuntos de variables; las de variables categóricas, ordinales y latentes; las de acuerdo entre métodos y evaluadores; las de datos con estructura —grupos, medidas repetidas, tiempo, espacio, filogenias, ángulos y composiciones—; las redes de correlación; y las herramientas que vienen después de calcular: comparar dos correlaciones, corregir por el error de medida, planear el tamaño de muestra y combinar estudios.</p>
+  <p>Cada resultado dice qué convenio usó —qué hacer con los empates, qué divisor, qué corrección—, porque dos programas que dan números distintos para «el mismo» coeficiente casi siempre difieren en eso. Cada fórmula se explica, en el catálogo y en las notas de teoría de cada bloque. Y las figuras salen listas para una revista, con paletas que se leen igual con daltonismo y en blanco y negro.</p>
+
+  <figure>
+    <div class="marco"><img src="../img/i-inicio.png" alt="La portada de la app: el título, los botones para empezar y la figura de los lirios con la paradoja de Simpson"></div>
+    <figcaption><b>Figura I.1.</b> La portada de CorrelationPro al abrirla. A la izquierda, la barra de los trece bloques; al centro, los cuatro botones para empezar y la figura de los lirios de Anderson, que muestra la paradoja de Simpson; a la derecha, la lista de las secciones del bloque abierto.</figcaption>
+  </figure>
+
+  <!-- I.2 -->
+  <h2 id="si-2"><span class="num">I.2</span>Preguntas que responde</h2>
+  <p>Una buena manera de saber si el programa te sirve es ver qué preguntas contesta, y en qué bloque.</p>
+  <table class="compacta">
+    <thead><tr><th>Pregunta</th><th style="width:0.75in" class="c">Bloque</th></tr></thead>
+    <tbody>
+      <tr><td>¿Qué coeficiente uso con estas dos variables?</td><td class="c"><span class="chip k2">2</span> <span class="chip k3">3</span></td></tr>
+      <tr><td>¿Mis datos cumplen los supuestos de Pearson? ¿Hay atípicos que lo deciden todo?</td><td class="c"><span class="chip k3">3</span></td></tr>
+      <tr><td>¿Cuánto vale la correlación, con qué intervalo, y es distinta de cero?</td><td class="c"><span class="chip k4">4</span></td></tr>
+      <tr><td>¿Cuál es la evidencia a favor y en contra de que haya relación?</td><td class="c"><span class="chip k4">4</span> <span class="chip k12">12</span></td></tr>
+      <tr><td>¿Cómo se relacionan veinte variables entre sí, y cuáles de esas correlaciones sobreviven a la corrección por pruebas múltiples?</td><td class="c"><span class="chip k5">5</span></td></tr>
+      <tr><td>¿Hay una relación que no es una recta, o que sólo aparece en las colas?</td><td class="c"><span class="chip k6">6</span></td></tr>
+      <tr><td>¿Siguen relacionadas dos variables cuando controlo por una tercera?</td><td class="c"><span class="chip k7">7</span></td></tr>
+      <tr><td>¿Se parecen dos conjuntos de variables (dos ordenaciones, dos matrices de distancias)?</td><td class="c"><span class="chip k7">7</span></td></tr>
+      <tr><td>¿Qué tan asociadas están dos variables categóricas, o una ordinal y una continua?</td><td class="c"><span class="chip k8">8</span></td></tr>
+      <tr><td>¿Dos instrumentos, dos métodos o dos evaluadores dicen lo mismo?</td><td class="c"><span class="chip k9">9</span></td></tr>
+      <tr><td>¿Mis casos son independientes? ¿Qué pasa si vienen en grupos, en el tiempo o en el espacio?</td><td class="c"><span class="chip k10">10</span></td></tr>
+      <tr><td>¿Qué variables se conectan directamente con cuáles, y cuál está en el centro?</td><td class="c"><span class="chip k11">11</span></td></tr>
+      <tr><td>¿Es mayor esta correlación que aquella? ¿Cuántos casos necesito? ¿Qué dicen todos los estudios juntos?</td><td class="c"><span class="chip k12">12</span></td></tr>
+      <tr><td>¿Cómo publico la figura, la tabla y los métodos?</td><td class="c"><span class="chip k13">13</span></td></tr>
+    </tbody>
+  </table>
+
+  <!-- I.3 -->
+  <h2 id="si-3"><span class="num">I.3</span>Seis ideas que sostienen el manual</h2>
+  <p>Todo lo que sigue descansa en seis ideas. Si te quedas con ellas, la mitad de los errores que se cometen con las correlaciones ya no son posibles.</p>
+  <ol class="pasos">
+    <li><b>Primero se mira, después se calcula.</b> Cuatro nubes de puntos completamente distintas pueden tener la misma <i>r</i> (Anscombe, 1973). La app dibuja la nube antes que el número, en cada bloque.</li>
+    <li><b>El coeficiente lo eligen los datos, no la costumbre.</b> Pearson mide la relación <i>lineal</i> entre dos variables continuas; Spearman y Kendall, la <i>monótona</i>; las de dependencia no lineal, cualquiera. Con categorías, con rangos o con latentes hacen falta otras. El Bloque 3 recomienda una para cada par y explica por qué.</li>
+    <li><b>Una correlación sin intervalo no dice cuánto.</b> El valor <i>p</i> sólo contesta si <i>r</i> es distinta de cero, y con muestras grandes cualquier cosa lo es. El intervalo de confianza dice qué valores son compatibles con los datos (Cumming, 2008).</li>
+    <li><b>Los casos casi nunca son independientes.</b> Medidas del mismo sujeto, de sitios vecinos, de años seguidos o de especies emparentadas se parecen entre sí, y eso infla la correlación y encoge el valor <i>p</i>. El Bloque 10 está hecho para eso.</li>
+    <li><b>Correlación no es acuerdo, ni causa.</b> Dos métodos pueden correlacionar .99 y diferir en diez unidades (Bland y Altman, 1986). Y dos variables pueden moverse juntas porque las mueve una tercera, o por puro azar entre muchas pruebas.</li>
+    <li><b>Lo que no se reporta no se puede revisar.</b> El coeficiente, el convenio, el manejo de faltantes, la corrección por pruebas múltiples y la versión del programa van en los métodos. El Bloque 13 los redacta a partir de lo que corriste.</li>
+  </ol>
+
+  <!-- I.4 -->
+  <h2 id="si-4"><span class="num">I.4</span>Datos que acepta y qué entrega</h2>
+  <p>Una tabla: una fila por caso y una columna por variable. Se abre de un archivo, se pega desde una hoja de cálculo o se toma de los ejemplos.</p>
+  <table class="compacta">
+    <thead><tr><th style="width:1.6in">Entra</th><th>Formato</th></tr></thead>
+    <tbody>
+      <tr><td>Hojas de cálculo</td><td>Libros <code>.xlsx</code>, <code>.xlsm</code> y <code>.ods</code>, con elección de hoja</td></tr>
+      <tr><td>Texto</td><td><code>.csv</code>, <code>.tsv</code>, <code>.txt</code> y <code>.dat</code>, con coma, punto y coma, tabulador o barra como separador, punto o coma decimal, y codificación UTF-8, UTF-16 o Latin-1, detectados solos</td></tr>
+      <tr><td>Pegado</td><td>Lo que copies de una hoja de cálculo, con su encabezado</td></tr>
+      <tr><td>Proyectos</td><td>Un paquete <code>.json</code> guardado antes por la propia app (Bloque 13)</td></tr>
+      <tr><td>Resúmenes</td><td>Para comparar correlaciones, corregirlas, planear o hacer un metaanálisis basta con escribir <i>r</i> y <i>n</i> (Bloque 12)</td></tr>
+    </tbody>
+  </table>
+  <table class="compacta">
+    <thead><tr><th style="width:1.6in">Sale</th><th>Formato</th></tr></thead>
+    <tbody>
+      <tr><td>Figuras</td><td>PNG, SVG, PDF vectorial y TIFF, a los anchos de revista de 85, 114 y 180 mm, por el estudio de figuras</td></tr>
+      <tr><td>Tablas</td><td>Copiadas al procesador de textos con su formato, o en CSV y HTML</td></tr>
+      <tr><td>Texto</td><td>Los métodos redactados con sus referencias, y un informe imprimible</td></tr>
+      <tr><td>Proyecto</td><td>Un paquete <code>.json</code> con los datos, sus tipos y las preferencias, para retomar el análisis</td></tr>
+    </tbody>
+  </table>
+
+  <!-- I.5 -->
+  <h2 id="si-5"><span class="num">I.5</span>Qué necesitas y cómo abrirlo</h2>
+  <p>Sólo un navegador moderno, en una versión de los últimos años. No hace falta instalar nada ni tener internet; el programa entero cabe en una carpeta.</p>
+  <ol class="pasos">
+    <li><b>Doble clic en <code>index.html</code>.</b> Es lo más sencillo y funciona igual que todo lo demás: todos los cálculos y los ejemplos están dentro del programa.</li>
+    <li><b>O doble clic en <code>Open CorrelationPro.bat</code>.</b> Abre un servidor local mínimo en el puerto 9950 y la app en <code>http://localhost:9950</code>. Sólo hace falta para abrirla desde otro equipo o una tableta de la misma red; el archivo <code>server.ps1</code> explica cómo.</li>
+  </ol>
+  <p>Sin copiar nada, la misma app se abre en línea en <code>https://luisangelbg.github.io/CorrelationPro/</code>, y la carpeta del programa se descarga de <code>https://github.com/luisangelbg/CorrelationPro</code>.</p>
+  <p>Las preferencias —idioma, tema, paleta, estilo de los números— se guardan en el propio navegador y se recuerdan la siguiente vez. Los datos no: cada vez que abres la app empieza vacía, y para retomar un análisis está el paquete del proyecto del Bloque 13.</p>
+
+  <h3>Qué tan grandes pueden ser tus datos</h3>
+  <p>El motor está escrito para que el navegador no se trabe. Estos son tiempos medidos en una computadora de escritorio con el mismo motor que corre en la app:</p>
+  <table class="compacta">
+    <thead><tr><th>Cálculo</th><th style="width:0.75in" class="num">Tiempo</th><th style="width:1.9in">En la práctica</th></tr></thead>
+    <tbody>
+      <tr><td>Matriz de Pearson de 200 × 200 variables, 1&nbsp;000 filas</td><td class="num">34 ms</td><td>instantáneo</td></tr>
+      <tr><td>Matriz de Pearson de 1&nbsp;000 × 1&nbsp;000 variables</td><td class="num">83 ms</td><td>instantáneo; se dibuja en lienzo</td></tr>
+      <tr><td>τ-b de Kendall con 100&nbsp;000 pares</td><td class="num">64 ms</td><td>instantáneo</td></tr>
+      <tr><td>Correlación de distancias con 2&nbsp;000 pares</td><td class="num">33 ms</td><td>instantáneo; hasta 3&nbsp;000 pares</td></tr>
+      <tr><td>Prueba de Mantel, 9&nbsp;999 permutaciones, 200 sitios</td><td class="num">0.34 s</td><td>un instante</td></tr>
+      <tr><td>Bootstrap BCa de <i>r</i> con 1&nbsp;999 remuestreos, 1&nbsp;000 pares</td><td class="num">0.9 s</td><td>un instante</td></tr>
+      <tr><td>Lazo gráfico con EBIC, 30 variables y 300 filas</td><td class="num">1.0 s</td><td>un instante</td></tr>
+    </tbody>
+  </table>
+  <p>Cuando un cálculo va a tardar más de un instante, la app lo avisa con una espera animada y, si puede, ajusta sola el número de remuestreos al tiempo disponible, y lo dice.</p>
+
+  <!-- I.6 -->
+  <h2 id="si-6"><span class="num">I.6</span>Recorrido por la interfaz</h2>
+  <p>Todas las aplicaciones de la suite comparten la misma barra, la misma navegación y las mismas herramientas de figuras, así que lo que aprendas aquí te sirve en las demás.</p>
+
+  <figure>
+    <div class="marco"><img src="../img/i-interfaz.png" alt="La pantalla del Bloque 5 con sus partes numeradas">
+      <span class="marca" style="left:4.8%;top:3.2%">1</span>
+      <span class="marca" style="left:79.5%;top:3.2%">2</span>
+      <span class="marca" style="left:86.8%;top:3.2%">3</span>
+      <span class="marca" style="left:94.4%;top:3.2%">4</span>
+      <span class="marca" style="left:15.4%;top:32.7%">5</span>
+      <span class="marca" style="left:61%;top:8.6%">6</span>
+      <span class="marca" style="left:77.8%;top:8.6%">7</span>
+      <span class="marca" style="left:85.2%;top:20.8%">8</span>
+      <span class="marca" style="left:20.4%;top:24.2%">9</span>
+      <span class="marca" style="left:15.4%;top:92.7%">10</span>
+    </div>
+    <figcaption><b>Figura I.2.</b> La pantalla del Bloque 5 con los lirios abiertos. Los números corresponden a la lista de abajo.</figcaption>
+  </figure>
+  <ul class="leyenda-marcas">
+    <li><span class="n">1</span><b>Nombre de la app.</b> Lleva a la portada (Bloque 1).</li>
+    <li><span class="n">2</span><b>LABG Suite.</b> Vuelve al portal con las demás aplicaciones.</li>
+    <li><span class="n">3</span><b>ES · EN.</b> Cambia el idioma de toda la interfaz, también el de las figuras.</li>
+    <li><span class="n">4</span><b>Tema, reporte y atajos.</b> Claro u oscuro; reportar un problema en la página pública del proyecto; la lista de atajos de teclado (tecla <code>?</code>).</li>
+    <li><span class="n">5</span><b>La barra de los trece bloques.</b> El número se vuelve una palomita cuando el bloque ya tiene un resultado; <code>[</code> la contrae.</li>
+    <li><span class="n">6</span><b>Documento · Enfocado.</b> Todas las secciones del bloque una tras otra, o una sola a la vez.</li>
+    <li><span class="n">7</span><b>Buscar</b> (<code>Ctrl+K</code>). Un bloque, una sección, un control o una medida, por su nombre.</li>
+    <li><span class="n">8</span><b>En este bloque.</b> Las secciones del bloque abierto; la actual va resaltada.</li>
+    <li><span class="n">9</span><b>Una tarjeta.</b> Cada sección es una tarjeta con sus controles arriba y sus resultados abajo.</li>
+    <li><span class="n">10</span><b>Buscar, Modo enfocado y Ayuda,</b> también al pie de la barra de bloques.</li>
+  </ul>
+
+  <h3>Navegar sin perderse</h3>
+  <p>Arriba de cada bloque, la ruta dice dónde estás —<span class="ruta">CorrelationPro<span class="sep">›</span>5 Matriz<span class="sep">›</span>Qué correlacionar</span>—, y al pie de cada bloque dos botones llevan al anterior y al siguiente. Con <code>Alt+←</code> y <code>Alt+→</code> se pasa de un bloque a otro desde el teclado; en el modo enfocado, de una sección a otra. Cuando cambias un control y los resultados se recalculan más abajo, aparece un botón flotante, <span class="ui">Último cambio</span>, que te regresa al control que tocaste.</p>
+
+  <figure class="reducida">
+    <div class="marco"><img src="../img/i-buscar.png" alt="La ventana de búsqueda con kendall escrito y cinco resultados"></div>
+    <figcaption><b>Figura I.3.</b> La búsqueda (<code>Ctrl+K</code>) con «kendall» escrito: encuentra las cinco medidas del catálogo que llevan el nombre y dice en qué bloque se calcula cada una. <code>Enter</code> lleva al resultado elegido.</figcaption>
+  </figure>
+
+  <h3>Las figuras</h3>
+  <p>Todas las figuras de la app se pueden abrir en el <b>estudio de figuras</b>, una ventana común a la suite donde se cambian los textos, el tamaño de la letra, la leyenda y los colores sin tocar los datos, y se exporta a los anchos y resoluciones de las revistas. El capítulo 13 lo explica a fondo. Junto a cada figura, el botón <span class="ui">✎</span> abre el editor de la figura, para cambiar sus textos, sus colores y su leyenda.</p>
+
+  <!-- I.7 -->
+  <h2 id="si-7"><span class="num">I.7</span>Los nueve conjuntos de ejemplo</h2>
+  <p>Para aprender sin datos propios, la app trae nueve conjuntos de dominio público, todos clásicos de la historia de la correlación. Se abren en <span class="ruta">Bloque 2<span class="sep">›</span>Conjuntos de ejemplo</span> o con los botones de los bloques que los usan. Cuando un bloque necesita un ejemplo que no existe entre ellos —datos espaciales, una filogenia, una red de evaluadores— lo simula y lo dice en su título: «Simulado… (no son datos reales)».</p>
+  <table class="compacta">
+    <thead><tr><th style="width:1.45in">Conjunto</th><th style="width:0.45in" class="num"><i>n</i></th><th>Qué tiene y para qué sirve</th></tr></thead>
+    <tbody>
+      <tr><td><b>Lirios de Anderson</b> (1935, 1936)</td><td class="num">150</td><td>Cuatro medidas de la flor de tres especies de <i>Iris</i>. La matriz de correlación, las correlaciones dentro y entre especies y la paradoja de Simpson.</td></tr>
+      <tr><td><b>Guisantes de Galton</b> (1877)</td><td class="num">700</td><td>Diámetro de la semilla madre y de la hija en el guisante de olor (<i>Lathyrus odoratus</i>). Muchos empates: los convenios de Spearman, Kendall y ξ.</td></tr>
+      <tr><td><b>Estaturas de Galton</b> (1886)</td><td class="num">928</td><td>Estatura de los hijos y de sus padres. La tabla con la que se describió la regresión a la media.</td></tr>
+      <tr><td><b>Maíz de Darwin</b> (1876)</td><td class="num">15</td><td>Altura de pares de plantas de maíz (<i>Zea mays</i>) de polinización cruzada y de autopolinización en la misma maceta. Datos pareados.</td></tr>
+      <tr><td><b>Suiza, 1888</b></td><td class="num">47</td><td>Seis indicadores de 47 distritos francófonos: relaciones de todos los signos, la red parcial y la matriz que alimenta un análisis factorial.</td></tr>
+      <tr><td><b>Economía de EE. UU.</b>, 1947–1962</td><td class="num">16</td><td>Siete series anuales casi colineales: correlaciones altísimas que vienen del tiempo, no de una relación directa.</td></tr>
+      <tr><td><b>Titanic</b>, 1912</td><td class="num">2&nbsp;201</td><td>Clase, sexo, edad y supervivencia: tablas de contingencia, la V de Cramér, la razón de momios y la tetracórica.</td></tr>
+      <tr><td><b>Frenado de autos</b> (Ezekiel, 1930)</td><td class="num">50</td><td>Velocidad y distancia de frenado: una relación que crece más que en línea recta.</td></tr>
+      <tr><td><b>Sueño con dos fármacos</b> (1905)</td><td class="num">10</td><td>Horas de sueño ganadas por diez pacientes con dos fármacos: datos pareados, el ejemplo con que se presentó la prueba <i>t</i>.</td></tr>
+    </tbody>
+  </table>
+
+  <!-- I.8 -->
+  <h2 id="si-8"><span class="num">I.8</span>Cómo se recorre un análisis</h2>
+  <p>Los bloques están en el orden en que se hace un análisis de correlación bien hecho. No hace falta pasar por todos: los que no apliquen a tus datos se saltan, y cada bloque te dice si conviene volver a uno anterior.</p>
+  <ol class="pasos">
+    <li><b>Cargar</b> (Bloque 2). Abre tus datos y revisa que cada columna tenga el tipo y el papel correctos: de eso depende qué coeficientes se ofrecen.</li>
+    <li><b>Explorar</b> (Bloque 3). Mira las nubes, revisa la normalidad y los atípicos, y anota el coeficiente que la app recomienda para cada par.</li>
+    <li><b>Medir</b> (Bloques 4 a 9). Un par a fondo, la matriz completa, la dependencia no lineal, las parciales, las categóricas o el acuerdo, según la pregunta.</li>
+    <li><b>Respetar la estructura</b> (Bloque 10). Si los casos vienen en grupos, en el tiempo o en el espacio, mide como corresponde antes de concluir.</li>
+    <li><b>Conectar y comparar</b> (Bloques 11 y 12). La red de las asociaciones directas; la comparación con otra correlación, otro grupo u otros estudios.</li>
+    <li><b>Publicar</b> (Bloque 13). La figura al ancho de la revista, la tabla, los métodos redactados y el informe.</li>
+  </ol>
+  <div class="caja nota">
+    <div class="caja-t"><span class="ico">i</span>Los datos se comparten entre bloques</div>
+    <p>Lo que abres en el Bloque 2 lo usan todos los demás. Si cambias el tipo de una columna, el manejo de faltantes o abres otros datos, cada bloque recalcula lo suyo la siguiente vez que lo visitas, y su palomita en la barra se apaga hasta entonces.</p>
+  </div>
+
+  <!-- I.9 -->
+  <h2 id="si-9"><span class="num">I.9</span>Cómo se comprobó</h2>
+  <p>Un programa de estadística vale lo que valen sus números. Cada motor de CorrelationPro se comparó, bloque por bloque, con implementaciones independientes escritas por otras personas y con fórmulas recalculadas aparte, sobre los conjuntos de ejemplo y sobre datos simulados con casos difíciles: empates, atípicos, muestras de cinco casos, correlaciones cercanas a 1.</p>
+  <div class="caja dato">
+    <div class="dato-cifra">19&nbsp;334</div>
+    <div class="dato-txt"><div class="caja-t">Comparaciones sin desacuerdos</div>Valores que la app calcula y que se compararon, uno por uno, con las referencias independientes: estimaciones, estadísticos, valores <i>p</i>, intervalos, matrices. Además, 284 pruebas automáticas corren en el navegador y vigilan las identidades que todo resultado debe cumplir.</div>
+  </div>
+  <p>La comparación sirvió también para encontrar errores, propios y ajenos. Cuando una referencia publicada no coincide con la fórmula del artículo original, la app sigue la fórmula original y el capítulo correspondiente lo dice. Los detalles —qué se comparó, con qué tolerancia y qué errores se encontraron— acompañan al programa en su carpeta de validación.</p>
+
+  <!-- I.10 -->
+  <h2 id="si-10"><span class="num">I.10</span>Lo que el programa no hace</h2>
+  <p>Saber dónde termina una herramienta es tan útil como saber qué hace.</p>
+  <table class="compacta">
+    <thead><tr><th style="width:1.7in">No hace</th><th>Por qué, y qué hacer</th></tr></thead>
+    <tbody>
+      <tr><td><b>Inferencia causal</b></td><td>Una correlación no dice qué causa qué. La app lo recuerda donde importa, pero no estima efectos causales.</td></tr>
+      <tr><td><b>Modelos de regresión completos</b></td><td>Aquí se mide la asociación. Para modelos lineales y mixtos con sus diagnósticos está otra aplicación de la suite, SigmaPro.</td></tr>
+      <tr><td><b>Análisis factorial y de componentes</b></td><td>La matriz de correlación es su punto de partida, y el Bloque 5 dice si sirve para eso (KMO y Bartlett); el análisis mismo está en PCAPro, de la misma suite.</td></tr>
+      <tr><td><b>Correlación multinivel con modelo mixto</b></td><td>El Bloque 10 separa la correlación dentro y entre grupos de forma descriptiva; el modelo mixto bivariado no está incluido.</td></tr>
+      <tr><td><b>Datos que no caben en memoria</b></td><td>Hasta decenas de miles de filas y mil variables; más allá, o con medidas costosas, la app avisa antes de empezar.</td></tr>
+    </tbody>
+  </table>
+</section>
+
+</body>
+</html>

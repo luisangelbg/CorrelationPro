@@ -1,0 +1,29 @@
+# Operating system
+Thumbs.db
+ehthumbs.db
+Desktop.ini
+desktop.ini
+.DS_Store
+
+# Editors and tooling
+.vscode/
+.idea/
+.claude/
+*.swp
+*~
+
+# Local development tools
+tools/local/
+
+# Archives
+*.zip
+
+# Verification material and working notes, which are not part of the work (see PROCEDENCIA.md, sections 6 and 7):
+# research/ names third-party programs and keeps their code and papers; validation/ holds the R references
+# and the comparison scripts.
+research/
+validation/
+
+# Working files of the manual
+manual/es/_*
+manual/en/_*

@@ -1,0 +1,110 @@
+<!-- ==================== BLOCK 10 · STRUCTURED AND SPECIAL DATA ==================== -->
+<section class="step-panel" id="panel-10">
+  <div class="panel-title"><div class="pt-num">10</div><div><h2><span data-l="es">Datos con estructura y datos especiales</span><span data-l="en">Structured and special data</span></h2><p><span data-l="es">Cuando las filas no son independientes, o los números no son una recta</span><span data-l="en">When the rows are not independent, or the numbers are not a line</span></p></div></div>
+
+  <div class="card" id="b10Empty">
+    <p class="hint"><span data-l="es">Primero abre unos datos en el Bloque 2 (o usa un conjunto de ejemplo).</span><span data-l="en">First open some data in Block 2 (or use an example dataset).</span></p>
+    <div class="btn-row"><button type="button" class="btn btn-secondary btn-sm" data-go="2"><span data-l="es">← Ir a Datos</span><span data-l="en">← Go to Data</span></button>
+      <button type="button" class="btn btn-ghost btn-sm" id="b10Iris"><span data-l="es">Usar los lirios (grupos)</span><span data-l="en">Use the irises (groups)</span></button></div>
+  </div>
+
+  <div id="b10Main" hidden>
+    <div class="card">
+      <h2><span data-l="es">Grupos y la paradoja de Simpson</span><span data-l="en">Groups and Simpson’s paradox</span></h2>
+      <div class="form-grid">
+        <div class="field"><label for="b10GX">X</label><select id="b10GX" class="b10-num"></select></div>
+        <div class="field"><label for="b10GY">Y</label><select id="b10GY" class="b10-num"></select></div>
+        <div class="field"><label for="b10GG"><span data-l="es">Grupo</span><span data-l="en">Group</span></label><select id="b10GG"></select></div>
+      </div>
+      <div id="b10GTiles"></div>
+      <div class="two-figs">
+        <div class="pg-pane" id="b10GScPane"><div class="pg-title"><span data-l="es">Rectas dentro de cada grupo y la de todos juntos</span><span data-l="en">Lines within each group and the one for all together</span></div><div id="b10GSc"></div><div class="fig-legend" id="b10GLeg"></div></div>
+        <div><div class="table-wrap" id="b10GTable"></div><div class="b10-text" id="b10GText"></div></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2><span data-l="es">Medidas repetidas</span><span data-l="en">Repeated measures</span></h2>
+      <p class="hint"><span data-l="es">Cuando cada sujeto aporta varias filas, la r de siempre mezcla la relación dentro de los sujetos con las diferencias entre ellos y cuenta de más los grados de libertad. La correlación de medidas repetidas (Bakdash y Marusich 2017) usa sólo la variación dentro de cada sujeto, con una pendiente común.</span><span data-l="en">When each subject contributes several rows, the usual r mixes the relation within subjects with the differences between them and overcounts the degrees of freedom. The repeated measures correlation (Bakdash and Marusich 2017) uses only the variation within each subject, with a common slope.</span></p>
+      <div class="form-grid">
+        <div class="field"><label for="b10RS"><span data-l="es">Sujeto</span><span data-l="en">Subject</span></label><select id="b10RS"></select></div>
+        <div class="field"><label for="b10RX">X</label><select id="b10RX" class="b10-num"></select></div>
+        <div class="field"><label for="b10RY">Y</label><select id="b10RY" class="b10-num"></select></div>
+      </div>
+      <div class="btn-row"><button type="button" class="btn btn-ghost btn-sm" id="b10RSim"><span data-l="es">Ejemplo simulado: 12 sujetos medidos 6 veces</span><span data-l="en">Simulated example: 12 subjects measured 6 times</span></button></div>
+      <div id="b10RTiles"></div>
+      <div class="pg-pane" id="b10RScPane"><div class="pg-title"><span data-l="es">Cada sujeto con su recta (pendiente común)</span><span data-l="en">Each subject with its line (common slope)</span></div><div id="b10RSc"></div></div>
+    </div>
+
+    <div class="card">
+      <h2><span data-l="es">Series de tiempo: correlación cruzada y preblanqueo</span><span data-l="en">Time series: cross-correlation and prewhitening</span></h2>
+      <p class="hint"><span data-l="es">Dos series con tendencia o con memoria correlacionan aunque no tengan nada que ver (Yule 1926). El preblanqueo ajusta un modelo autorregresivo a X, filtra con él las dos series y sólo entonces las correlaciona en cada retardo.</span><span data-l="en">Two series with a trend or a memory correlate even if they have nothing to do with each other (Yule 1926). Prewhitening fits an autoregressive model to X, filters both series with it and only then correlates them at each lag.</span></p>
+      <div class="form-grid">
+        <div class="field"><label for="b10TX">X</label><select id="b10TX" class="b10-num"></select></div>
+        <div class="field"><label for="b10TY">Y</label><select id="b10TY" class="b10-num"></select></div>
+        <div class="field"><label for="b10TT"><span data-l="es">Ordenar por</span><span data-l="en">Order by</span></label><select id="b10TT"></select></div>
+      </div>
+      <div id="b10TTiles"></div>
+      <div class="two-figs">
+        <div class="pg-pane" id="b10TRawPane"><div class="pg-title"><span data-l="es">Correlación cruzada de las series</span><span data-l="en">Cross-correlation of the series</span></div><div id="b10TRaw"></div></div>
+        <div class="pg-pane" id="b10TPwPane"><div class="pg-title"><span data-l="es">Después del preblanqueo</span><span data-l="en">After prewhitening</span></div><div id="b10TPw"></div></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2><span data-l="es">Datos espaciales: la t modificada de Dutilleul</span><span data-l="en">Spatial data: Dutilleul’s modified t</span></h2>
+      <p class="hint"><span data-l="es">Si los lugares cercanos se parecen, hay menos información independiente que filas y el valor p habitual es demasiado optimista. La prueba de Dutilleul (1993) estima el tamaño de muestra efectivo con la autocorrelación de cada variable (I de Moran por clases de distancia).</span><span data-l="en">If nearby places resemble each other, there is less independent information than rows and the usual p-value is too optimistic. Dutilleul’s test (1993) estimates the effective sample size from the autocorrelation of each variable (Moran’s I by distance classes).</span></p>
+      <div class="form-grid">
+        <div class="field"><label for="b10SX">X</label><select id="b10SX" class="b10-num"></select></div>
+        <div class="field"><label for="b10SY">Y</label><select id="b10SY" class="b10-num"></select></div>
+        <div class="field"><label for="b10SCX"><span data-l="es">Coordenada este–oeste</span><span data-l="en">East–west coordinate</span></label><select id="b10SCX" class="b10-num"></select></div>
+        <div class="field"><label for="b10SCY"><span data-l="es">Coordenada norte–sur</span><span data-l="en">North–south coordinate</span></label><select id="b10SCY" class="b10-num"></select></div>
+      </div>
+      <div class="btn-row"><button type="button" class="btn btn-ghost btn-sm" id="b10SSim"><span data-l="es">Ejemplo simulado: 100 parcelas</span><span data-l="en">Simulated example: 100 plots</span></button></div>
+      <div id="b10STiles"></div>
+      <div class="two-figs">
+        <div class="pg-pane" id="b10SMapPane"><div class="pg-title"><span data-l="es">Los lugares, coloreados por X</span><span data-l="en">The places, coloured by X</span></div><div id="b10SMap"></div></div>
+        <div class="pg-pane" id="b10SCorPane"><div class="pg-title"><span data-l="es">Correlograma: I de Moran por distancia</span><span data-l="en">Correlogram: Moran’s I by distance</span></div><div id="b10SCor"></div></div>
+      </div>
+    </div>
+
+    <div class="card">
+      <h2><span data-l="es">Especies emparentadas: contrastes independientes</span><span data-l="en">Related species: independent contrasts</span></h2>
+      <p class="hint"><span data-l="es">Las especies comparten historia y no son observaciones independientes (Felsenstein 1985). Con el árbol filogenético, cada nodo da un contraste independiente; su correlación pasa por el origen.</span><span data-l="en">Species share history and are not independent observations (Felsenstein 1985). With the phylogenetic tree, each node gives an independent contrast; their correlation goes through the origin.</span></p>
+      <div class="form-grid">
+        <div class="field"><label for="b10PSp"><span data-l="es">Columna con los nombres de las especies</span><span data-l="en">Column with the species names</span></label><select id="b10PSp"></select></div>
+        <div class="field"><label for="b10PX">X</label><select id="b10PX" class="b10-num"></select></div>
+        <div class="field"><label for="b10PY">Y</label><select id="b10PY" class="b10-num"></select></div>
+      </div>
+      <label class="field-label" for="b10PTree"><span data-l="es">Árbol en formato Newick (con longitudes de rama)</span><span data-l="en">Tree in Newick format (with branch lengths)</span></label>
+      <textarea id="b10PTree" rows="3" spellcheck="false" class="b10-newick"></textarea>
+      <div class="btn-row"><button type="button" class="btn btn-primary btn-sm" id="b10PGo"><span data-l="es">Calcular los contrastes</span><span data-l="en">Compute the contrasts</span></button>
+        <button type="button" class="btn btn-ghost btn-sm" id="b10PSim"><span data-l="es">Ejemplo simulado: 30 especies</span><span data-l="en">Simulated example: 30 species</span></button></div>
+      <div class="messages" id="b10PMsgs"></div>
+      <div id="b10PTiles"></div>
+      <div class="pg-pane" id="b10PScPane" hidden><div class="pg-title"><span data-l="es">Los contrastes, por el origen</span><span data-l="en">The contrasts, through the origin</span></div><div id="b10PSc"></div></div>
+    </div>
+
+    <div class="card">
+      <h2><span data-l="es">Datos circulares</span><span data-l="en">Circular data</span></h2>
+      <p class="hint"><span data-l="es">Ángulos, horas, días del año, meses: 359° y 1° están juntos y Pearson no lo sabe. Para dos ángulos, la correlación de Jammalamadaka y SenGupta (1988); para un ángulo y una variable lineal, la de Mardia (1976).</span><span data-l="en">Angles, hours, days of the year, months: 359° and 1° are neighbours and Pearson does not know it. For two angles, the correlation of Jammalamadaka and SenGupta (1988); for an angle and a linear variable, Mardia’s (1976).</span></p>
+      <div class="form-grid">
+        <div class="field"><label for="b10CA"><span data-l="es">Ángulo</span><span data-l="en">Angle</span></label><select id="b10CA"></select></div>
+        <div class="field"><label for="b10CB"><span data-l="es">Con</span><span data-l="en">With</span></label><select id="b10CB"></select></div>
+      </div>
+      <div class="btn-row"><button type="button" class="btn btn-ghost btn-sm" id="b10CSim"><span data-l="es">Ejemplo simulado: viento y temperatura</span><span data-l="en">Simulated example: wind and temperature</span></button></div>
+      <div class="messages" id="b10CMsgs"></div>
+      <div id="b10CTiles"></div>
+      <div class="pg-pane" id="b10CScPane" hidden><div class="pg-title" id="b10CTitle"></div><div id="b10CSc"></div></div>
+    </div>
+
+    <div class="card">
+      <h2><span data-l="es">Composiciones: partes de un todo</span><span data-l="en">Compositions: parts of a whole</span></h2>
+      <p class="hint"><span data-l="es">Si las variables suman una constante (porcentajes, proporciones), su correlación de Pearson es espuria por construcción (Pearson 1897): si una sube, otras tienen que bajar. Se trabaja con log-cocientes centrados (Aitchison 1986) y con la proporcionalidad <span class="nc">ρ<sub>p</sub></span>.</span><span data-l="en">If the variables add up to a constant (percentages, proportions), their Pearson correlation is spurious by construction (Pearson 1897): if one rises, others must fall. One works with centred log-ratios (Aitchison 1986) and with the proportionality <span class="nc">ρ<sub>p</sub></span>.</span></p>
+      <div class="form-grid"><div class="field"><label for="b10KG"><span data-l="es">Grupo composicional</span><span data-l="en">Compositional group</span></label><select id="b10KG"></select></div></div>
+      <div class="btn-row"><button type="button" class="btn btn-ghost btn-sm" id="b10KSim"><span data-l="es">Ejemplo simulado: textura del suelo</span><span data-l="en">Simulated example: soil texture</span></button></div>
+      <div class="messages" id="b10KMsgs"></div>
+      <div class="b10-three" id="b10K"></div>
+    </div>
+  </div>
+</section>

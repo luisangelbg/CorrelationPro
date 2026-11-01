@@ -1,0 +1,101 @@
+<!-- ==================== BLOCK 2 · DATA ==================== -->
+<section class="step-panel" id="panel-2">
+  <div class="panel-title"><div class="pt-num">2</div><div><h2><span data-l="es">Datos</span><span data-l="en">Data</span></h2><p><span data-l="es">Cargar, revisar el tipo de cada columna y elegir el coeficiente</span><span data-l="en">Load, check the kind of each column and choose the coefficient</span></p></div></div>
+
+  <div class="card" id="b2Open">
+    <h2><span data-l="es">Abrir datos</span><span data-l="en">Open data</span></h2>
+    <p class="hint"><span data-l="es">Una fila por observación y una columna por variable, con los nombres en la primera fila. Tus datos no salen de tu computadora.</span><span data-l="en">One row per observation and one column per variable, with the names in the first row. Your data never leave your computer.</span></p>
+    <div class="src-grid">
+      <label class="src-tile src-drop" id="b2Drop" tabindex="0">
+        <b><span data-l="es">Un archivo</span><span data-l="en">A file</span></b>
+        <small><span data-l="es">CSV, texto con tabuladores o punto y coma, libros .xlsx y .ods. Arrástralo aquí o haz clic.</span><span data-l="en">CSV, tab- or semicolon-delimited text, .xlsx and .ods workbooks. Drag it here or click.</span></small>
+        <input type="file" id="b2File" accept=".csv,.tsv,.txt,.xlsx,.xlsm,.ods,.dat" hidden>
+      </label>
+      <button type="button" class="src-tile" id="b2PasteBtn"><b><span data-l="es">Pegar</span><span data-l="en">Paste</span></b>
+        <small><span data-l="es">Copia las celdas en tu hoja de cálculo y pégalas aquí.</span><span data-l="en">Copy the cells in your spreadsheet and paste them here.</span></small></button>
+      <button type="button" class="src-tile" id="b2ExamplesBtn"><b><span data-l="es">Un conjunto de ejemplo</span><span data-l="en">An example dataset</span></b>
+        <small><span data-l="es">Nueve conjuntos clásicos de dominio público, de 1876 a 1962.</span><span data-l="en">Nine classic public-domain datasets, from 1876 to 1962.</span></small></button>
+    </div>
+    <details class="b2-opts"><summary><span data-l="es">Opciones de lectura</span><span data-l="en">Reading options</span></summary>
+      <div class="form-grid">
+        <div class="field"><label for="b2Delim"><span data-l="es">Separador</span><span data-l="en">Delimiter</span></label>
+          <select id="b2Delim"><option value="" data-es="Detectar" data-en="Detect">Detectar</option><option value="," data-es="Coma (,)" data-en="Comma (,)">Coma (,)</option><option value=";" data-es="Punto y coma (;)" data-en="Semicolon (;)">Punto y coma (;)</option><option value="&#9;" data-es="Tabulador" data-en="Tab">Tabulador</option><option value="|" data-es="Barra (|)" data-en="Bar (|)">Barra (|)</option></select></div>
+        <div class="field"><label for="b2Dec"><span data-l="es">Decimal</span><span data-l="en">Decimal mark</span></label>
+          <select id="b2Dec"><option value="" data-es="Detectar" data-en="Detect">Detectar</option><option value="." data-es="Punto (1.5)" data-en="Point (1.5)">Punto (1.5)</option><option value="," data-es="Coma (1,5)" data-en="Comma (1,5)">Coma (1,5)</option></select></div>
+        <div class="field"><label for="b2Miss"><span data-l="es">Otros códigos de faltante</span><span data-l="en">Other missing codes</span></label>
+          <input type="text" id="b2Miss" data-es-ph="p. ej. -999, s/i" data-en-ph="e.g. -999, n/i" placeholder="p. ej. -999, s/i"></div>
+        <label class="checkbox-label"><input type="checkbox" id="b2Header" checked> <span data-l="es">La primera fila trae los nombres</span><span data-l="en">The first row has the names</span></label>
+      </div>
+    </details>
+    <div class="paste-box" id="b2PasteBox" hidden>
+      <label for="b2PasteText" class="field-label"><span data-l="es">Pega aquí tus celdas</span><span data-l="en">Paste your cells here</span></label>
+      <textarea id="b2PasteText" rows="8" spellcheck="false"></textarea>
+      <div class="btn-row"><button type="button" class="btn btn-primary btn-sm" id="b2PasteGo"><span data-l="es">Leer lo pegado</span><span data-l="en">Read what was pasted</span></button>
+        <button type="button" class="btn btn-ghost btn-sm" id="b2PasteCancel"><span data-l="es">Cancelar</span><span data-l="en">Cancel</span></button></div>
+    </div>
+    <div class="sheet-pick" id="b2SheetPick" hidden></div>
+    <div class="messages" id="b2Msgs"></div>
+  </div>
+
+  <div class="card" id="b2Examples">
+    <h2><span data-l="es">Conjuntos de dominio público</span><span data-l="en">Public-domain datasets</span></h2>
+    <p class="hint"><span data-l="es">Datos reales, publicados hace mucho o por gobiernos, con su fuente. Cada uno sirve para algo distinto.</span><span data-l="en">Real data, published long ago or by governments, with their source. Each one is good for something different.</span></p>
+    <div class="ex-grid" id="b2ExGrid"></div>
+  </div>
+
+  <div id="b2Loaded" hidden>
+    <div class="card">
+      <h2><span data-l="es">Tus datos</span><span data-l="en">Your data</span></h2>
+      <div id="b2Tiles"></div>
+      <div class="data-grid-wrap" id="b2Grid"></div>
+      <p class="hint" id="b2GridNote"></p>
+    </div>
+
+    <div class="card">
+      <h2><span data-l="es">Tipo y papel de cada columna</span><span data-l="en">Kind and role of each column</span></h2>
+      <p class="hint"><span data-l="es">Cada tipo se dedujo de los datos y de los nombres, y dice por qué. Cámbialo si no es así: el tipo decide qué coeficientes tienen sentido y el papel, cómo se usa la columna.</span><span data-l="en">Each kind was deduced from the data and the names, and says why. Change it if it is not right: the kind decides which coefficients make sense and the role, how the column is used.</span></p>
+      <div class="types-wrap" id="b2Types"></div>
+      <div class="btn-row"><button type="button" class="btn btn-ghost btn-sm" id="b2Restore"><span data-l="es">Volver a lo deducido</span><span data-l="en">Back to what was deduced</span></button></div>
+    </div>
+
+    <div class="card">
+      <h2><span data-l="es">Datos faltantes</span><span data-l="en">Missing data</span></h2>
+      <div id="b2MissTiles"></div>
+      <div class="miss-grid"><div id="b2MissBars"></div><div id="b2MissPatterns"></div></div>
+      <div class="form-grid">
+        <div class="field"><label for="b2Mode"><span data-l="es">Para cada par de variables, usar</span><span data-l="en">For each pair of variables, use</span></label>
+          <select id="b2Mode"><option value="pairwise" data-es="Las filas completas de ese par (por pares)" data-en="The rows complete for that pair (pairwise)">Las filas completas de ese par (por pares)</option><option value="listwise" data-es="Sólo las filas completas en todas (por listas)" data-en="Only the rows complete in every column (listwise)">Sólo las filas completas en todas (por listas)</option></select></div>
+      </div>
+      <p class="hint" id="b2ModeNote"></p>
+      <div class="messages" id="b2MissMsgs"></div>
+    </div>
+
+    <div class="card">
+      <h2><span data-l="es">Transformar</span><span data-l="en">Transform</span></h2>
+      <p class="hint"><span data-l="es">Cada transformación crea una columna nueva y deja la original como estaba.</span><span data-l="en">Each transformation creates a new column and leaves the original as it was.</span></p>
+      <div class="form-grid">
+        <div class="field"><label for="b2TrCol"><span data-l="es">Columna</span><span data-l="en">Column</span></label><select id="b2TrCol"></select></div>
+        <div class="field"><label for="b2TrOp"><span data-l="es">Transformación</span><span data-l="en">Transformation</span></label><select id="b2TrOp"></select></div>
+        <div class="field"><span class="field-spacer">&nbsp;</span><button type="button" class="btn btn-primary btn-sm" id="b2TrGo"><span data-l="es">Crear la columna</span><span data-l="en">Create the column</span></button></div>
+      </div>
+      <div class="messages" id="b2TrMsgs"></div>
+      <div id="b2TrList"></div>
+    </div>
+
+    <div class="card" id="b2Assist">
+      <h2><span data-l="es">¿Qué correlación uso?</span><span data-l="en">Which correlation should I use?</span></h2>
+      <p class="hint"><span data-l="es">Elige dos columnas: el asistente mira su tipo y, si son continuas, la forma de su nube (atípicos, curvatura, empates, si sube y baja), y propone las medidas en orden, con la razón de cada una.</span><span data-l="en">Pick two columns: the assistant looks at their kind and, if they are continuous, the shape of their cloud (outliers, curvature, ties, whether it rises and falls), and proposes the measures in order, with the reason for each.</span></p>
+      <div class="form-grid">
+        <div class="field"><label for="b2AsX">X</label><select id="b2AsX"></select></div>
+        <div class="field"><label for="b2AsY">Y</label><select id="b2AsY"></select></div>
+      </div>
+      <div class="assist-grid"><div id="b2AsPlot" class="pg-pane"></div><div><div id="b2AsLook"></div><div id="b2AsRecs"></div></div></div>
+    </div>
+
+    <div class="card">
+      <h2><span data-l="es">Guardar</span><span data-l="en">Save</span></h2>
+      <p class="hint"><span data-l="es">Los datos con las columnas que creaste, en texto separado por comas (UTF-8).</span><span data-l="en">The data with the columns you created, as comma-separated text (UTF-8).</span></p>
+      <div class="btn-row"><button type="button" class="btn btn-secondary btn-sm" id="b2Csv"><span data-l="es">Descargar CSV</span><span data-l="en">Download CSV</span></button></div>
+    </div>
+  </div>
+</section>

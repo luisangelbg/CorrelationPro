@@ -1,0 +1,37 @@
+{
+  "title": "CorrelationPro: a browser-based platform for correlation analysis of every kind, with its theory",
+  "description": "<p>CorrelationPro is a self-contained web application for correlation analysis that runs entirely in the browser, with no installation, no server-side computation and no third-party libraries. It reads spreadsheets (xlsx, xlsm, ods), CSV, TSV and pasted text with its own reader, records the kind and role of each column (continuous, ordinal, nominal, binary, circular, compositional, date, coordinate, subject), handles missing values pairwise or listwise and transforms variables. It checks the assumptions of each pair (univariate and multivariate normality, linearity versus monotonicity, heteroscedasticity, robust bivariate outliers, influence) and recommends a coefficient for each one. It computes every coefficient that applies to two variables with exact, asymptotic or permutation tests, analytic and bootstrap intervals and the Bayes factor; correlation matrices with eleven measures, six multiple-testing corrections, the nearest positive-definite matrix, shrinkage, KMO and nine glyphs for up to a thousand variables; nonlinear dependence (dCor, HSIC, MIC, xi, tau*, Hoeffding's D, mutual information, maximal correlation) and five copula families with tail dependence; partial, semipartial, multiple and canonical correlation, RV, Procrustes, co-inertia and Mantel; categorical, ordinal and latent correlations (Cramér's V, Goodman and Kruskal's measures, Yule's Q and Y, tetrachoric, polychoric, polyserial, biserial and rank-biserial) and the heterogeneous matrix; agreement and reliability (Lin's CCC, Bland&ndash;Altman, six forms of the ICC, Cohen's, Fleiss' and Conger's kappa, Kendall's W, Krippendorff's alpha, Gwet's AC1/AC2); data with structure (within and between groups and Simpson's paradox, repeated measures, time series with prewhitening, spatial data with Dutilleul's corrected t, phylogenetic independent contrasts, circular and compositional data); correlation networks (graphical lasso with EBIC, centralities, communities); and the comparison of independent and dependent correlations and of matrices, correction for attenuation and range restriction, power and sample size, and meta-analysis of correlations.</p><p>Throughout, a reading in plain words accompanies each number, and the home page explains the theory with six labs that run the real engine and a catalogue of 98 measures with their formulas and 229 references. It ends in a gallery of every figure with export at journal widths, a designer of colour-vision-safe diverging palettes, a correlation table ready to publish, a methods section written from what was actually run, a printable report and a project package. The interface is in Spanish and English.</p><p>Every engine of Blocks 1 to 12 was checked against independent implementations in R: 19,334 comparisons with no disagreement, and 285 unit tests in the browser. The archive includes nine public-domain example datasets, simulated examples announced as such, and a user manual in Spanish (HTML and PDF, 145 pages).</p>",
+  "upload_type": "software",
+  "version": "1.0.0",
+  "creators": [
+    {
+      "name": "Barrera-Guzmán, Luis Ángel",
+      "orcid": "0000-0001-8057-2583"
+    }
+  ],
+  "license": "gpl-3.0-or-later",
+  "access_right": "open",
+  "language": "eng",
+  "keywords": [
+    "correlation",
+    "association measures",
+    "rank correlation",
+    "robust correlation",
+    "nonlinear dependence",
+    "distance correlation",
+    "copulas",
+    "partial correlation",
+    "canonical correlation",
+    "polychoric correlation",
+    "agreement and reliability",
+    "intraclass correlation",
+    "repeated measures correlation",
+    "correlation networks",
+    "graphical lasso",
+    "meta-analysis of correlations",
+    "statistical power",
+    "bootstrap",
+    "data visualization",
+    "statistics education"
+  ]
+}

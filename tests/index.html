@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<!-- CorrelationPro — Copyright (C) 2026 Luis Ángel Barrera-Guzmán. Free software under the GNU GPL v3 or later; see LICENSE. -->
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<title>CorrelationPro — pruebas</title>
+<link rel="stylesheet" href="../css/labg-base.css">
+<link rel="stylesheet" href="../css/style.css">
+<script src="../js/i18n.js"></script>
+<style>
+  body { padding: 20px; }
+  .t { font-family: var(--mono); font-size: .8rem; padding: 2px 0; }
+  .ok { color: var(--success-text); } .bad { color: var(--danger-text); font-weight: 700; }
+  h2 { margin: 18px 0 4px; font-size: 1rem; }
+</style>
+</head>
+<body>
+<h1>CorrelationPro · <span id="sum">…</span></h1>
+<div id="out"></div>
+<script src="../js/num.js"></script>
+<script src="../js/coef.js"></script>
+<script src="../js/palettes.js"></script>
+<script src="../js/fmt.js"></script>
+<script src="../js/glyphs.js"></script>
+<script src="../js/plot.js"></script>
+<script src="../js/datasets.js"></script>
+<script src="../js/blocks.js"></script>
+<script src="../js/dataio.js"></script>
+<script src="../js/table.js"></script>
+<script src="../js/assume.js"></script>
+<script src="../js/pairstat.js"></script>
+<script src="../js/matrix.js"></script>
+<script src="../js/nonlin.js"></script>
+<script src="../js/partial.js"></script>
+<script src="../js/categ.js"></script>
+<script src="../js/agree.js"></script>
+<script src="../js/struct.js"></script>
+<script src="../js/network.js"></script>
+<script src="../js/infer.js"></script>
+<script src="../js/core.js"></script>
+<script src="../js/catalog.js"></script>
+<script src="../js/theory.js"></script>
+<script src="../js/art.js"></script>
+<script src="../js/labs.js"></script>
+<script src="../js/block2.js"></script>
+<script>
+/* The harness: every line must be green. Open with a double click or through
+   the server. */
+let pass = 0, fail = 0;
+const out = document.getElementById('out');
+function sec(title) { out.appendChild(mk('h2', null, title)); }
+function t(name, cond, info) {
+  const okv = !!cond;
+  okv ? pass++ : fail++;
+  out.appendChild(mk('div', { class: 't ' + (okv ? 'ok' : 'bad') },
+    (okv ? '✔ ' : '✘ ') + esc(name) + (info != null && !okv ? '  →  ' + esc(info) : '')));
+}
+function near(name, a, b, tol) {
+  tol = tol == null ? 1e-9 : tol;
+  const d = Math.abs(a - b);
+  t(name + '  (' + a + ' vs ' + b + ')', d <= tol, 'diff ' + d);
+}
+</script>
+<script src="block1.js"></script>
+<script src="block2.js"></script>
+<script src="block3.js"></script>
+<script src="block4.js"></script>
+<script src="block5.js"></script>
+<script src="block9.js"></script>
+<script>
+document.getElementById('sum').innerHTML = fail === 0
+  ? `<span class="ok">${pass} pruebas, todas pasan</span>`
+  : `<span class="bad">${fail} fallan</span> de ${pass + fail}`;
+window.testsDone = Promise.resolve({ pass, fail });
+</script>
+</body>
+</html>
