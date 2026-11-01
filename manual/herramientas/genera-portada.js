@@ -8,7 +8,8 @@
      – la franja de los trece colores de los bloques, los mismos del manual;
      – al pie, tres viñetas: la matriz de Pearson de los lirios, la red regularizada de Suiza (1888) y la
        distribución exacta de r bajo H₀ y bajo ρ = .30 con n = 50 (la potencia sombreada).
-   Sin azar: todo sale de los datos. Uso, desde la carpeta de la app:  node manual/herramientas/genera-portada.js */
+   Sin azar: todo sale de los datos. Uso, desde la carpeta de la app:  node manual/herramientas/genera-portada.js
+   La edición inglesa (en/00a-portada.html: el mismo dibujo con los textos en inglés):  … genera-portada.js --idioma en */
 'use strict';
 const fs = require('fs');
 const path = require('path');
@@ -22,6 +23,9 @@ vm.runInContext('NumCore(this); CoefCore(this); PalCore(this); PairStatCore(this
 const { Num, Coef, Pal, Mat, Net, Infer, Datasets } = box;
 const D = id => Datasets.list.find(d => d.id === id);
 const f1 = v => v.toFixed(1), f2 = v => v.toFixed(2);
+/* the language of the texts: Spanish by default, English with --idioma en */
+const EN = process.argv.includes('--idioma') && process.argv[process.argv.indexOf('--idioma') + 1] === 'en';
+const L = (es, en) => (EN ? en : es);
 
 /* ---------------- the palette of the cover ---------------- */
 const C = {
@@ -55,9 +59,16 @@ const glifo = (cx, cy, rr, r, fill, stroke, sw0) => {
 [[60, 60, 0.8], [W - 60, 60, -0.8], [60, H - 60, -0.8], [W - 60, H - 60, 0.8]].forEach(([x, y, r]) => { s += glifo(x, y, 13, r, 'none', '#d4a848', 1.1) + glifo(x, y, 6, -r, '#b3182d', 'none', 0); });
 
 /* title */
-s += `<text x="${W / 2}" y="104" text-anchor="middle" font-family="Jost" font-weight="500" font-size="12.5" letter-spacing="5.5" fill="${C.oro}">LABG SUITE · CIENCIA ABIERTA EN EL NAVEGADOR</text>
+s += `<text x="${W / 2}" y="104" text-anchor="middle" font-family="Jost" font-weight="500" font-size="12.5" letter-spacing="5.5" fill="${C.oro}">${L('LABG SUITE · CIENCIA ABIERTA EN EL NAVEGADOR', 'LABG SUITE · OPEN SCIENCE IN THE BROWSER')}</text>
 <text x="${W / 2}" y="196" text-anchor="middle" font-family="Cormorant" font-weight="600" font-size="92" fill="${C.marfil}">Correlation<tspan fill="${C.rojo}">Pro</tspan></text>
-<line x1="${W / 2 - 70}" y1="222" x2="${W / 2 + 70}" y2="222" stroke="${C.oro}" stroke-width="1.4"/>
+<line x1="${W / 2 - 70}" y1="222" x2="${W / 2 + 70}" y2="222" stroke="${C.oro}" stroke-width="1.4"/>`;
+s += EN
+  ? `
+<text x="${W / 2}" y="257" text-anchor="middle" font-family="Cormorant" font-weight="600" font-size="36" fill="${C.marfil}">User’s Manual</text>
+<text x="${W / 2}" y="285" text-anchor="middle" font-family="Cormorant" font-style="italic" font-weight="500" font-size="25" fill="${C.oro}">Manual de usuario</text>
+<text x="${W / 2}" y="312" text-anchor="middle" font-family="Jost" font-weight="400" font-size="15" fill="${C.marfil}" opacity="0.88">Correlation analysis of every kind, with its theory</text>
+<text x="${W / 2}" y="331" text-anchor="middle" font-family="Cormorant" font-style="italic" font-weight="500" font-size="14" fill="${C.marfil}" opacity="0.6">Análisis de correlación de todo tipo, con su teoría</text>`
+  : `
 <text x="${W / 2}" y="262" text-anchor="middle" font-family="Cormorant" font-style="italic" font-weight="500" font-size="36" fill="${C.oro}">Manual de usuario</text>
 <text x="${W / 2}" y="296" text-anchor="middle" font-family="Jost" font-weight="400" font-size="15" fill="${C.marfil}" opacity="0.88">Análisis de correlación de todo tipo, con su teoría</text>
 <text x="${W / 2}" y="318" text-anchor="middle" font-family="Jost" font-weight="300" font-size="11.5" letter-spacing="1.2" fill="${C.marfil}" opacity="0.55">User’s manual · Correlation analysis of every kind</text>`;
@@ -71,8 +82,8 @@ for (let v = 2; v <= 4.5; v += 0.5) s += `<line x1="${X0}" y1="${f1(sy(v))}" x2=
 s += `<line x1="${X0}" y1="${Y0}" x2="${X1}" y2="${Y0}" stroke="${C.oro}" stroke-opacity="0.6" stroke-width="1"/><line x1="${X0}" y1="${Y0}" x2="${X0}" y2="${Y1}" stroke="${C.oro}" stroke-opacity="0.6" stroke-width="1"/>`;
 for (let v = 5; v <= 8; v++) s += `<text x="${f1(sx(v))}" y="${Y0 + 16}" text-anchor="middle" font-family="Jost" font-size="10" fill="${C.marfil}" opacity="0.6">${v}</text>`;
 for (let v = 2; v <= 4; v++) s += `<text x="${X0 - 8}" y="${f1(sy(v) + 3.5)}" text-anchor="end" font-family="Jost" font-size="10" fill="${C.marfil}" opacity="0.6">${v}</text>`;
-s += `<text x="${(X0 + X1) / 2}" y="${Y0 + 34}" text-anchor="middle" font-family="Jost" font-size="10.5" letter-spacing="1" fill="${C.marfil}" opacity="0.7">LARGO DEL SÉPALO (cm)</text>
-<text transform="translate(${X0 - 30} ${(Y0 + Y1) / 2}) rotate(-90)" text-anchor="middle" font-family="Jost" font-size="10.5" letter-spacing="1" fill="${C.marfil}" opacity="0.7">ANCHO DEL SÉPALO (cm)</text>`;
+s += `<text x="${(X0 + X1) / 2}" y="${Y0 + 34}" text-anchor="middle" font-family="Jost" font-size="10.5" letter-spacing="1" fill="${C.marfil}" opacity="0.7">${L('LARGO DEL SÉPALO (cm)', 'SEPAL LENGTH (cm)')}</text>
+<text transform="translate(${X0 - 30} ${(Y0 + Y1) / 2}) rotate(-90)" text-anchor="middle" font-family="Jost" font-size="10.5" letter-spacing="1" fill="${C.marfil}" opacity="0.7">${L('ANCHO DEL SÉPALO (cm)', 'SEPAL WIDTH (cm)')}</text>`;
 /* data ellipses (68 %), within lines, points */
 const rs = {};
 s += '<g clip-path="url(#nube)">';
@@ -101,10 +112,10 @@ const rAll = Coef.pearson(sl, sw).est;
 const fr = v => (v < 0 ? '−' : '+') + Math.abs(v).toFixed(2).replace(/^0/, '');
 /* the legend, as a reader would write it */
 s += `<g font-family="Jost" font-size="11.5" fill="${C.marfil}">
-  <line x1="472" y1="394" x2="500" y2="394" stroke="${C.marfil}" stroke-width="1.8" stroke-dasharray="7 5"/><text x="508" y="398">las 150 flores juntas: r = ${fr(rAll)}</text>
+  <line x1="472" y1="394" x2="500" y2="394" stroke="${C.marfil}" stroke-width="1.8" stroke-dasharray="7 5"/><text x="508" y="398">${L('las 150 flores juntas', 'all 150 flowers pooled')}: r = ${fr(rAll)}</text>
   ${especies.map((e, k) => `<line x1="472" y1="${414 + 18 * k}" x2="500" y2="${414 + 18 * k}" stroke="${C[e]}" stroke-width="2.4"/><circle cx="486" cy="${414 + 18 * k}" r="3.4" fill="${C[e]}"/><text x="508" y="${418 + 18 * k}"><tspan font-style="italic">I. ${e}</tspan>: r = ${fr(rs[e])}</text>`).join('')}
 </g>`;
-s += `<text x="${X1}" y="${Y1 - 10}" text-anchor="end" font-family="Cormorant" font-style="italic" font-size="15" fill="${C.oro}">dentro de cada especie suben; juntas, bajan: la paradoja de Simpson</text>`;
+s += `<text x="${X1}" y="${Y1 - 10}" text-anchor="end" font-family="Cormorant" font-style="italic" font-size="15" fill="${C.oro}">${L('dentro de cada especie suben; juntas, bajan: la paradoja de Simpson', 'within each species they rise; pooled, they fall: Simpson’s paradox')}</text>`;
 
 /* ---------------- the band of glyphs ---------------- */
 const pal = Pal.get('anil');
@@ -131,21 +142,21 @@ const vin = (x, titulo, cuerpo) => `<g transform="translate(${x} 846)"><rect wid
     g += `<rect x="${c0 + j * s0}" y="${y0 + i * s0}" width="${s0 - 2}" height="${s0 - 2}" fill="${i === j ? '#2a1c1a' : '#160d0d'}" stroke="#3a2826" stroke-width="0.5"/>`;
     if (i < j) g += glifo(cx - 1, cy - 1, 8.5, r, Pal.color(pal, r), 'none', 0);
     else if (i > j) g += `<text x="${cx - 1}" y="${cy + 2.5}" text-anchor="middle" font-family="Jost" font-weight="500" font-size="8.2" fill="${Pal.color(Pal.darkVersion(pal), r)}">${fr(r).replace('+', '')}</text>`;
-    else g += `<text x="${cx - 1}" y="${cy + 2.5}" text-anchor="middle" font-family="Jost" font-size="7" fill="${C.marfil}" opacity="0.6">${['LS', 'AS', 'LP', 'AP'][i]}</text>`;
+    else g += `<text x="${cx - 1}" y="${cy + 2.5}" text-anchor="middle" font-family="Jost" font-size="7" fill="${C.marfil}" opacity="0.6">${(EN ? ['SL', 'SW', 'PL', 'PW'] : ['LS', 'AS', 'LP', 'AP'])[i]}</text>`;
   }));
-  s += vin(135, 'LA MATRIZ', g);
+  s += vin(135, L('LA MATRIZ', 'THE MATRIX'), g);
 }
 /* 2 · the regularized network of Switzerland */
 {
-  const sw0 = D('swiss'), cols = sw0.vars.filter(v => v.type === 'continuous').map(v => v.v), names = sw0.vars.filter(v => v.type === 'continuous').map(v => v.es);
+  const sw0 = D('swiss'), cols = sw0.vars.filter(v => v.type === 'continuous').map(v => v.v), names = sw0.vars.filter(v => v.type === 'continuous').map(v => (EN ? v.en : v.es));
   const R = cols.map(a => cols.map(b => Coef.pearson(a, b).est));
-  const E = Net.ebicGlasso(R, sw0.n, { gamma: 0.5 }), Wt = E.net, pos = Net.layoutFR(Wt, { seed: 3 });
+  const E = Net.ebicLasso(R, sw0.n, { gamma: 0.5 }), Wt = E.net, pos = Net.layoutFR(Wt, { seed: 3 });
   const px = pos.map(p => p[0]), py = pos.map(p => p[1]), mnx = Math.min(...px), mxx = Math.max(...px), mny = Math.min(...py), mxy = Math.max(...py);
   const tx = v => 22 + (v - mnx) / (mxx - mnx || 1) * 132, ty = v => 16 + (v - mny) / (mxy - mny || 1) * 98;
   let g = '';
   for (let i = 0; i < Wt.length; i++) for (let j = i + 1; j < Wt.length; j++) { const w = Wt[i][j]; if (Math.abs(w) < 1e-9) continue; g += `<line x1="${f1(tx(px[i]))}" y1="${f1(ty(py[i]))}" x2="${f1(tx(px[j]))}" y2="${f1(ty(py[j]))}" stroke="${w > 0 ? '#8f96ff' : '#ef4b5e'}" stroke-width="${f1(0.8 + 7 * Math.abs(w))}" stroke-linecap="round" stroke-opacity="0.85"/>`; }
   pos.forEach((p, i) => { g += `<circle cx="${f1(tx(p[0]))}" cy="${f1(ty(p[1]))}" r="7.5" fill="#d4a848" stroke="#120c0c" stroke-width="1.6"/><text x="${f1(tx(p[0]))}" y="${f1(ty(p[1]) + 2.6)}" text-anchor="middle" font-family="Jost" font-weight="600" font-size="6.6" fill="#120c0c">${names[i].slice(0, 2).toUpperCase()}</text>`; });
-  s += vin(337, 'LA RED', g);
+  s += vin(337, L('LA RED', 'THE NETWORK'), g);
 }
 /* 3 · the exact distribution of r under H0 and under rho = .30, n = 50 */
 {
@@ -160,32 +171,32 @@ const vin = (x, titulo, cuerpo) => `<g transform="translate(${x} 846)"><rect wid
   g += `<path d="${path0}" fill="none" stroke="${C.marfil}" stroke-opacity="0.75" stroke-width="1.5"/><path d="${path1}" fill="none" stroke="#ef4b5e" stroke-width="2"/>`;
   g += `<line x1="${f1(gx(rc))}" y1="14" x2="${f1(gx(rc))}" y2="118" stroke="#d4a848" stroke-width="0.9" stroke-dasharray="3 2"/><line x1="${f1(gx(-rc))}" y1="14" x2="${f1(gx(-rc))}" y2="118" stroke="#d4a848" stroke-width="0.9" stroke-dasharray="3 2"/>`;
   g += `<text x="${f1(gx(0))}" y="${f1(gy(Math.max(...d0)) - 4)}" text-anchor="middle" font-family="Jost" font-size="7.2" fill="${C.marfil}" opacity="0.8">H₀</text><text x="${f1(gx(rho) + 6)}" y="${f1(gy(Math.max(...d1)) - 4)}" text-anchor="middle" font-family="Jost" font-size="7.2" fill="#ef4b5e">ρ = .30</text>`;
-  g += `<text x="${f1(gx(0.55))}" y="102" text-anchor="middle" font-family="Jost" font-size="7" fill="#ef4b5e">${Math.round(100 * Infer.powerExact(rho, n, 0.05))} %</text>`;
-  s += vin(539, 'LA POTENCIA', g);
+  g += `<text x="${f1(gx(0.55))}" y="102" text-anchor="middle" font-family="Jost" font-size="7" fill="#ef4b5e">${Math.round(100 * Infer.powerExact(rho, n, 0.05))}${L(' %', '%')}</text>`;
+  s += vin(539, L('LA POTENCIA', 'THE POWER'), g);
 }
 
 /* footer */
 s += `<text x="${W / 2}" y="1040" text-anchor="middle" font-family="Jost" font-weight="400" font-size="12" letter-spacing="2.5" fill="${C.marfil}" opacity="0.85">LUIS ÁNGEL BARRERA-GUZMÁN</text>
-<text x="${W / 2}" y="1060" text-anchor="middle" font-family="Jost" font-weight="300" font-size="10" letter-spacing="1.5" fill="${C.oro}">VERSIÓN 1.0 · 2026</text>`;
+<text x="${W / 2}" y="1060" text-anchor="middle" font-family="Jost" font-weight="300" font-size="10" letter-spacing="1.5" fill="${C.oro}">${L('VERSIÓN 1.0 · 2026', 'ENGLISH EDITION · VERSION 1.0 · 2026')}</text>`;
 
 const html = `<!doctype html>
-<html lang="es">
+<html lang="${L('es', 'en')}">
 <head>
 <meta charset="utf-8">
-<title>CorrelationPro · Manual de usuario · Portada</title>
+<title>${L('CorrelationPro · Manual de usuario · Portada', 'CorrelationPro · User’s Manual · Cover')}</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,500;0,600;1,500&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../manual.css">
-<!-- dibujada por herramientas/genera-portada.js: no se edita a mano -->
+<!-- dibujada por herramientas/genera-portada.js${L('', ' --idioma en')}: no se edita a mano -->
 </head>
 <body>
-<section class="page cover" aria-label="Portada">
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${H}" role="img" aria-label="Portada del manual de CorrelationPro: la paradoja de Simpson en los lirios de Anderson, los nueve glifos de la correlación y tres viñetas (la matriz, la red y la potencia)">
+<section class="page cover" aria-label="${L('Portada', 'Cover')}">
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 ${W} ${H}" role="img" aria-label="${L('Portada del manual de CorrelationPro: la paradoja de Simpson en los lirios de Anderson, los nueve glifos de la correlación y tres viñetas (la matriz, la red y la potencia)', 'Cover of the CorrelationPro manual: Simpson’s paradox in Anderson’s irises, the nine glyphs of correlation and three vignettes (the matrix, the network and the power)')}">
 ${s}
 </svg>
 </section>
 </body>
 </html>
 `;
-fs.writeFileSync(path.join(APP, 'manual', 'es', '00a-portada.html'), html);
+fs.writeFileSync(path.join(APP, 'manual', EN ? 'en' : 'es', '00a-portada.html'), html);
 console.log('portada: r juntas', rAll.toFixed(4), 'por especie', especies.map(e => rs[e].toFixed(4)).join(' '), '·', (html.length / 1024).toFixed(0) + ' KB');

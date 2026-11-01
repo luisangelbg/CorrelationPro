@@ -1,0 +1,248 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>CorrelationPro · User’s Manual · Chapter 1</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,500;0,600;1,500&family=Crimson+Pro:ital,wght@0,400;0,600;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../interior.css">
+<script src="../paginar.js"></script>
+<style>
+  figure.media .marco { width: 78%; }
+  figure.media figcaption { margin-left: 11%; margin-right: 11%; }
+</style>
+</head>
+<body>
+
+<section class="capitulo" id="cap-1" data-pestana="1" data-orden="1" style="--acento: var(--b1)">
+  <div class="cap-apertura">
+    <div class="cap-num">1</div>
+    <div class="cap-etiqueta">Chapter one · Block 1</div>
+    <h1 data-corto="Home">Home: the theory, the labs and the catalog</h1>
+    <div class="cap-regla"></div>
+    <p class="cap-resumen">The first block asks for no data: it teaches. It explains in plain words what a correlation is and what it is not, lets you play with six labs that really compute with the same engine the app will use on your data, describes the 98 measures of the catalog with their formula and their original paper, and sets three things that hold for the whole app: the glyph of the matrices, the color palette and the way numbers are written.</p>
+    <div class="cap-franja"><span class="k1"></span><span class="k1"></span><span class="k2"></span><span class="k13"></span></div>
+    <ul class="cap-contenido">
+      <li><b>1.1</b>The home page and its figure</li>
+      <li><b>1.2</b>The route of a sound analysis</li>
+      <li><b>1.3</b>Six labs that really compute</li>
+      <li><b>1.4</b>Which measure for which data</li>
+      <li><b>1.5</b>Nine ways to draw a correlation</li>
+      <li><b>1.6</b>Own palettes, tested</li>
+      <li><b>1.7</b>How the numbers are written</li>
+      <li><b>1.8</b>The catalog of measures</li>
+      <li><b>1.9</b>The theory, the references and the citation</li>
+    </ul>
+  </div>
+
+  <!-- 1.1 -->
+  <h2 id="s1-1"><span class="num">1.1</span>The home page and its figure</h2>
+  <p class="lead">The figure on the home page is not decoration: it is the most important lesson of the program, with real data. It shows the 150 flowers of Anderson’s irises, sepal length against sepal width.</p>
+  <p>Taken together, the flowers say that the longer the sepal, the narrower it is: <i>r</i> = −.12. But the <span class="ui">See by species</span> button separates the three species, and within each one the relation is the opposite and much stronger: +.74 in <i>Iris setosa</i>, +.53 in <i>I. versicolor</i> and +.46 in <i>I. virginica</i>. The correlation of all of them together mixes two different things—how flowers vary within a species and how the species differ from one another—and describes none of them. This is <b>Simpson’s paradox</b> (Simpson, 1951), and Block 10 is made to measure it.</p>
+
+  <figure class="w70">
+    <div class="marco"><img src="../img/en/b1-heroe.png" alt="The app’s home page with the iris figure split by species"></div>
+    <figcaption><b>Figure 1.1.</b> The home page with <span class="ui">See by species</span> pressed: one line and one ellipse per species, each with its <i>r</i>. On the right, the Pearson matrix of the four flower measurements, drawn with the chosen glyph. The button changes to <span class="ui">See them pooled</span> to go back.</figcaption>
+  </figure>
+  <p>The four buttons on the left lead to what follows: <span class="ui">Start with my data →</span> opens Block 2; <span class="ui">Try the labs</span>, <span class="ui">See the measures</span> and <span class="ui">How to cite</span> scroll down to their sections on this same page.</p>
+
+  <!-- 1.2 -->
+  <h2 id="s1-2"><span class="num">1.2</span>The route of a sound analysis</h2>
+  <p>Below the home figure, <span class="ui">How it works</span> sums up in seven steps the order in which the app walks through an analysis: <b>load</b> the data and their types, <b>explore</b> the cloud and the assumptions, <b>choose</b> the right coefficient, <b>measure</b> with a test and an interval, <b>control</b> for third variables and the structure, <b>compare</b> groups, matrices or studies, and <b>publish</b> the figure, the table and the report. Further down, <span class="ui">The thirteen blocks</span> shows one card per block with what it does; a click on the card opens it.</p>
+
+  <!-- 1.3 -->
+  <h2 id="s1-3"><span class="num">1.3</span>Six labs that really compute</h2>
+  <p>None of them is a recorded animation: every move recomputes each coefficient and its <i>p</i>-value with the same engine the app uses on your data. They are chosen with the tabs at the top.</p>
+
+  <h3>Drag the points</h3>
+  <p>A cloud of 30 points you can touch: drag a point, click an empty spot to add one and double-click a point to remove it. On the right, twelve coefficients in four families—<b>linear</b>, <b>rank</b>, <b>robust</b> and <b>general dependence</b>—move at the same time. The buttons at the top set starting clouds: <span class="ui">Linear</span>, <span class="ui">With an outlier</span>, <span class="ui">Parabola</span>, <span class="ui">Circle</span>, <span class="ui">Step</span>, <span class="ui">Random</span> and <span class="ui">Irises (petal)</span>.</p>
+
+  <figure class="w70">
+    <div class="marco"><img src="../img/en/b1-lab-drag.png" alt="The Drag the points lab with the linear cloud and the twelve coefficients"></div>
+    <figcaption><b>Figure 1.2.</b> <span class="ui">Drag the points</span> with the linear cloud. The ellipse holds 68% of a bivariate normal with the means and covariances of the cloud; the dashed line is the least-squares line. Each bar runs from −1 to 1, and the figure on the right is the <i>p</i>-value.</figcaption>
+  </figure>
+  <div class="caja ejemplo">
+    <div class="caja-t"><span class="ico">▸</span>Worked example · a single data point</div>
+    <p>Press <span class="ui">With an outlier</span>: 28 points with no relation and one far away, at the top right. Pearson climbs to a high correlation because of that single point; the rank and robust coefficients barely move. Drag the outlier toward the center and watch Pearson collapse. This is why Block 3 checks the influence of each data point before recommending a coefficient.</p>
+  </div>
+  <p class="small">The <i>p</i>-values are two-sided except for the general dependence measures, which can only be positive and are tested one-sided. Hoeffding’s uses 199 permutations with a fixed seed, and the τ* of Bergsma and Dassios gives only the estimator, because its exact test is too slow to recompute at every move.</p>
+
+  <h3>Same r, different shape</h3>
+  <p>Pick a figure—<span class="ui">Axolotl</span>, <span class="ui">Prickly pear</span>, <span class="ui">Pyramid</span>, <span class="ui">Agave</span>, <span class="ui">Star</span>, <span class="ui">Circle</span> or <span class="ui">X</span>—and press <span class="ui">Morph</span>. The points move little by little toward the figure, but a move is only accepted if the two means, the two standard deviations and Pearson’s <i>r</i> stay equal to two decimals. In the end you have a completely different cloud with the same five numbers. The method is the simulated annealing of Matejka and Fitzmaurice (2017); the figures are this app’s own.</p>
+
+  <figure class="w80">
+    <div class="marco"><img src="../img/en/b1-lab-same.png" alt="The Same r, different shape lab with the cloud turned into an axolotl"></div>
+    <figcaption><b>Figure 1.3.</b> The cloud turned into an axolotl. The five numbers on the right—x̄ = 54.58, ȳ = 47.76, the two standard deviations and <i>r</i> = .13—are the same as those of the starting cloud. <span class="ui">Back to the cloud</span> returns it.</figcaption>
+  </figure>
+
+  <h3>Guess the correlation</h3>
+  <p>How well do you read a cloud? Move the control to the <i>r</i> you believe and press <span class="ui">Check</span>; <span class="ui">Another cloud</span> moves on to the next of ten rounds. The score does not count the raw error: it divides it by the difference the eye can notice, which is large near zero and small near ±1 (Rensink and Baldridge, 2010). Missing by .10 around .70 is worth less than missing by .10 around zero.</p>
+
+  <figure class="w70">
+    <div class="marco"><img src="../img/en/b1-lab-guess.png" alt="The Guess the correlation lab after an answer"></div>
+    <figcaption><b>Figure 1.4.</b> One round: the answer was .60 and the cloud had .70. The deviation of 0.10 equals 1.1 noticeable differences and gives 58 points.</figcaption>
+  </figure>
+
+  <h3>What does each coefficient detect?</h3>
+  <p>Nine shapes of relation against seven coefficients, in a table colored by the absolute value, with an asterisk where the test is significant at 5%. Pearson only sees the line; Spearman and Kendall, what is monotonic; distance correlation, Chatterjee’s ξ and Hoeffding’s <i>D</i> also see the parabola, the sine, the circle and the X. The <i>n</i> control changes the size of the samples and <span class="ui">Another sample</span> draws new ones.</p>
+
+  <figure class="w80">
+    <div class="marco"><img src="../img/en/b1-lab-detect.png" alt="The table of nine shapes against seven coefficients"></div>
+    <figcaption><b>Figure 1.5.</b> With <i>n</i> = 150, the parabola, the circle and the X have <i>r</i> close to zero, but dCor and ξ detect them. In the independence row nobody should light up, and nobody does.</figcaption>
+  </figure>
+  <div class="caja importante">
+    <div class="caja-t"><span class="ico">!</span>An r of zero does not mean “no relation”</div>
+    <p>It means “no <i>linear</i> relation”. If the question is whether two variables have anything to do with each other in any way, a general dependence measure is needed. Block 6 computes them and scans the whole matrix looking for what Pearson does not see.</p>
+  </div>
+
+  <h3>The dance of r</h3>
+  <p>Set a population—its ρ and the sample size—and press <span class="ui">Dance</span>: each row is a new sample with its <i>r</i> and its 95% interval, and alongside, the distribution of the <i>r</i> values builds up, with the theoretical curve on top. With samples of 20 cases, <i>r</i> “dances” from .1 to .8 even though ρ is always .50, and in the long run 95% of the intervals contain ρ (Cumming, 2008). <span class="ui">Clear</span> starts over.</p>
+
+  <figure class="w80">
+    <div class="marco"><img src="../img/en/b1-lab-dance.png" alt="The dance of r with 49 samples and the distribution of r"></div>
+    <figcaption><b>Figure 1.6.</b> Forty-nine samples of <i>n</i> = 20 with ρ = .50. The intervals in red do not contain ρ (the gold line); in this run there were four, and 92% did contain it. The red curve on the right is the theoretical distribution of <i>r</i> through Fisher’s <i>z</i>.</figcaption>
+  </figure>
+
+  <h3>Range and measurement error</h3>
+  <p>The two most common ways for a real correlation to come out smaller. <b>Range restriction</b>: if only part of the values of <i>x</i> is observed—only the plants that survived, only the students admitted—<i>r</i> drops; the percentile control chooses which part is seen. <b>Measurement error</b>: if <i>x</i> and <i>y</i> are measured with noise, <i>r</i> is “attenuated”; the reliability control sets it. The two cards on the right apply the corrections of Thorndike (case II) and of Spearman, which Block 12 offers for your own numbers.</p>
+
+  <figure class="w80">
+    <div class="marco"><img src="../img/en/b1-lab-range.png" alt="The Range and measurement error lab with the upper half of x and reliability 0.70"></div>
+    <figcaption><b>Figure 1.7.</b> With ρ = .70, observing only the upper half of <i>x</i> and measuring with reliability .70 leaves the observed <i>r</i> at .37. The range correction raises it to .52 and the attenuation correction, after that, to .74: close to the true value, but not exact, because no correction is better than the information it is given.</figcaption>
+  </figure>
+
+  <!-- 1.4 -->
+  <h2 id="s1-4"><span class="num">1.4</span>Which measure for which data</h2>
+  <p>The kind of the two variables decides which coefficients make sense. The section <span class="ui">Which measure for which data</span> lays out the full map in nine cards, each with the block that computes it:</p>
+  <table class="compacta">
+    <thead><tr><th style="width:1.9in">Your two variables</th><th>Measures</th><th style="width:0.6in" class="c">Block</th></tr></thead>
+    <tbody>
+      <tr><td>Continuous and continuous</td><td><i>r</i>, ρ, τ, the robust ones, dCor, ξ, MIC</td><td class="c"><span class="chip k4">4</span> <span class="chip k6">6</span></td></tr>
+      <tr><td>Ordinal and ordinal</td><td>ρ, τ-b, τ-c, γ, Somers’ <i>d</i>, polychoric</td><td class="c"><span class="chip k8">8</span></td></tr>
+      <tr><td>Nominal and nominal</td><td>φ, <i>V</i>, <i>C</i>, λ, <i>U</i>, odds ratio</td><td class="c"><span class="chip k8">8</span></td></tr>
+      <tr><td>Binary or groups and continuous</td><td>point-biserial, biserial, rank-biserial, η</td><td class="c"><span class="chip k8">8</span></td></tr>
+      <tr><td>Raters or methods</td><td>CCC, ICC, κ, <i>W</i>, α, Bland–Altman</td><td class="c"><span class="chip k9">9</span></td></tr>
+      <tr><td>Angles and dates of the year</td><td>circular–circular, circular–linear</td><td class="c"><span class="chip k10">10</span></td></tr>
+      <tr><td>Proportions of a whole</td><td>ρ<sub>p</sub>, the centered log-ratio</td><td class="c"><span class="chip k10">10</span></td></tr>
+      <tr><td>In time, in space or on a tree</td><td>repeated measures, prewhitening, Dutilleul, contrasts</td><td class="c"><span class="chip k10">10</span></td></tr>
+      <tr><td>Two tables or two matrices</td><td>canonical, RV, Procrustes, Mantel, co-inertia</td><td class="c"><span class="chip k7">7</span></td></tr>
+    </tbody>
+  </table>
+  <p>There is no need to memorize it: the assistant of Block 2 applies it on its own to each pair of your columns.</p>
+
+  <!-- 1.5 -->
+  <h2 id="s1-5"><span class="num">1.5</span>Nine ways to draw a correlation</h2>
+  <p>In a correlation matrix each cell is a <b>glyph</b>. The app offers nine, and all of them carry the sign in their shape too, not only in the color: with a divergent palette, +<i>r</i> and −<i>r</i> print as the same gray, and a glyph that depends only on color loses the sign in a photocopy.</p>
+
+  <figure>
+    <div class="marco"><img src="../img/en/b1-glyphs.png" alt="The nine glyphs drawn with r = .60"></div>
+    <figcaption><b>Figure 1.8.</b> The nine glyphs with <i>r</i> = .60. The control moves <i>r</i> in all nine at once, and <span class="ui">See the morph</span> sweeps from −1 to 1 to show how each one changes.</figcaption>
+  </figure>
+  <table class="compacta">
+    <thead><tr><th style="width:1.2in">Glyph</th><th>What it encodes</th></tr></thead>
+    <tbody>
+      <tr><td><b>Moon</b> ★</td><td>This app’s own: a disk of fixed size whose lit part is exactly |<i>r</i>|, waxing if <i>r</i> &gt; 0 and waning if <i>r</i> &lt; 0. It reads the same in color, in gray and with color blindness.</td></tr>
+      <tr><td>Circle · Square</td><td>The area is proportional to |<i>r</i>|; the sign, by the color.</td></tr>
+      <tr><td>Ellipse</td><td>The shape of a bivariate normal with that <i>r</i>: tilted to the right if it is positive, thinner and thinner as it nears ±1 (Murdoch and Chow, 1996).</td></tr>
+      <tr><td>Pie</td><td>A sector of 360°·|<i>r</i>|, clockwise if it is positive.</td></tr>
+      <tr><td>Bar</td><td>Rises if it is positive and hangs if it is negative.</td></tr>
+      <tr><td>Shade</td><td>Stripes that rise or fall, with the intensity of |<i>r</i>| (Friendly, 2002).</td></tr>
+      <tr><td>Colour · Number</td><td>The cell filled with color, or the value written in the color of its sign.</td></tr>
+    </tbody>
+  </table>
+
+  <!-- 1.6 -->
+  <h2 id="s1-6"><span class="num">1.6</span>Own palettes, tested</h2>
+  <p>Nineteen palettes designed for this app, named after plants, places and crafts of Mexico: twelve divergent ones—ten for a light background and two for a dark one—and seven sequential ones, for what goes from 0 to 1 (|<i>r</i>|, <i>r</i>², densities). All of them were built in a perceptual color space, where equal steps of <i>r</i> look like equal steps of color, and each one passes five checks, which the card shows with a check mark:</p>
+  <ul class="lista">
+    <li><b>fits:</b> its whole ramp can be shown on an ordinary screen, with no clipped colors;</li>
+    <li><b>uniform:</b> its steps have the same perceptual size;</li>
+    <li><b>colour-blind:</b> the sign can be told apart with the three forms of color blindness, even with |<i>r</i>| = .25;</li>
+    <li><b>grey:</b> +<i>r</i> and −<i>r</i> have the same gray, so in black and white the glyph decides;</li>
+    <li><b>contrast:</b> its ends contrast at least 3 to 1 with the background.</li>
+  </ul>
+
+  <figure class="w70">
+    <div class="marco"><img src="../img/en/b1-palettes.png" alt="The first nine palettes with their checks"></div>
+    <figcaption><b>Figure 1.9.</b> The first nine palettes, with their five checks. The chosen one—here Añil–Achiote (Indigo–Annatto), the default—is framed and is used throughout the app.</figcaption>
+  </figure>
+  <p>The <span class="ui">See as</span> menu draws all the palettes as a person with protanopia, deuteranopia or tritanopia would see them, or in grayscale, and the <span class="ui">Invert the sign (red positive)</span> box swaps the two hues for those used to the opposite convention. Below the gallery, the iris matrix is redrawn with the chosen palette. The palettes for figures with groups—one of our own, which keeps the distance between colors under the three forms of color blindness, and that of Okabe and Ito (2008)—are used automatically where they are needed. If none of them suits you, Block 13 has a designer to make your own.</p>
+
+  <!-- 1.7 -->
+  <h2 id="s1-7"><span class="num">1.7</span>How the numbers are written</h2>
+  <p>Style manuals do not agree. The section <span class="ui">How the numbers are written</span> offers four styles, and the one you choose is used throughout the app: on screen, in the tables and in the report.</p>
+  <table class="compacta">
+    <thead><tr><th style="width:1.75in">Style</th><th style="width:2.55in">Comes out as</th><th>Rule</th></tr></thead>
+    <tbody>
+      <tr><td>Psychology and social sciences (APA 7)</td><td><code>r(48) = .45, 95% CI [.20, .65], p &lt; .001</code></td><td>No leading zero for what cannot exceed 1</td></tr>
+      <tr><td>Biomedical (SAMPL guidelines)</td><td><code>r(48) = 0.45, 95% CI, 0.20 to 0.65, P &lt; 0.001</code></td><td>Leading zero and a capital <i>P</i></td></tr>
+      <tr><td>Mexican standard (NOM-008)</td><td><code>r(48) = 0.45, 95% CI [0.20, 0.65], p &lt; 0.001</code></td><td>Leading zero required, decimal point</td></tr>
+      <tr><td>Standard with decimal comma</td><td><code>r(48) = 0,45, 95% CI [0,20; 0,65], p &lt; 0,001</code></td><td>Decimal comma; the limits separated by a semicolon</td></tr>
+    </tbody>
+  </table>
+  <p>The same style can also be chosen from the table to publish in Block 13.</p>
+
+  <!-- 1.8 -->
+  <h2 id="s1-8"><span class="num">1.8</span>The catalog of measures</h2>
+  <p>The section <span class="ui">The measures and where they come from</span> describes 98 measures of association and inference tools, each on a card. They are searched by name in the field at the top, or filtered by family: classical, robust, nonlinear, partial and sets, categorical and latent, agreement, structured, special data and inference. Under the name of each card come the author and year that define it, and the block where it is computed.</p>
+
+  <figure class="w80">
+    <div class="marco"><img src="../img/en/b1-catalogo.png" alt="The catalog with the search field, the family filters and the first twelve cards"></div>
+    <figcaption><b>Figure 1.10.</b> The catalog: the search field, the filters with the number of cards in each family and the first cards. The colored edge gives the family.</figcaption>
+  </figure>
+  <div class="caja dato">
+    <div class="dato-cifra">83</div>
+    <div class="dato-txt"><div class="caja-t">Computed out of the 98</div>The other fifteen are described so that the catalog is complete—Shepherd’s π, the median correlation, the tests of Blum, Kiefer and Rosenblatt or of Heller, Heller and Gorfine, the partial Mantel test, the moving correlation, among others—but the app does not compute them, and their card says <span class="ui">catalogue only</span> instead of the block.</div>
+  </div>
+  <p>A click on a card opens it. Each one has the same parts: what it measures, its <b>formula</b> written as in a textbook, its hypothesis <b>test</b>, its confidence <b>interval</b>, its <b>pitfalls and conventions</b>—what it does with ties, which divisor it uses, where programs differ—and its full <b>references</b>.</p>
+
+  <figure class="w60">
+    <div class="marco"><img src="../img/en/b1-ficha.png" alt="The card of Kendall’s τ-b open"></div>
+    <figcaption><b>Figure 1.11.</b> The card of Kendall’s τ-b: the formula corrected for ties, the exact or normal test depending on the case, the interval with the variance of Fieller, Hartley and Pearson, the convention of Knight’s (1966) algorithm and the four references.</figcaption>
+  </figure>
+  <div class="caja nota">
+    <div class="caja-t"><span class="ico">i</span>The catalog can also be searched from any block</div>
+    <p>The search in the bar (<code>Ctrl+K</code>) finds the cards by their name and says in which block each measure is computed, as in Figure I.3.</p>
+  </div>
+
+  <!-- 1.9 -->
+  <h2 id="s1-9"><span class="num">1.9</span>The theory, the references and the citation</h2>
+  <p><span class="ui">The theory, in plain words</span> gathers in twelve collapsible topics the ideas that hold up everything else. Each topic says in which block it is used, and several bring their own figure.</p>
+
+  <figure class="w80">
+    <div class="marco"><img src="../img/en/b1-theory.png" alt="The theory section with the first topic open"></div>
+    <figcaption><b>Figure 1.12.</b> The theory with the first topic open: <i>r</i> as the cosine of the angle between the two centered variables, one of thirteen equivalent ways of seeing it (Rodgers and Nicewander, 1988).</figcaption>
+  </figure>
+  <table class="compacta">
+    <thead><tr><th>Topic</th><th style="width:1in" class="c">Blocks</th></tr></thead>
+    <tbody>
+      <tr><td>What a correlation is</td><td class="c">all</td></tr>
+      <tr><td>Linear, monotonic or any dependence</td><td class="c">4 and 6</td></tr>
+      <tr><td>Correlation is not causation</td><td class="c">7 and 10</td></tr>
+      <tr><td>Is it significant? The <i>p</i>-value</td><td class="c">4 and 5</td></tr>
+      <tr><td>How precise? The intervals</td><td class="c">4</td></tr>
+      <tr><td>Is it large? The size</td><td class="c">4 and 12</td></tr>
+      <tr><td>Many tests at once</td><td class="c">5</td></tr>
+      <tr><td>Assumptions and outliers</td><td class="c">3</td></tr>
+      <tr><td>Groups: Simpson’s paradox</td><td class="c">10</td></tr>
+      <tr><td>Correlation is not agreement</td><td class="c">9</td></tr>
+      <tr><td>How to read a correlation figure without fooling yourself</td><td class="c">5 and 13</td></tr>
+      <tr><td>How to report a correlation</td><td class="c">13</td></tr>
+    </tbody>
+  </table>
+  <p>At the end of the page, <span class="ui">References</span> lists the 229 works the app cites, which can be filtered by topic with the buttons at the top (<span class="ui">See every reference</span> unfolds the full list), and <span class="ui">How to cite</span> gives the program’s citation in APA format and in BibTeX, each with its button to copy it.</p>
+
+  <div class="caja regla">
+    <div class="caja-t"><span class="ico">✓</span>Before you open your data</div>
+    <table class="compacta"><tbody>
+      <tr><td style="width:44%"><b>If</b> you are going to publish the figures…</td><td>choose the palette and the glyph here, once: the whole app will use them.</td></tr>
+      <tr><td><b>If</b> the journal asks for a number style…</td><td>choose it here; the screen, the tables and the report will follow it.</td></tr>
+      <tr><td><b>If</b> you do not know which coefficient to use…</td><td>do not decide yet: Blocks 2 and 3 recommend one from your data.</td></tr>
+    </tbody></table>
+  </div>
+</section>
+
+</body>
+</html>

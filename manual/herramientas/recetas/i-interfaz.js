@@ -12,14 +12,14 @@
     [2, at(vis('.suite-link'))],
     [3, at(vis('[aria-label="Idioma / Language"]'))],
     [4, at(vis('#themeBtn'))],
-    [5, at(vis('[title="Reportar un problema"], [aria-label="Reportar un problema"]'))],
+    [5, at(vis('[title="Reportar un problema"], [aria-label="Reportar un problema"], [title="Report a problem"], [aria-label="Report a problem"]'))],
     [6, at(vis('#helpBtn'))],
-    [7, at(vis('button, a', 'Matriz', 400) || vis('a, button', '5', 400), 0.9)],
-    [8, at(vis('button', 'Documento'), 0.5)],
+    [7, at(vis('button, a', 'Matriz', 400) || vis('button, a', 'Matrix', 400) || vis('a, button', '5', 400), 0.9)],
+    [8, at((vis('button', 'Documento') || vis('button', 'Document')), 0.5)],
     [9, at(vis('.lnav-k'))],
-    [10, at(vis('*', 'EN ESTE BLOQUE') || vis('*', 'En este bloque'), 0.15)],
+    [10, at(vis('*', 'EN ESTE BLOQUE') || vis('*', 'En este bloque') || vis('*', 'IN THIS BLOCK') || vis('*', 'In this block'), 0.15)],
     [11, at(vis('.step-panel.active .card'), 0.02, 0.1)],
-    [12, at(vis('button, a', 'Modo enfocado', 400), 0.9)],
+    [12, at(vis('button, a', 'Modo enfocado', 400) || vis('button, a', 'Focused mode', 400), 0.9)],
   ].filter(x => x[1]);
   window.__marcas = m.map(([n, p]) => [n, +p[0].toFixed(1), +p[1].toFixed(1)]);
   return null;
