@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>CorrelationPro · User’s Manual · Chapter 11</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,500;0,600;1,500&family=Crimson+Pro:ital,wght@0,400;0,600;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../interior.css">
+<script src="../paginar.js"></script>
+</head>
+<body>
+
+<section class="capitulo" id="cap-11" data-pestana="11" data-orden="11" style="--acento: var(--b11)">
+  <div class="cap-apertura">
+    <div class="cap-num">11</div>
+    <div class="cap-etiqueta">Chapter eleven · Block 11</div>
+    <h1 data-corto="Networks">Correlation networks</h1>
+    <div class="cap-regla"></div>
+    <p class="cap-resumen">A large matrix reads better as a network: each variable is a node and each relationship, an edge. This block builds the network from correlations or from partial correlations—with or without regularization—, draws it in five ways that morph into one another, measures who sits at the center and finds the communities: the groups of variables that are more related to one another than to the rest.</p>
+    <div class="cap-franja"><span class="k11"></span><span class="k11"></span><span class="k5"></span><span class="k7"></span></div>
+    <ul class="cap-contenido">
+      <li><b>11.1</b>Which network</li>
+      <li><b>11.2</b>The network and its five views</li>
+      <li><b>11.3</b>Centralities and communities</li>
+    </ul>
+  </div>
+
+  <!-- 11.1 -->
+  <h2 id="s11-1"><span class="num">11.1</span>Which network</h2>
+  <p class="lead">The numeric variables with the variable role go in; when you open a dataset, the first forty are selected. At least three are needed, and the network uses only the rows that are complete in all of them.</p>
+  <figure>
+    <div class="marco"><img src="../img/en/b11-que.png" alt="The Which network card with the six variables of Switzerland, 1888"></div>
+    <figcaption><b>Figure 11.1.</b> Switzerland, 1888, the example the block opens with: six variables, the regularized partial network, Pearson and γ = 0.5.</figcaption>
+  </figure>
+  <p><span class="ui">Edges</span> decides which relationships are drawn; <span class="ui">Coefficient</span>, whether to start from Pearson or from Spearman.</p>
+  <table class="compacta">
+    <caption><b>Table 11.1.</b> The four ways of building the network</caption>
+    <thead><tr><th style="width:2.1in">Edges</th><th>What is drawn</th></tr></thead>
+    <tbody>
+      <tr><td><b>Regularized partials</b> (the default)</td><td>the partial correlations of the <b>graphical lasso</b> (Friedman, Hastie and Tibshirani 2008), which sets the weak ones to zero; how many is chosen by the EBIC criterion (Foygel and Drton 2010) with its <span class="ui">EBIC γ</span>: 0.5 gives the sparsest network, 0 is the BIC</td></tr>
+      <tr><td><b>Significant partials</b></td><td>the partial correlations—each pair removing all the others—whose <i>p</i>-value, corrected by Holm, is below .05</td></tr>
+      <tr><td><b>Correlations with |r| ≥ threshold</b></td><td>the marginal correlations that pass the <span class="ui">Threshold |r|</span>, from .05 to .90</td></tr>
+      <tr><td><b>Significant correlations</b></td><td>the significant marginal correlations with Holm’s correction</td></tr>
+    </tbody>
+  </table>
+  <p>If the matrix is not positive definite, the two partial networks use the nearest one (Section 5.5) and a message says so. With fewer than three complete rows per variable, another message warns that the network is unstable. With more than 25 variables, the graphical lasso runs through its 100 penalties with a progress screen.</p>
+  <div class="caja importante">
+    <div class="caja-t"><span class="ico">!</span>Marginal or partial: two different networks</div>
+    <p>In a network of marginal correlations almost everything is connected to everything, because many variables share a common cause. Partial correlations show only the relationships that remain after controlling for all the other variables: an edge means “they are related even knowing everything else.” Both are useful, but they answer different questions, and the report must say which one was drawn.</p>
+  </div>
+
+  <!-- 11.2 -->
+  <h2 id="s11-2"><span class="num">11.2</span>The network and its five views</h2>
+  <p>The title says how many nodes and edges the network has and how it was built (with the chosen lasso λ). The thickness of each edge is its |weight|, and its color, the sign: blue for positive and red for negative ones, in the Block 1 palette. The size of each node is its strength and its color, its community; nodes without edges are gray.</p>
+  <figure class="w80">
+    <div class="marco"><img src="../img/en/b11-red.png" alt="The regularized partial network of Switzerland, 1888, with Education selected"></div>
+    <figcaption><b>Figure 11.2.</b> Switzerland, 1888: 11 edges out of 15 possible (λ = 0.065). With a click on Education, its edges are highlighted and the line below gives its neighbors with their weights: Fertility −.37, Examination .33, Agriculture −.30 and Catholic .24.</figcaption>
+  </figure>
+  <p>Hovering the pointer over a node highlights its edges and its neighbors; a click pins it and writes below it its community, its strength and its neighbors ordered by weight. The buttons at the top change the view, and the change is animated: each node and each edge travels to its new place.</p>
+  <ul>
+    <li><span class="ui">Forces</span>: the nodes arrange themselves as if the edges were springs (Fruchterman and Reingold 1991): strongly related ones end up close together.</li>
+    <li><span class="ui">Circle</span>: the nodes on a circumference, ordered by community.</li>
+    <li><span class="ui">Bundled chords</span>: the same circle, with the edges curved toward the center of their community: the relationships between communities show up as bundles.</li>
+    <li><span class="ui">Arcs</span>: the nodes on a line, with the edges as arcs above it.</li>
+    <li><span class="ui">Matrix</span>: the weights as colored cells, in the order of the communities.</li>
+  </ul>
+  <p><span class="ui">▶ Tour: matrix → network → chords</span> goes through the matrix, the forces, the circle and the chords, one after another, to show that they are the same information drawn in four ways.</p>
+  <div class="dos" style="margin-bottom:0.16in">
+    <figure style="margin:0">
+      <div class="marco"><img src="../img/en/b11-cuerdas.png" alt="The regularized partial network as bundled chords"></div>
+      <figcaption><b>Figure 11.3.</b> The same network, as bundled chords.</figcaption>
+    </figure>
+    <figure style="margin:0">
+      <div class="marco"><img src="../img/en/b11-marginal.png" alt="The network of correlations with |r| of .30 or more, as a circle"></div>
+      <figcaption><b>Figure 11.4.</b> The marginal network with |<i>r</i>| ≥ .30, as a circle.</figcaption>
+    </figure>
+  </div>
+  <p>The two figures above show the difference described in the previous section. In the marginal one, Agriculture and Fertility are joined (<i>r</i> = .35); in the regularized partial one that edge is missing, because the correlation runs through Education.</p>
+
+  <!-- 11.3 -->
+  <h2 id="s11-3"><span class="num">11.3</span>Centralities and communities</h2>
+  <p>Four figures summarize the network: the edges with the density (the share of the possible edges that are present), the communities with their modularity <i>Q</i>, the strongest node and the rows used. The table gives, for each node, sorted by strength, five centralities, and the chart below, its strength relative to that of the strongest node, in the color of its community.</p>
+  <figure class="w80">
+    <div class="marco"><img src="../img/en/b11-cent.png" alt="The centralities and communities of the Switzerland, 1888 network"></div>
+    <figcaption><b>Figure 11.5.</b> Education and Examination are the strongest nodes; Infant mortality, the weakest. Modularity is low (<i>Q</i> = 0.078): with six variables this closely related, the two communities barely separate.</figcaption>
+  </figure>
+  <table class="compacta">
+    <caption><b>Table 11.2.</b> The centralities</caption>
+    <thead><tr><th style="width:1.5in">Centrality</th><th>What it measures</th></tr></thead>
+    <tbody>
+      <tr><td><b>Degree</b></td><td>how many edges the node has</td></tr>
+      <tr><td><b>Strength</b></td><td>the sum of the |weights| of its edges: the most stable and the most widely used</td></tr>
+      <tr><td><b>Expected influence</b></td><td>the sum of the weights with their sign: if it is negative, the node holds its neighbors back more than it drives them</td></tr>
+      <tr><td><b>Closeness</b></td><td>how close it is to all the others, with path lengths of 1/|weight| (Opsahl, Agneessens and Skvoretz 2010)</td></tr>
+      <tr><td><b>Betweenness</b></td><td>how many shortest paths between other nodes pass through it (Brandes 2001)</td></tr>
+    </tbody>
+  </table>
+  <p>The <b>communities</b> maximize modularity (Newman 2006) with the Louvain method (Blondel and colleagues 2008): the network is split into groups of nodes with more edges inside them than between them. A modularity near zero says that the partition can hardly be told apart from a random one.</p>
+  <div class="caja teoria">
+    <div class="caja-t"><span class="ico">θ</span>Theory in brief · how much to trust a network</div>
+    <p>A network estimated from few rows changes a lot from one sample to another: weak edges appear and disappear, and the order of the centralities shifts. Strength is the most stable centrality; closeness and betweenness, the least (Epskamp and Fried 2018). With many variables and few rows, the graphical lasso with γ = 0.5 is conservative on purpose: it would rather lose a weak edge than invent one.</p>
+  </div>
+  <div class="caja regla">
+    <div class="caja-t"><span class="ico">✓</span>Reading Block 11</div>
+    <table class="compacta"><tbody>
+      <tr><td style="width:44%"><b>If</b> the question is what is directly related…</td><td>use a partial network, regularized if there are many variables.</td></tr>
+      <tr><td><b>If</b> there are few rows per variable…</td><td>interpret only the strong edges and the strength; not betweenness.</td></tr>
+      <tr><td><b>If</b> modularity is low…</td><td>do not talk about groups of variables: the communities cannot be told apart.</td></tr>
+      <tr><td><b>If</b> you are going to publish the network…</td><td>state how the edges were built, the coefficient, the EBIC γ or the threshold, and how many rows were used.</td></tr>
+    </tbody></table>
+    <p class="regla-pie">These are guides for interpretation, not laws: what you know about the phenomenon, the design and how it was measured always comes first.</p>
+  </div>
+</section>
+
+</body>
+</html>

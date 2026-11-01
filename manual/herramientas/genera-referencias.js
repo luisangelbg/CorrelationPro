@@ -2,7 +2,9 @@
    Lee js/theory.js (las 230 referencias, cada una con su tema) y reemplaza lo que hay entre las marcas
    <!-- REFERENCIAS --> y <!-- /REFERENCIAS --> de es/14-apendices.html: un apartado por tema, en el orden
    de la app, con las obras en orden alfabético. Así el manual y el programa citan exactamente lo mismo.
-   Uso:   node manual/herramientas/genera-referencias.js */
+   Uso:   node manual/herramientas/genera-referencias.js              (es/14-apendices.html)
+          node manual/herramientas/genera-referencias.js --idioma en  (en/14-apendices.html: Theory.refText(k, 'en'), comillas “ ”
+                                                                        y los temas en inglés, como la app en inglés) */
 'use strict';
 const fs = require('fs');
 const path = require('path');
@@ -12,7 +14,9 @@ const raiz = path.resolve(__dirname, '..', '..');
 const caja = { window: {} };
 vm.createContext(caja);
 vm.runInContext(fs.readFileSync(path.join(raiz, 'js', 'theory.js'), 'utf8'), caja);
-const { REFS, REF_TOPICS } = caja.window.Theory;
+const { REFS, REF_TOPICS, refText } = caja.window.Theory;
+const iIdioma = process.argv.indexOf('--idioma'), en = iIdioma > 0 && process.argv[iIdioma + 1] === 'en';
+const lang = en ? 'en' : 'es';
 
 /* el orden de los temas: el del recorrido de la app, de la historia a las figuras */
 const ORDEN = ['his', 'sup', 'cla', 'rob', 'dep', 'par', 'cat', 'acu', 'est', 'esp', 'inf', 'fig', 'dat'];
@@ -22,13 +26,13 @@ const clave = s => s.replace(/<[^>]+>/g, '').normalize('NFD').replace(/[̀-ͯ]/g
 
 let total = 0, html = '\n';
 temas.forEach((t, i) => {
-  const lista = Object.keys(REFS).filter(k => REFS[k][1] === t).map(k => REFS[k][0]).sort((a, b) => clave(a).localeCompare(clave(b), 'es'));
+  const lista = Object.keys(REFS).filter(k => REFS[k][1] === t).map(k => (en ? refText(k, 'en') : REFS[k][0])).sort((a, b) => clave(a).localeCompare(clave(b), lang));
   if (!lista.length) return;
   total += lista.length;
-  html += `  <h3>F.${i + 1} · ${REF_TOPICS[t][0]}</h3>\n  <ul class="refs">\n` + lista.map(r => `    <li>${r}</li>`).join('\n') + '\n  </ul>\n';
+  html += `  <h3>F.${i + 1} · ${en ? REF_TOPICS[t][1].replace(/colour/g, 'color') : REF_TOPICS[t][0]}</h3>\n  <ul class="refs">\n` + lista.map(r => `    <li>${en ? r.replace(/«/g, '“').replace(/»/g, '”') : r}</li>`).join('\n') + '\n  </ul>\n';
 });
 
-const archivo = path.join(raiz, 'manual', 'es', '14-apendices.html');
+const archivo = path.join(raiz, 'manual', lang, '14-apendices.html');
 const texto = fs.readFileSync(archivo, 'utf8');
 const a = texto.indexOf('<!-- REFERENCIAS -->'), b = texto.indexOf('<!-- /REFERENCIAS -->');
 if (a < 0 || b < 0) throw new Error('No encontré las marcas de las referencias en ' + archivo);

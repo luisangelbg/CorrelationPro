@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>CorrelationPro · User’s Manual · Chapter 13</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,500;0,600;1,500&family=Crimson+Pro:ital,wght@0,400;0,600;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../interior.css">
+<script src="../paginar.js"></script>
+</head>
+<body>
+
+<section class="capitulo" id="cap-13" data-pestana="13" data-orden="13" style="--acento: var(--b13)">
+  <div class="cap-apertura">
+    <div class="cap-num">13</div>
+    <div class="cap-etiqueta">Chapter thirteen · Block 13</div>
+    <h1 data-corto="Figures and report">Figures, palettes and report</h1>
+    <div class="cap-regla"></div>
+    <p class="cap-resumen">The end of the road: what goes into the paper or the thesis. This block gathers all the figures the other blocks drew and exports them at journal size, designs a palette of your own and puts it to the test, builds the correlation table for publication, writes the methods from what was actually computed, collects the references, prepares a report for printing and saves the complete project so you can pick it up another day.</p>
+    <div class="cap-franja"><span class="k13"></span><span class="k13"></span><span class="k1"></span><span class="k5"></span></div>
+    <ul class="cap-contenido">
+      <li><b>13.1</b>The figures you have made</li>
+      <li><b>13.2</b>The figure studio</li>
+      <li><b>13.3</b>Designing a palette</li>
+      <li><b>13.4</b>The table for publication</li>
+      <li><b>13.5</b>The methods and the references</li>
+      <li><b>13.6</b>The report and the project</li>
+    </ul>
+  </div>
+  <p>Like Block 12, this one has five sections chosen with the buttons at the top: <span class="ui">Figures</span>, <span class="ui">Design a palette</span>, <span class="ui">Table to publish</span>, <span class="ui">Methods and references</span> and <span class="ui">Project and report</span>. Everything they show comes from what was computed in this session: if a block was not opened, it does not appear.</p>
+
+  <!-- 13.1 -->
+  <h2 id="s13-1"><span class="num">13.1</span>The figures you have made</h2>
+  <p class="lead">Each figure the blocks drew appears here as a card, with its title and the block it comes from.</p>
+  <p>Each card has two controls: <span class="ui">In the report</span>, which marks it for inclusion in the report of Section 13.6, and <span class="ui">Export</span>, which opens it in the figure studio. At the top, <span class="ui">Typeface of the figures</span> chooses the typeface family of all the figures in the app: <span class="ui">Sans serif (the system’s)</span>, <span class="ui">Serif</span> or <span class="ui">Monospaced</span>; the typeface is the computer’s own, with nothing downloaded.</p>
+  <figure>
+    <div class="marco"><img src="../img/en/b13-figs.png" alt="The gallery with the first eight figures of the iris data"></div>
+    <figcaption><b>Figure 13.1.</b> The first eight cards of a session with the iris data in Blocks 2 to 5. The gallery goes on with those of Block 4 (the scatter, the ranks, the intervals, the bootstrap, the permutation, the Bayes factor) and those of Block 5.</figcaption>
+  </figure>
+
+  <!-- 13.2 -->
+  <h2 id="s13-2"><span class="num">13.2</span>The figure studio</h2>
+  <p><span class="ui">Export</span> opens the figure in the <b>figure studio</b>, the same in every application of the suite: the figure in the middle, at its real size, and the controls on the right. It also opens from any block, with the pencil-and-ruler button that appears in the corner of each figure.</p>
+  <figure>
+    <div class="marco"><img src="../img/en/b13-estudio.png" alt="The figure studio with the iris scatterplot matrix"></div>
+    <figcaption><b>Figure 13.2.</b> The iris scatterplot matrix in the studio. Below the figure, its final size (85 × 83.5 mm at 600 dots per inch, 2,008 × 1,972 pixels); on the right, the settings, the fine editing and the palettes.</figcaption>
+  </figure>
+  <ul>
+    <li><b>Size</b>: the journal widths—one column (85 mm), one and a half (114 mm) and two (180 mm)—or a free one, and the resolution. The studio warns if any text falls below 7 points at the final size.</li>
+    <li><b>Format</b>: PNG, SVG, vector PDF with standard fonts, and TIFF for the journals that ask for it. <span class="ui">Export</span> downloads the file; nothing leaves the computer.</li>
+    <li><b>Fine editing</b>: title, subtitle and footnote inside the figure; the typeface, its size and color; the line width and point size; the background and the frame, and in its tabs, the axes and grid, the series, the legend—its place, inside or outside—, the texts and the annotations. <span class="ui">Copy the style to every figure</span> applies the same to the others.</li>
+    <li><b>Palette and color</b>: the figure’s own or another of the app’s palettes, including your own from Section 13.3. If the app is in dark mode, the figure can be exported with the light-mode colors.</li>
+  </ul>
+  <p>On the figure, a click takes you to the section of controls for that part and a double click on a text lets you change it. <span class="ui">Presets</span> applies combinations of settings in one click and saves your own, and the arrows at the top undo and redo.</p>
+
+  <!-- 13.3 -->
+  <h2 id="s13-3"><span class="num">13.3</span>Designing a palette</h2>
+  <p>A diverging palette for correlations: one hue for the positive ones and another for the negative ones, meeting at a light center. It is built in <b>OKLab</b>, a color space where equal distances look equal, so the color grows at the same pace as |<i>r</i>|. The controls are the <span class="ui">Hue of positive r</span> and the <span class="ui">Hue of negative r</span> (in degrees of the color wheel), the <span class="ui">Lightness of the ends</span>, the <span class="ui">Chroma (intensity)</span>, the <span class="ui">Name</span> and, to start from one of the app’s palettes, <span class="ui">Start from</span>.</p>
+  <figure>
+    <div class="marco"><img src="../img/en/b13-pal.png" alt="The palette designer with its five tests, the ramps by type of vision and the iris matrix"></div>
+    <figcaption><b>Figure 13.3.</b> A blue-to-red palette that passes all five tests. The ramps show it as seen by people with the three common forms of color blindness and as it prints in gray; on the right, the iris matrix drawn with it.</figcaption>
+  </figure>
+  <table class="compacta">
+    <caption><b>Table 13.1.</b> The five tests of a palette</caption>
+    <thead><tr><th style="width:2.2in">Test</th><th>What it ensures</th></tr></thead>
+    <tbody>
+      <tr><td><b>Fits the screen (sRGB)</b></td><td>that all its colors can be displayed without being clipped</td></tr>
+      <tr><td><b>Uniform steps</b></td><td>that each step of |<i>r</i>| changes the color by the same amount (the Δ<i>E</i> between steps)</td></tr>
+      <tr><td><b>The sign reads with colour blindness</b></td><td>that with protanopia, deuteranopia and tritanopia an <i>r</i> of .25 and one of −.25 can still be told apart</td></tr>
+      <tr><td><b>Symmetric in grey</b></td><td>that printed in black and white, <i>r</i> and −<i>r</i> have the same lightness</td></tr>
+      <tr><td><b>Contrast with the background ≥ 3:1</b></td><td>that the ends can be read on both the light and the dark background</td></tr>
+    </tbody>
+  </table>
+  <p><span class="ui">Find the best hue for negative r</span> tries the possible hues and picks the one that best separates the sign under color blindness, keeping that of the positive ones fixed; <span class="ui">Swap the direction</span> exchanges the two. <span class="ui">Use across the app</span> makes it the palette of all the matrices, networks and figures; it is saved in the browser and travels in the project package.</p>
+
+  <!-- 13.4 -->
+  <h2 id="s13-4"><span class="num">13.4</span>The table for publication</h2>
+  <p>The classic correlation table, with more options than the one in Block 5. You choose the variables with the buttons and, in the menus, the <span class="ui">Coefficient</span> (Pearson, Spearman or Kendall), the <span class="ui">Significance</span> (asterisks, the 95% interval or the <i>p</i>-value under each <i>r</i>, or nothing), the <span class="ui">Multiple-testing correction</span> (none, Holm, Benjamini–Hochberg or Bonferroni), the <span class="ui">Decimals</span>, the <span class="ui">Style of the numbers</span>—the same as in Section 1.7, which applies to the whole app—and the <span class="ui">Descriptives</span> (mean and SD, median and interquartile range, or none).</p>
+  <figure class="w80">
+    <div class="marco"><img src="../img/en/b13-tabla.png" alt="The iris correlation table for publication"></div>
+    <figcaption><b>Figure 13.4.</b> The iris data in the social-sciences style: title, means, standard deviations, the lower half of the matrix and the note with the <i>n</i> and the meaning of the asterisks.</figcaption>
+  </figure>
+  <p><span class="ui">Copy for the word processor</span> puts it on the clipboard as a formatted table: when pasted into a word processor it keeps its columns, its rules and its italics. <span class="ui">Download CSV</span> and <span class="ui">Download HTML</span> save it as a file.</p>
+
+  <!-- 13.5 -->
+  <h2 id="s13-5"><span class="num">13.5</span>The methods and the references</h2>
+  <p>The app writes the methods section from what was actually computed in this session: one paragraph per block used, with the coefficients, the tests, the corrections, the chosen settings—the number of resamples, the prior, the handling of missing values—and the citation of each method. At the end come the main results in a list and the version of the app.</p>
+  <figure class="w70">
+    <div class="marco"><img src="../img/en/b13-metodos.png" alt="The methods written for a session with the iris data"></div>
+    <figcaption><b>Figure 13.5.</b> The methods of the iris session: the data, the assumptions of Block 3, the pair of Block 4 and the matrix of Block 5, with their main results.</figcaption>
+  </figure>
+  <p><span class="ui">Copy the methods</span> puts them on the clipboard; <span class="ui">Write again</span> redoes them after you change something in another block. Below, <span class="ui">References of the methods used</span> gives, in alphabetical order and in social-sciences format, only the works cited in the methods, and <span class="ui">Copy the references</span> leaves them ready to paste.</p>
+  <div class="caja importante">
+    <div class="caja-t"><span class="ico">!</span>Always review the text</div>
+    <p>The app writes <i>what</i> it did, not <i>why</i>. Why you chose that coefficient, why those control variables or that correction is something only you know, and a reviewer is going to ask. Use the text as a starting point: correct it, remove what you do not use and explain your decisions.</p>
+  </div>
+
+  <!-- 13.6 -->
+  <h2 id="s13-6"><span class="num">13.6</span>The report and the project</h2>
+  <p><b>The report</b> is a document with the data used, the results of each block, the table, the figures marked in Section 13.1, the methods and the references, always in the light-mode colors. You give it a <span class="ui">Title</span> and, if you wish, the <span class="ui">Authorship (optional)</span>; a line says what it will include. <span class="ui">Open the report to print</span> opens it in a new tab, from which you print it or save it as PDF; <span class="ui">Download the report (HTML)</span> saves it as a web page.</p>
+  <figure class="w80">
+    <div class="marco"><img src="../img/en/b13-proyecto.png" alt="The cards of the report and of the project package"></div>
+    <figcaption><b>Figure 13.6.</b> The report, with its title proposed from the data, and the project package.</figcaption>
+  </figure>
+  <p><b>The project package</b> is a <code>.correlationpro.json</code> file with the data as they were read, the kind and role of each column, the transformed columns, the handling of missing values, the palette—your own as well—and the style of the numbers. <span class="ui">Save the project</span> downloads it; <span class="ui">Open a project</span> reads it and recomputes the blocks with those data. It is the way to resume an analysis another day, to send it to a colleague or to keep it alongside the paper.</p>
+  <div class="caja nota">
+    <div class="caja-t"><span class="ico">i</span>Nothing leaves your computer</div>
+    <p>The app does not send the data anywhere: everything is computed in the browser, and the report, the figures, the table and the project are saved as files on your computer. That is why it works offline, and that is why, if you close the tab without saving the project, the analysis is not kept.</p>
+  </div>
+
+  <div class="caja regla">
+    <div class="caja-t"><span class="ico">✓</span>Before you submit</div>
+    <table class="compacta"><tbody>
+      <tr><td style="width:44%"><b>If</b> the journal asks for a width…</td><td>export the figures at that width and check the warning about small text.</td></tr>
+      <tr><td><b>If</b> the figure will be printed in gray…</td><td>use a palette that passes the gray-symmetry test.</td></tr>
+      <tr><td><b>If</b> you copy the table…</td><td>check that the style of the numbers is the journal’s.</td></tr>
+      <tr><td><b>If</b> you use the written methods…</td><td>add why you chose each method and remove what you do not report.</td></tr>
+      <tr><td><b>Always</b>…</td><td>save the project package: it is the record of how each number was obtained.</td></tr>
+    </tbody></table>
+    <p class="regla-pie">These are guides for interpretation, not laws: what you know about the phenomenon, the design and how it was measured always comes first.</p>
+  </div>
+</section>
+
+</body>
+</html>

@@ -1,0 +1,505 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>CorrelationPro · User’s Manual · Appendices</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,500;0,600;1,500&family=Crimson+Pro:ital,wght@0,400;0,600;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../interior.css">
+<script src="../paginar.js"></script>
+</head>
+<body>
+
+<section class="capitulo" id="apendices" data-pestana="Ap" data-orden="14" style="--acento: var(--bx)">
+  <div class="cap-apertura">
+    <div class="cap-num">A</div>
+    <div class="cap-etiqueta">Appendices</div>
+    <h1 data-corto="Appendices">Appendices</h1>
+    <div class="cap-regla"></div>
+    <p class="cap-resumen">What is worth having at hand and did not fit in any chapter: which files the app reads and writes, all the reading rules of the thirteen blocks gathered in one place, the vocabulary, what to do when something does not work, the 229 references of the catalog, and the license of the tool with the way to cite it.</p>
+    <div class="cap-franja"><span class="k13"></span><span class="k1"></span><span class="k5"></span><span class="k12"></span></div>
+    <ul class="cap-contenido">
+      <li><b>A</b>The files the app reads and writes</li>
+      <li><b>B</b>The reading rules, gathered</li>
+      <li><b>C</b>Glossary</li>
+      <li><b>D</b>When something goes wrong</li>
+      <li><b>E</b>The tool: license and how to cite it</li>
+      <li><b>F</b>References</li>
+    </ul>
+  </div>
+
+  <!-- ================================================================= A -->
+  <h2 id="ap-a"><span class="num">A</span>The files the app reads and writes</h2>
+  <p class="lead">CorrelationPro runs in the browser and <b>sends nothing to any server</b>: everything that goes in and out is a file on your computer or the clipboard. This appendix says which ones.</p>
+
+  <h3>A.1 · What it reads</h3>
+  <table class="compacta">
+    <thead><tr><th style="width:1.7in">Format</th><th>Where and what for</th></tr></thead>
+    <tbody>
+      <tr><td><b>Delimited text</b><br><code>.csv .tsv .txt .dat</code></td><td>Block 2. It detects the separator (comma, semicolon, tab or bar), the decimal mark and the encoding, and says what it chose.</td></tr>
+      <tr><td><b>Spreadsheet workbook</b><br><code>.xlsx .xlsm .ods</code></td><td>Block 2, with its own reader. If the workbook has several sheets with data, it asks which one to open.</td></tr>
+      <tr><td><b>Copied cells</b></td><td>Block 2, with <span class="ui">Paste</span>: what you copy from a spreadsheet.</td></tr>
+      <tr><td><b>Tree in Newick format</b></td><td>Block 10, pasted into the box of the independent contrasts, with branch lengths.</td></tr>
+      <tr><td><b>List of studies</b></td><td>Block 12, typed or pasted: one study per line with its name, its <i>r</i> and its <i>n</i>.</td></tr>
+      <tr><td><b>Project</b><br><code>.correlationpro.json</code></td><td>Block 13, with <span class="ui">Open a project</span>: the data and settings of a previous session.</td></tr>
+    </tbody>
+  </table>
+
+  <h3>A.2 · What it writes</h3>
+  <table class="compacta">
+    <thead><tr><th style="width:1.7in">File</th><th>What comes out and from where</th></tr></thead>
+    <tbody>
+      <tr><td><b>The data</b> <code>.csv</code></td><td>Block 2, with <span class="ui">Download CSV</span>: the table as it stands, with the transformed columns.</td></tr>
+      <tr><td><b>The matrix</b> <code>.csv</code></td><td>Block 5: one line per pair with <i>r</i>, the uncorrected <i>p</i>, the corrected one and the <i>n</i>.</td></tr>
+      <tr><td><b>The table for publication</b></td><td>Block 5, copied with tabs; Block 13, copied with formatting for the word processor or downloaded as <code>.csv</code> and <code>.html</code>.</td></tr>
+      <tr><td><b>The figures</b></td><td>The figure studio: <code>.png</code>, <code>.svg</code>, vector <code>.pdf</code> and <code>.tiff</code>.</td></tr>
+      <tr><td><b>The methods and the references</b></td><td>Block 13, to the clipboard, ready to paste.</td></tr>
+      <tr><td><b>The report</b> <code>.html</code></td><td>Block 13: it opens for printing or saving as PDF, or it is downloaded.</td></tr>
+      <tr><td><b>The project</b> <code>.correlationpro.json</code></td><td>Block 13: the data, the kinds and roles, the missing values, the palette and the style of the numbers.</td></tr>
+    </tbody>
+  </table>
+  <div class="caja nota">
+    <div class="caja-t"><span class="ico">i</span>What the browser remembers</div>
+    <p>The preferences—the language, light or dark mode, the palette, the style of the numbers, the typeface of the figures, your own palette—are kept in the browser’s storage, on your computer. The data are not: they are lost when you close the tab, unless you save the project.</p>
+  </div>
+
+  <!-- ================================================================= B -->
+  <h2 id="ap-b"><span class="num">B</span>The reading rules, gathered</h2>
+  <p>The scales and cutoffs the app uses to put a word or a color next to a number, in one place, so you can cite and discuss them.</p>
+  <div class="caja importante">
+    <div class="caja-t"><span class="ico">!</span>Almost all of these cutoffs are customs, not laws</div>
+    <p>The .05 of significance, the .30 of a “medium” correlation, the .60 of the KMO or the 3 of the Bayes factor are reading conventions, not thresholds that come out of a theory. Use them to find your bearings and always say which one you used; what you know about the phenomenon outweighs any table.</p>
+  </div>
+
+  <h3>B.1 · The size of a correlation</h3>
+  <table class="compacta">
+    <thead><tr><th style="width:1.75in">Scale</th><th>Cutoffs in |<i>r</i>| and words</th></tr></thead>
+    <tbody>
+      <tr><td><b>Cohen (1988)</b></td><td>negligible &lt; .10 ≤ small &lt; .30 ≤ medium &lt; .50 ≤ large</td></tr>
+      <tr><td><b>Evans (1996)</b></td><td>very weak &lt; .20 ≤ weak &lt; .40 ≤ moderate &lt; .60 ≤ strong &lt; .80 ≤ very strong</td></tr>
+      <tr><td><b>Gignac and Szodorai (2016)</b></td><td>very small &lt; .10 ≤ small &lt; .20 ≤ typical &lt; .30 ≤ large</td></tr>
+    </tbody>
+  </table>
+
+  <h3>B.2 · Exploration and assumptions (Block 3)</h3>
+  <table class="compacta">
+    <thead><tr><th style="width:2.4in">Quantity</th><th>Cutoff and reading</th></tr></thead>
+    <tbody>
+      <tr><td>Shapiro–Wilk <i>p</i>-value</td><td>≥ .05 “looks normal”; lower, “not normal” (in red if &lt; .01)</td></tr>
+      <tr><td>Skewness <i>g</i><sub>1</sub> · kurtosis <i>g</i><sub>2</sub></td><td>|<i>g</i><sub>1</sub>| &gt; 1 or |<i>g</i><sub>2</sub>| &gt; 2 matter for the test of <i>r</i></td></tr>
+      <tr><td>With more than 300 values</td><td><i>p</i> &lt; .05 without large skewness or kurtosis: “departs little”</td></tr>
+      <tr><td>Curvature · fan</td><td>flag if the quadratic term or Breusch–Pagan give <i>p</i> &lt; .01</td></tr>
+      <tr><td>Influence of a point</td><td>flag if |Δ<i>r</i>| exceeds max(0.02, (1 − <i>r</i>²)/√(<i>n</i> − 1))</td></tr>
+      <tr><td>Few values</td><td>ten distinct values or fewer: τ-b instead of ρ</td></tr>
+      <tr><td><i>r</i> versus ρ</td><td>if they differ by 0.1 or more, ρ</td></tr>
+      <tr><td>Not monotonic</td><td>dCor &gt; |ρ| + 0.25</td></tr>
+      <tr><td>Groups</td><td>Simpson if in half the groups <i>r</i> has the opposite sign with |<i>r</i>| ≥ .3; group effect if the mean within-group <i>r</i> differs by 0.3 or more</td></tr>
+      <tr><td>Multivariate outlier</td><td>squared Mahalanobis distance above the 0.975 quantile of χ² with <i>p</i> degrees of freedom</td></tr>
+    </tbody>
+  </table>
+
+  <h3>B.3 · Inference (Blocks 4 and 12)</h3>
+  <table class="compacta">
+    <thead><tr><th style="width:2.4in">Quantity</th><th>Cutoff and reading</th></tr></thead>
+    <tbody>
+      <tr><td>Bayes factor BF<sub>10</sub></td><td>1–3 anecdotal · 3–10 moderate · 10–30 strong · 30–100 very strong · more than 100 extreme; the reciprocals, in favor of ρ = 0 (Jeffreys 1961; Lee and Wagenmakers 2013)</td></tr>
+      <tr><td>Heterogeneity <i>I</i>²</td><td>&lt; 25% low · &lt; 50% moderate · &lt; 75% substantial · more, high</td></tr>
+      <tr><td>Power</td><td>the desired one, 80, 90 or 95%</td></tr>
+    </tbody>
+  </table>
+
+  <h3>B.4 · Matrices and networks (Blocks 5 and 11)</h3>
+  <table class="compacta">
+    <thead><tr><th style="width:2.4in">Quantity</th><th>Cutoff and reading</th></tr></thead>
+    <tbody>
+      <tr><td>KMO and MSA (Kaiser and Rice 1974)</td><td>≥ .90 marvelous · .80 meritorious · .70 middling · .60 mediocre · .50 miserable · below, unacceptable</td></tr>
+      <tr><td>Condition number</td><td>more than 1,000: nearly collinear</td></tr>
+      <tr><td>Rows per variable in a network</td><td>fewer than three: the network is unstable</td></tr>
+      <tr><td>EBIC γ</td><td>0.5, sparse network (the default); 0, the BIC</td></tr>
+    </tbody>
+  </table>
+
+  <h3>B.5 · Nonlinear, categorical and agreement (Blocks 6, 8 and 9)</h3>
+  <table class="compacta">
+    <thead><tr><th style="width:2.4in">Quantity</th><th>Cutoff and reading</th></tr></thead>
+    <tbody>
+      <tr><td>dCor − |<i>r</i>|</td><td>more than 0.2: dependence that a straight line does not capture</td></tr>
+      <tr><td>Asymmetry of ξ</td><td>the two directions differ by more than 0.15</td></tr>
+      <tr><td>Adjusted residual of a cell</td><td>|·| &gt; 1.96 (and &gt; 2.58): more or fewer cases than expected</td></tr>
+      <tr><td>Expected frequencies</td><td>below 5: use the exact or Monte Carlo <i>p</i>-value</td></tr>
+      <tr><td>κ (Landis and Koch 1977)</td><td>&lt; 0 poor · up to .20 slight · .40 fair · .60 moderate · .80 substantial · more, almost perfect</td></tr>
+      <tr><td>ICC (Koo and Li 2016)</td><td>&lt; .50 poor · .75 moderate · .90 good · more, excellent</td></tr>
+    </tbody>
+  </table>
+
+  <h3>B.6 · Data with structure (Block 10)</h3>
+  <table class="compacta">
+    <thead><tr><th style="width:2.4in">Quantity</th><th>Cutoff and reading</th></tr></thead>
+    <tbody>
+      <tr><td>Cross-correlation</td><td>outside ±2/√<i>n</i>: a lag that stands out</td></tr>
+      <tr><td>Effective size (Dutilleul)</td><td>less than half the sites: autocorrelation weighs in</td></tr>
+      <tr><td>Simpson’s paradox</td><td>all the group <i>r</i> values with the sign opposite to that of pooling everything</td></tr>
+    </tbody>
+  </table>
+
+  <!-- ================================================================= C -->
+  <h2 id="ap-c"><span class="num">C</span>Glossary</h2>
+  <p>Each English term is followed by its Spanish equivalent, the one the app shows when its interface is in Spanish.</p>
+  <dl class="glosario">
+    <dt>Attenuation (<i>atenuación</i>)</dt><dd>The reduction of a correlation caused by the measurement error of its variables. It is corrected with their reliabilities (Section 12.3).</dd>
+    <dt>Autocorrelation (<i>autocorrelación</i>)</dt><dd>The resemblance of a variable to itself at nearby times or places. It reduces the independent information in the data.</dd>
+    <dt>BCa (<i>BCa</i>)</dt><dd>Bootstrap interval corrected for bias and acceleration (Efron 1987).</dd>
+    <dt>Bootstrap (<i>bootstrap</i>)</dt><dd>Resampling the cases with replacement and recomputing the statistic many times to learn its variation.</dd>
+    <dt>Centered log-ratio (<i>log-cociente centrado</i>)</dt><dd>The logarithm of each part of a composition divided by the geometric mean of all of them (Aitchison 1986).</dd>
+    <dt>Collider (<i>colisionador</i>)</dt><dd>A variable that is a consequence of two others. Controlling for it creates a correlation that does not exist.</dd>
+    <dt>Confidence · credible · prediction interval (<i>intervalo de confianza · creíble · de predicción</i>)</dt><dd>The range of values compatible with the data (frequentist), the one that contains a percentage of the posterior (Bayesian), and the place where the value of a new study would fall (meta-analysis).</dd>
+    <dt>Copula (<i>cópula</i>)</dt><dd>The shape of the dependence between two variables, separated from their marginal distributions.</dd>
+    <dt>Distance correlation (<i>correlación de distancias</i>)</dt><dd>A measure of dependence that is zero, in the population, only when the variables are independent.</dd>
+    <dt>Ecological fallacy (<i>falacia ecológica</i>)</dt><dd>Drawing conclusions about individuals from the correlation between groups (Robinson 1950).</dd>
+    <dt>Effective sample size (<i>tamaño de muestra efectivo</i>)</dt><dd>The number of independent cases that data with autocorrelation are worth.</dd>
+    <dt>Eigenvalue (<i>valor propio</i>)</dt><dd>The variance carried by each component of a matrix. Their sum is the number of variables.</dd>
+    <dt>Fixed effect · random effects (<i>efecto fijo · efectos aleatorios</i>)</dt><dd>In a meta-analysis, assuming that all studies estimate the same thing, or that each one estimates its own value around an average.</dd>
+    <dt>Graphical lasso (<i>lazo gráfico</i>)</dt><dd>An estimate of the partial correlations that sets the weak ones to zero (Friedman, Hastie and Tibshirani 2008).</dd>
+    <dt>Heteroscedasticity (<i>heterocedasticidad</i>)</dt><dd>A spread that changes along the line; in the scatterplot it looks like a fan.</dd>
+    <dt>ICC (<i>ICC</i>)</dt><dd>The intraclass correlation coefficient: the part of the variation due to the cases and not to the raters.</dd>
+    <dt>Lin’s concordance (<i>concordancia de Lin</i>)</dt><dd>A measure of agreement that penalizes both the lack of correlation and the shifts in location and scale.</dd>
+    <dt>LOWESS (<i>LOWESS</i>)</dt><dd>A smoother that fits weighted local lines, to see the shape of a scatterplot without assuming it (Cleveland 1979).</dd>
+    <dt>Masking (<i>enmascaramiento</i>)</dt><dd>When several outliers inflate the mean and the covariance and the classical distance stops seeing them.</dd>
+    <dt>Modularity (<i>modularidad</i>)</dt><dd>How much more the nodes connect within their communities than would be expected by chance.</dd>
+    <dt>Monotonic (<i>monótona</i>)</dt><dd>A relationship that always goes up or always goes down, even if it is not straight.</dd>
+    <dt>Multiple testing (<i>pruebas múltiples</i>)</dt><dd>Running many tests at once. Without correction, some come out significant by chance alone.</dd>
+    <dt>Outlier (<i>atípico</i>)</dt><dd>A case far away from the others. It may be an error or a real value; the robust distance finds it even when there are several (Section 3.4).</dd>
+    <dt><i>p</i>-value (<i>valor p</i>)</dt><dd>The probability of obtaining a result as extreme as the one observed if there were no relationship. It is not the probability that there is none.</dd>
+    <dt>Partial · semipartial correlation (<i>correlación parcial · semiparcial</i>)</dt><dd>The correlation that remains after removing the linear effect of other variables from both variables (partial) or from only one (semipartial).</dd>
+    <dt>Permutation (<i>permutación</i>)</dt><dd>Shuffling one variable against the other to learn the distribution of a statistic when there is no relationship.</dd>
+    <dt>Polychoric · tetrachoric · polyserial (<i>policórica · tetracórica · poliserial</i>)</dt><dd>The correlation of the latent continuous variables assumed to lie behind two ordinal variables, two binary ones, or an ordinal and a continuous one.</dd>
+    <dt>Positive definite (<i>definida positiva</i>)</dt><dd>A matrix whose eigenvalues are all greater than zero. A valid correlation matrix is one.</dd>
+    <dt>Prewhitening (<i>preblanqueo</i>)</dt><dd>Filtering two series with the autoregressive model of one of them before correlating them, to remove the memory that creates spurious correlations.</dd>
+    <dt>Pseudo-observations (<i>pseudo-observaciones</i>)</dt><dd>The ranks of each variable divided by <i>n</i> + 1: what is left of the data when the marginals are removed.</dd>
+    <dt>Range restriction (<i>rango restringido</i>)</dt><dd>Having observed only part of the span of a variable, which lowers the correlation.</dd>
+    <dt>Reliability (<i>fiabilidad</i>)</dt><dd>The part of the variation of a measure that is not error. It is estimated with an α, a test–retest or an ICC.</dd>
+    <dt>Simpson’s paradox (<i>paradoja de Simpson</i>)</dt><dd>A relationship that changes sign when different groups are pooled (Simpson 1951).</dd>
+    <dt>Suppression (<i>supresión</i>)</dt><dd>When controlling for a third variable makes a correlation grow or changes its sign.</dd>
+  </dl>
+
+  <!-- ================================================================= D -->
+  <h2 id="ap-d"><span class="num">D</span>When something goes wrong</h2>
+  <table class="compacta">
+    <thead><tr><th style="width:2.3in">What you see</th><th>What it usually is and what to do</th></tr></thead>
+    <tbody>
+      <tr><td>The columns come out stuck together in a single one, or the numbers as text</td><td>The separator or the decimal mark were not detected correctly. Choose them in <span class="ui">Reading options</span> in Block 2.</td></tr>
+      <tr><td>A value very far from the others, such as −999</td><td>It is a missing-value code. Add it in <span class="ui">Other missing codes</span> and read the file again.</td></tr>
+      <tr><td>A variable does not appear in a block</td><td>Its kind or its role are not the ones that block uses. Check them in Block 2: almost all blocks take only the columns with the variable role.</td></tr>
+      <tr><td>“Too few complete pairs.”</td><td>The two variables have missing values in different rows. Look at the missing-value pattern in Block 2.</td></tr>
+      <tr><td>The matrix is not positive definite</td><td>Pairwise missing values, a robust coefficient or more variables than rows. Section 5.5.</td></tr>
+      <tr><td>The distance correlation or τ* are not in the table</td><td>They have size limits: distance correlation, 3,000 pairs; τ*, 80.</td></tr>
+      <tr><td>A computation takes a long time</td><td>Many rows, many resamples or a costly measure. Lower the resamples while you explore and raise them for the final result.</td></tr>
+      <tr><td>MIC says that only a 2 × 2 grid fits</td><td>There are too few data for MIC. Use distance correlation or ξ.</td></tr>
+      <tr><td>The network changes a lot when one variable is removed</td><td>There are few rows per variable. Interpret only the strong edges.</td></tr>
+      <tr><td>The report does not open</td><td>The browser blocked the new tab. Use <span class="ui">Download the report (HTML)</span> or allow pop-up windows for the app.</td></tr>
+      <tr><td>The table does not paste with formatting</td><td>The browser did not grant clipboard permission. Select the table with the mouse and copy it, or download it as HTML.</td></tr>
+      <tr><td>“it is not a project of this app”</td><td>The file is not a <code>.correlationpro.json</code>, or it was edited by hand.</td></tr>
+      <tr><td>I closed the tab and lost the analysis</td><td>The data are not saved automatically. Save the project in Block 13 before closing.</td></tr>
+      <tr><td>The text looks different on another computer</td><td>The app uses the system fonts, which change from one computer to another. Figures exported as PDF or PNG no longer change.</td></tr>
+    </tbody>
+  </table>
+
+  <!-- ================================================================= E -->
+  <h2 id="ap-e"><span class="num">E</span>The tool: license and how to cite it</h2>
+  <h3>E.1 · What it is and what it is not</h3>
+  <p>CorrelationPro is a program written from scratch: the computing engines—the coefficients, the tests, the matrices, the copulas, the networks, the meta-analysis—, the spreadsheet reader, the figures and the palettes are in its own code, which can be read. It uses no third-party computing libraries and downloads nothing when it opens. Its results were compared with those of reference programs—19,334 comparisons with no disagreement, Section I.9—, which served only for validation and are not part of the program.</p>
+  <p>Nor does it bring third-party fonts or icons: the typefaces are those of the computer, and the icons of the navigator and of the figure studio were drawn for the author’s suite. The only things that are not the author’s are the nine example datasets, which are in the public domain, and each one says why (Section I.7); the meta-analysis example is simulated and says so when it loads. The file <code>PROCEDENCIA.md</code>, in the program folder, says where each part comes from.</p>
+  <h3>E.2 · License</h3>
+  <p>It is distributed under the GNU General Public License, version 3 or later (GPL-3.0-or-later). The full text is in the <code>LICENSE</code> file, in the program folder.</p>
+  <div class="caja nota">
+    <div class="caja-t"><span class="ico">i</span>Licensing is not giving up authorship</div>
+    <p>Choosing a free license is a decision about what whoever receives the program may do. Authorship is neither transferred nor waived. You may use the program, study it, modify it and redistribute it; what the license asks in return is that, if you distribute a modified version, you do so with the same freedoms.</p>
+  </div>
+  <h3>E.3 · How to cite it</h3>
+  <p>The <span class="ui">How to cite</span> section of the home page gives the citation ready to copy, in social-sciences format and as a bibliography entry. The short form, for the program and for this manual:</p>
+  <div class="caja dato">
+    <div class="dato-cifra">∑</div>
+    <div class="dato-txt"><div class="caja-t">Suggested citation</div>Barrera-Guzmán, L. Á. (2026). <i>CorrelationPro: A browser-based platform for correlation analysis of every kind, with its theory</i> (Version 1.0.0) [Computer software]. Zenodo. https://doi.org/10.5281/zenodo.23867439<br><span style="display:block;margin-top:0.06in">Barrera-Guzmán, L. Á. (2026). <i>CorrelationPro: User’s Manual</i> (1st English ed.). Distributed with CorrelationPro, version 1.0.0. https://doi.org/10.5281/zenodo.23867439</span></div>
+  </div>
+  <p class="small">Concept DOI, which always leads to the most recent version: 10.5281/zenodo.23867439; each version also has its own on Zenodo (1.0.0: 10.5281/zenodo.23867440). Code: https://github.com/luisangelbg/CorrelationPro · online app: https://luisangelbg.github.io/CorrelationPro/.</p>
+  <p>In the methods section, also cite the works behind the methods you used: the coefficient, the test, the correction, the model. Block 13 gathers them on its own, and only those your analysis actually used, which is exactly the list that has to go there.</p>
+
+  <!-- ================================================================= F -->
+  <h2 id="ap-f"><span class="num">F</span>References</h2>
+  <p>The 229 works of the app’s catalog, grouped by topic and, within each one, in alphabetical order: those that define each measure, its tests and its intervals, those on the assumptions and the figures, and those of the example datasets. The same ones appear in the <span class="ui">References</span> section of the home page.</p>
+  <!-- REFERENCIAS -->
+  <h3>F.1 · History</h3>
+  <ul class="refs">
+    <li>Galton, F. (1886). Regression towards mediocrity in hereditary stature. <i>Journal of the Anthropological Institute of Great Britain and Ireland, 15</i>, 246–263.</li>
+    <li>Galton, F. (1888). Co-relations and their measurement, chiefly from anthropometric data. <i>Proceedings of the Royal Society of London, 45</i>, 135–145.</li>
+    <li>Rodgers, J. L., & Nicewander, W. A. (1988). Thirteen ways to look at the correlation coefficient. <i>The American Statistician, 42</i>(1), 59–66.</li>
+  </ul>
+  <h3>F.2 · Assumptions and exploration</h3>
+  <ul class="refs">
+    <li>Anderson, T. W., & Darling, D. A. (1952). Asymptotic theory of certain “goodness of fit” criteria based on stochastic processes. <i>The Annals of Mathematical Statistics, 23</i>(2), 193–212.</li>
+    <li>Breusch, T. S., & Pagan, A. R. (1979). A simple test for heteroscedasticity and random coefficient variation. <i>Econometrica, 47</i>(5), 1287–1294.</li>
+    <li>Cleveland, W. S. (1979). Robust locally weighted regression and smoothing scatterplots. <i>Journal of the American Statistical Association, 74</i>(368), 829–836.</li>
+    <li>Cleveland, W. S. (1981). LOWESS: A program for smoothing scatterplots by robust locally weighted regression. <i>The American Statistician, 35</i>(1), 54.</li>
+    <li>D’Agostino, R. B., & Stephens, M. A. (Eds.). (1986). <i>Goodness-of-fit techniques</i>. Marcel Dekker.</li>
+    <li>Gnanadesikan, R., & Kettenring, J. R. (1972). Robust estimates, residuals, and outlier detection with multiresponse data. <i>Biometrics, 28</i>(1), 81–124.</li>
+    <li>Henze, N., & Zirkler, B. (1990). A class of invariant consistent tests for multivariate normality. <i>Communications in Statistics – Theory and Methods, 19</i>(10), 3595–3617.</li>
+    <li>Koenker, R. (1981). A note on studentizing a test for heteroscedasticity. <i>Journal of Econometrics, 17</i>(1), 107–112.</li>
+    <li>Mardia, K. V. (1970). Measures of multivariate skewness and kurtosis with applications. <i>Biometrika, 57</i>(3), 519–530.</li>
+    <li>Royston, P. (1992). Approximating the Shapiro–Wilk W-test for non-normality. <i>Statistics and Computing, 2</i>(3), 117–119.</li>
+    <li>Royston, P. (1995). Remark AS R94: A remark on algorithm AS 181: The W-test for normality. <i>Journal of the Royal Statistical Society, Series C (Applied Statistics), 44</i>(4), 547–551.</li>
+    <li>Shapiro, S. S., & Wilk, M. B. (1965). An analysis of variance test for normality (complete samples). <i>Biometrika, 52</i>(3–4), 591–611.</li>
+  </ul>
+  <h3>F.3 · Classical</h3>
+  <ul class="refs">
+    <li>Best, D. J., & Roberts, D. E. (1975). Algorithm AS 89: The upper tail probabilities of Spearman's rho. <i>Applied Statistics, 24</i>(3), 377–379.</li>
+    <li>Blomqvist, N. (1950). On a measure of dependence between two random variables. <i>Annals of Mathematical Statistics, 21</i>(4), 593–600.</li>
+    <li>Bonett, D. G., & Wright, T. A. (2000). Sample size requirements for estimating Pearson, Kendall and Spearman correlations. <i>Psychometrika, 65</i>(1), 23–28.</li>
+    <li>Boudt, K., Cornelissen, J., & Croux, C. (2012). The Gaussian rank correlation estimator: Robustness properties. <i>Statistics and Computing, 22</i>(2), 471–483.</li>
+    <li>Fieller, E. C., Hartley, H. O., & Pearson, E. S. (1957). Tests for rank correlation coefficients. I. <i>Biometrika, 44</i>(3/4), 470–481.</li>
+    <li>Fisher, R. A. (1915). Frequency distribution of the values of the correlation coefficient in samples from an indefinitely large population. <i>Biometrika, 10</i>(4), 507–521.</li>
+    <li>Kendall, M. G. (1938). A new measure of rank correlation. <i>Biometrika, 30</i>(1/2), 81–93.</li>
+    <li>Kendall, M. G. (1945). The treatment of ties in ranking problems. <i>Biometrika, 33</i>(3), 239–251.</li>
+    <li>Kendall, M. G. (1970). <i>Rank correlation methods</i> (4th ed.). Griffin.</li>
+    <li>Knight, W. R. (1966). A computer method for calculating Kendall's tau with ungrouped data. <i>Journal of the American Statistical Association, 61</i>(314), 436–439.</li>
+    <li>Olkin, I., & Pratt, J. W. (1958). Unbiased estimation of certain correlation coefficients. <i>Annals of Mathematical Statistics, 29</i>(1), 201–211.</li>
+    <li>Pearson, K. (1896). Mathematical contributions to the theory of evolution. III. Regression, heredity, and panmixia. <i>Philosophical Transactions of the Royal Society A, 187</i>, 253–318.</li>
+    <li>Schechtman, E., & Yitzhaki, S. (1987). A measure of association based on Gini's mean difference. <i>Communications in Statistics — Theory and Methods, 16</i>(1), 207–231.</li>
+    <li>Somers, R. H. (1962). A new asymmetric measure of association for ordinal variables. <i>American Sociological Review, 27</i>(6), 799–811.</li>
+    <li>Spearman, C. (1904). The proof and measurement of association between two things. <i>American Journal of Psychology, 15</i>(1), 72–101.</li>
+    <li>Stuart, A. (1953). The estimation and comparison of strengths of association in contingency tables. <i>Biometrika, 40</i>(1/2), 105–110.</li>
+  </ul>
+  <h3>F.4 · Robust</h3>
+  <ul class="refs">
+    <li>Maronna, R. A., & Zamar, R. H. (2002). Robust estimates of location and dispersion for high-dimensional datasets. <i>Technometrics, 44</i>(4), 307–317.</li>
+    <li>Mosteller, F., & Tukey, J. W. (1977). <i>Data analysis and regression: A second course in statistics</i>. Addison-Wesley.</li>
+    <li>Rousseeuw, P. J. (1984). Least median of squares regression. <i>Journal of the American Statistical Association, 79</i>(388), 871–880.</li>
+    <li>Schwarzkopf, D. S., De Haas, B., & Rees, G. (2012). Better ways to improve standards in brain–behavior correlation analysis. <i>Frontiers in Human Neuroscience, 6</i>, 200.</li>
+    <li>Shevlyakov, G. L., & Smirnov, P. O. (2011). Robust estimation of the correlation coefficient: An attempt of survey. <i>Austrian Journal of Statistics, 40</i>(1–2), 147–156.</li>
+    <li>Wilcox, R. R. (1994). The percentage bend correlation coefficient. <i>Psychometrika, 59</i>(4), 601–616.</li>
+    <li>Wilcox, R. R. (2004). Inferences based on a skipped correlation coefficient. <i>Journal of Applied Statistics, 31</i>(2), 131–143.</li>
+    <li>Wilcox, R. R. (2012). <i>Introduction to robust estimation and hypothesis testing</i> (3rd ed.). Academic Press.</li>
+  </ul>
+  <h3>F.5 · Nonlinear</h3>
+  <ul class="refs">
+    <li>Bergsma, W., & Dassios, A. (2014). A consistent test of independence based on a sign covariance related to Kendall's tau. <i>Bernoulli, 20</i>(2), 1006–1028.</li>
+    <li>Blum, J. R., Kiefer, J., & Rosenblatt, M. (1961). Distribution free tests of independence based on the sample distribution function. <i>Annals of Mathematical Statistics, 32</i>(2), 485–498.</li>
+    <li>Breiman, L., & Friedman, J. H. (1985). Estimating optimal transformations for multiple regression and correlation. <i>Journal of the American Statistical Association, 80</i>(391), 580–598.</li>
+    <li>Chatterjee, S. (2021). A new coefficient of correlation. <i>Journal of the American Statistical Association, 116</i>(536), 2009–2022.</li>
+    <li>Gebelein, H. (1941). Das statistische Problem der Korrelation als Variations- und Eigenwertproblem und sein Zusammenhang mit der Ausgleichsrechnung. <i>Zeitschrift für Angewandte Mathematik und Mechanik, 21</i>(6), 364–379.</li>
+    <li>Genest, C., Ghoudi, K., & Rivest, L.-P. (1995). A semiparametric estimation procedure of dependence parameters in multivariate families of distributions. <i>Biometrika, 82</i>(3), 543–552.</li>
+    <li>Gretton, A., Bousquet, O., Smola, A., & Schölkopf, B. (2005). Measuring statistical dependence with Hilbert–Schmidt norms. In <i>Algorithmic Learning Theory</i> (pp. 63–77).</li>
+    <li>Gretton, A., Fukumizu, K., Teo, C. H., Song, L., Schölkopf, B., & Smola, A. J. (2008). A kernel statistical test of independence. In <i>Advances in Neural Information Processing Systems 20</i> (pp. 585–592).</li>
+    <li>Heller, R., Heller, Y., & Gorfine, M. (2013). A consistent multivariate test of association based on ranks of distances. <i>Biometrika, 100</i>(2), 503–510.</li>
+    <li>Hoeffding, W. (1948). A non-parametric test of independence. <i>Annals of Mathematical Statistics, 19</i>(4), 546–557.</li>
+    <li>Kraskov, A., Stögbauer, H., & Grassberger, P. (2004). Estimating mutual information. <i>Physical Review E, 69</i>(6), 066138.</li>
+    <li>Linfoot, E. H. (1957). An informational measure of correlation. <i>Information and Control, 1</i>(1), 85–89.</li>
+    <li>Lopez-Paz, D., Hennig, P., & Schölkopf, B. (2013). The randomized dependence coefficient. <i>Advances in Neural Information Processing Systems, 26</i>.</li>
+    <li>Pearson, K. (1905). <i>On the general theory of skew correlation and non-linear regression</i> (Mathematical contributions to the theory of evolution, XIV). Drapers' Company Research Memoirs, Biometric Series II. Dulau.</li>
+    <li>Pfister, N., Bühlmann, P., Schölkopf, B., & Peters, J. (2018). Kernel-based tests for joint independence. <i>Journal of the Royal Statistical Society, Series B, 80</i>(1), 5–31.</li>
+    <li>Rényi, A. (1959). On measures of dependence. <i>Acta Mathematica Academiae Scientiarum Hungarica, 10</i>(3–4), 441–451.</li>
+    <li>Reshef, D. N., Reshef, Y. A., Finucane, H. K., Grossman, S. R., McVean, G., Turnbaugh, P. J., Lander, E. S., Mitzenmacher, M., & Sabeti, P. C. (2011). Detecting novel associations in large data sets. <i>Science, 334</i>(6062), 1518–1524.</li>
+    <li>Reshef, Y. A., Reshef, D. N., Finucane, H. K., Sabeti, P. C., & Mitzenmacher, M. (2016). Measuring dependence powerfully and equitably. <i>Journal of Machine Learning Research, 17</i>(212), 1–63.</li>
+    <li>Simon, N., & Tibshirani, R. (2014). Comment on “Detecting novel associations in large data sets” by Reshef et al., Science Dec 16, 2011. arXiv:1401.7645.</li>
+    <li>Székely, G. J., & Rizzo, M. L. (2013). The distance correlation t-test of independence in high dimension. <i>Journal of Multivariate Analysis, 117</i>, 193–213.</li>
+    <li>Székely, G. J., & Rizzo, M. L. (2014). Partial distance correlation with methods for dissimilarities. <i>The Annals of Statistics, 42</i>(6), 2382–2412.</li>
+    <li>Székely, G. J., Rizzo, M. L., & Bakirov, N. K. (2007). Measuring and testing dependence by correlation of distances. <i>The Annals of Statistics, 35</i>(6), 2769–2794.</li>
+    <li>Weihs, L., Drton, M., & Leung, D. (2016). Efficient computation of the Bergsma–Dassios sign covariance. <i>Computational Statistics, 31</i>(1), 315–328.</li>
+  </ul>
+  <h3>F.6 · Partial and sets</h3>
+  <ul class="refs">
+    <li>Bartlett, M. S. (1941). The statistical significance of canonical correlations. <i>Biometrika, 32</i>(1), 29–37.</li>
+    <li>Dolédec, S., & Chessel, D. (1994). Co-inertia analysis: An alternative method for studying species–environment relationships. <i>Freshwater Biology, 31</i>(3), 277–294.</li>
+    <li>Escoufier, Y. (1973). Le traitement des variables vectorielles. <i>Biometrics, 29</i>(4), 751–760.</li>
+    <li>Fisher, R. A. (1924). The distribution of the partial correlation coefficient. <i>Metron, 3</i>, 329–332.</li>
+    <li>Gower, J. C. (1975). Generalized Procrustes analysis. <i>Psychometrika, 40</i>(1), 33–51.</li>
+    <li>Guillot, G., & Rousset, F. (2013). Dismantling the Mantel tests. <i>Methods in Ecology and Evolution, 4</i>(4), 336–344.</li>
+    <li>Hotelling, H. (1936). Relations between two sets of variates. <i>Biometrika, 28</i>(3/4), 321–377.</li>
+    <li>Kendall, M. G. (1942). Partial rank correlation. <i>Biometrika, 32</i>(3/4), 277–283.</li>
+    <li>Legendre, P., Fortin, M.-J., & Borcard, D. (2015). Should the Mantel test be used in spatial analysis? <i>Methods in Ecology and Evolution, 6</i>(11), 1239–1247.</li>
+    <li>Mantel, N. (1967). The detection of disease clustering and a generalized regression approach. <i>Cancer Research, 27</i>(2), 209–220.</li>
+    <li>Peres-Neto, P. R., & Jackson, D. A. (2001). How well do multivariate data sets match? The advantages of a Procrustean superimposition approach over the Mantel test. <i>Oecologia, 129</i>(2), 169–178.</li>
+    <li>Robert, P., & Escoufier, Y. (1976). A unifying tool for linear multivariate statistical methods: The RV-coefficient. <i>Applied Statistics, 25</i>(3), 257–265.</li>
+    <li>Smilde, A. K., Kiers, H. A. L., Bijlsma, S., Rubingh, C. M., & van Erk, M. J. (2009). Matrix correlations for high-dimensional data: The modified RV-coefficient. <i>Bioinformatics, 25</i>(3), 401–405.</li>
+    <li>Smouse, P. E., Long, J. C., & Sokal, R. R. (1986). Multiple regression and correlation extensions of the Mantel test of matrix correspondence. <i>Systematic Zoology, 35</i>(4), 627–632.</li>
+    <li>Stewart, D., & Love, W. (1968). A general canonical correlation index. <i>Psychological Bulletin, 70</i>(3), 160–163.</li>
+    <li>Yule, G. U. (1897). On the theory of correlation. <i>Journal of the Royal Statistical Society, 60</i>(4), 812–854.</li>
+  </ul>
+  <h3>F.7 · Categorical</h3>
+  <ul class="refs">
+    <li>Bergsma, W. (2013). A bias-correction for Cramér's V and Tschuprow's T. <i>Journal of the Korean Statistical Society, 42</i>(3), 323–328.</li>
+    <li>Cornfield, J. (1951). A method of estimating comparative rates from clinical data. <i>Journal of the National Cancer Institute, 11</i>(6), 1269–1275.</li>
+    <li>Cramér, H. (1946). <i>Mathematical methods of statistics</i>. Princeton University Press.</li>
+    <li>Glass, G. V. (1965). A ranking variable analogue of biserial correlation: Implications for short-cut item analysis. <i>Journal of Educational Measurement, 2</i>(1), 91–95.</li>
+    <li>Goodman, L. A., & Kruskal, W. H. (1954). Measures of association for cross classifications. <i>Journal of the American Statistical Association, 49</i>(268), 732–764.</li>
+    <li>Kerby, D. S. (2014). The simple difference formula: An approach to teaching nonparametric correlation. <i>Comprehensive Psychology, 3</i>, 11.IT.3.1.</li>
+    <li>Olsson, U. (1979). Maximum likelihood estimation of the polychoric correlation coefficient. <i>Psychometrika, 44</i>(4), 443–460.</li>
+    <li>Olsson, U., Drasgow, F., & Dorans, N. J. (1982). The polyserial correlation coefficient. <i>Psychometrika, 47</i>(3), 337–347.</li>
+    <li>Pearson, K. (1900). Mathematical contributions to the theory of evolution. VII. On the correlation of characters not quantitatively measurable. <i>Philosophical Transactions of the Royal Society A, 195</i>, 1–47.</li>
+    <li>Pearson, K. (1904). <i>On the theory of contingency and its relation to association and normal correlation</i> (Mathematical contributions to the theory of evolution, XIII). Drapers' Company Research Memoirs, Biometric Series I. Dulau.</li>
+    <li>Pearson, K. (1909). On a new method of determining correlation between a measured character A, and a character B, of which only the percentage of cases wherein B exceeds (or falls short of) a given intensity is recorded for each grade of A. <i>Biometrika, 7</i>(1/2), 96–105.</li>
+    <li>Theil, H. (1970). On the estimation of relationships involving qualitative variables. <i>American Journal of Sociology, 76</i>(1), 103–154.</li>
+    <li>Tschuprow, A. A. (1939). <i>Principles of the mathematical theory of correlation</i>. William Hodge.</li>
+    <li>Yule, G. U. (1900). On the association of attributes in statistics. <i>Philosophical Transactions of the Royal Society A, 194</i>, 257–319.</li>
+    <li>Yule, G. U. (1912). On the methods of measuring association between two attributes. <i>Journal of the Royal Statistical Society, 75</i>(6), 579–652.</li>
+  </ul>
+  <h3>F.8 · Agreement</h3>
+  <ul class="refs">
+    <li>Bland, J. M., & Altman, D. G. (1986). Statistical methods for assessing agreement between two methods of clinical measurement. <i>The Lancet, 327</i>(8476), 307–310.</li>
+    <li>Bland, J. M., & Altman, D. G. (1999). Measuring agreement in method comparison studies. <i>Statistical Methods in Medical Research, 8</i>(2), 135–160.</li>
+    <li>Cohen, J. (1960). A coefficient of agreement for nominal scales. <i>Educational and Psychological Measurement, 20</i>(1), 37–46.</li>
+    <li>Cohen, J. (1968). Weighted kappa: Nominal scale agreement with provision for scaled disagreement or partial credit. <i>Psychological Bulletin, 70</i>(4), 213–220.</li>
+    <li>Conger, A. J. (1980). Integration and generalization of kappas for multiple raters. <i>Psychological Bulletin, 88</i>(2), 322–328.</li>
+    <li>Feinstein, A. R., & Cicchetti, D. V. (1990). High agreement but low kappa: I. The problems of two paradoxes. <i>Journal of Clinical Epidemiology, 43</i>(6), 543–549.</li>
+    <li>Fleiss, J. L. (1971). Measuring nominal scale agreement among many raters. <i>Psychological Bulletin, 76</i>(5), 378–382.</li>
+    <li>Fleiss, J. L., Cohen, J., & Everitt, B. S. (1969). Large sample standard errors of kappa and weighted kappa. <i>Psychological Bulletin, 72</i>(5), 323–327.</li>
+    <li>Gwet, K. L. (2008). Computing inter-rater reliability and its variance in the presence of high agreement. <i>British Journal of Mathematical and Statistical Psychology, 61</i>(1), 29–48.</li>
+    <li>Hayes, A. F., & Krippendorff, K. (2007). Answering the call for a standard reliability measure for coding data. <i>Communication Methods and Measures, 1</i>(1), 77–89.</li>
+    <li>Kendall, M. G., & Babington Smith, B. (1939). The problem of m rankings. <i>Annals of Mathematical Statistics, 10</i>(3), 275–287.</li>
+    <li>Koo, T. K., & Li, M. Y. (2016). A guideline of selecting and reporting intraclass correlation coefficients for reliability research. <i>Journal of Chiropractic Medicine, 15</i>(2), 155–163.</li>
+    <li>Krippendorff, K. (1970). Estimating the reliability, systematic error and random error of interval data. <i>Educational and Psychological Measurement, 30</i>(1), 61–70.</li>
+    <li>Landis, J. R., & Koch, G. G. (1977). The measurement of observer agreement for categorical data. <i>Biometrics, 33</i>(1), 159–174.</li>
+    <li>Lin, L. I.-K. (1989). A concordance correlation coefficient to evaluate reproducibility. <i>Biometrics, 45</i>(1), 255–268.</li>
+    <li>McGraw, K. O., & Wong, S. P. (1996). Forming inferences about some intraclass correlation coefficients. <i>Psychological Methods, 1</i>(1), 30–46.</li>
+    <li>Shrout, P. E., & Fleiss, J. L. (1979). Intraclass correlations: Uses in assessing rater reliability. <i>Psychological Bulletin, 86</i>(2), 420–428.</li>
+  </ul>
+  <h3>F.9 · Structure</h3>
+  <ul class="refs">
+    <li>Bakdash, J. Z., & Marusich, L. R. (2017). Repeated measures correlation. <i>Frontiers in Psychology, 8</i>, 456.</li>
+    <li>Bartlett, M. S. (1946). On the theoretical specification and sampling properties of autocorrelated time-series. <i>Supplement to the Journal of the Royal Statistical Society, 8</i>(1), 27–41.</li>
+    <li>Bland, J. M., & Altman, D. G. (1995). Calculating correlation coefficients with repeated observations: Part 1 — Correlation within subjects. <i>BMJ, 310</i>(6977), 446.</li>
+    <li>Box, G. E. P., & Jenkins, G. M. (1976). <i>Time series analysis: Forecasting and control</i> (rev. ed.). Holden-Day.</li>
+    <li>Clifford, P., Richardson, S., & Hémon, D. (1989). Assessing the significance of the correlation between two spatial processes. <i>Biometrics, 45</i>(1), 123–134.</li>
+    <li>Dutilleul, P. (1993). Modifying the t test for assessing the correlation between two spatial processes. <i>Biometrics, 49</i>(1), 305–314.</li>
+    <li>Felsenstein, J. (1985). Phylogenies and the comparative method. <i>The American Naturalist, 125</i>(1), 1–15.</li>
+    <li>Garland, T., Jr., Harvey, P. H., & Ives, A. R. (1992). Procedures for the analysis of comparative data using phylogenetically independent contrasts. <i>Systematic Biology, 41</i>(1), 18–32.</li>
+    <li>Kievit, R. A., Frankenhuis, W. E., Waldorp, L. J., & Borsboom, D. (2013). Simpson's paradox in psychological science: A practical guide. <i>Frontiers in Psychology, 4</i>, 513.</li>
+    <li>Lee, S.-I. (2001). Developing a bivariate spatial association measure: An integration of Pearson's r and Moran's I. <i>Journal of Geographical Systems, 3</i>(4), 369–385.</li>
+    <li>Mann, H. B. (1945). Nonparametric tests against trend. <i>Econometrica, 13</i>(3), 245–259.</li>
+    <li>Moran, P. A. P. (1950). Notes on continuous stochastic phenomena. <i>Biometrika, 37</i>(1/2), 17–23.</li>
+    <li>Pyper, B. J., & Peterman, R. M. (1998). Comparison of methods to account for autocorrelation in correlation analyses of fish data. <i>Canadian Journal of Fisheries and Aquatic Sciences, 55</i>(9), 2127–2140.</li>
+    <li>Robinson, W. S. (1950). Ecological correlations and the behavior of individuals. <i>American Sociological Review, 15</i>(3), 351–357.</li>
+    <li>Sen, P. K. (1968). Estimates of the regression coefficient based on Kendall's tau. <i>Journal of the American Statistical Association, 63</i>(324), 1379–1389.</li>
+    <li>Simpson, E. H. (1951). The interpretation of interaction in contingency tables. <i>Journal of the Royal Statistical Society B, 13</i>(2), 238–241.</li>
+    <li>Snijders, T. A. B., & Bosker, R. J. (2012). <i>Multilevel analysis: An introduction to basic and advanced multilevel modeling</i> (2nd ed.). Sage.</li>
+    <li>Sokal, R. R., & Oden, N. L. (1978). Spatial autocorrelation in biology: 1. Methodology. <i>Biological Journal of the Linnean Society, 10</i>(2), 199–228.</li>
+    <li>Yule, G. U. (1926). Why do we sometimes get nonsense-correlations between time-series? <i>Journal of the Royal Statistical Society, 89</i>(1), 1–63.</li>
+  </ul>
+  <h3>F.10 · Special</h3>
+  <ul class="refs">
+    <li>Aitchison, J. (1986). <i>The statistical analysis of compositional data</i>. Chapman and Hall.</li>
+    <li>Erb, I., & Notredame, C. (2016). How should we measure proportionality on relative gene expression data? <i>Theory in Biosciences, 135</i>(1–2), 21–36.</li>
+    <li>Fisher, N. I., & Lee, A. J. (1983). A correlation coefficient for circular data. <i>Biometrika, 70</i>(2), 327–332.</li>
+    <li>Genest, C., & Favre, A.-C. (2007). Everything you always wanted to know about copula modeling but were afraid to ask. <i>Journal of Hydrologic Engineering, 12</i>(4), 347–368.</li>
+    <li>Jammalamadaka, S. R., & Sarma, Y. R. (1988). A correlation coefficient for angular variables. In K. Matusita (Ed.), <i>Statistical theory and data analysis II</i> (pp. 349–364). North-Holland.</li>
+    <li>Joe, H. (1997). <i>Multivariate models and dependence concepts</i>. Chapman and Hall.</li>
+    <li>Johnson, R. A., & Wehrly, T. (1977). Measures and models for angular correlation and angular–linear correlation. <i>Journal of the Royal Statistical Society B, 39</i>(2), 222–229.</li>
+    <li>Lovell, D., Pawlowsky-Glahn, V., Egozcue, J. J., Marguerat, S., & Bähler, J. (2015). Proportionality: A valid alternative to correlation for relative data. <i>PLoS Computational Biology, 11</i>(3), e1004075.</li>
+    <li>Mardia, K. V. (1976). Linear-circular correlation coefficients and rhythmometry. <i>Biometrika, 63</i>(2), 403–405.</li>
+    <li>Pearson, K. (1897). On a form of spurious correlation which may arise when indices are used in the measurement of organs. <i>Proceedings of the Royal Society of London, 60</i>, 489–498.</li>
+    <li>Sklar, A. (1959). Fonctions de répartition à n dimensions et leurs marges. <i>Publications de l'Institut de Statistique de l'Université de Paris, 8</i>, 229–231.</li>
+  </ul>
+  <h3>F.11 · Inference</h3>
+  <ul class="refs">
+    <li>Bartlett, M. S. (1950). Tests of significance in factor analysis. <i>British Journal of Psychology, Statistical Section, 3</i>(2), 77–85.</li>
+    <li>Benjamini, Y., & Hochberg, Y. (1995). Controlling the false discovery rate: A practical and powerful approach to multiple testing. <i>Journal of the Royal Statistical Society B, 57</i>(1), 289–300.</li>
+    <li>Benjamini, Y., & Yekutieli, D. (2001). The control of the false discovery rate in multiple testing under dependency. <i>The Annals of Statistics, 29</i>(4), 1165–1188.</li>
+    <li>Bishara, A. J., & Hittner, J. B. (2017). Confidence intervals for correlations when data are not normal. <i>Behavior Research Methods, 49</i>(1), 294–309.</li>
+    <li>Blondel, V. D., Guillaume, J.-L., Lambiotte, R., & Lefebvre, E. (2008). Fast unfolding of communities in large networks. <i>Journal of Statistical Mechanics: Theory and Experiment, 2008</i>(10), P10008.</li>
+    <li>Box, G. E. P. (1949). A general distribution theory for a class of likelihood criteria. <i>Biometrika, 36</i>(3/4), 317–346.</li>
+    <li>Brandes, U. (2001). A faster algorithm for betweenness centrality. <i>Journal of Mathematical Sociology, 25</i>(2), 163–177.</li>
+    <li>Cohen, J. (1988). <i>Statistical power analysis for the behavioral sciences</i> (2nd ed.). Lawrence Erlbaum.</li>
+    <li>Cumming, G. (2008). Replication and p intervals: p values predict the future only vaguely, but confidence intervals do much better. <i>Perspectives on Psychological Science, 3</i>(4), 286–300.</li>
+    <li>Davison, A. C., & Hinkley, D. V. (1997). <i>Bootstrap methods and their application</i>. Cambridge University Press.</li>
+    <li>DerSimonian, R., & Laird, N. (1986). Meta-analysis in clinical trials. <i>Controlled Clinical Trials, 7</i>(3), 177–188.</li>
+    <li>DiCiccio, T. J., & Efron, B. (1996). Bootstrap confidence intervals. <i>Statistical Science, 11</i>(3), 189–228.</li>
+    <li>Dickey, J. M., & Lientz, B. P. (1970). The weighted likelihood ratio, sharp hypotheses about chances, the order of a Markov chain. <i>The Annals of Mathematical Statistics, 41</i>(1), 214–226.</li>
+    <li>Dunn, O. J., & Clark, V. (1969). Correlation coefficients measured on the same individuals. <i>Journal of the American Statistical Association, 64</i>(325), 366–377.</li>
+    <li>Efron, B. (1979). Bootstrap methods: Another look at the jackknife. <i>The Annals of Statistics, 7</i>(1), 1–26.</li>
+    <li>Efron, B. (1987). Better bootstrap confidence intervals. <i>Journal of the American Statistical Association, 82</i>(397), 171–185.</li>
+    <li>Egger, M., Davey Smith, G., Schneider, M., & Minder, C. (1997). Bias in meta-analysis detected by a simple, graphical test. <i>BMJ, 315</i>(7109), 629–634.</li>
+    <li>Epskamp, S., & Fried, E. I. (2018). A tutorial on regularized partial correlation networks. <i>Psychological Methods, 23</i>(4), 617–634.</li>
+    <li>Evans, J. D. (1996). <i>Straightforward statistics for the behavioral sciences</i>. Brooks/Cole.</li>
+    <li>Fisher, R. A. (1921). On the “probable error” of a coefficient of correlation deduced from a small sample. <i>Metron, 1</i>, 3–32.</li>
+    <li>Fisher, R. A. (1925). <i>Statistical methods for research workers</i>. Oliver and Boyd.</li>
+    <li>Foygel, R., & Drton, M. (2010). Extended Bayesian information criteria for Gaussian graphical models. <i>Advances in Neural Information Processing Systems, 23</i>, 604–612.</li>
+    <li>Friedman, J., Hastie, T., & Tibshirani, R. (2008). Sparse inverse covariance estimation with the graphical lasso. <i>Biostatistics, 9</i>(3), 432–441.</li>
+    <li>Funder, D. C., & Ozer, D. J. (2019). Evaluating effect size in psychological research: Sense and nonsense. <i>Advances in Methods and Practices in Psychological Science, 2</i>(2), 156–168.</li>
+    <li>Gignac, G. E., & Szodorai, E. T. (2016). Effect size guidelines for individual differences researchers. <i>Personality and Individual Differences, 102</i>, 74–78.</li>
+    <li>Hedges, L. V., & Olkin, I. (1985). <i>Statistical methods for meta-analysis</i>. Academic Press.</li>
+    <li>Hendrickson, G. F., Stanley, J. C., & Hills, J. R. (1970). Olkin’s new formula for significance of r<sub>13</sub> vs. r<sub>23</sub> compared with Hotelling’s method. <i>American Educational Research Journal, 7</i>(2), 189–195.</li>
+    <li>Higgins, J. P. T., & Thompson, S. G. (2002). Quantifying heterogeneity in a meta-analysis. <i>Statistics in Medicine, 21</i>(11), 1539–1558.</li>
+    <li>Higgins, J. P. T., Thompson, S. G., & Spiegelhalter, D. J. (2009). A re-evaluation of random-effects meta-analysis. <i>Journal of the Royal Statistical Society, Series A, 172</i>(1), 137–159.</li>
+    <li>Higham, N. J. (2002). Computing the nearest correlation matrix — a problem from finance. <i>IMA Journal of Numerical Analysis, 22</i>(3), 329–343.</li>
+    <li>Hittner, J. B., May, K., & Silver, N. C. (2003). A Monte Carlo evaluation of tests for comparing dependent correlations. <i>The Journal of General Psychology, 130</i>(2), 149–168.</li>
+    <li>Hochberg, Y. (1988). A sharper Bonferroni procedure for multiple tests of significance. <i>Biometrika, 75</i>(4), 800–802.</li>
+    <li>Hoenig, J. M., & Heisey, D. M. (2001). The abuse of power: The pervasive fallacy of power calculations for data analysis. <i>The American Statistician, 55</i>(1), 19–24.</li>
+    <li>Holm, S. (1979). A simple sequentially rejective multiple test procedure. <i>Scandinavian Journal of Statistics, 6</i>(2), 65–70.</li>
+    <li>Hommel, G. (1988). A stagewise rejective multiple test procedure based on a modified Bonferroni test. <i>Biometrika, 75</i>(2), 383–386.</li>
+    <li>Hotelling, H. (1940). The selection of variates for use in prediction with some comments on the general problem of nuisance parameters. <i>The Annals of Mathematical Statistics, 11</i>(3), 271–283.</li>
+    <li>Hotelling, H. (1953). New light on the correlation coefficient and its transforms. <i>Journal of the Royal Statistical Society, Series B, 15</i>(2), 193–232.</li>
+    <li>Hunter, J. E., & Schmidt, F. L. (2004). <i>Methods of meta-analysis: Correcting error and bias in research findings</i> (2nd ed.). Sage.</li>
+    <li>Jeffreys, H. (1961). <i>Theory of probability</i> (3rd ed.). Oxford University Press.</li>
+    <li>Jennrich, R. I. (1970). An asymptotic χ² test for the equality of two correlation matrices. <i>Journal of the American Statistical Association, 65</i>(330), 904–912.</li>
+    <li>Kaiser, H. F. (1970). A second generation little jiffy. <i>Psychometrika, 35</i>(4), 401–415.</li>
+    <li>Kaiser, H. F., & Rice, J. (1974). Little jiffy, mark IV. <i>Educational and Psychological Measurement, 34</i>(1), 111–117.</li>
+    <li>Ledoit, O., & Wolf, M. (2004). A well-conditioned estimator for large-dimensional covariance matrices. <i>Journal of Multivariate Analysis, 88</i>(2), 365–411.</li>
+    <li>Lee, M. D., & Wagenmakers, E.-J. (2013). <i>Bayesian cognitive modeling: A practical course</i>. Cambridge University Press.</li>
+    <li>Ly, A., Marsman, M., & Wagenmakers, E.-J. (2018). Analytic posteriors for Pearson’s correlation coefficient. <i>Statistica Neerlandica, 72</i>(1), 4–13.</li>
+    <li>Ly, A., Verhagen, J., & Wagenmakers, E.-J. (2016). Harold Jeffreys's default Bayes factor hypothesis tests: Explanation, extension, and application in psychology. <i>Journal of Mathematical Psychology, 72</i>, 19–32.</li>
+    <li>Meng, X.-L., Rosenthal, R., & Rubin, D. B. (1992). Comparing correlated correlation coefficients. <i>Psychological Bulletin, 111</i>(1), 172–175.</li>
+    <li>Newman, M. E. J. (2006). Modularity and community structure in networks. <i>Proceedings of the National Academy of Sciences, 103</i>(23), 8577–8582.</li>
+    <li>Olkin, I. (1967). Correlations revisited. In J. C. Stanley (Ed.), <i>Improving experimental design and statistical analysis</i> (pp. 102–128). Rand McNally.</li>
+    <li>Opsahl, T., Agneessens, F., & Skvoretz, J. (2010). Node centrality in weighted networks: Generalizing degree and shortest paths. <i>Social Networks, 32</i>(3), 245–251.</li>
+    <li>Pearson, K., & Filon, L. N. G. (1898). Mathematical contributions to the theory of evolution. IV. On the probable errors of frequency constants and on the influence of random selection on variation and correlation. <i>Philosophical Transactions of the Royal Society of London, Series A, 191</i>, 229–311.</li>
+    <li>Pitman, E. J. G. (1937). Significance tests which may be applied to samples from any populations. II. The correlation coefficient test. <i>Supplement to the Journal of the Royal Statistical Society, 4</i>(2), 225–232.</li>
+    <li>Raghunathan, T. E., Rosenthal, R., & Rubin, D. B. (1996). Comparing correlated but nonoverlapping correlations. <i>Psychological Methods, 1</i>(2), 178–183.</li>
+    <li>Sackett, P. R., & Yang, H. (2000). Correction for range restriction: An expanded typology. <i>Journal of Applied Psychology, 85</i>(1), 112–118.</li>
+    <li>Schäfer, J., & Strimmer, K. (2005). A shrinkage approach to large-scale covariance matrix estimation and implications for functional genomics. <i>Statistical Applications in Genetics and Molecular Biology, 4</i>(1), 32.</li>
+    <li>Silver, N. C., Hittner, J. B., & May, K. (2004). Testing dependent correlations with nonoverlapping variables: A Monte Carlo simulation. <i>The Journal of Experimental Education, 73</i>(1), 53–69.</li>
+    <li>Steiger, J. H. (1980). Tests for comparing elements of a correlation matrix. <i>Psychological Bulletin, 87</i>(2), 245–251.</li>
+    <li>Thorndike, R. L. (1949). <i>Personnel selection: Test and measurement techniques</i>. Wiley.</li>
+    <li>Viechtbauer, W. (2005). Bias and efficiency of meta-analytic variance estimators in the random-effects model. <i>Journal of Educational and Behavioral Statistics, 30</i>(3), 261–293.</li>
+    <li>Westfall, P. H., & Young, S. S. (1993). <i>Resampling-based multiple testing: Examples and methods for p-value adjustment</i>. Wiley.</li>
+    <li>Wetzels, R., & Wagenmakers, E.-J. (2012). A default Bayesian hypothesis test for correlations and partial correlations. <i>Psychonomic Bulletin &amp; Review, 19</i>(6), 1057–1064.</li>
+    <li>Williams, E. J. (1959). The comparison of regression variables. <i>Journal of the Royal Statistical Society B, 21</i>(2), 396–399.</li>
+    <li>Zou, G. Y. (2007). Toward using confidence intervals to compare correlations. <i>Psychological Methods, 12</i>(4), 399–413.</li>
+  </ul>
+  <h3>F.12 · Figures and color</h3>
+  <ul class="refs">
+    <li>American Psychological Association. (2020). <i>Publication manual of the American Psychological Association</i> (7th ed.).</li>
+    <li>Anscombe, F. J. (1973). Graphs in statistical analysis. <i>The American Statistician, 27</i>(1), 17–21.</li>
+    <li>Borland, D., & Taylor, R. M. (2007). Rainbow color map (still) considered harmful. <i>IEEE Computer Graphics and Applications, 27</i>(2), 14–17.</li>
+    <li>Cleveland, W. S., Diaconis, P., & McGill, R. (1982). Variables on scatterplots look more highly correlated when the scales are increased. <i>Science, 216</i>(4550), 1138–1141.</li>
+    <li>Crameri, F., Shephard, G. E., & Heron, P. J. (2020). The misuse of colour in science communication. <i>Nature Communications, 11</i>, 5444.</li>
+    <li>Friendly, M. (2002). Corrgrams: Exploratory displays for correlation matrices. <i>The American Statistician, 56</i>(4), 316–324.</li>
+    <li>Friendly, M., Monette, G., & Fox, J. (2013). Elliptical insights: Understanding statistical methods through elliptical geometry. <i>Statistical Science, 28</i>(1), 1–39.</li>
+    <li>Fruchterman, T. M. J., & Reingold, E. M. (1991). Graph drawing by force-directed placement. <i>Software: Practice and Experience, 21</i>(11), 1129–1164.</li>
+    <li>Lang, T. A., & Altman, D. G. (2013). Basic statistical reporting for articles published in biomedical journals: The “Statistical Analyses and Methods in the Published Literature” or the SAMPL Guidelines. In P. Smart, H. Maisonneuve & A. Polderman (Eds.), <i>Science Editors' Handbook</i>. European Association of Science Editors.</li>
+    <li>Machado, G. M., Oliveira, M. M., & Fernandes, L. A. F. (2009). A physiologically-based model for simulation of color vision deficiency. <i>IEEE Transactions on Visualization and Computer Graphics, 15</i>(6), 1291–1298.</li>
+    <li>Matejka, J., & Fitzmaurice, G. (2017). Same stats, different graphs: Generating datasets with varied appearance and identical statistics through simulated annealing. In <i>Proceedings of the 2017 CHI Conference on Human Factors in Computing Systems</i> (pp. 1290–1294).</li>
+    <li>Murdoch, D. J., & Chow, E. D. (1996). A graphical display of large correlation matrices. <i>The American Statistician, 50</i>(2), 178–180.</li>
+    <li>Okabe, M., & Ito, K. (2008). <i>Color universal design: How to make figures and presentations that are friendly to colorblind people</i>. https://jfly.uni-koeln.de/color/</li>
+    <li>Ottosson, B. (2020). <i>A perceptual color space for image processing</i>. https://bottosson.github.io/posts/oklab/</li>
+    <li>Rensink, R. A., & Baldridge, G. (2010). The perception of correlation in scatterplots. <i>Computer Graphics Forum, 29</i>(3), 1203–1210.</li>
+    <li>Secretaría de Economía. (2023). <i>Norma Oficial Mexicana NOM-008-SE-2021, Sistema general de unidades de medida</i>. Diario Oficial de la Federación.</li>
+  </ul>
+  <h3>F.13 · Data</h3>
+  <ul class="refs">
+    <li>Anderson, E. (1935). The irises of the Gaspé Peninsula. <i>Bulletin of the American Iris Society, 59</i>, 2–5.</li>
+    <li>British Board of Trade. (1912). <i>Report on the loss of the “Titanic” (S.S.)</i>. His Majesty’s Stationery Office.</li>
+    <li>Cushny, A. R., & Peebles, A. R. (1905). The action of optical isomers: II. Hyoscines. <i>The Journal of Physiology, 32</i>(5–6), 501–510.</li>
+    <li>Darwin, C. (1876). <i>The effects of cross and self fertilisation in the vegetable kingdom</i>. John Murray.</li>
+    <li>Dawson, R. J. M. (1995). The “unusual episode” data revisited. <i>Journal of Statistics Education, 3</i>(3).</li>
+    <li>Ezekiel, M. (1930). <i>Methods of correlation analysis</i>. Wiley.</li>
+    <li>Fisher, R. A. (1936). The use of multiple measurements in taxonomic problems. <i>Annals of Eugenics, 7</i>(2), 179–188.</li>
+    <li>Galton, F. (1877). Typical laws of heredity. <i>Proceedings of the Royal Institution of Great Britain, 8</i>, 282–301.</li>
+    <li>Longley, J. W. (1967). An appraisal of least squares programs for the electronic computer from the point of view of the user. <i>Journal of the American Statistical Association, 62</i>(319), 819–841.</li>
+    <li>Student. (1908). The probable error of a mean. <i>Biometrika, 6</i>(1), 1–25.</li>
+  </ul>
+  <!-- /REFERENCIAS -->
+</section>
+
+</body>
+</html>

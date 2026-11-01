@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>CorrelationPro · User’s Manual · Chapter 12</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,500;0,600;1,500&family=Crimson+Pro:ital,wght@0,400;0,600;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../interior.css">
+<script src="../paginar.js"></script>
+</head>
+<body>
+
+<section class="capitulo" id="cap-12" data-pestana="12" data-orden="12" style="--acento: var(--b12)">
+  <div class="cap-apertura">
+    <div class="cap-num">12</div>
+    <div class="cap-etiqueta">Chapter twelve · Block 12</div>
+    <h1 data-corto="Compare and plan">Compare, correct, plan and combine</h1>
+    <div class="cap-regla"></div>
+    <p class="cap-resumen">The questions that come after computing a correlation: is it different from another one? Is the structure of two groups the same? What would it be worth without measurement error or without the selection of the cases? How many cases are needed? What do all the studies say together? Almost all of this block works without open data: typing in the published figures is enough.</p>
+    <div class="cap-franja"><span class="k12"></span><span class="k12"></span><span class="k4"></span><span class="k13"></span></div>
+    <ul class="cap-contenido">
+      <li><b>12.1</b>Comparing two correlations</li>
+      <li><b>12.2</b>Comparing two matrices</li>
+      <li><b>12.3</b>Correcting for attenuation and range</li>
+      <li><b>12.4</b>Power and sample size</li>
+      <li><b>12.5</b>The Bayes factor of a published r</li>
+      <li><b>12.6</b>Meta-analysis</li>
+    </ul>
+  </div>
+  <p>The block has five sections, chosen with the buttons at the top: <span class="ui">Compare two correlations</span>, <span class="ui">Compare matrices</span>, <span class="ui">Correct</span>, <span class="ui">Power and sample size</span> and <span class="ui">Meta-analysis</span>. Each one is recomputed as soon as a number changes.</p>
+
+  <!-- 12.1 -->
+  <h2 id="s12-1"><span class="num">12.1</span>Comparing two correlations</h2>
+  <p class="lead">Is the correlation larger in one group than in another, or does one variable predict better than another? The right test depends on the <b>design</b>, and picking the wrong one is one of the most common mistakes when comparing correlations.</p>
+  <ul>
+    <li><span class="ui">Two independent groups</span>: the same correlation in two different samples. You type the <i>r</i> and <i>n</i> of each group.</li>
+    <li><span class="ui">Same cases, one variable in common</span>: <i>r</i><sub>jk</sub> against <i>r</i><sub>jh</sub>, for example, whether the exam is more related to the final grade or to attendance. You also need <i>r</i><sub>kh</sub>, the correlation between the other two.</li>
+    <li><span class="ui">Same cases, no variable in common</span>: <i>r</i><sub>jk</sub> against <i>r</i><sub>hm</sub>, with the four cross correlations.</li>
+  </ul>
+  <p>You also choose the <span class="ui">Alternative hypothesis</span> (different, or one greater than the other) and the <span class="ui">Confidence</span> of the interval. <span class="ui">Take them from the open data</span> computes the correlations of the variables and groups you choose; <span class="ui">Example: iris by species</span> compares the sepal and the petal of two species.</p>
+  <figure class="w80">
+    <div class="marco"><img src="../img/en/b12-cmp.png" alt="The Which correlations card with sepal length and petal length of setosa and versicolor"></div>
+    <figcaption><b>Figure 12.1.</b> The iris example: the correlation of sepal length with petal length in setosa (.267) and in versicolor (.754), 50 flowers each.</figcaption>
+  </figure>
+  <p>The result gives the difference, <b>Zou’s interval</b> (2007) for that difference—which says how much they differ, not only whether they differ—and the recommended test for the design. The table gives all the tests that apply, with the recommended one marked, and the chart shows the two correlations with their intervals and the difference with its own.</p>
+  <figure class="w80">
+    <div class="marco"><img src="../img/en/b12-cmp-res.png" alt="The comparison of the two iris correlations"></div>
+    <figcaption><b>Figure 12.2.</b> The difference is −.487, with interval [−.783, −.202]: in versicolor the relationship is clearly stronger (<i>z</i> = −3.43, <i>p</i> &lt; .001).</figcaption>
+  </figure>
+  <figure class="w70">
+    <div class="marco"><img src="../img/en/b12-traslape.png" alt="The nine tests for two correlations with one variable in common"></div>
+    <figcaption><b>Figure 12.3.</b> With one variable in common (the default values: <i>r</i><sub>jk</sub> = .50, <i>r</i><sub>jh</sub> = .30, <i>r</i><sub>kh</sub> = .40, <i>n</i> = 100) there are nine tests, from 1898 to 2003. They agree here, but they can differ with small <i>n</i> and large correlations.</figcaption>
+  </figure>
+  <table class="compacta">
+    <caption><b>Table 12.1.</b> The recommended tests for each design</caption>
+    <thead><tr><th style="width:2.1in">Design</th><th>Recommended</th></tr></thead>
+    <tbody>
+      <tr><td>two independent groups</td><td>the difference of Fisher’s <i>z</i> (1925)</td></tr>
+      <tr><td>one variable in common</td><td>Williams’ <i>t</i> (1959) and the <i>z</i> of Hittner, May and Silver (2003)</td></tr>
+      <tr><td>no variable in common</td><td>that of Silver, Hittner and May (2004) and that of Raghunathan, Rosenthal and Rubin (1996)</td></tr>
+    </tbody>
+  </table>
+  <div class="caja error">
+    <div class="caja-t"><span class="ico">✕</span>Common error · treating two correlations from the same cases as independent</div>
+    <p>If the two correlations come from the same subjects, they are correlated with each other, and the independent-groups test gives a wrong <i>p</i>-value: almost always too large, when the variables are positively related. And one correlation being significant while the other is not does not prove that they are different: only the test of their difference says that.</p>
+  </div>
+
+  <!-- 12.2 -->
+  <h2 id="s12-2"><span class="num">12.2</span>Comparing two matrices</h2>
+  <p>Are the variables related in the same way in two groups? You choose the <span class="ui">Grouping column</span>, the two groups, the coefficient and, with the buttons, the variables. <b>Jennrich’s test</b> (1970) compares the two whole matrices with a χ² that takes into account that the correlations of a matrix depend on one another. Then each cell is compared separately with Fisher’s <i>z</i> and Holm’s correction.</p>
+  <figure class="w70">
+    <div class="marco"><img src="../img/en/b12-mat.png" alt="The comparison of the correlation matrices of setosa and versicolor"></div>
+    <figcaption><b>Figure 12.4.</b> Setosa against versicolor: the matrices are different (χ² = 30.95 with 6 degrees of freedom, <i>p</i> &lt; .001), and three of the six correlations differ after correction. In the matrix of the difference, the faint cells are not significant.</figcaption>
+  </figure>
+  <div class="caja nota">
+    <div class="caja-t"><span class="ico">i</span>Why adding up the cells is not enough</div>
+    <p>Adding up the <i>z</i>² of each cell only gives a χ² when all the correlations are close to zero. With correlated variables it rejects too often—in the simulation of this block’s validation, 11% of the time instead of 5%—, and that is why here the cells serve to read where the difference lies, not to decide whether there is one. With Spearman, Jennrich’s test is approximate, and a message says so.</p>
+  </div>
+
+  <!-- 12.3 -->
+  <h2 id="s12-3"><span class="num">12.3</span>Correcting for attenuation and range</h2>
+  <p>Two reasons why an observed correlation can fall short, and their classical corrections.</p>
+  <p><b>Attenuation.</b> If both measures carry error, the observed correlation underestimates that of the true scores. Spearman’s correction (1904) divides by the square root of the product of the <b>reliabilities</b>—an α, a test–retest or an ICC from Block 9—. The figures are the corrected <i>r</i>, the <b>ceiling</b> of the observable <i>r</i> (no observed <i>r</i> can exceed it) and the part of the correlation taken away by measurement error.</p>
+  <div class="formula"><i>r</i><sub>corrected</sub> = <i>r</i> / √(<i>r</i><sub>xx</sub> · <i>r</i><sub>yy</sub>)</div>
+  <p><b>Restricted range.</b> If only cases with values of <i>x</i> inside an interval were observed—the admitted, the survivors, the selected—, the correlation comes out lower than in the full population. Thorndike’s <b>case II</b> (1949) corrects direct selection on <i>x</i>, with <i>U</i>, the ratio of the unrestricted standard deviation to the restricted one; <b>case III</b>, selection on a third variable <i>z</i>, with its two correlations.</p>
+  <figure class="w80">
+    <div class="marco"><img src="../img/en/b12-cor.png" alt="The correction for attenuation and for range restriction with the default values"></div>
+    <figcaption><b>Figure 12.5.</b> The default values. An <i>r</i> of .42 with reliabilities of .80 and .70 is worth .561 between the true scores: error takes away 25%. An <i>r</i> of .30 in a sample with a standard deviation of 6, when that of the population is 10, is worth .464 without the restriction.</figcaption>
+  </figure>
+  <p>The chart of the case II correction, below the figures, shows how the corrected <i>r</i> grows with <i>U</i> for several observed <i>r</i> values, with yours in red and its point: the correction is larger the stronger the selection was.</p>
+  <div class="caja importante">
+    <div class="caja-t"><span class="ico">!</span>Correcting does not create information</div>
+    <p>Both corrections assume a linear, homoscedastic relationship, and that the selection was the one stated. A correction above 1 indicates that some reliability is underestimated or that the errors are not independent. And the corrected interval is the observed one transformed with the same formula: wider in the same proportion (Hunter and Schmidt 2004; Sackett and Yang 2000). Always report the observed <i>r</i> next to the corrected one.</p>
+  </div>
+
+  <!-- 12.4 -->
+  <h2 id="s12-4"><span class="num">12.4</span>Power and sample size</h2>
+  <p>Before collecting the data: with the <span class="ui">Expected ρ</span> and the <span class="ui">n</span> of the two sliders, the <span class="ui">α</span> and the <span class="ui">Test</span> (two-sided or one-sided), the block gives four figures:</p>
+  <ul>
+    <li>the <b>exact power</b> with that <i>n</i>, and the approximate one;</li>
+    <li>the <b><i>n</i> for the desired power</b> (80, 90 or 95%), exact and approximate;</li>
+    <li>the <b><i>n</i> for an interval of the desired half-width</b> (from ±0.05 to ±0.20), with the expected interval;</li>
+    <li>the <b>critical <i>r</i></b>: the smallest |<i>r</i>| that would be significant with that <i>n</i>.</li>
+  </ul>
+  <figure>
+    <div class="marco"><img src="../img/en/b12-plan.png" alt="Planning a study with an expected ρ of .30 and n of 50"></div>
+    <figcaption><b>Figure 12.6.</b> With ρ = .30 and 50 cases, the power is only 57.2%; for 80%, 84 are needed. But to estimate ρ with an interval of ±.10, 320 are needed. On the left, the exact distribution of <i>r</i> with no relationship and with ρ = .30; the shaded part is the power. On the right, power by <i>n</i> for four values of ρ.</figcaption>
+  </figure>
+  <div class="caja teoria">
+    <div class="caja-t"><span class="ico">θ</span>Theory in brief · exact and approximate</div>
+    <p>The exact power integrates the density of <i>r</i> when the true correlation is ρ (Fisher 1915; Hotelling 1953) over the region where the <i>t</i> test rejects; the approximate one uses Fisher’s <i>z</i> with a bias correction and departs by a few thousandths with small <i>n</i>. With ρ = 0 the exact power is α, as it should be. Planning by the width of the interval, and not only by power, guarantees a useful estimate even if the effect turns out to be small (Bonett and Wright 2000).</p>
+  </div>
+
+  <!-- 12.5 -->
+  <h2 id="s12-5"><span class="num">12.5</span>The Bayes factor of a published r</h2>
+  <p>With only the <i>r</i> and the <i>n</i> of a paper you get the evidence for there being a correlation against there being none, with the same prior as in Block 4 (Section 4.6) and its width κ. The figures are BF<sub>10</sub> with its word, BF<sub>01</sub>, the one-sided BF<sub>+0</sub> (ρ &gt; 0) and the posterior ρ with its credible interval.</p>
+  <figure>
+    <div class="marco"><img src="../img/en/b12-bf.png" alt="The Bayes factor of an r of .25 with 60 cases"></div>
+    <figcaption><b>Figure 12.7.</b> An <i>r</i> of .25 with 60 cases sits at the edge of significance: <i>p</i> = .054 two-sided and .027 one-sided. Its Bayes factor is 1.60, anecdotal evidence; the one-sided one, 3.10, barely moderate.</figcaption>
+  </figure>
+
+  <!-- 12.6 -->
+  <h2 id="s12-6"><span class="num">12.6</span>Meta-analysis</h2>
+  <p>Combines the correlations of several studies. You type one study per line—name; <i>r</i>; <i>n</i>, separated by semicolons or tabs—or take them from columns of the open data with <span class="ui">Use columns of the data</span>. The correlations are combined on Fisher’s <i>z</i> scale, with variance 1/(<i>n</i> − 3). The <span class="ui">Model</span> can be random effects—with REML (the default), DerSimonian–Laird or Hunter–Schmidt—or fixed effect.</p>
+  <figure class="w70">
+    <div class="marco"><img src="../img/en/b12-meta-in.png" alt="The 16 studies of the meta-analysis example and the model"></div>
+    <figcaption><b>Figure 12.8.</b> The example, loaded by the <span class="ui">Simulated example: 16 studies</span> button: studies generated around a true correlation of .25, with heterogeneity among them (τ = 0.10 on the <i>z</i> scale) and from 40 to 800 cases each. They are not real data, and the app says so when it loads them.</figcaption>
+  </figure>
+  <p>Five figures summarize the result: the combined <i>r</i> with its interval and its <i>p</i>-value; the <b>prediction interval</b>, where the ρ of a new study would fall; the heterogeneity τ and <i>I</i>² with the <i>Q</i> test; Egger’s asymmetry test; and the Hunter–Schmidt <i>r</i> with the share of the variance explained by sampling error.</p>
+  <figure class="w70">
+    <div class="marco"><img src="../img/en/b12-meta.png" alt="The result of the meta-analysis with the forest plot"></div>
+    <figcaption><b>Figure 12.9.</b> The 16 studies give <i>r</i> = .261 [.205, .315]—the interval contains the .25 they were simulated with—, but they are heterogeneous (<i>I</i>² = 70.8%), and a new study could find anything from .073 to .431. In the forest plot, the size of each square is its weight; the diamond is the combined estimate and the golden band, the prediction interval.</figcaption>
+  </figure>
+  <p>Below, the <b>funnel</b> places each study by its effect and its standard error: without bias, the studies form a symmetric triangle around the combined effect. Egger’s line measures the asymmetry. Next to it, the reading in words, and below, the table with the four models side by side and the Hunter–Schmidt summary.</p>
+  <figure class="w80">
+    <div class="marco"><img src="../img/en/b12-meta2.png" alt="The funnel, the reading and the table of the four models"></div>
+    <figcaption><b>Figure 12.10.</b> The funnel shows no asymmetry (<i>p</i> = .118). The three random-effects models give almost the same <i>r</i> (from .259 to .261); the fixed-effect one gives .236 and a narrower interval, because it ignores the heterogeneity and gives more weight to the large studies.</figcaption>
+  </figure>
+  <div class="caja teoria">
+    <div class="caja-t"><span class="ico">θ</span>Theory in brief · fixed effect, random effects and heterogeneity</div>
+    <p>The fixed effect assumes that all studies estimate the same ρ; random effects, that each one estimates its own, around an average, with variance τ² (DerSimonian and Laird 1986; Viechtbauer 2005). <i>Q</i> tests whether there is heterogeneity; <i>I</i>² says what part of the variation between studies is not chance (Higgins and Thompson 2002); the prediction interval (Higgins, Thompson and Spiegelhalter 2009) is usually much wider than the confidence interval. The test of Egger and colleagues (1997) looks for asymmetry, which may come from publication bias or from small studies being different; with few studies it has little power.</p>
+  </div>
+  <div class="caja regla">
+    <div class="caja-t"><span class="ico">✓</span>Reading Block 12</div>
+    <table class="compacta"><tbody>
+      <tr><td style="width:44%"><b>If</b> the two correlations come from the same cases…</td><td>use the test for dependent samples, never the independent-groups one.</td></tr>
+      <tr><td><b>If</b> one correlation is significant and the other is not…</td><td>compare them: that does not prove they are different.</td></tr>
+      <tr><td><b>If</b> you correct for attenuation or range…</td><td>report the observed <i>r</i>, the corrected one and the reliabilities or standard deviations used.</td></tr>
+      <tr><td><b>If</b> you are planning a study…</td><td>plan by power and by the width of the interval, and take the expected ρ from previous studies, not from the one you would like.</td></tr>
+      <tr><td><b>If</b> the studies are heterogeneous…</td><td>use random effects and report the prediction interval, not only the confidence interval.</td></tr>
+    </tbody></table>
+    <p class="regla-pie">These are guides for interpretation, not laws: what you know about the phenomenon, the design and how it was measured always comes first.</p>
+  </div>
+</section>
+
+</body>
+</html>
