@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>CorrelationPro · User’s Manual · Chapter 7</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,500;0,600;1,500&family=Crimson+Pro:ital,wght@0,400;0,600;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../interior.css">
+<script src="../paginar.js"></script>
+</head>
+<body>
+
+<section class="capitulo" id="cap-7" data-pestana="7" data-orden="7" style="--acento: var(--b7)">
+  <div class="cap-apertura">
+    <div class="cap-num">7</div>
+    <div class="cap-etiqueta">Chapter seven · Block 7</div>
+    <h1 data-corto="Partial and sets">Partial, multiple and between sets</h1>
+    <div class="cap-regla"></div>
+    <p class="cap-resumen">Two variables are almost never alone. This block removes the effect of third variables (partial and semipartial correlation), measures how much several variables together explain of one (multiple correlation, with the breakdown of its R²) and correlates groups of variables with each other: canonical correlation, the RV coefficient, Procrustes, the Mantel test and co-inertia.</p>
+    <div class="cap-franja"><span class="k7"></span><span class="k7"></span><span class="k5"></span><span class="k11"></span></div>
+    <ul class="cap-contenido">
+      <li><b>7.1</b>Partial and semipartial correlation</li>
+      <li><b>7.2</b>Multiple correlation</li>
+      <li><b>7.3</b>Canonical correlation</li>
+      <li><b>7.4</b>Between sets: RV, Procrustes, Mantel and co-inertia</li>
+    </ul>
+  </div>
+
+  <!-- 7.1 -->
+  <h2 id="s7-1"><span class="num">7.1</span>Partial and semipartial correlation</h2>
+  <p class="lead">How much of the relation between <i>X</i> and <i>Y</i> is left once you remove what both share with <i>Z</i>? The <b>partial</b> correlation removes <i>Z</i> from both; the <b>semipartial</b>, from <i>Y</i> only.</p>
+  <p>You choose <span class="ui">X</span>, <span class="ui">Y</span> and the <span class="ui">Coefficient</span>—Pearson, Spearman or Kendall—and one or more variables in <span class="ui">Control for (Z)</span>. The figures are the uncontrolled correlation, the partial with its test, the semipartial, the <b>partial distance correlation</b> (Székely and Rizzo 2014), which removes <i>Z</i> without assuming linear relations, with its permutation <i>p</i>-value (with up to 800 rows), and the number of controls with the degrees of freedom, <i>n</i> − 2 − <i>k</i>.</p>
+  <figure class="w80">
+    <div class="marco"><img src="../img/en/b7-parcial.png" alt="Education and fertility in Switzerland, 1888, controlling for Catholic and Agriculture"></div>
+    <figcaption><b>Figure 7.1.</b> Education and fertility in the Swiss districts, controlling for Catholics and agriculture. The relation is not due to them: uncontrolled −.664, partial −.724 with 43 degrees of freedom. The chart on the right is the added-variable plot: the residuals of each variable after removing <i>Z</i>.</figcaption>
+  </figure>
+  <p>The two charts are the key to understanding the partial correlation. On the left, the usual cloud; on the right, the <b>added-variable plot</b>: the residuals of <i>X</i> and of <i>Y</i> after removing what <i>Z</i> predicts. With Pearson, the partial is exactly the <i>r</i> of that second cloud. Below, a reading says what happened when controlling: whether the relation drops to less than half, whether it changes sign or grows (a suppression effect), or whether it changes little.</p>
+  <div class="caja importante">
+    <div class="caja-t"><span class="ico">!</span>The partial does not decide causality</div>
+    <p>A relation that drops when you control for <i>Z</i> can mean two opposite things: that <i>Z</i> is a common cause of <i>X</i> and <i>Y</i> (and the original correlation was partly spurious) or that <i>Z</i> is the path through which <i>X</i> acts on <i>Y</i> (a mediator). And if <i>Z</i> is a consequence of both—a <b>collider</b>—controlling for it creates a correlation that does not exist. Choose the control variables by what you know about the phenomenon, not because they change the result.</p>
+  </div>
+
+  <!-- 7.2 -->
+  <h2 id="s7-2"><span class="num">7.2</span>Multiple correlation</h2>
+  <p>The correlation between <i>Y</i> and the best linear combination of several <i>X</i>: the <i>R</i> of a multiple regression. You choose <span class="ui">Y</span> and, in <span class="ui">Predictors (X)</span>, the others. Four figures summarize it: <i>R</i>, <i>R</i>² with its version adjusted for the number of predictors, the <i>F</i> test that all the coefficients are zero, and the <b>shared</b> part of <i>R</i>², the part that belongs to no predictor in particular.</p>
+  <figure class="w60">
+    <div class="marco"><img src="../img/en/b7-multiple.png" alt="The multiple correlation of fertility with the other five indicators of Switzerland, 1888"></div>
+    <figcaption><b>Figure 7.2.</b> Fertility and the other five indicators: <i>R</i> = .841, <i>R</i>² = .707. What each predictor contributes on its own (sr²) adds up to .331; the other .375 is shared. Education contributes the most by itself (.162).</figcaption>
+  </figure>
+  <p>The table gives, for each predictor, its simple correlation <i>r</i> with <i>Y</i>, its standardized coefficient β with its <i>t</i> test, its squared semipartial sr²—what <i>R</i>² would lose if that predictor were removed—and its <b>structure coefficient</b>, <i>r</i>/<i>R</i>, the correlation of the predictor with the prediction. The chart splits <i>R</i>² into what is unique to each predictor and what is shared.</p>
+  <div class="caja ejemplo">
+    <div class="caja-t"><span class="ico">▸</span>Example · when β and r have opposite signs</div>
+    <p>In Figure 7.2, agriculture has <i>r</i> = .353 with fertility—the more agricultural districts have more children—but β = −.313. It is not a mistake: among districts with the same education, the same examination scores, the same proportion of Catholics and the same mortality, more agriculture goes with somewhat lower fertility. The simple correlation was loaded by education, which is lower in the agricultural districts. That is why a β is not interpreted without also looking at <i>r</i> and the structure.</p>
+  </div>
+
+  <!-- 7.3 -->
+  <h2 id="s7-3"><span class="num">7.3</span>Canonical correlation</h2>
+  <p>With two <b>sets</b> of variables, canonical correlation (Hotelling 1936) looks for the linear combination of each set that correlates most with one of the other; then the next one, independent of the first, and so on up to the size of the smaller set. The sets are built with the buttons of <span class="ui">Set A</span> (in red) and <span class="ui">Set B</span> (in gold); a variable cannot be in both. There must be more rows than variables in total.</p>
+  <figure class="w80">
+    <div class="marco"><img src="../img/en/b7-canonica.png" alt="The canonical correlation between four social indicators and fertility and infant mortality in Switzerland, 1888"></div>
+    <figcaption><b>Figure 7.3.</b> Four social indicators (A) against fertility and infant mortality (B). The first dimension, ρ = .814, is significant by all three tests; the second, .222, is not. In the circle, the first dimension sets fertility and Catholics against education and examination.</figcaption>
+  </figure>
+  <p>The table gives each canonical correlation with three tests: Wilks’ lambda (with Rao’s <i>F</i>), the Hotelling–Lawley trace and the Pillai–Bartlett trace. Each row tests whether the dimensions from that one to the last are zero: if the first row is significant and the second is not, only the first dimension is real. Below comes Roy’s largest root, which is an upper bound and therefore tends to reject too often. The cloud shows the first pair of canonical variates; the <b>circle of correlations</b> places each variable according to its correlation with the first two canonical variates of its set (the structure loadings).</p>
+
+  <!-- 7.4 -->
+  <h2 id="s7-4"><span class="num">7.4</span>Between sets: RV, Procrustes, Mantel and co-inertia</h2>
+  <p>With the same sets A and B, four measures that do not look for linear combinations but compare the two whole tables. All of them use the standardized variables, and the first three come with a permutation test: 999 shuffles of the rows (fewer with more than 300 rows).</p>
+  <ul>
+    <li><b>RV</b> (Escoufier 1973): an <i>r</i> between two tables, from 0 to 1. The figure also gives the value it would have with no relation, which is not zero: it grows with the number of variables and falls with the number of rows.</li>
+    <li><b>Procrustes</b> (Gower 1975; Peres-Neto and Jackson 2001): rotates and scales one configuration to fit the other; <i>m</i>² is what remains unfitted and <i>r</i> = √(1 − <i>m</i>²).</li>
+    <li><b>Mantel</b> (1967): the correlation between the distances of all pairs of rows in one table and in the other (with up to 400 rows).</li>
+    <li><b>Co-inertia</b>: the analysis that looks for the axes along which the two tables vary together; the figure gives the share of the co-inertia taken by the first axis and the <i>r</i> between the scores of the two tables on it.</li>
+  </ul>
+  <figure class="w70">
+    <div class="marco"><img src="../img/en/b7-conjuntos.png" alt="RV, Procrustes, Mantel and co-inertia between the two sets of Switzerland, 1888, with the permutation distribution of RV"></div>
+    <figcaption><b>Figure 7.4.</b> The same sets: RV = .294 against the .041 that chance would give, Procrustes .446 and Mantel .359, all three with <i>p</i> = .001, the smallest possible with 999 shuffles. The first axis takes 98.1% of the co-inertia. The chart sets the observed RV against those of the shuffles.</figcaption>
+  </figure>
+  <div class="caja teoria">
+    <div class="caja-t"><span class="ico">θ</span>Theory in brief · when to use each one</div>
+    <p><b>Canonical</b> correlation looks for linear combinations and breaks down with many variables and few rows; <b>RV</b> summarizes the whole table and is the basis of co-inertia; <b>Procrustes</b> compares configurations, for example two ordinations of the same sites; <b>Mantel</b> is useful when what you have are distances—genetic, geographic, ecological—although its power is low and it does not correct for spatial autocorrelation (Guillot and Rousset 2013; Legendre, Fortin and Borcard 2015).</p>
+  </div>
+  <div class="caja regla">
+    <div class="caja-t"><span class="ico">✓</span>Reading Block 7</div>
+    <table class="compacta"><tbody>
+      <tr><td style="width:44%"><b>If</b> the relation drops a lot when controlling for <i>Z</i>…</td><td>decide, from what you know, whether <i>Z</i> is a common cause (the relation was spurious) or a mediator (the partial is the direct effect).</td></tr>
+      <tr><td><b>If</b> the relation grows or changes sign when controlling…</td><td>there is suppression: report both, the simple and the partial.</td></tr>
+      <tr><td><b>If</b> <i>R</i>² is high but no β is significant…</td><td>the predictors share almost everything: look at the shared part and the structure, not only at the β.</td></tr>
+      <tr><td><b>If</b> only the first canonical dimension is significant…</td><td>interpret only that one, with the circle of correlations.</td></tr>
+      <tr><td><b>If</b> there are almost as many variables as rows…</td><td>use RV or Procrustes instead of canonical correlation.</td></tr>
+    </tbody></table>
+    <p class="regla-pie">These are guides for interpretation, not laws: what you know about the phenomenon, the design and how it was measured always comes first.</p>
+  </div>
+</section>
+
+</body>
+</html>

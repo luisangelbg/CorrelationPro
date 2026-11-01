@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>CorrelationPro · User’s Manual · Chapter 9</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,500;0,600;1,500&family=Crimson+Pro:ital,wght@0,400;0,600;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../interior.css">
+<script src="../paginar.js"></script>
+</head>
+<body>
+
+<section class="capitulo" id="cap-9" data-pestana="9" data-orden="9" style="--acento: var(--b9)">
+  <div class="cap-apertura">
+    <div class="cap-num">9</div>
+    <div class="cap-etiqueta">Chapter nine · Block 9</div>
+    <h1 data-corto="Agreement">Agreement and reliability</h1>
+    <div class="cap-regla"></div>
+    <p class="cap-resumen">Sometimes the question is not whether two measurements move together, but whether they say the same thing: two instruments, two laboratory methods, several raters scoring the same cases. Correlation is no use for that. This block computes Lin’s concordance, the Bland–Altman plot, the six intraclass coefficients, κ with its variants and relatives, and Krippendorff’s α.</p>
+    <div class="cap-franja"><span class="k9"></span><span class="k9"></span><span class="k4"></span><span class="k8"></span></div>
+    <ul class="cap-contenido">
+      <li><b>9.1</b>What is compared</li>
+      <li><b>9.2</b>Two methods: concordance and Bland–Altman</li>
+      <li><b>9.3</b>Several raters: the intraclass coefficients</li>
+      <li><b>9.4</b>Categories: κ and its relatives</li>
+    </ul>
+  </div>
+
+  <!-- 9.1 -->
+  <h2 id="s9-1"><span class="num">9.1</span>What is compared</h2>
+  <p class="lead">The data come with one row per case and one column per rater, instrument or method. In <span class="ui">What is compared</span> you choose two or more columns that measure the same thing on the same cases.</p>
+  <p>If all the chosen columns are continuous, the block shows the concordance, the Bland–Altman plot of the first two and the intraclass coefficients of all of them. If all are categorical (binary, nominal or ordinal), it shows κ and its relatives; the columns must have the same categories, because they are compared by their position on the scale. If the two types are mixed, a message asks you to remove those of one type.</p>
+  <figure>
+    <div class="marco"><img src="../img/en/b9-que.png" alt="The What is compared card with four simulated instruments and four simulated raters"></div>
+    <figcaption><b>Figure 9.1.</b> The simulated raters: 40 cases measured with four instruments, each with its own bias and noise, and rated by four raters in five categories. These are simulated data, not real ones; the app says so when it loads them.</figcaption>
+  </figure>
+  <div class="caja nota">
+    <div class="caja-t"><span class="ico">i</span>The two examples of the block</div>
+    <p>Besides the <span class="ui">Simulated raters</span>, the block offers a real set: the extra sleep gained by ten patients with two drugs (Cushny and Peebles 1905), the data with which Student presented his <i>t</i> test. It serves to compare two measurements of the same patients, although with only ten cases.</p>
+  </div>
+
+  <!-- 9.2 -->
+  <h2 id="s9-2"><span class="num">9.2</span>Two methods: concordance and Bland–Altman</h2>
+  <p>With the first two columns, five figures: <b>Lin’s concordance correlation coefficient</b> (CCC) with its interval; Pearson’s <i>r</i> and the accuracy factor <i>C</i><sub>b</sub>, because CCC = <i>r</i> × <i>C</i><sub>b</sub>; the <b>mean bias</b> (the average difference, with its test); the 95% <b>limits of agreement</b>; and the <b>proportional bias</b>, the slope of the difference on the mean.</p>
+  <figure class="w80">
+    <div class="marco"><img src="../img/en/b9-dos.png" alt="The concordance and the Bland–Altman plot of two simulated instruments"></div>
+    <figcaption><b>Figure 9.2.</b> Two simulated instruments: <i>r</i> = .890 but CCC = .841. The first gives, on average, 2.39 units less than the second (<i>p</i> &lt; .001), and the difference grows with the level (slope 0.179, <i>p</i> = .027). On any given case, the first may fall between −10.28 and 5.50 units from the second.</figcaption>
+  </figure>
+  <p>On the left, the cloud against the <b>line of equality</b> (dashed): if the two said the same thing, the points would fall on it, not just on some straight line. On the right, the <b>Bland–Altman</b> plot: the difference of each case against the mean of the two, with the mean bias (solid line), the two limits of agreement (dashed), the bands of their confidence intervals and, if there is one, the line of the proportional bias. Below, the reading says whether the concordance departs from <i>r</i>, whether there is mean or proportional bias, and how much a case can differ.</p>
+  <div class="caja importante">
+    <div class="caja-t"><span class="ico">!</span>A high r is not agreement</div>
+    <p>Two instruments can correlate at .99 and always differ by ten units, or one can give twice the value of the other: <i>r</i> measures association, not agreement (Bland and Altman 1986). Lin’s concordance penalizes both departures—in location and in scale—and the Bland–Altman plot shows how much they can differ on a case. Whether that difference is acceptable is not for statistics to decide: the person who uses the measurement decides, before seeing the data.</p>
+  </div>
+
+  <!-- 9.3 -->
+  <h2 id="s9-3"><span class="num">9.3</span>Several raters: the intraclass coefficients</h2>
+  <p>The intraclass correlation coefficient (ICC) measures what part of the total variation is due to differences between cases rather than between raters. There are six forms (McGraw and Wong 1996), and the table gives all of them, with their interval, their <i>F</i> test and the reading of Koo and Li (2016). The right form is decided by the design, not by the result:</p>
+  <table class="compacta">
+    <caption><b>Table 9.1.</b> How to choose the form of the ICC</caption>
+    <thead><tr><th style="width:2.2in">If…</th><th>use</th></tr></thead>
+    <tbody>
+      <tr><td>each case is rated by different raters, drawn at random</td><td><b>one-way</b>: ICC(1) or, for the average of <i>k</i> raters, ICC(<i>k</i>)</td></tr>
+      <tr><td>the same raters rate all the cases, and it is enough that they rank them alike</td><td><b>two-way, consistency</b>: ICC(C,1) or ICC(C,<i>k</i>)</td></tr>
+      <tr><td>the same raters rate everything, and they must give the same number</td><td><b>two-way, absolute agreement</b>: ICC(A,1) or ICC(A,<i>k</i>)</td></tr>
+      <tr><td>in practice, the rating of a single rater will be used</td><td>the <b>single measure</b> form (…,1)</td></tr>
+      <tr><td>in practice, the average of the raters will be used</td><td>the <b>average</b> form (…,<i>k</i>)</td></tr>
+    </tbody>
+  </table>
+  <figure class="w80">
+    <div class="marco"><img src="../img/en/b9-icc.png" alt="The six intraclass coefficients of the four simulated instruments and the profile chart"></div>
+    <figcaption><b>Figure 9.3.</b> The four simulated instruments. The single-measure consistency is good (ICC(C,1) = .785), but absolute agreement drops to moderate (ICC(A,1) = .667), because the instruments have different biases. Averaging the four, both forms exceed .88. In the chart, each line is a case across the four instruments.</figcaption>
+  </figure>
+  <p>Below the table, three more figures: the cases and raters used (complete rows only), <b>Kendall’s W</b>, the agreement in the ordering of the cases with its χ² test, and the interval <b>Krippendorff’s α</b>, which admits missing ratings. The profile chart draws each case as a line across the raters, colored by its mean: if the raters agree, the lines are horizontal and do not cross.</p>
+  <table class="compacta">
+    <caption><b>Table 9.2.</b> Reading the ICC (Koo and Li 2016)</caption>
+    <thead><tr><th style="width:1.6in">ICC</th><th>Reliability</th></tr></thead>
+    <tbody>
+      <tr><td>below .50</td><td>poor</td></tr>
+      <tr><td>.50 to .75</td><td>moderate</td></tr>
+      <tr><td>.75 to .90</td><td>good</td></tr>
+      <tr><td>above .90</td><td>excellent</td></tr>
+    </tbody>
+  </table>
+
+  <!-- 9.4 -->
+  <h2 id="s9-4"><span class="num">9.4</span>Categories: κ and its relatives</h2>
+  <p>With categorical columns, the main measure is <b>κ</b>: the observed agreement corrected for the agreement expected by chance. With two raters it is Cohen’s κ (1960) or, if the categories are ordinal and there are more than two, the quadratic weighted κ; with three or more raters, Fleiss’ κ. The figure comes with the reading of Landis and Koch (1977), the observed agreement and the agreement expected by chance, Gwet’s AC1 and Krippendorff’s α, ordinal or nominal according to the type.</p>
+  <figure class="w80">
+    <div class="marco"><img src="../img/en/b9-cat.png" alt="Fleiss’ κ, its relatives and the agreement table of two simulated raters"></div>
+    <figcaption><b>Figure 9.4.</b> The four simulated raters, in five ordered categories. Fleiss’ κ is “slight” (.188): they agree on the exact category only 35% of the time. But their disagreements are usually by one or two categories, rarely more, and the measures that use the order see it: quadratic κ of the first two .579, AC2 .608, ordinal α .548.</figcaption>
+  </figure>
+  <p>The table gives all the variants, with their standard error and <i>p</i>-value when they exist: Cohen’s κ of the first two raters, unweighted, with linear and with quadratic weights; Fleiss’ κ and Conger’s exact κ (with three or more); Gwet’s AC1 and its weighted version AC2; and Krippendorff’s nominal and ordinal α. On the right, the agreement table of the first two raters: the diagonal is the exact agreement.</p>
+  <table class="compacta">
+    <caption><b>Table 9.3.</b> Reading κ (Landis and Koch 1977)</caption>
+    <thead><tr><th style="width:1.6in">κ</th><th>Agreement</th></tr></thead>
+    <tbody>
+      <tr><td>below 0</td><td>poor</td></tr>
+      <tr><td>0 to .20</td><td>slight</td></tr>
+      <tr><td>.21 to .40</td><td>fair</td></tr>
+      <tr><td>.41 to .60</td><td>moderate</td></tr>
+      <tr><td>.61 to .80</td><td>substantial</td></tr>
+      <tr><td>.81 to 1</td><td>almost perfect</td></tr>
+    </tbody>
+  </table>
+  <div class="caja teoria">
+    <div class="caja-t"><span class="ico">θ</span>Theory in brief · the paradoxes of κ</div>
+    <p>κ corrects agreement for chance, and chance depends on the marginals. With very unbalanced categories—almost all cases “healthy”, for example—the agreement expected by chance is high, and κ can come out low even though the raters agree almost always (Feinstein and Cicchetti 1990). Gwet’s AC1 (2008) computes chance in another way and is more stable in that case. Krippendorff’s α admits any number of raters, missing ratings and nominal, ordinal, interval or ratio scales (Hayes and Krippendorff 2007).</p>
+  </div>
+  <div class="caja regla">
+    <div class="caja-t"><span class="ico">✓</span>Reading Block 9</div>
+    <table class="compacta"><tbody>
+      <tr><td style="width:44%"><b>If</b> two instruments correlate highly…</td><td>do not say that they agree: report the concordance and the limits of agreement.</td></tr>
+      <tr><td><b>If</b> there is mean or proportional bias…</td><td>correct it or describe it; the limits of agreement are not enough.</td></tr>
+      <tr><td><b>If</b> you are going to report an ICC…</td><td>say which of the six forms, and why your design calls for it.</td></tr>
+      <tr><td><b>If</b> the categories are ordinal…</td><td>report a weighted κ, the AC2 or the ordinal α, not the unweighted κ.</td></tr>
+      <tr><td><b>If</b> κ is low but the observed agreement is high…</td><td>look at the marginals: it may be the κ paradox; report the AC1 as well.</td></tr>
+    </tbody></table>
+    <p class="regla-pie">These are guides for interpretation, not laws: what you know about the phenomenon, the design and how it was measured always comes first.</p>
+  </div>
+</section>
+
+</body>
+</html>

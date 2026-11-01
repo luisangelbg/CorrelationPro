@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>CorrelationPro · User’s Manual · Chapter 8</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,500;0,600;1,500&family=Crimson+Pro:ital,wght@0,400;0,600;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../interior.css">
+<script src="../paginar.js"></script>
+</head>
+<body>
+
+<section class="capitulo" id="cap-8" data-pestana="8" data-orden="8" style="--acento: var(--b8)">
+  <div class="cap-apertura">
+    <div class="cap-num">8</div>
+    <div class="cap-etiqueta">Chapter eight · Block 8</div>
+    <h1 data-corto="Categorical">Categorical, ordinal and mixed</h1>
+    <div class="cap-regla"></div>
+    <p class="cap-resumen">Not everything is measured with numbers. This block analyzes the association in a contingency table—with its test, its mosaic and some twenty measures—, the relation between a continuous and a categorical variable, the latent correlations (tetrachoric, polychoric and polyserial) and the heterogeneous matrix, in which each pair gets the coefficient its types call for.</p>
+    <div class="cap-franja"><span class="k8"></span><span class="k8"></span><span class="k2"></span><span class="k5"></span></div>
+    <ul class="cap-contenido">
+      <li><b>8.1</b>Two categorical variables</li>
+      <li><b>8.2</b>The tests and measures of a table</li>
+      <li><b>8.3</b>The 2 × 2 table</li>
+      <li><b>8.4</b>A continuous and a categorical variable</li>
+      <li><b>8.5</b>The heterogeneous matrix</li>
+    </ul>
+  </div>
+
+  <!-- 8.1 -->
+  <h2 id="s8-1"><span class="num">8.1</span>Two categorical variables</h2>
+  <p class="lead">You choose the <span class="ui">Rows</span> and the <span class="ui">Columns</span> among the binary, nominal or ordinal variables (from 2 to 30 categories; the number appears in parentheses), and the app builds the contingency table.</p>
+  <p><span class="ui">In each cell</span> decides what is shown: the <span class="ui">Count</span>, the <span class="ui">Row %</span>, the <span class="ui">Column %</span> or the <span class="ui">Standardized residual</span> (Haberman’s adjusted residual). Whatever the choice, the background of each cell tells you whether it has more cases than there would be if the two variables were independent (blue) or fewer (red), when the adjusted residual exceeds 1.96, and it is more intense when it exceeds 2.58. If any expected frequency is below 5, a note warns you and asks for the exact or Monte Carlo <i>p</i>-value.</p>
+  <figure class="w80">
+    <div class="marco"><img src="../img/en/b8-tabla.png" alt="The table of class and survival on the Titanic and its mosaic"></div>
+    <figcaption><b>Figure 8.1.</b> The Titanic, the example the block opens with: the class and the survival of 2,201 people. In first class more survived than expected (203, blue); in third class and in the crew, fewer (red). The mosaic draws it: the height of each band is the size of the class and the width of each rectangle, the proportion within it.</figcaption>
+  </figure>
+  <p>In the <b>mosaic</b> each row of the table is a horizontal band, with a height proportional to its total, and within it each column takes up the width of its proportion. The color is the Pearson residual of the cell, in the palette of Block 1: blue when there are more cases than expected, red when there are fewer.</p>
+
+  <!-- 8.2 -->
+  <h2 id="s8-2"><span class="num">8.2</span>The tests and measures of a table</h2>
+  <p>Below come the main figures: Pearson’s χ² with its degrees of freedom, the likelihood ratio <i>G</i>², Fisher’s exact <i>p</i>-value (in 2 × 2 tables, with Yates’ corrected χ²) or the Monte Carlo one with 1,999 tables (in larger tables, with up to 5,000 cases), and the bias-corrected Cramér’s V. The χ² says <i>whether</i> there is association; the measures say <i>how much</i>.</p>
+  <figure class="w80">
+    <div class="marco"><img src="../img/en/b8-medidas.png" alt="The tests and measures of association of class and survival on the Titanic"></div>
+    <figcaption><b>Figure 8.2.</b> Class and survival: χ² = 190.40 with 3 degrees of freedom and Cramér’s V = .292. The asymmetric measures say that knowing the class somewhat improves the prediction of survival (λ = .114), and that knowing survival does not help at all to predict the class (λ = .000).</figcaption>
+  </figure>
+  <table class="compacta">
+    <caption><b>Table 8.1.</b> The measures of a contingency table</caption>
+    <thead><tr><th style="width:1.9in">Measure</th><th>What it says</th></tr></thead>
+    <tbody>
+      <tr><td><b>Cramér’s V</b></td><td>the strength of the association, from 0 to 1, for any table; the corrected one (Bergsma 2013) removes the upward bias of small samples</td></tr>
+      <tr><td><b>Contingency C</b></td><td>Pearson’s measure; it never reaches 1, and the app gives its largest possible value for that table</td></tr>
+      <tr><td><b>Tschuprow’s T</b></td><td>like V, but it reaches 1 only in square tables</td></tr>
+      <tr><td><b>Goodman–Kruskal λ</b></td><td>how much the error of guessing one variable by its most common category drops when you know the other; in both directions and symmetric</td></tr>
+      <tr><td><b>Goodman–Kruskal τ</b></td><td>the same, but guessing at random with the proportions; in both directions</td></tr>
+      <tr><td><b>Theil’s U</b></td><td>the part of the uncertainty (the entropy) of one variable removed by the other; in both directions and symmetric</td></tr>
+      <tr><td><b>γ, Somers’ d, τ-b, τ-c</b></td><td>with ordered categories (none nominal): the concordance in the order. γ ignores ties and therefore exaggerates; τ-c suits rectangular tables</td></tr>
+      <tr><td><b>Polychoric</b></td><td>if each variable is the cut of a latent normal, the correlation of those normals, with the test that the normal model fits</td></tr>
+    </tbody>
+  </table>
+  <div class="caja importante">
+    <div class="caja-t"><span class="ico">!</span>With many cases, everything is significant</div>
+    <p>With 2,201 people, a tiny association already gives <i>p</i> &lt; .001. The <i>p</i>-value of χ² does not measure strength: always report a measure—the corrected V, a λ, an odds ratio—and the percentages that explain it.</p>
+  </div>
+
+  <!-- 8.3 -->
+  <h2 id="s8-3"><span class="num">8.3</span>The 2 × 2 table</h2>
+  <p>When both variables are binary, the measures specific to the 2 × 2 table appear: φ, which is Pearson’s <i>r</i> of two variables coded 0 and 1; the <b>odds ratio</b> with its Woolf interval, which does not depend on the marginals; Yule’s <i>Q</i> and <i>Y</i>, which bring the odds ratio to the scale from −1 to 1; the <b>relative risk</b>; and the <b>tetrachoric</b> correlation.</p>
+  <figure class="w70">
+    <div class="marco"><img src="../img/en/b8-2x2.png" alt="The measures of the 2 × 2 table of sex and survival on the Titanic"></div>
+    <figcaption><b>Figure 8.3.</b> Sex and survival. Of the women, 73% survived; of the men, 21%: φ = .456 and an odds ratio of 10.15 [8.03, 12.83]. The relative risk, 2.939, compares the first column (not surviving) between the first row and the second: among the men, the proportion of deaths was almost three times that of the women.</figcaption>
+  </figure>
+  <div class="caja nota">
+    <div class="caja-t"><span class="ico">i</span>The order of the categories decides the sign</div>
+    <p>The odds ratio, the relative risk, φ and the tetrachoric compare the first category with the second in the order of the table. Here sex goes “Male, Female” and survival “No, Yes”: that is why φ is positive (being a woman goes with surviving). If you reverse the order of a variable in Block 2, the sign changes, not the strength.</p>
+  </div>
+  <div class="caja teoria">
+    <div class="caja-t"><span class="ico">θ</span>Theory in brief · φ versus the tetrachoric</div>
+    <p>φ measures the association of the two binary variables as they are. The tetrachoric assumes that each binary variable is the cut of a continuous normal variable—the propensity to survive, for example—and estimates the correlation of those two normals; that is why it is larger (.698 against .456). Use it only if that latent variable makes sense; for two genuine categories, such as sex, φ or the odds ratio are more honest.</p>
+  </div>
+
+  <!-- 8.4 -->
+  <h2 id="s8-4"><span class="num">8.4</span>A continuous and a categorical variable</h2>
+  <p>You choose a <span class="ui">Continuous</span> and a <span class="ui">Categorical</span> variable. The <b>correlation ratio η</b> is always computed, with its η² and its <i>F</i> test (that of the one-way analysis of variance): what part of the variation of the continuous variable the categories explain. Depending on the type of the categorical variable, others are added:</p>
+  <ul>
+    <li><b>Binary</b>: the <b>point-biserial</b>, which is Pearson’s <i>r</i> with the binary variable as 0 and 1 and is equivalent to the two-group <i>t</i> test; the <b>biserial</b>, if the binary variable is the cut of a normal; the <b>rank-biserial</b>, which does not assume normality (with the Mann–Whitney <i>U</i>); and the polyserial.</li>
+    <li><b>Ordinal</b>: the <b>polyserial</b> (Olsson, Drasgow and Dorans 1982), the correlation of the continuous variable with the latent normal that is cut into the categories, with its standard error and the ad hoc estimate of the same authors.</li>
+    <li><b>Nominal</b>: only η, which has no sign because the categories have no order.</li>
+  </ul>
+  <figure class="w80">
+    <div class="marco"><img src="../img/en/b8-mixta.png" alt="The petal length of the three iris species with η"></div>
+    <figcaption><b>Figure 8.4.</b> Petal length and species of the irises: η = .970, η² = .941. The species explain 94% of the variation in petal length. Each category shows its points, its box (median and quartiles) and its mean (the cross).</figcaption>
+  </figure>
+
+  <!-- 8.5 -->
+  <h2 id="s8-5"><span class="num">8.5</span>The heterogeneous matrix</h2>
+  <p>When the data mix types, a Pearson matrix treats as numbers what are not numbers. The heterogeneous matrix gives each pair the coefficient its types call for, and a letter in the corner of each cell tells you which one it was:</p>
+  <table class="compacta">
+    <caption><b>Table 8.2.</b> The coefficient for each pair of types</caption>
+    <thead><tr><th style="width:2.3in">Pair of types</th><th style="width:0.5in">Letter</th><th>Coefficient</th></tr></thead>
+    <tbody>
+      <tr><td>continuous and continuous</td><td><b>P</b></td><td>Pearson’s <i>r</i></td></tr>
+      <tr><td>continuous and ordinal or binary</td><td><b>S</b></td><td>polyserial</td></tr>
+      <tr><td>ordinal or binary with ordinal</td><td><b>C</b></td><td>polychoric</td></tr>
+      <tr><td>binary and binary</td><td><b>T</b></td><td>tetrachoric</td></tr>
+      <tr><td>nominal and continuous</td><td><b>η</b></td><td>correlation ratio</td></tr>
+      <tr><td>nominal and categorical</td><td><b>V</b></td><td>bias-corrected Cramér’s V</td></tr>
+    </tbody>
+  </table>
+  <figure class="w70">
+    <div class="marco"><img src="../img/en/b8-het.png" alt="The heterogeneous matrix of the four Titanic variables"></div>
+    <figcaption><b>Figure 8.5.</b> The four Titanic variables: Cramér’s V for class, which is nominal, and tetrachorics for the pairs of binary variables. The strongest is that of sex with survival (.70).</figcaption>
+  </figure>
+  <p>The buttons at the top choose the variables, with their type beside them (at first, the first twelve). Since η and V have no sign, a note reminds you that, mixed with the others, they do not form a positive definite correlation matrix: the heterogeneous matrix is for description. For a factor analysis of ordinal variables, the right choice is a matrix of polychorics only.</p>
+
+  <div class="caja regla">
+    <div class="caja-t"><span class="ico">✓</span>Reading Block 8</div>
+    <table class="compacta"><tbody>
+      <tr><td style="width:44%"><b>If</b> there are expected frequencies below 5…</td><td>report Fisher’s exact <i>p</i>-value (2 × 2) or the Monte Carlo one.</td></tr>
+      <tr><td><b>If</b> the table is 2 × 2…</td><td>report the odds ratio with its interval, and the percentages of each group.</td></tr>
+      <tr><td><b>If</b> you want to predict one variable from the other…</td><td>use an asymmetric measure (λ, τ or <i>U</i>) in that direction.</td></tr>
+      <tr><td><b>If</b> the categories are ordered…</td><td>use τ-b or the polychoric; V ignores the order.</td></tr>
+      <tr><td><b>If</b> the tetrachoric or the polychoric turn out very different from φ or V…</td><td>remember that they assume a latent normal: say whether that assumption is reasonable.</td></tr>
+    </tbody></table>
+    <p class="regla-pie">These are guides for interpretation, not laws: what you know about the phenomenon, the design and how it was measured always comes first.</p>
+  </div>
+</section>
+
+</body>
+</html>

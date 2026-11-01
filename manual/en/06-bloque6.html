@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>CorrelationPro · User’s Manual · Chapter 6</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,500;0,600;1,500&family=Crimson+Pro:ital,wght@0,400;0,600;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../interior.css">
+<script src="../paginar.js"></script>
+</head>
+<body>
+
+<section class="capitulo" id="cap-6" data-pestana="6" data-orden="6" style="--acento: var(--b6)">
+  <div class="cap-apertura">
+    <div class="cap-num">6</div>
+    <div class="cap-etiqueta">Chapter six · Block 6</div>
+    <h1 data-corto="Nonlinear">Nonlinear dependence and copulas</h1>
+    <div class="cap-regla"></div>
+    <p class="cap-resumen">Pearson’s <i>r</i> measures straight lines, and Spearman’s ρ measures curves that always go up or always go down. A U-shaped, bell-shaped or cyclic relation escapes both. This block gathers the measures that are zero only when there is no relation at all, sweeps every pair to find the ones Pearson misses, and fits five copulas that tell you whether extreme values happen together.</p>
+    <div class="cap-franja"><span class="k6"></span><span class="k6"></span><span class="k4"></span><span class="k5"></span></div>
+    <ul class="cap-contenido">
+      <li><b>6.1</b>One pair: what each measure sees</li>
+      <li><b>6.2</b>The cloud and the common scale</li>
+      <li><b>6.3</b>MIC and its characteristic matrix</li>
+      <li><b>6.4</b>The sweep: what Pearson misses</li>
+      <li><b>6.5</b>Copulas: the shape of the dependence</li>
+    </ul>
+  </div>
+
+  <!-- 6.1 -->
+  <h2 id="s6-1"><span class="num">6.1</span>One pair: what each measure sees</h2>
+  <p class="lead">You choose two numeric variables in <span class="ui">X</span> and <span class="ui">Y</span>, and the block computes nine figures at once: Pearson’s <i>r</i>, Spearman’s ρ and the dependence measures that see any shape. Kendall’s τ appears in the chart of Section 6.2.</p>
+  <p>At least 10 complete pairs are needed. <span class="ui">Permutations for MIC</span> computes the <i>p</i>-value of MIC by shuffling <i>Y</i> 199, 499 or 999 times; since MIC is slow, it is off by default (<span class="ui">Do not compute its p-value</span>). With more than 250 rows, or with permutations, a waiting screen appears.</p>
+  <figure>
+    <div class="marco"><img src="../img/en/b6-cifras.png" alt="The nine figures for the year and the United States armed forces, 1947 to 1962"></div>
+    <figcaption><b>Figure 6.1.</b> The year and the United States armed forces, 1947 to 1962, the example the block opens with. Neither <i>r</i> (.417, <i>p</i> = .108) nor ρ (.226) is significant; the distance correlation (.737), ξ and HSIC are, with <i>p</i> &lt; .001.</figcaption>
+  </figure>
+
+  <table class="compacta">
+    <caption><b>Table 6.1.</b> The measures of Block 6</caption>
+    <thead><tr><th style="width:1.6in">Measure</th><th>What it measures</th><th style="width:1.45in">Test · limit</th></tr></thead>
+    <tbody>
+      <tr><td><b><i>r</i>, ρ, τ</b></td><td>the linear part (<i>r</i>) and the monotonic part (ρ, τ) of the relation</td><td>those of Block 4</td></tr>
+      <tr><td><b>dCor</b></td><td>any dependence; in the population it is 0 only under independence (Székely, Rizzo and Bakirov 2007)</td><td><i>T</i> · up to 3,000 rows</td></tr>
+      <tr><td><b>ξ(X→Y) · ξ(Y→X)</b></td><td>how much <i>Y</i> is a function of <i>X</i>, and the other way around: it is not symmetric (Chatterjee 2021)</td><td><i>z</i> · no limit</td></tr>
+      <tr><td><b>HSIC</b></td><td>dependence measured in a space of functions, with Gaussian kernels (Gretton et al. 2005)</td><td>gamma approximation · up to 1,500</td></tr>
+      <tr><td><b>MIC</b></td><td>the largest mutual information a grid can capture, normalized so that a noiseless function of any shape scores 1 (Reshef et al. 2011)</td><td>permutation, if requested · up to 1,200</td></tr>
+      <tr><td><b>Mutual information</b></td><td>how much uncertainty about <i>Y</i> is removed by knowing <i>X</i>, in nats; Linfoot’s coefficient puts it on the scale of a correlation (Kraskov, Stögbauer and Grassberger 2004)</td><td>— · up to 3,000</td></tr>
+      <tr><td><b>Maximal correlation</b></td><td>the largest <i>r</i> obtained by transforming <i>X</i> and <i>Y</i> with any function (Gebelein 1941; Rényi 1959), on quantile classes</td><td>— · no limit</td></tr>
+      <tr><td><b>D · τ*</b></td><td>Hoeffding’s D and the τ* of Bergsma and Dassios, as in Block 4</td><td>— · τ* up to 80</td></tr>
+    </tbody>
+  </table>
+  <div class="caja nota">
+    <div class="caja-t"><span class="ico">i</span>Mutual information, in standard units</div>
+    <p>The nearest-neighbor estimator measures distances with the maximum norm, so the app standardizes both variables first: in their own units, the one with the larger spread would decide on its own which points are neighbors. Linfoot’s coefficient, √(1 − e<sup>−2<i>I</i></sup>), equals |ρ| when both variables are normal.</p>
+  </div>
+
+  <!-- 6.2 -->
+  <h2 id="s6-2"><span class="num">6.2</span>The cloud and the common scale</h2>
+  <p>On the left, the cloud with the straight line and the LOWESS curve. On the right, the nine measures on a single scale from 0 (independence) to 1, in the color of their family: <i>r</i> in red, the rank-based ones in gold, the dependence measures in turquoise and the maximal correlation in violet. When the dependence measures lie far to the right of |<i>r</i>|, there is a relation that a straight line does not see.</p>
+  <figure>
+    <div class="marco"><img src="../img/en/b6-nube.png" alt="The cloud of the year and the armed forces, and the nine measures on a scale from 0 to 1"></div>
+    <figcaption><b>Figure 6.2.</b> The armed forces grow suddenly in 1951, with the Korean War, and then decline slowly. The straight line barely captures it; the distance correlation (.74), ξ (.62 and .51) and the maximal correlation (.92) do.</figcaption>
+  </figure>
+  <p>Below, the reading in words compares the distance correlation with |<i>r</i>|: if it exceeds it by more than 0.2, there is dependence that a straight line does not capture; if not, nearly all the dependence detected is also captured by a line. If the two ξ differ by more than 0.15, it says so and explains in which direction the dependence is stronger: in a parabola, <i>Y</i> is a function of <i>X</i> but not the reverse. It also gives the MIC nonlinearity index, MIC − <i>r</i>².</p>
+  <div class="caja importante">
+    <div class="caja-t"><span class="ico">!</span>With few data, not every measure works</div>
+    <p>With the 16 years of this example, MIC can only use a 2 × 2 grid, and the maximal correlation three classes per variable, which tend to give high values. The distance correlation, ξ and HSIC work well with few data and come with their own test; MIC and mutual information need at least about 50.</p>
+  </div>
+
+  <!-- 6.3 -->
+  <h2 id="s6-3"><span class="num">6.3</span>MIC and its characteristic matrix</h2>
+  <p>MIC tries many grids over the cloud—from 2 × 2 up to those with as many as <i>n</i><sup>0.6</sup> cells—and in each one it measures the mutual information between the column and the row each point falls in, normalized by the logarithm of the smaller side. The <b>characteristic matrix</b> shows that value for each combination of columns and rows; MIC is its maximum, framed in red. With very few data only the 2 × 2 grid fits, and the app says so instead of drawing a one-cell matrix.</p>
+  <figure class="w80">
+    <div class="marco"><img src="../img/en/b6-mic-iris.png" alt="The MIC characteristic matrix for the sepal width and the petal length of the irises"></div>
+    <figcaption><b>Figure 6.3.</b> The sepal width and the petal length of the irises. The maximum is in the grid of 2 columns by 10 rows: MIC = .439 against <i>r</i>² = .184. ξ is asymmetric: the petal length says a lot about the sepal width (.321), and not the other way around (.071), because for the same sepal width there are both short and long petals.</figcaption>
+  </figure>
+  <div class="caja teoria">
+    <div class="caja-t"><span class="ico">θ</span>Theory in brief · what each one sees</div>
+    <p>The distance correlation compares the distances between all pairs of points in <i>X</i> with those in <i>Y</i>; HSIC does the same with the similarities given by a Gaussian kernel, whose width is set by the median of the distances. Both are zero only under independence. ξ sorts the data by <i>X</i> and looks at how much the ranks of <i>Y</i> jump from one neighbor to the next: if <i>Y</i> is a function of <i>X</i>, they hardly jump. MIC and mutual information come from information theory; the maximal correlation, from searching for the best transformations of the two variables.</p>
+  </div>
+
+  <!-- 6.4 -->
+  <h2 id="s6-4"><span class="num">6.4</span>The sweep: what Pearson misses</h2>
+  <p><span class="ui">Sweep</span> computes, for every pair of numeric variables (up to 30 variables), <i>r</i>, ρ, the distance correlation and ξ in its stronger direction, and sorts them by <b>dCor − |<i>r</i>|</b>: curved, U-shaped or cyclic relations rise to the top. <span class="ui">Include MIC (slower)</span> adds MIC and MIC − <i>r</i>². The first six pairs appear as cards with a miniature cloud; the table shows up to 40, with the difference in amber when it exceeds 0.2. A click on a card or a row takes that pair to the study of Section 6.1.</p>
+  <figure class="w80">
+    <div class="marco"><img src="../img/en/b6-rastreo.png" alt="The sweep of the 21 pairs of the United States economy, with the first six clouds and the table"></div>
+    <figcaption><b>Figure 6.4.</b> The 21 pairs of the United States economy. The first six involve the armed forces, which rise and then fall against the other series; the series that grow together end up at the bottom, with dCor − |<i>r</i>| close to zero.</figcaption>
+  </figure>
+  <div class="caja ejemplo">
+    <div class="caja-t"><span class="ico">▸</span>Example · what the sweep is for</div>
+    <p>A matrix of 20 variables has 190 pairs, and nobody looks at 190 clouds. The sweep brings forward the few pairs on which a Pearson matrix—the one in Block 5—is misleading, because it says “little relation” where there is a lot. Those pairs deserve a cloud in the report, and a dependence measure instead of <i>r</i>.</p>
+  </div>
+
+  <!-- 6.5 -->
+  <h2 id="s6-5"><span class="num">6.5</span>Copulas: the shape of the dependence</h2>
+  <p>Sklar’s theorem (1959) separates each variable from its dependence: when the data are turned into ranks divided by <i>n</i>&nbsp;+&nbsp;1—the pseudo-observations—only the <b>copula</b> remains, the dependence without the marginals. Two pairs with the same Kendall’s τ can have very different copulas, and the difference lies above all in the tails: do extreme values happen together?</p>
+  <p>The block fits five families to the chosen pair, each with two estimates of its parameter θ: the one given by inverting Kendall’s τ and the maximum pseudo-likelihood one (Genest, Ghoudi and Rivest 1995). It gives their log-likelihood, their AIC—the one with the lowest AIC carries the label <span class="ui">lowest AIC</span>—and their lower and upper tail dependence. Clayton and Gumbel are fitted only with positive dependence.</p>
+  <figure class="w80">
+    <div class="marco"><img src="../img/en/b6-copulas.png" alt="The five copulas of examination and education in Switzerland, 1888, with the data as ranks, a sample from the Gumbel copula and the empirical tails"></div>
+    <figcaption><b>Figure 6.5.</b> Examination and education in the districts of Switzerland, 1888 (τ = .529). Gumbel wins, with the dependence concentrated at the top (λ<sub>up</sub> = .615): the districts with more high-scoring conscripts are also those with more education. On the right, a sample from the fitted copula to compare with the data.</figcaption>
+  </figure>
+  <table class="compacta">
+    <caption><b>Table 6.2.</b> The five families and their tails</caption>
+    <thead><tr><th style="width:1.3in">Family</th><th>Tails</th></tr></thead>
+    <tbody>
+      <tr><td><b>Gaussian</b></td><td>no tail dependence: the extremes become independent</td></tr>
+      <tr><td><b>Student t</b></td><td>the same dependence in both tails, larger the fewer the degrees of freedom (ν)</td></tr>
+      <tr><td><b>Clayton</b></td><td>dependence at the bottom: low values happen together</td></tr>
+      <tr><td><b>Gumbel</b></td><td>dependence at the top: high values happen together</td></tr>
+      <tr><td><b>Frank</b></td><td>no tail dependence, symmetric; allows negative dependence</td></tr>
+    </tbody>
+  </table>
+  <p>Below, four figures give the tails of the data themselves: the probability that <i>Y</i> is in its lower 10% when <i>X</i> is, the same for the upper 10%, what both would be if the variables were independent (0.1), and the Kendall’s τ that fixes each family.</p>
+  <div class="caja teoria">
+    <div class="caja-t"><span class="ico">θ</span>Theory in brief · tail dependence</div>
+    <p>Upper tail dependence λ<sub>up</sub> is the limit of the probability that <i>V</i> exceeds <i>u</i> when <i>U</i> exceeds <i>u</i>, as <i>u</i> approaches 1 (Joe 1997); the lower one is the same at the bottom. It matters for risk: if the droughts of two regions, the falls of two prices or the pests of two crops share a tail, they happen together more often than a Gaussian with the same correlation would suggest. Inverting τ gives a starting value that does not depend on the marginals; the pseudo-likelihood refines it.</p>
+  </div>
+  <div class="caja regla">
+    <div class="caja-t"><span class="ico">✓</span>Reading Block 6</div>
+    <table class="compacta"><tbody>
+      <tr><td style="width:44%"><b>If</b> dCor is much larger than |<i>r</i>|…</td><td>look at the cloud and report a dependence measure, not <i>r</i>; describe the shape in words.</td></tr>
+      <tr><td><b>If</b> the two ξ differ a lot…</td><td>one variable is nearly a function of the other, but not the reverse: say in which direction.</td></tr>
+      <tr><td><b>If</b> there are fewer than about 50 data…</td><td>rely on dCor, ξ and HSIC; take MIC, mutual information and the maximal correlation as a guide.</td></tr>
+      <tr><td><b>If</b> the best copula has a tail…</td><td>extremes happen together: keep it in mind in any simulation or risk analysis.</td></tr>
+      <tr><td><b>If</b> two families are close in AIC…</td><td>the data are not enough to choose: with few data, the empirical tails rest on very few points.</td></tr>
+    </tbody></table>
+    <p class="regla-pie">These are guides for interpretation, not laws: what you know about the phenomenon, the design and how it was measured always comes first.</p>
+  </div>
+</section>
+
+</body>
+</html>
