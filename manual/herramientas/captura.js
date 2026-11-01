@@ -3,7 +3,8 @@
    manual/img/<nombre>.png al doble de resolución. La receta devuelve el recorte "x,y,ancho,alto" en
    coordenadas del documento (getBoundingClientRect + scroll) o nada, para la ventana entera.
    Uso, desde la carpeta de la app:
-     node manual/herramientas/captura.js <receta> [--ancho 1400] [--alto 900] [--tema dark] [--salida nombre]
+     node manual/herramientas/captura.js <receta> [--ancho 1400] [--alto 900] [--tema dark] [--idioma en] [--salida nombre]
+     (--salida en/<nombre> la deja en manual/img/en/)
      node manual/herramientas/captura.js --todas          (todas las recetas, con la ventana que pide cada una)
    Una receta puede pedir su ventana en su primera línea:  // ventana 1500x1100 */
 'use strict';
@@ -24,6 +25,10 @@ async function una(nombre, o) {
   const ancho = +(o.ancho || (v && v[1]) || 1400), alto = +(o.alto || (v && v[2]) || 900);
   const nav = await abrir({ ancho, alto, escala: 2, tema: o.tema });
   try {
+    /* the interface language is the saved one: write it first, then open the app again */
+    await nav.enviar('Page.navigate', { url: urlDe(path.join(APP, 'index.html')) });
+    await esperar(600);
+    await nav.evaluar(`localStorage.setItem('correlationpro:lang', ${JSON.stringify(o.idioma === 'en' ? 'en' : 'es')}); 1`);
     await nav.enviar('Page.navigate', { url: urlDe(path.join(APP, 'index.html')) });
     await esperar(1800);
     const recorte = await nav.evaluar(codigo, 240000);
@@ -51,5 +56,5 @@ async function una(nombre, o) {
     return;
   }
   const nombres = process.argv.slice(2).filter((a, i, A) => !a.startsWith('--') && !(A[i - 1] || '').startsWith('--'));
-  for (const n of nombres) await una(n, { ancho: arg('ancho'), alto: arg('alto'), tema: arg('tema'), salida: nombres.length === 1 ? arg('salida') : null });
+  for (const n of nombres) await una(n, { ancho: arg('ancho'), alto: arg('alto'), tema: arg('tema'), idioma: arg('idioma'), salida: nombres.length === 1 ? arg('salida') : null });
 })().catch(e => { console.error(e.message || e); process.exit(1); });
