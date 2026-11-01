@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>CorrelationPro · User’s Manual · Chapter 5</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,500;0,600;1,500&family=Crimson+Pro:ital,wght@0,400;0,600;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../interior.css">
+<script src="../paginar.js"></script>
+</head>
+<body>
+
+<section class="capitulo" id="cap-5" data-pestana="5" data-orden="5" style="--acento: var(--b5)">
+  <div class="cap-apertura">
+    <div class="cap-num">5</div>
+    <div class="cap-etiqueta">Chapter five · Block 5</div>
+    <h1 data-corto="Matrix">The correlation matrix</h1>
+    <div class="cap-regla"></div>
+    <p class="cap-resumen">All the variables against all: the matrix with its tests corrected for multiple testing, the figure for publication with the glyph and the order that read it best, the diagnosis that says whether the matrix is fit for what follows—regression, factor analysis, simulation—, the KMO and Bartlett’s test, and the table of means, standard deviations and correlations ready for the article.</p>
+    <div class="cap-franja"><span class="k5"></span><span class="k5"></span><span class="k1"></span><span class="k13"></span></div>
+    <ul class="cap-contenido">
+      <li><b>5.1</b>What to correlate</li>
+      <li><b>5.2</b>The matrix</li>
+      <li><b>5.3</b>Multiple testing</li>
+      <li><b>5.4</b>Four matrices to show</li>
+      <li><b>5.5</b>Is it a valid matrix?</li>
+      <li><b>5.6</b>KMO and Bartlett</li>
+      <li><b>5.7</b>The table to publish</li>
+      <li><b>5.8</b>Large matrices</li>
+    </ul>
+  </div>
+
+  <!-- 5.1 -->
+  <h2 id="s5-1"><span class="num">5.1</span>What to correlate</h2>
+  <p class="lead">The numeric columns—continuous and ordinal—with the variable role come in. When you open some data all of them are selected; a click removes or adds one (at least two always remain) and <span class="ui">all</span> puts them all back.</p>
+  <p><span class="ui">Coefficient</span> offers eleven of the twelve coefficients of Block 4 (all except τ*, which is too slow for a matrix). <span class="ui">Multiple-testing correction</span> and <span class="ui">α</span> decide which cells count as significant (Section 5.3). Each cell uses the rows complete in its two variables, unless listwise handling of missing data was chosen in Block 2.</p>
+  <figure>
+    <div class="marco"><img src="../img/en/b5-que.png" alt="The What to correlate card with the six variables of Switzerland, 1888"></div>
+    <figcaption><b>Figure 5.1.</b> Switzerland, 1888, the example the block opens with: six indicators for 47 French-speaking districts, Pearson’s <i>r</i> and Holm’s correction at 5%.</figcaption>
+  </figure>
+  <div class="caja nota">
+    <div class="caja-t"><span class="ico">i</span>Costly measures and many variables</div>
+    <p>The distance correlation stores <i>n</i> × <i>n</i> matrices and is computed with up to 3,000 rows. The distance correlation, Hoeffding’s D and Chatterjee’s ξ allow up to 60 variables when there are more than 300 rows. With more than 30 complete variables, Pearson and Spearman are computed as products of standardized columns, with the <i>p</i>-values of the <i>t</i> approximation, and a message says so.</p>
+  </div>
+
+  <!-- 5.2 -->
+  <h2 id="s5-2"><span class="num">5.2</span>The matrix</h2>
+  <p>The figure has two halves. <span class="ui">Below</span> and <span class="ui">Above</span> choose the glyph for each one among the nine of Section 1.5—ellipse, circle, moon, pie, square, bar, shade, color and number—or <span class="ui">Nothing</span>; when you change it, the shape glyphs morph into the new one. The color follows the palette chosen in Block 1, and the bar on the right gives its scale from −1 to 1.</p>
+  <ul>
+    <li><span class="ui">Order</span>: <span class="ui">As in the data</span>; three of hierarchical <span class="ui">Clustering</span> (average, complete or Ward), with the distance 1 − <i>r</i>; <span class="ui">Angle of the eigenvectors</span> (Friendly 2002), which orders by the angle of each variable in the first two; <span class="ui">First principal component</span>, by the loading on the first; or <span class="ui">Alphabetical</span>.</li>
+    <li><span class="ui">Not significant</span>: the cells whose corrected <i>p</i>-value does not reach α are <span class="ui">Crossed out</span>, <span class="ui">Faded</span> or drawn <span class="ui">Like the others</span>.</li>
+    <li><span class="ui">Show</span>: which of the four matrices of Section 5.4 is drawn.</li>
+  </ul>
+  <p>Hovering the pointer over a cell shows its two variables, its value, its corrected <i>p</i> and its <i>n</i>. A click selects it: it is framed in both halves, a line below gives its uncorrected and corrected <i>p</i>, and <span class="ui">Study the chosen pair in Block 4 →</span> takes that pair to Block 4.</p>
+
+  <figure class="w70">
+    <div class="marco"><img src="../img/en/b5-matriz.png" alt="The matrix of Switzerland, 1888, with ellipses below, numbers above and a chosen pair"></div>
+    <figcaption><b>Figure 5.2.</b> Switzerland, 1888, with ellipses below and numbers above. Education and fertility (framed) give −.66. Agriculture and fertility, with .35, are crossed out: uncorrected they would give <i>p</i> &lt; .05, but they do not survive Holm’s correction.</figcaption>
+  </figure>
+  <div class="caja teoria">
+    <div class="caja-t"><span class="ico">θ</span>Theory in brief · glyphs and order</div>
+    <p>Each glyph encodes <i>r</i> in a different way: the ellipse is the shape of a cloud with that correlation (Murdoch and Chow 1996), the moon and the pie show |<i>r</i>| as a fraction, color and shading (Friendly 2002) read well from a distance and the number is exact. A good arrangement combines two: a glyph that reads at a glance in one half and the number in the other. The order matters as much as the glyph: grouping similar variables reveals blocks that the order of the data hides.</p>
+  </div>
+
+  <!-- 5.3 -->
+  <h2 id="s5-3"><span class="num">5.3</span>Multiple testing</h2>
+  <p>With <i>p</i> variables there are <i>p</i>(<i>p</i> − 1)/2 tests: with six variables, fifteen; with thirty, 435. Without correction, at 5% false positives are expected even if no variable is related to any other: one in every twenty pairs, on average. The corrections adjust the <i>p</i>-values of the whole family of tests.</p>
+  <table class="compacta">
+    <caption><b>Table 5.1.</b> The multiple-testing corrections</caption>
+    <thead><tr><th style="width:1.7in">Correction</th><th>What it controls</th></tr></thead>
+    <tbody>
+      <tr><td><b>Holm</b> (the default)</td><td>the probability of having at least one false positive in the whole matrix (the familywise error), with more power than Bonferroni and no assumptions</td></tr>
+      <tr><td><b>Benjamini–Hochberg</b></td><td>the expected proportion of false positives among the significant cells (the false discovery rate); more powerful when there are many tests</td></tr>
+      <tr><td><b>Benjamini–Yekutieli</b></td><td>the same rate, valid under any dependence between the tests; more conservative</td></tr>
+      <tr><td><b>Hochberg</b> · <b>Hommel</b></td><td>the familywise error, with somewhat more power than Holm; they assume that the tests are independent or positively associated</td></tr>
+      <tr><td><b>Bonferroni</b></td><td>the familywise error, by multiplying each <i>p</i> by the number of tests: the simplest and the most conservative</td></tr>
+      <tr><td><b>None</b></td><td>nothing: each cell with its own <i>p</i></td></tr>
+    </tbody>
+  </table>
+  <div class="caja importante">
+    <div class="caja-t"><span class="ico">!</span>Decide the correction before seeing the matrix</div>
+    <p>If the question is confirmatory (“are these correlations real?”), use Holm. If it is exploratory (“which pairs are worth following up?”), Benjamini–Hochberg. What is not acceptable is to try several and keep the one that gives the most stars. And always state in the report which one you used: the table to publish puts it in its note.</p>
+  </div>
+
+  <!-- 5.4 -->
+  <h2 id="s5-4"><span class="num">5.4</span>Four matrices to show</h2>
+  <ul>
+    <li><span class="ui">The estimated matrix</span>: the one from the data, cell by cell.</li>
+    <li><span class="ui">The nearest positive-definite one</span>: the valid correlation matrix most similar to the estimated one (Section 5.5).</li>
+    <li><span class="ui">The shrunk one (Schäfer–Strimmer)</span>: each correlation shrunk toward zero in the proportion λ estimated from the data; useful with few rows for many variables.</li>
+    <li><span class="ui">The partial correlations</span>: each pair after removing the linear effect of all the other variables, with its <i>t</i> test on <i>n</i> − <i>p</i> degrees of freedom and the same correction. It requires a positive-definite matrix.</li>
+  </ul>
+  <div class="caja nota">
+    <div class="caja-t"><span class="ico">i</span>The partial correlation of a single pair</div>
+    <p>This view removes all the other variables at once. To control for only some of them, with their interval and their robust version, there is Block 7.</p>
+  </div>
+
+  <figure class="w70">
+    <div class="marco"><img src="../img/en/b5-parciales.png" alt="The partial correlations of Switzerland, 1888, ordered by clustering, with pies below and color above"></div>
+    <figcaption><b>Figure 5.3.</b> The partial correlations of Switzerland, 1888, ordered by clustering, with pies below and color above. With the other variables removed, education remains closely tied to Catholics and to fertility; examination and education, which gave .70, are crossed out: almost everything they share goes through the other variables.</figcaption>
+  </figure>
+  <!-- 5.5 -->
+  <h2 id="s5-5"><span class="num">5.5</span>Is it a valid matrix?</h2>
+  <p>A correlation matrix must be <b>positive definite</b>: all its eigenvalues greater than zero. Computed cell by cell it may not be—with pairwise missing data, with robust coefficients or with more variables than rows—, and then it cannot be used for regression, factor analysis, structural equations or simulation. The card gives five figures: whether it is positive definite (and, if not, how many eigenvalues are negative or zero), the smallest and largest eigenvalue (with the share of the variance taken by the largest), the condition number—above 1,000 the matrix is nearly collinear—and the logarithm of the determinant.</p>
+  <figure class="w80">
+    <div class="marco"><img src="../img/en/b5-diag.png" alt="The diagnosis of the matrix of Switzerland, 1888, with the eigenvalue plot and the corrections"></div>
+    <figcaption><b>Figure 5.4.</b> Switzerland, 1888: positive definite, with the smallest eigenvalue at 0.121 and a condition number of 26.5. The first component takes 53% of the variance; the dashed line is the Kaiser criterion (λ = 1).</figcaption>
+  </figure>
+  <p>The eigenvalue plot helps to see how many dimensions the data have. On the right, the <span class="ui">Corrections</span>: <span class="ui">Compute the nearest positive-definite one</span> applies Higham’s algorithm (2002), with up to 150 variables, and states how many iterations it used, the Frobenius distance to the estimated matrix and the largest change in a single cell; the Schäfer and Strimmer shrinkage gives its λ and the factor by which each correlation is multiplied.</p>
+  <div class="caja regla">
+    <div class="caja-t"><span class="ico">✓</span>If the matrix is not positive definite</div>
+    <table class="compacta"><tbody>
+      <tr><td style="width:44%"><b>If</b> missing data are handled pairwise…</td><td>try listwise handling in Block 2; if things change a lot, the missing values are not at random.</td></tr>
+      <tr><td><b>If</b> the coefficient is robust…</td><td>use the nearest one, and say in the report that you used it and how much it changed.</td></tr>
+      <tr><td><b>If</b> there are more variables than rows…</td><td>the matrix is necessarily singular: use the shrunk one, or reduce the variables.</td></tr>
+      <tr><td><b>If</b> the largest change of the nearest one is large (more than .05)…</td><td>the estimated matrix has a deeper problem: check the data before going on.</td></tr>
+    </tbody></table>
+  </div>
+
+  <!-- 5.6 -->
+  <h2 id="s5-6"><span class="num">5.6</span>KMO and Bartlett</h2>
+  <p>Before a factor analysis it is worth knowing whether the variables share anything. The <b>Kaiser–Meyer–Olkin</b> measure (KMO) compares the correlations with the partial ones: if the partials are small compared with the correlations, the variables share factors. It is given for the whole matrix and, as MSA, for each variable (up to 60 variables). <b>Bartlett’s test</b> asks whether the matrix is the identity, that is, whether nothing correlates; it uses the smallest <i>n</i> in the matrix. Both require a positive-definite matrix.</p>
+  <figure class="w80">
+    <div class="marco"><img src="../img/en/b5-kmo.png" alt="The KMO and Bartlett’s test for Switzerland, 1888, with the MSA of each variable"></div>
+    <figcaption><b>Figure 5.5.</b> Switzerland, 1888: KMO = .626, “mediocre”; Bartlett rejects the identity (χ² = 144.75 with 15 degrees of freedom). Catholic, with MSA = .478, is the variable that shares least with the others.</figcaption>
+  </figure>
+  <table class="compacta">
+    <caption><b>Table 5.2.</b> The words for the KMO (Kaiser and Rice 1974)</caption>
+    <thead><tr><th style="width:1.4in">KMO or MSA</th><th>Reading</th></tr></thead>
+    <tbody>
+      <tr><td>.90 or more</td><td>marvelous</td></tr>
+      <tr><td>.80 to .90</td><td>meritorious</td></tr>
+      <tr><td>.70 to .80</td><td>middling</td></tr>
+      <tr><td>.60 to .70</td><td>mediocre</td></tr>
+      <tr><td>.50 to .60</td><td>miserable</td></tr>
+      <tr><td>less than .50</td><td>unacceptable</td></tr>
+    </tbody>
+  </table>
+  <p>In the table for each variable, the labels are green from .60 up, amber between .50 and .60 and red below. An unacceptable variable is the first candidate to be left out of the factor analysis.</p>
+
+  <!-- 5.7 -->
+  <h2 id="s5-7"><span class="num">5.7</span>The table to publish</h2>
+  <p>The classic table of an article: each variable numbered with its mean (M) and its standard deviation (SD), and below the diagonal the correlations with stars according to the corrected <i>p</i>. The footnote gives the <i>n</i> (or its range, with pairwise missing data) and the correction used. The numbers follow the style of Block 1. It is built with up to 30 variables, and it shows whichever matrix is selected in <span class="ui">Show</span>.</p>
+  <figure class="w80">
+    <div class="marco"><img src="../img/en/b5-tabla.png" alt="The table of means, standard deviations and correlations of Switzerland, 1888"></div>
+    <figcaption><b>Figure 5.6.</b> Switzerland, 1888, ready for the article. <span class="ui">Copy the table</span> puts it on the clipboard separated by tabs, so that when you paste it into a word processor or a spreadsheet each value falls into its own cell.</figcaption>
+  </figure>
+  <p><span class="ui">Download r, p and n (CSV)</span> saves one line per pair with its two variables, <i>r</i>, the uncorrected <i>p</i>, the corrected <i>p</i> and the <i>n</i>: what you need for supplementary material or for another program, with any number of variables.</p>
+
+  <!-- 5.8 -->
+  <h2 id="s5-8"><span class="num">5.8</span>Large matrices</h2>
+  <p>With more than 40 variables the figure drops the glyphs and becomes a canvas of colors, one cell per pair. When you hover the pointer, a <b>magnifier</b> shows the numbers of the 9 × 9 window of cells around it, and a line below gives the pair, its value, its corrected <i>p</i> and its <i>n</i>; a click selects the pair. Ordering by clustering is what makes a large matrix readable. <span class="ui">Try 300 simulated variables</span> opens a set of 300 variables and 120 rows in six modules—simulated, not real data—to try it out.</p>
+  <figure class="w50">
+    <div class="marco"><img src="../img/en/b5-grande.png" alt="The matrix of 300 simulated variables ordered by clustering, with the magnifier open"></div>
+    <figcaption><b>Figure 5.7.</b> The 300 simulated variables, ordered by clustering: the six modules are the blocks along the diagonal. The magnifier gives the numbers around the pointer.</figcaption>
+  </figure>
+  <p>The diagnosis is computed with up to 400 variables. With 300 variables and only 120 rows, the matrix cannot be positive definite: it has 181 zero eigenvalues (300 minus 119), its condition number is infinite and the nearest one is not computed with so many variables. For a case like this there is shrinkage: λ = 0.199 multiplies each correlation by 0.801 and leaves a valid matrix.</p>
+  <figure class="w80">
+    <div class="marco"><img src="../img/en/b5-grande-diag.png" alt="The diagnosis of the matrix of 300 simulated variables: singular, with 181 zero eigenvalues"></div>
+    <figcaption><b>Figure 5.8.</b> A matrix with more variables than rows: singular, with 181 zero eigenvalues. The first six eigenvalues, far above the rest, are the six modules.</figcaption>
+  </figure>
+</section>
+
+</body>
+</html>

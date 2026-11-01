@@ -1,0 +1,233 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>CorrelationPro · User’s Manual · Chapter 3</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,500;0,600;1,500&family=Crimson+Pro:ital,wght@0,400;0,600;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../interior.css">
+<script src="../paginar.js"></script>
+</head>
+<body>
+
+<section class="capitulo" id="cap-3" data-pestana="3" data-orden="3" style="--acento: var(--b3)">
+  <div class="cap-apertura">
+    <div class="cap-num">3</div>
+    <div class="cap-etiqueta">Chapter three · Block 3</div>
+    <h1 data-corto="Exploration">Exploration and assumptions</h1>
+    <div class="cap-regla"></div>
+    <p class="cap-resumen">A coefficient sums up a cloud of points in a single number, and that number is only faithful if the cloud is what the coefficient assumes. This block looks before measuring: the shape of each variable, of the whole set and of each pair; it searches for outliers, curvature, fanning, points that decide on their own and groups that reverse a relation, and for each pair it says which coefficient describes it best and why.</p>
+    <div class="cap-franja"><span class="k3"></span><span class="k3"></span><span class="k4"></span><span class="k10"></span></div>
+    <ul class="cap-contenido">
+      <li><b>3.1</b>What to explore</li>
+      <li><b>3.2</b>The scatterplot matrix</li>
+      <li><b>3.3</b>The shape of each variable</li>
+      <li><b>3.4</b>Joint normality and multivariate outliers</li>
+      <li><b>3.5</b>The assumptions of each pair</li>
+      <li><b>3.6</b>The chosen pair, up close</li>
+      <li><b>3.7</b>From Block 3 to the others</li>
+    </ul>
+  </div>
+
+  <!-- 3.1 -->
+  <h2 id="s3-1"><span class="num">3.1</span>What to explore</h2>
+  <p class="lead">The block works with the numeric columns—continuous and ordinal—that have the variable role in Block 2. There is nothing to press to compute: every change redoes all the calculations.</p>
+  <p>The variables appear as buttons. When you open some data the first eight are selected; a click removes or adds one, at least one always stays selected and up to ten fit at once (for more, use the matrix of Block 5). Ordinal variables carry the mark <span class="ui">ord.</span>, because they change the recommendation for their pairs.</p>
+  <p><span class="ui">Colour by group</span> offers the nominal or binary columns with two to eight categories; if one of them has the group role, it is selected automatically. The group colors the points of every cloud, adds <i>r</i> within each group and turns on the search for Simpson’s paradox. <span class="ui">Line in each cloud</span> decides what is drawn in the clouds of the matrix: the <span class="ui">LOWESS smoother</span> (the default), the <span class="ui">Least-squares line</span> or <span class="ui">None</span>.</p>
+
+  <figure>
+    <div class="marco"><img src="../img/en/b3-que.png" alt="The What to explore card with the four measurements of the irises, the species as group and the LOWESS smoother"></div>
+    <figcaption><b>Figure 3.1.</b> The irises: the four measurements selected, the species as group (with its three categories in parentheses) and the LOWESS smoother in the clouds.</figcaption>
+  </figure>
+  <div class="caja nota">
+    <div class="caja-t"><span class="ico">i</span>With a lot of data</div>
+    <p>The calculations always use all the rows. To keep the page responsive, the clouds of the matrix draw at most 1,500 randomly chosen points, and a note below says so. With more than 400 rows or more than six variables, a wait indicator appears while the computation runs.</p>
+  </div>
+
+  <!-- 3.2 -->
+  <h2 id="s3-2"><span class="num">3.2</span>The scatterplot matrix</h2>
+  <p>Each pair of variables has two cells. <b>Below</b> the diagonal goes its cloud, with the row variable on the vertical axis and the column variable on the horizontal one, and the chosen line. On the <b>diagonal</b>, the histogram of each variable. <b>Above</b>, Pearson’s <i>r</i> with its stars (* <i>p</i> &lt; .05, ** <i>p</i> &lt; .01, *** <i>p</i> &lt; .001) and, underneath, Spearman’s ρ; the color of <i>r</i> follows the palette chosen in Block 1 and its size grows with |<i>r</i>|, so that strong correlations stand out. With a group, the within-group <i>r</i> values go at the foot of each upper cell, in the color of each group.</p>
+  <p>A click on an upper or lower cell takes that pair to the section <span class="ui">The chosen pair</span> (Section 3.6) and frames it in red in both of its cells; a click on the diagonal takes that variable to <span class="ui">Each variable</span>.</p>
+
+  <figure class="w80">
+    <div class="marco"><img src="../img/en/b3-splom.png" alt="The scatterplot matrix of the irises colored by species"></div>
+    <figcaption><b>Figure 3.2.</b> The matrix of the irises by species. Between sepal length and sepal width (framed cells), <i>r</i> = −.12, with no stars; within each species, .74, .53 and .46. Pooling the three species reverses the sign: Simpson’s paradox, at a glance.</figcaption>
+  </figure>
+  <div class="caja ejemplo">
+    <div class="caja-t"><span class="ico">▸</span>Worked example · what the matrix shows about the irises</div>
+    <p>The histogram of petal length has a gap: the setosas, with short petals, sit apart from the other two species. Pooling everything, petal length and petal width give <i>r</i> = .96; within each species, .33, .79 and .32. Almost all of that very high correlation comes from the species differing in size, not from flowers with long petals also having wide ones within a species.</p>
+  </div>
+
+  <!-- 3.3 -->
+  <h2 id="s3-3"><span class="num">3.3</span>The shape of each variable</h2>
+  <p>The table <span class="ui">Each variable</span> gives, for each one, the number of values, the mean, the standard deviation (SD), the skewness <i>g</i><sub>1</sub> and the excess kurtosis <i>g</i><sub>2</sub>, the Shapiro–Wilk test (<i>W</i> and its <i>p</i>-value), the Anderson–Darling test (<i>A</i>² and its <i>p</i>-value), a miniature Q–Q plot and a <span class="ui">Reading</span> in words. The <i>p</i>-values are red below .01, amber between .01 and .05 and green from .05 up; <i>g</i><sub>1</sub> is amber if it exceeds 1 in absolute value, and <i>g</i><sub>2</sub> if it exceeds 2.</p>
+  <p>A click on a row (or <code>Enter</code> on it) draws below it the histogram of that variable with the normal curve of the same mean and SD, and its normal Q–Q plot: if the data were normal, the points would follow the dotted diagonal.</p>
+
+  <figure class="w80">
+    <div class="marco"><img src="../img/en/b3-variable.png" alt="The normality table of the four measurements of the irises with the histogram and the Q–Q plot of sepal length"></div>
+    <figcaption><b>Figure 3.3.</b> The four measurements of the irises. Sepal length gives <i>W</i> = 0.976 and <i>p</i> = .010, in amber: “not normal”, although its Q–Q plot departs only at the ends. Sepal width “looks normal” (<i>p</i> = .101) even though Anderson–Darling gives .020: the reading follows Shapiro–Wilk. The two petal measurements, with <i>p</i> &lt; .001, have a stepped Q–Q plot: the setosas, apart.</figcaption>
+  </figure>
+
+  <p>Table 3.1 says when each reading appears. The non-normal ones are red if <i>p</i> &lt; .01 and amber if <i>p</i> is between .01 and .05.</p>
+  <table class="compacta">
+    <caption><b>Table 3.1.</b> The reading of each variable</caption>
+    <thead><tr><th style="width:1.9in">Reading</th><th>When it appears</th></tr></thead>
+    <tbody>
+      <tr><td><b>looks normal</b></td><td>the Shapiro–Wilk <i>p</i>-value is .05 or more</td></tr>
+      <tr><td><b>departs little (large n)</b></td><td><i>p</i> &lt; .05, but with more than 300 values, |<i>g</i><sub>1</sub>| ≤ 1 and |<i>g</i><sub>2</sub>| ≤ 2: the test detects a departure that does not matter</td></tr>
+      <tr><td><b>right-skewed · left-skewed</b></td><td><i>p</i> &lt; .05 and <i>g</i><sub>1</sub> &gt; 1 · <i>g</i><sub>1</sub> &lt; −1</td></tr>
+      <tr><td><b>heavy tails · light tails</b></td><td><i>p</i> &lt; .05, |<i>g</i><sub>1</sub>| ≤ 1 and <i>g</i><sub>2</sub> &gt; 2 · <i>g</i><sub>2</sub> &lt; −2</td></tr>
+      <tr><td><b>not normal</b></td><td><i>p</i> &lt; .05 without a large skewness or kurtosis to explain it (for example, a mixture of groups)</td></tr>
+    </tbody>
+  </table>
+
+  <div class="caja importante">
+    <div class="caja-t"><span class="ico">!</span>Pearson’s r does not need normality to describe</div>
+    <p>As a summary of how well a cloud lines up, <i>r</i> assumes nothing. What needs normality—that of the two variables together—is its classical test and its Fisher interval. And with large samples, normality tests reject departures of no practical importance: the Q–Q plot rules. If in doubt, Block 4 gives the permutation <i>p</i>-value and the bootstrap interval, which do not depend on normality.</p>
+  </div>
+  <div class="caja teoria">
+    <div class="caja-t"><span class="ico">θ</span>Theory in brief · the normality tests</div>
+    <p><b>Shapiro–Wilk</b> (1965) compares the ordered data with what would be expected from a normal; <i>W</i> close to 1 is normal. Its <i>p</i>-value follows Royston’s approximation (1995), valid from 3 to 5,000 values; outside that range the table shows “—”. <b>Anderson–Darling</b> measures the distance between the cumulative distribution of the data and the fitted normal, with more weight on the tails; its <i>p</i>-value is Stephens’s (D’Agostino and Stephens 1986) and needs at least 8 values. The <b>skewness</b> <i>g</i><sub>1</sub> and the excess <b>kurtosis</b> <i>g</i><sub>2</sub> say how it departs: |<i>g</i><sub>1</sub>| &gt; 1 or |<i>g</i><sub>2</sub>| &gt; 2 already matter for the test of <i>r</i>.</p>
+  </div>
+
+  <!-- 3.4 -->
+  <h2 id="s3-4"><span class="num">3.4</span>Joint normality and multivariate outliers</h2>
+  <p>Each variable being normal is not enough: the multivariate normal also requires all their combinations to be normal. This card uses the rows complete in all the chosen variables (it needs at least two variables and four more complete rows than variables) and shows five figures:</p>
+  <ul>
+    <li><b>Complete rows</b>, with the number of variables.</li>
+    <li><b>Mardia skewness</b>, with its χ² and its <i>p</i>(<i>p</i>+1)(<i>p</i>+2)/6 degrees of freedom (corrected with fewer than 20 rows).</li>
+    <li><b>Mardia kurtosis</b>, with its <i>z</i>.</li>
+    <li><b>Henze–Zirkler</b>, an omnibus test that detects any departure from normality.</li>
+    <li><b>Robust outliers</b>: the rows beyond the cut with the robust distance, and how many with the classical one.</li>
+  </ul>
+  <p>Mardia and Henze–Zirkler are computed with up to 2,500 rows. The colored edge of each figure follows the scale of the <i>p</i>-values of the previous table: red, amber or green.</p>
+  <p>The plot compares the squared Mahalanobis distances of each row—the classical one in gray, the robust one in red—with the quantiles of χ² with as many degrees of freedom as variables; under a normal, the points follow the diagonal. The horizontal dotted line is the χ²(0.975) cut. Beside it, the table <span class="ui">Farthest rows (robust distance)</span> gives the eight rows that most exceed the robust cut, with their two distances, and how many more there are. The rows in gray italics are the ones the classical distance does not see: <b>masking</b>.</p>
+
+  <figure class="w80">
+    <div class="marco"><img src="../img/en/b3-conjunta.png" alt="The joint normality tests of the irises, the plot of distances against χ² and the table of farthest rows"></div>
+    <figcaption><b>Figure 3.4.</b> The four measurements of the irises together. Mardia skewness (67.43 with 20 degrees of freedom) and Henze–Zirkler (2.336) give <i>p</i> &lt; .001: the set is not normal, even though the kurtosis looks fine (<i>p</i> = .818). 21 rows pass the cut (11.14) with the robust distance and only 6 with the classical one; rows 146 and 145 are seen only by the robust one.</figcaption>
+  </figure>
+  <div class="caja teoria">
+    <div class="caja-t"><span class="ico">θ</span>Theory in brief · classical against robust</div>
+    <p>The classical distance uses the mean and covariance of all the data, and outliers inflate them until they hide: this is the masking effect. The robust one uses the orthogonalized Gnanadesikan–Kettenring estimator (Maronna and Zamar 2002) with τ-scales and a reweighting that leaves out whatever exceeds the cut, so that outliers stay far away. <b>Mardia</b> (1970) tests multivariate skewness and kurtosis; <b>Henze and Zirkler</b> (1990) compare the characteristic function of the data with that of the normal, and their test is consistent against any alternative.</p>
+  </div>
+  <div class="caja importante">
+    <div class="caja-t"><span class="ico">!</span>An outlier is not an error</div>
+    <p>Before removing a row, look at it: it may be a data-entry error, a missing-value code or a real and valuable observation. And when different groups are mixed, like the three species of irises, the “outliers” may simply be a group far from the others; in that case, the right thing is to analyze within the groups.</p>
+  </div>
+
+  <!-- 3.5 -->
+  <h2 id="s3-5"><span class="num">3.5</span>The assumptions of each pair</h2>
+  <p>The table <span class="ui">Each pair</span> checks all the pairs at once, each with its rows complete in both variables (that is why its <i>n</i> may vary). For each pair it gives <i>n</i>, <i>r</i> and ρ, and four diagnostics:</p>
+  <ul>
+    <li><span class="ui">Curve</span>: the <i>p</i>-value of adding a quadratic term to the line.</li>
+    <li><span class="ui">Fan</span>: that of the Breusch–Pagan test in its studentized form (Koenker 1981), which checks whether the spread changes along the line.</li>
+    <li><span class="ui">Out</span>: how many points lie outside the 97.5% robust ellipse.</li>
+    <li><span class="ui">Largest |Δr|</span>: the most <i>r</i> changes when a single point is removed.</li>
+  </ul>
+  <p>From them, the table gives the <span class="ui">Signals</span> of Table 3.2 and a <span class="ui">Recommended</span> coefficient: the one that best describes the pair. A click on a row takes the pair to the next section. A pair with fewer than five complete rows says “too few complete pairs”.</p>
+
+  <figure>
+    <div class="marco"><img src="../img/en/b3-pares.png" alt="The assumptions table of the six pairs of measurements of the irises"></div>
+    <figcaption><b>Figure 3.5.</b> The six pairs of the irises with the species as group. Five call for analyzing <span class="ui">By group</span>: in three the relation changes sign within the species (Simpson) and in two pooling the species inflates it. Only sepal length with petal length, which curves, gets Spearman’s ρ.</figcaption>
+  </figure>
+
+  <table class="compacta">
+    <caption><b>Table 3.2.</b> The signals of each pair</caption>
+    <thead><tr><th style="width:1.35in">Signal</th><th>Appears when…</th></tr></thead>
+    <tbody>
+      <tr><td><b>curved</b></td><td>the quadratic term gives <i>p</i> &lt; .01</td></tr>
+      <tr><td><b>fan</b></td><td>Breusch–Pagan gives <i>p</i> &lt; .01</td></tr>
+      <tr><td><b>not normal</b></td><td>Shapiro–Wilk gives <i>p</i> &lt; .05 in at least one of the two variables</td></tr>
+      <tr><td><b>influential point</b></td><td>the largest |Δ<i>r</i>| exceeds the limit of Section 3.6 and at least one point lies outside the robust ellipse</td></tr>
+      <tr><td><b>few values</b></td><td>one of the two takes ten distinct values or fewer</td></tr>
+      <tr><td><b>not monotonic</b></td><td>the distance correlation exceeds |ρ| by more than 0.25: the cloud rises and falls (computed with up to 2,000 pairs)</td></tr>
+      <tr><td><b>Simpson</b></td><td>with a group: in at least half of the groups with five cases or more, <i>r</i> has the opposite sign and |<i>r</i>| ≥ .3</td></tr>
+      <tr><td><b>groups</b></td><td>with a group and no Simpson: the mean <i>r</i> within groups differs by 0.3 or more from <i>r</i> pooling everything</td></tr>
+    </tbody>
+  </table>
+
+  <p>The recommendation follows a fixed order: the first rule that holds wins. The reasons for the order are common sense: if the groups change the relation, no coefficient computed by pooling everything describes it; if the cloud rises and falls, no monotonic coefficient sees it; and only when the cloud is straight does it make sense to ask about points that decide on their own.</p>
+  <table class="compacta">
+    <caption><b>Table 3.3.</b> How the recommended coefficient is chosen</caption>
+    <thead><tr><th style="width:0.3in">#</th><th style="width:2.6in">If…</th><th>it recommends</th></tr></thead>
+    <tbody>
+      <tr><td>1</td><td>there is Simpson or a group effect</td><td><b>By group</b>: analyze within the groups (Block 10)</td></tr>
+      <tr><td>2</td><td>the relation is not monotonic</td><td><b>dCor or ξ</b>: the distance correlation or Chatterjee’s ξ (Block 6)</td></tr>
+      <tr><td>3</td><td>at least one of the two is ordinal</td><td><b>Spearman’s ρ</b>, or <b>Kendall’s τ-b</b> if there are ten distinct values or fewer</td></tr>
+      <tr><td>4</td><td>there is curvature, or <i>r</i> and ρ differ by 0.1 or more</td><td><b>Spearman’s ρ</b> (or τ-b, with few values)</td></tr>
+      <tr><td>5</td><td>there is an influential point</td><td><b>Percentage bend</b>, a robust correlation (Block 4)</td></tr>
+      <tr><td>6</td><td>none of the above</td><td><b>Pearson’s r</b>; if one of the two is not normal or there is fanning, with the note to use the permutation or the bootstrap of Block 4</td></tr>
+    </tbody>
+  </table>
+  <p>The recommendation label is green when it is Pearson’s <i>r</i> with no notes, amber when it is Pearson with a note and gold when the pair calls for another coefficient.</p>
+  <div class="caja ejemplo">
+    <div class="caja-t"><span class="ico">▸</span>Worked example · fifteen pairs from an economy</div>
+    <p>The six annual series of the United States economy from 1947 to 1962 (Figure 3.6) give the three kinds of answer. Eight pairs get Pearson’s <i>r</i>. Three get ρ: two because they curve, and unemployed with armed forces because <i>r</i> = −.18 and ρ = −.34 differ by more than 0.1. And four of the five pairs with the armed forces, which grow suddenly in 1951 with the Korean War and then fall slowly, are “not monotonic”: dCor or ξ.</p>
+  </div>
+
+  <figure class="w70">
+    <div class="marco"><img src="../img/en/b3-longley.png" alt="The assumptions table of the fifteen pairs of the United States economy from 1947 to 1962"></div>
+    <figcaption><b>Figure 3.6.</b> The United States economy from 1947 to 1962: sixteen years, six variables and fifteen pairs, with the three kinds of recommendation.</figcaption>
+  </figure>
+
+  <!-- 3.6 -->
+  <h2 id="s3-6"><span class="num">3.6</span>The chosen pair, up close</h2>
+  <p>The last card studies one pair: the one chosen in the matrix or in the table, or the one set in <span class="ui">X</span> and <span class="ui">Y</span>. The orientation matters for the line, the residuals and the Breusch–Pagan test, which are of <i>Y</i> on <i>X</i>; <i>r</i>, ρ and the recommendation are symmetric.</p>
+  <p>Seven figures sum up the pair: <i>n</i> (and how many rows do not have the pair complete), <i>r</i> with its <i>p</i>-value, ρ, the distance correlation dCor (“any shape”: in the population it is zero only if the two are independent), the <span class="ui">Curvature</span> with its <i>F</i>, the <span class="ui">Spread (BP)</span> with its χ² and the <span class="ui">Largest |Δr|</span> with the row that causes it and the limit. Below, <span class="ui">For this pair</span> gives the recommendation with its reason and its notes; if the recommendation is a measure from the catalog, <span class="ui">What is it?</span> opens its card.</p>
+
+  <figure class="w70">
+    <div class="marco"><img src="../img/en/b3-par-a.png" alt="The pair sepal length and sepal width: seven figures, the By group recommendation, the cloud with its two ellipses and the residuals"></div>
+    <figcaption><b>Figure 3.7.</b> Sepal length and sepal width. Neither curvature (<i>p</i> = .057) nor fanning (<i>p</i> = .098), and no point decides (0.033, below the limit of 0.081); but within the species the mean <i>r</i> is .58 against −.12 pooling everything, and the recommendation is <span class="ui">By group</span>. The eight points outside the robust ellipse carry their row number.</figcaption>
+  </figure>
+  <p>Three plots show why:</p>
+  <ul>
+    <li><b>The cloud with its ellipses.</b> The line in black, the LOWESS in gold, the classical 97.5% ellipse dashed and the robust one in red. The points outside the robust ellipse are circled, and the eight farthest carry their row number.</li>
+    <li><b>The residuals from the line</b>, with their own LOWESS. If the gold line curves, the relation curves; if the points open out toward one side, there is fanning.</li>
+    <li><b>The influence.</b> For each point, in row order, how much <i>r</i> changes if it is removed. The dashed lines mark the limit, and the four points that move <i>r</i> the most carry their row.</li>
+  </ul>
+  <p>The influence limit is, roughly, one standard error of <i>r</i>: a point that by itself moves <i>r</i> more than that decides too much.</p>
+  <div class="formula">limit = max ( 0.02 ,  (1 − <i>r</i>²) / √(<i>n</i> − 1) )</div>
+
+  <figure class="w80">
+    <div class="marco"><img src="../img/en/b3-par-b.png" alt="The influence plot of sepal length and sepal width and the button that takes the pair to Block 4"></div>
+    <figcaption><b>Figure 3.8.</b> The influence in the same pair. The point that moves <i>r</i> the most, row 132, changes it by 0.033, less than half the limit: no flower decides on its own.</figcaption>
+  </figure>
+  <p><span class="ui">Measure this pair in depth in Block 4 →</span> takes the pair to the block of single-pair measures, with all its coefficients, intervals, permutations and bootstrap. There, the coefficient studied in depth is, until you choose another, the one recommended here; with <span class="ui">By group</span> it is Pearson’s <i>r</i>, because the within-group analysis belongs to Block 10.</p>
+
+  <div class="caja ejemplo">
+    <div class="caja-t"><span class="ico">▸</span>Worked example · a pair that calls for Pearson, with a note</div>
+    <p>The speed and braking distance of 50 cars (Ezekiel 1930): <i>r</i> = .807 and ρ = .830; neither curvature (<i>p</i> = .136) nor fanning (<i>p</i> = .073), and the most influential point, row 23, moves <i>r</i> by 0.027, below the limit of 0.050. The recommendation is Pearson’s <i>r</i>, but braking distance is not normal, so the note asks for the permutation <i>p</i>-value or the bootstrap interval.</p>
+  </div>
+  <figure class="w80">
+    <div class="marco"><img src="../img/en/b3-cars.png" alt="The figures and the recommendation for the pair speed and braking distance"></div>
+    <figcaption><b>Figure 3.9.</b> Ezekiel’s cars: the three tests in green and the recommendation <span class="ui">Pearson’s r</span>, with its note.</figcaption>
+  </figure>
+
+  <div class="caja teoria">
+    <div class="caja-t"><span class="ico">θ</span>Theory in brief · why each assumption</div>
+    <p><b>Linearity.</b> <i>r</i> measures only the straight part of the relation; if the cloud curves but keeps rising, ρ or τ measure all of it; if it rises and falls, neither <i>r</i> nor ρ sees it (Anscombe 1973). <b>Constant spread.</b> When the cloud opens like a fan, the standard error of <i>r</i> given by the classical formula is wrong; the permutation <i>p</i>-value and the bootstrap interval do not depend on it. <b>Outliers and influence.</b> A single point can create or erase a correlation; if <i>r</i> changes by more than one standard error when it is removed, that point decides too much. <b>Groups.</b> Pooling groups with different means can inflate, hide or reverse the relation (Simpson 1951). The app carries this same explanation in the collapsible note <span class="ui">Why each assumption</span>, at the foot of the card.</p>
+  </div>
+
+  <!-- 3.7 -->
+  <h2 id="s3-7"><span class="num">3.7</span>From Block 3 to the others</h2>
+  <p>The block computes nothing for publication: it decides what to compute. What it finds is used by Block 4, which opens with the recommended coefficient, and by the drafted methods of Block 13, which describe the tests used to check the assumptions and cite their references.</p>
+
+  <div class="caja regla">
+    <div class="caja-t"><span class="ico">✓</span>Before leaving Block 3</div>
+    <table class="compacta"><tbody>
+      <tr><td style="width:44%"><b>If</b> the recommendation is <span class="ui">By group</span>…</td><td>analyze within the groups in Block 10, and do not publish the pooled <i>r</i> without saying so.</td></tr>
+      <tr><td><b>If</b> it is <span class="ui">dCor or ξ</span>…</td><td>look at the cloud: the relation rises and falls. Measure it in Block 6; <i>r</i> and ρ near zero do not mean independence.</td></tr>
+      <tr><td><b>If</b> it is Spearman’s ρ or Kendall’s τ-b…</td><td>use it in Block 4; if you report <i>r</i> anyway, say that the relation curves.</td></tr>
+      <tr><td><b>If</b> it is the <span class="ui">Percentage bend</span>…</td><td>find the point in the cloud and work out what it is before deciding; compare with the robust coefficients of Block 4.</td></tr>
+      <tr><td><b>If</b> it is Pearson’s <i>r</i> with a note…</td><td>give the permutation <i>p</i>-value or the bootstrap interval from Block 4.</td></tr>
+      <tr><td><b>If</b> the normality tests reject with a lot of data…</td><td>look at the Q–Q plot before switching coefficients.</td></tr>
+    </tbody></table>
+    <p class="regla-pie">These are guides for interpretation, not laws: what you know about the phenomenon, the design and how it was measured always comes first.</p>
+  </div>
+</section>
+
+</body>
+</html>

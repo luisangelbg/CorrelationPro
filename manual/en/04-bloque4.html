@@ -1,0 +1,207 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>CorrelationPro · User’s Manual · Chapter 4</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,500;0,600;1,500&family=Crimson+Pro:ital,wght@0,400;0,600;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../interior.css">
+<script src="../paginar.js"></script>
+</head>
+<body>
+
+<section class="capitulo" id="cap-4" data-pestana="4" data-orden="4" style="--acento: var(--b4)">
+  <div class="cap-apertura">
+    <div class="cap-num">4</div>
+    <div class="cap-etiqueta">Chapter four · Block 4</div>
+    <h1 data-corto="One pair">One pair in depth</h1>
+    <div class="cap-regla"></div>
+    <p class="cap-resumen">Two numeric variables, and everything that can be said about their relation: twelve coefficients with their tests and intervals, the bootstrap and the permutation of the main coefficient, the Bayes factor of Pearson’s <i>r</i> and a reading in words that ends in a sentence ready for the report.</p>
+    <div class="cap-franja"><span class="k4"></span><span class="k4"></span><span class="k3"></span><span class="k13"></span></div>
+    <ul class="cap-contenido">
+      <li><b>4.1</b>The pair and the question</li>
+      <li><b>4.2</b>The result, in figures and in words</li>
+      <li><b>4.3</b>The cloud and its ranks</li>
+      <li><b>4.4</b>Every coefficient, side by side</li>
+      <li><b>4.5</b>Bootstrap and permutation</li>
+      <li><b>4.6</b>The Bayes factor</li>
+      <li><b>4.7</b>How it was computed</li>
+    </ul>
+  </div>
+
+  <!-- 4.1 -->
+  <h2 id="s4-1"><span class="num">4.1</span>The pair and the question</h2>
+  <p class="lead">The pair arrives in three ways: from the button <span class="ui">Measure this pair in depth in Block 4 →</span> of Block 3, from the assistant of Block 2, or by choosing it here in <span class="ui">X</span> and <span class="ui">Y</span>. The menus offer the continuous and ordinal columns that are not marked as “not used”.</p>
+  <p>The first card gathers the eight decisions of the analysis. Every change recomputes everything; if the calculation takes a while (many rows or many resamples), a wait indicator appears.</p>
+
+  <figure>
+    <div class="marco"><img src="../img/en/b4-par.png" alt="The card The pair and the question with the speed and braking distance of the cars"></div>
+    <figcaption><b>Figure 4.1.</b> Ezekiel’s cars, the example the block opens with, with the default options.</figcaption>
+  </figure>
+  <ul>
+    <li><span class="ui">Main coefficient</span>: the one studied in depth. <span class="ui">Recommended (Block 3)</span> lets the assumption check of Section 3.5 choose it; you can also fix any of the twelve of Section 4.4.</li>
+    <li><span class="ui">Alternative hypothesis</span>: <span class="ui">Two-sided: ρ ≠ 0</span>, <span class="ui">Positive: ρ &gt; 0</span> or <span class="ui">Negative: ρ &lt; 0</span>. Choose a one-sided one only if the direction was decided before seeing the data. The dependence measures have no sign, and their test is always for large values.</li>
+    <li><span class="ui">Confidence level</span>: 90, 95 or 99% for all the intervals; its complement (10, 5 or 1%) is the significance level of the reading.</li>
+    <li><span class="ui">Resamples</span>: 999, 1,999, 4,999 or 9,999 for the bootstrap and for the permutation. With a costly coefficient and many data, the app uses fewer and says so.</li>
+    <li><span class="ui">Seed</span>: the starting point of the random number generator. The same seed gives exactly the same numbers; write it down if you are going to publish resampling results.</li>
+    <li><span class="ui">Scale for the size</span>: the words the reading uses to rate the strength of the relation (Table 4.1).</li>
+  </ul>
+
+  <table class="compacta">
+    <caption><b>Table 4.1.</b> The three scales for the size of a correlation (by |<i>r</i>|)</caption>
+    <thead><tr><th style="width:1.75in">Scale</th><th>Cuts and words</th></tr></thead>
+    <tbody>
+      <tr><td><b>Cohen (1988)</b></td><td>negligible &lt; .10 ≤ small &lt; .30 ≤ medium &lt; .50 ≤ large</td></tr>
+      <tr><td><b>Evans (1996)</b></td><td>very weak &lt; .20 ≤ weak &lt; .40 ≤ moderate &lt; .60 ≤ strong &lt; .80 ≤ very strong</td></tr>
+      <tr><td><b>Gignac and Szodorai (2016)</b></td><td>very small &lt; .10 ≤ small &lt; .20 ≤ typical &lt; .30 ≤ large</td></tr>
+    </tbody>
+  </table>
+  <div class="caja nota">
+    <div class="caja-t"><span class="ico">i</span>Which scale to choose</div>
+    <p>Cohen’s and Evans’s are general conventions. Gignac and Szodorai’s comes from the correlations actually published in psychology: there, an <i>r</i> of .30 is already large. The best thing is to compare with what is known about the phenomenon in your discipline, and to say in the report which scale you used.</p>
+  </div>
+
+  <!-- 4.2 -->
+  <h2 id="s4-2"><span class="num">4.2</span>The result, in figures and in words</h2>
+  <p>The <span class="ui">Result</span> card sums up the analysis in six figures: the main coefficient with the word for its size (and the mark <span class="ui">chosen by Block 3</span> if the assumption check chose it), its confidence interval with the method that produced it, its own test with the statistic and the degrees of freedom, the permutation <i>p</i>-value, the bootstrap interval and the Bayes factor BF<sub>10</sub>. In the tests, a green edge means significant at the chosen level and amber, not; in the Bayes factor, green is evidence for the correlation and amber, for ρ = 0.</p>
+
+  <figure class="w80">
+    <div class="marco"><img src="../img/en/b4-resultado.png" alt="The Result card for the cars with six figures, the reading and the sentence for the report"></div>
+    <figcaption><b>Figure 4.2.</b> Ezekiel’s cars: <i>r</i> = .807, “large” by Cohen, with Fisher interval [.68, .89], <i>t</i> = 9.46 with 48 degrees of freedom, permutation and BCa interval in agreement and a Bayes factor of 1.7&nbsp;×&nbsp;10<sup>9</sup>. The line in amber is the note from Block 3.</figcaption>
+  </figure>
+  <p>Below, the reading says the same thing in words, in five short paragraphs:</p>
+  <ol class="pasos">
+    <li><b>The direction and the size</b>, with the interval: “there is a large positive correlation by Cohen (1988)”. For a dependence measure, which has no sign, it gives its value on the scale from 0 (independence) to 1.</li>
+    <li><b>The test</b>: how likely a value like this would be if there were no relation, with the permutation one in parentheses, and whether independence is rejected. If it is not rejected, it says so carefully: the data are not enough to rule it out, which does not prove that there is no relation.</li>
+    <li><b>The Bayesian evidence</b> of Pearson’s <i>r</i>, in the words of Section 4.6.</li>
+    <li><b>The shared variance</b>, only with Pearson: <i>r</i>² = .65 means that, in a linear sense, the two variables share 65% of their variance.</li>
+    <li><b>The reminder</b> that a correlation does not say which variable causes the other, or whether both depend on a third.</li>
+  </ol>
+  <p>The notes go in amber: those from Block 3 for this pair and, if you chose a coefficient other than the recommended one, which one Block 3 recommends and why.</p>
+  <p><span class="ui">For the report</span> gives the sentence in the number style chosen in Block 1—“<i>r</i>(48) = .81, 95% CI [.68, .89], <i>p</i> &lt; .001; permutation <i>p</i> &lt; .001 (B = 1999); BF<sub>10</sub> = 1.7&nbsp;×&nbsp;10<sup>9</sup>”—and <span class="ui">Copy</span> puts it on the clipboard.</p>
+
+  <div class="caja ejemplo">
+    <div class="caja-t"><span class="ico">▸</span>Worked example · when the main coefficient is a dependence measure</div>
+    <p>In the 1947–1962 economy, Block 3 recommends the distance correlation for armed forces with employed, because their cloud rises and then falls (Section 3.5). Here, dCor = .76 with BCa interval [.68, .86] and <i>p</i> &lt; .001 both ways. The Bayes factor, which is always that of Pearson’s <i>r</i>, gives only 1.70: anecdotal evidence. The two figures do not contradict each other: the relation is strong, but it is not a straight line.</p>
+  </div>
+  <figure class="w80">
+    <div class="marco"><img src="../img/en/b4-dep.png" alt="The Result card with the distance correlation of armed forces and employed"></div>
+    <figcaption><b>Figure 4.3.</b> The distance correlation as the main coefficient. For a measure without sign, the reading gives its value on the scale from 0 to 1 instead of a direction and a size.</figcaption>
+  </figure>
+
+  <!-- 4.3 -->
+  <h2 id="s4-3"><span class="num">4.3</span>The cloud and its ranks</h2>
+  <p>Two plots of the same pair. On the left, the data with the 95% ellipse, the line in black, the LOWESS in gold and, along the axes, a tick for each value. On the right, the same points turned into ranks (divided by <i>n</i>&nbsp;+&nbsp;1, so that they run from 0 to 1): this is what Spearman’s ρ and Kendall’s τ see. A monotonic but curved relation becomes straight in the ranks; a point very far away in the data becomes just one more in the ranks.</p>
+  <figure class="w80">
+    <div class="marco"><img src="../img/en/b4-nube.png" alt="The plots of the data and of the ranks of speed and braking distance"></div>
+    <figcaption><b>Figure 4.4.</b> Ezekiel’s cars. In the data, distance grows somewhat faster than the line at high speeds (the LOWESS curves upward) and spreads out more; in the ranks the curve disappears and the cloud is straight.</figcaption>
+  </figure>
+
+  <!-- 4.4 -->
+  <h2 id="s4-4"><span class="num">4.4</span>Every coefficient, side by side</h2>
+  <p>The table computes the twelve coefficients that apply to two numeric variables, each with its own test—exact, asymptotic or by permutation—and its interval: the analytic one where it exists and, where not, a percentile bootstrap with 499 resamples. The main one carries the label <span class="ui">main</span>; <span class="ui">Make main</span> changes the main coefficient without going back to the menu, and <span class="ui">?</span> opens its card in the catalog. Significant <i>p</i>-values are in green.</p>
+
+  <div class="caja importante">
+    <div class="caja-t"><span class="ico">!</span>Do not choose the coefficient after seeing the table</div>
+    <p>With twelve coefficients in view, it is tempting to report the one that gave the highest value or the smallest <i>p</i>. That inflates the results. Choose the coefficient by the shape of the data—which is what Block 3 does—or before seeing them, and report that one; the table serves to see whether the conclusion depends on the choice.</p>
+  </div>
+
+  <figure class="w80">
+    <div class="marco"><img src="../img/en/b4-tabla.png" alt="The table of the twelve coefficients for the cars"></div>
+    <figcaption><b>Figure 4.5.</b> The twelve coefficients for Ezekiel’s cars. The rank and robust ones lie between .66 and .85; the dependence measures, on their own scale. Hoeffding’s D and τ* have no test in the table.</figcaption>
+  </figure>
+
+  <table class="compacta">
+    <caption><b>Table 4.2.</b> The twelve coefficients of Block 4</caption>
+    <thead><tr><th style="width:1.45in">Coefficient</th><th>What it measures</th><th style="width:1.75in">Test · interval</th></tr></thead>
+    <tbody>
+      <tr><td><b>Pearson’s <i>r</i></b></td><td>the linear relation</td><td><i>t</i> with <i>n</i> − 2 df · Fisher</td></tr>
+      <tr><td><b>Spearman’s ρ</b></td><td>the monotonic relation: Pearson on the ranks</td><td>exact without ties, otherwise <i>t</i> · Fieller</td></tr>
+      <tr><td><b>Kendall’s τ-b</b></td><td>the concordance of pairs of observations, corrected for ties</td><td>exact without ties (<i>n</i> &lt; 50), otherwise <i>z</i> · Fieller</td></tr>
+      <tr><td><b>Gaussian rank</b> <i>r</i><sub>G</sub></td><td>Pearson on the normal scores of the ranks</td><td><i>t</i> · Fisher</td></tr>
+      <tr><td><b>Blomqvist’s β</b></td><td>the concordance with respect to the two medians</td><td><i>z</i> · percentile</td></tr>
+      <tr><td><b>Biweight</b> <i>r</i><sub>bw</sub></td><td>robust: gives less weight to data far from the median</td><td><i>t</i> · Fisher</td></tr>
+      <tr><td><b>Percentage bend</b> <i>r</i><sub>pb</sub></td><td>robust: bounds the farthest 20% of each variable</td><td><i>t</i> · percentile</td></tr>
+      <tr><td><b>Winsorized</b> <i>r</i><sub>w</sub></td><td>robust: Pearson after pulling 20% of each tail in to its limit</td><td><i>t</i> with <i>n</i> − 2<i>g</i> − 2 df · percentile</td></tr>
+      <tr><td><b>Distance correlation</b> dCor</td><td>any dependence; 0 only under independence</td><td><i>T</i> with <i>n</i>(<i>n</i> − 3)/2 − 1 df · percentile</td></tr>
+      <tr><td><b>Chatterjee’s ξ</b></td><td>how much <i>Y</i> is a function of <i>X</i> (it is not symmetric)</td><td><i>z</i> · percentile</td></tr>
+      <tr><td><b>Hoeffding’s D</b></td><td>the distance between the joint distribution and that of independence (scale 30·D)</td><td>— · percentile</td></tr>
+      <tr><td><b>Bergsma–Dassios τ*</b></td><td>any dependence, with a statistic over all groups of four points; only up to <i>n</i> = 80</td><td>— · —</td></tr>
+    </tbody>
+  </table>
+  <p>The dependence measures (dCor, ξ, D, τ*) run from 0 to 1 and have no sign; ξ and D can fall slightly below zero when there is no relation. D and τ* have no test of their own in the table: when made main, the permutation gives their <i>p</i>-value. The distance correlation is computed with up to 3,000 pairs.</p>
+
+  <figure class="w80">
+    <div class="marco"><img src="../img/en/b4-forest.png" alt="The plot of the twelve estimates with their intervals"></div>
+    <figcaption><b>Figure 4.6.</b> The twelve estimates with their intervals on a single scale from −1 to 1. The main one is in red and larger; the others, in the color of their family: rank, robust and dependence.</figcaption>
+  </figure>
+  <!-- 4.5 -->
+  <h2 id="s4-5"><span class="num">4.5</span>Bootstrap and permutation</h2>
+  <p>Two ways of doing inference without assuming normality, both on the main coefficient. The <b>bootstrap</b> resamples the pairs with replacement and recomputes the coefficient in each resample; the spread of those replicates imitates that of the coefficient from one sample to another. The <b>permutation</b> shuffles <i>Y</i> against <i>X</i>, which breaks any relation and preserves everything else; its <i>p</i>-value is the proportion of shuffles that give a value as far from zero as the observed one.</p>
+  <p>Six figures sum up the bootstrap: its standard error, its bias (with the correction <i>z</i><sub>0</sub> and the acceleration <i>a</i> of the BCa) and four intervals: percentile, basic, normal and BCa (the last one when the coefficient is not too costly to recompute). The two plots show the replicates: in the bootstrap one, the band is the BCa interval, the solid line the estimate and the dashed ones the percentile limits; in the permutation one, the solid line is the observed value and the dashed one its mirror image, which also counts in the two-sided test.</p>
+
+  <figure class="w80">
+    <div class="marco"><img src="../img/en/b4-remuestreo.png" alt="The bootstrap figures and the bootstrap and permutation distributions for the cars"></div>
+    <figcaption><b>Figure 4.7.</b> Ezekiel’s cars with 1,999 resamples and seed 2026. The bootstrap distribution has a long left tail, and the BCa [.67, .87] shifts in that direction relative to the percentile [.70, .89]. None of the 1,999 shuffles comes close to .81.</figcaption>
+  </figure>
+  <div class="caja teoria">
+    <div class="caja-t"><span class="ico">θ</span>Theory in brief · what each interval does</div>
+    <p>The <b>percentile</b> interval takes the quantiles of the replicates; the <b>basic</b> one reflects them around the estimate; the <b>normal</b> one uses their standard error; the <b>BCa</b> (Efron 1987) also corrects for bias (<i>z</i><sub>0</sub>) and for the spread changing with the value (the acceleration <i>a</i>, estimated with the jackknife). With normal data the Fisher interval covers what it promises; with very skewed data it falls short, and the bootstrap ones come closer to the requested level, without quite reaching it with small samples (Bishara and Hittner 2017). The permutation (Pitman 1937) gives <i>p</i> = (<i>k</i> + 1)/(<i>B</i> + 1), where <i>k</i> is the number of shuffles as extreme as the observed value: it never gives zero.</p>
+  </div>
+  <div class="caja nota">
+    <div class="caja-t"><span class="ico">i</span>How many resamples</div>
+    <p>With 1,999 the smallest possible <i>p</i>-value is 1/2000 = .0005, and the interval limits settle at the second digit. For a 99% interval or to publish a <i>p</i>-value close to .05, use 4,999 or 9,999.</p>
+  </div>
+
+  <!-- 4.6 -->
+  <h2 id="s4-6"><span class="num">4.6</span>The Bayes factor</h2>
+  <p>The Bayes factor BF<sub>10</sub> says how many times more probable the data are if there is a correlation than if ρ = 0; its reciprocal BF<sub>01</sub>, the opposite. Unlike the <i>p</i>-value, it can give evidence that there is no relation. It is always computed for Pearson’s <i>r</i>, whatever the main coefficient.</p>
+  <p>The prior distribution of ρ is a beta stretched to the interval from −1 to 1, and <span class="ui">Prior (κ)</span> controls its width: <span class="ui">κ = 1/3, the common default</span>, <span class="ui">κ = 1/√3, wider</span> or <span class="ui">κ = 1, uniform (Jeffreys)</span>. The figures are BF<sub>10</sub>, BF<sub>01</sub>, the two one-sided ones (BF<sub>+0</sub> for ρ &gt; 0 and BF<sub>−0</sub> for ρ &lt; 0; with a one-sided alternative, only its own), the median and mean of the posterior of ρ and its central credible interval at the chosen level.</p>
+
+  <figure class="w80">
+    <div class="marco"><img src="../img/en/b4-bayes.png" alt="The Bayes factor for the cars with the prior, the posterior and the evidence table"></div>
+    <figcaption><b>Figure 4.8.</b> Ezekiel’s cars. The posterior of ρ (in red) is concentrated around .77, with credible interval [.63, .86]; at ρ = 0 its density is practically nil against 0.938 for the prior, and the ratio of the two is the Bayes factor: extreme evidence.</figcaption>
+  </figure>
+  <table class="compacta">
+    <caption><b>Table 4.3.</b> The words for the evidence (Jeffreys 1961, as given by Lee and Wagenmakers 2013)</caption>
+    <thead><tr><th style="width:1.4in">BF<sub>10</sub></th><th>Evidence that there is a correlation</th></tr></thead>
+    <tbody>
+      <tr><td>1 to 3</td><td>anecdotal</td></tr>
+      <tr><td>3 to 10</td><td>moderate</td></tr>
+      <tr><td>10 to 30</td><td>strong</td></tr>
+      <tr><td>30 to 100</td><td>very strong</td></tr>
+      <tr><td>more than 100</td><td>extreme</td></tr>
+    </tbody>
+  </table>
+  <p>The reciprocals (from 1/3 to 1, from 1/10 to 1/3 and so on) are the same scale of evidence for ρ = 0.</p>
+  <div class="caja teoria">
+    <div class="caja-t"><span class="ico">θ</span>Theory in brief · how it is computed</div>
+    <p>With the means and variances integrated out under Jeffreys’ priors, the likelihood of ρ depends only on <i>r</i> and <i>n</i> (Ly, Verhagen and Wagenmakers 2016). The Bayes factor is its average under the prior divided by its value at ρ = 0, and it equals the ratio of the prior and posterior densities at ρ = 0 (the Savage–Dickey ratio): these are the two dots on the plot. The app uses that exact form and integrates it numerically, with an adaptive method.</p>
+  </div>
+
+  <!-- 4.7 -->
+  <h2 id="s4-7"><span class="num">4.7</span>How it was computed</h2>
+  <p>The last card lists the conventions of this calculation: the test and interval of the main coefficient, the bootstrap with its number of resamples and its seed, the permutation with its own (the seed plus one), the prior of the Bayes factor and how many rows were left out because of missing values. It is what the methods section needs, and what Block 13 drafts for you.</p>
+  <figure>
+    <div class="marco"><img src="../img/en/b4-como.png" alt="The list of conventions of the calculation for the cars"></div>
+    <figcaption><b>Figure 4.9.</b> The conventions for Ezekiel’s cars with Pearson’s <i>r</i> as the main coefficient.</figcaption>
+  </figure>
+
+  <div class="caja regla">
+    <div class="caja-t"><span class="ico">✓</span>Reading and writing up a pair</div>
+    <table class="compacta"><tbody>
+      <tr><td style="width:44%"><b>If</b> the classical test and the permutation agree…</td><td>report the classical one; the permutation confirms that it does not depend on normality.</td></tr>
+      <tr><td><b>If</b> they do not agree…</td><td>report the permutation and the bootstrap interval, and say why.</td></tr>
+      <tr><td><b>If</b> the interval includes both small and large values…</td><td>the sample is not enough to know how strong the relation is; say so, even if <i>p</i> is small.</td></tr>
+      <tr><td><b>If</b> <i>p</i> is not significant…</td><td>do not write “there is no relation”: look at the interval and the Bayes factor, which can support ρ = 0.</td></tr>
+      <tr><td><b>If</b> the main coefficient is not Pearson’s <i>r</i>…</td><td>remember that the Bayes factor and <i>r</i>² belong to Pearson, not to the main coefficient.</td></tr>
+      <tr><td><b>If</b> you used resampling…</td><td>report the number of resamples and the seed.</td></tr>
+    </tbody></table>
+    <p class="regla-pie">These are guides for interpretation, not laws: what you know about the phenomenon, the design and how it was measured always comes first.</p>
+  </div>
+</section>
+
+</body>
+</html>

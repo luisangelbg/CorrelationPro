@@ -1,0 +1,184 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>CorrelationPro · User’s Manual · Chapter 2</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant:ital,wght@0,500;0,600;1,500&family=Crimson+Pro:ital,wght@0,400;0,600;1,400&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../interior.css">
+<script src="../paginar.js"></script>
+</head>
+<body>
+
+<section class="capitulo" id="cap-2" data-pestana="2" data-orden="2" style="--acento: var(--b2)">
+  <div class="cap-apertura">
+    <div class="cap-num">2</div>
+    <div class="cap-etiqueta">Chapter two · Block 2</div>
+    <h1 data-corto="Data">The data and their kinds</h1>
+    <div class="cap-regla"></div>
+    <p class="cap-resumen">Everything starts here, and so do almost all mistakes. This block opens your data, deduces the kind of each column and what it is for, counts the missing values and decides how to handle them, creates transformed columns and, for each pair of variables, proposes which correlation to use and why. What is decided here is used by the twelve blocks that follow.</p>
+    <div class="cap-franja"><span class="k2"></span><span class="k2"></span><span class="k3"></span><span class="k4"></span></div>
+    <ul class="cap-contenido">
+      <li><b>2.1</b>Opening the data</li>
+      <li><b>2.2</b>The public-domain datasets</li>
+      <li><b>2.3</b>Your data at a glance</li>
+      <li><b>2.4</b>The kind and role of each column</li>
+      <li><b>2.5</b>Missing data</li>
+      <li><b>2.6</b>Transforming a column</li>
+      <li><b>2.7</b>Which correlation should I use?</li>
+      <li><b>2.8</b>Saving</li>
+    </ul>
+  </div>
+
+  <!-- 2.1 -->
+  <h2 id="s2-1"><span class="num">2.1</span>Opening the data</h2>
+  <p class="lead">One row per observation and one column per variable, with the names in the first row. It is the “long” layout of any well-made spreadsheet, and the only one the block needs.</p>
+  <p>There are three ways in. <span class="ui">A file</span> accepts delimited text (<code>.csv</code>, <code>.tsv</code>, <code>.txt</code>, <code>.dat</code>) and spreadsheet workbooks (<code>.xlsx</code>, <code>.xlsm</code>, <code>.ods</code>); drag it onto the box or pick it with a click. <span class="ui">Paste</span> opens a box where you paste the cells copied from a spreadsheet; <span class="ui">Read what was pasted</span> turns them into a table. <span class="ui">An example dataset</span> leads to the nine datasets of the next section.</p>
+
+  <figure>
+    <div class="marco"><img src="../img/en/b2-abrir.png" alt="The Open data card with the reading options expanded"></div>
+    <figcaption><b>Figure 2.1.</b> The three ways in and, expanded, the <span class="ui">Reading options</span>. Normally you leave everything on <span class="ui">Detect</span>: the app guesses the delimiter, the decimal mark and the encoding, and says what it chose.</figcaption>
+  </figure>
+  <p>The reading options are only needed when detection gets it wrong. <span class="ui">Delimiter</span> forces comma, semicolon, tab or bar; <span class="ui">Decimal mark</span>, point (1.5) or comma (1,5); <span class="ui">Other missing codes</span> adds your own, separated by commas (for example <code>-999, n/i</code>); and the box <span class="ui">The first row has the names</span> is unchecked if your data have no header. If a workbook has several sheets with data, the app asks which one to open.</p>
+  <div class="caja nota">
+    <div class="caja-t"><span class="ico">i</span>What the app recognizes on its own as “no data”</div>
+    <p>Besides the empty cell, 28 ways of writing it that turn up in real spreadsheets, regardless of case: <code>NA</code>, <code>N/A</code>, <code>NaN</code>, <code>null</code>, <code>.</code>, <code>-</code>, <code>?</code>, <code>nd</code>, <code>n/d</code>, <code>s/d</code>, <code>sin dato</code>, <code>no disponible</code>, <code>faltante</code>, <code>missing</code> and spreadsheet errors such as <code>#N/A</code>, <code>#VALUE!</code> or <code>#DIV/0!</code>, among others.</p>
+  </div>
+
+  <!-- 2.2 -->
+  <h2 id="s2-2"><span class="num">2.2</span>The public-domain datasets</h2>
+  <p>Nine real datasets, published long ago or by governments, each with its source, its license and what it is good for (the table in Section I.7 summarizes them). <span class="ui">Use this dataset</span> opens it as if it were your data, with the kind and role of each column already declared.</p>
+  <figure class="w80">
+    <div class="marco"><img src="../img/en/b2-ejemplos.png" alt="The first six cards of the public-domain datasets"></div>
+    <figcaption><b>Figure 2.2.</b> Six of the nine datasets. Each card states how many rows and columns it has, why it is in the public domain and which article it comes from.</figcaption>
+  </figure>
+
+  <!-- 2.3 -->
+  <h2 id="s2-3"><span class="num">2.3</span>Your data at a glance</h2>
+  <p>When you open some data, a message says what was read—“Read «pasted data»: 12 rows and 4 columns, separated by tab, with a decimal point.”—and the <span class="ui">Your data</span> card shows five figures and the table.</p>
+  <figure class="w80">
+    <div class="marco"><img src="../img/en/b2-datos.png" alt="The Your data card with Switzerland, 1888"></div>
+    <figcaption><b>Figure 2.3.</b> Switzerland, 1888: 47 rows, 7 columns of which 6 are in use (the district is an identifier), all complete. Under the name of each column goes its kind.</figcaption>
+  </figure>
+  <p><span class="ui">Compositional</span> warns when the app finds three or more consecutive columns that add up to the same total in every row—percentages of a diet, fractions of sand, silt and clay—: they are parts of a whole, and their Pearson correlation is misleading by construction (Chapter 10). The table shows the first rows; if there are more, a note says so.</p>
+
+  <!-- 2.4 -->
+  <h2 id="s2-4"><span class="num">2.4</span>The kind and role of each column</h2>
+  <p>This is the most important card of the block. The <b>kind</b> decides which coefficients make sense; the <b>role</b>, how the column is used. The app deduces both from the values and from the column name, and explains why in the last column of the table. If it got them wrong, change them with the menus; <span class="ui">Back to what was deduced</span> undoes the changes.</p>
+
+
+  <table class="compacta">
+    <caption><b>Table 2.1.</b> The nine kinds and when the app deduces them</caption>
+    <thead><tr><th style="width:1in">Kind</th><th>Deduced when…</th></tr></thead>
+    <tbody>
+      <tr><td><b>continuous</b></td><td>the values are numbers with many distinct values. If many are repeated it says so, because ties matter for Spearman and Kendall.</td></tr>
+      <tr><td><b>ordinal</b></td><td>the values are integers with seven values or fewer and a short range (a 1-to-5 scale), or texts that form a known scale (low &lt; medium &lt; high, never &lt; sometimes &lt; always…), which are put in order automatically.</td></tr>
+      <tr><td><b>binary</b></td><td>there are only two values, numbers or texts.</td></tr>
+      <tr><td><b>nominal</b></td><td>the values are repeated texts with no order. With twelve categories or fewer it gets the group role.</td></tr>
+      <tr><td><b>circular</b></td><td>the name says angle, direction, hour, month or day of the year and the values fit its range (0 to 360, 0 to 24, 1 to 12, 1 to 366): the end lies next to the beginning.</td></tr>
+      <tr><td><b>date</b></td><td>all the values are dates; they are stored as days since 1970 and the column gets the time role.</td></tr>
+      <tr><td><b>identifier</b></td><td>the name looks like a key (id, folio, code, subject, patient…) or there is a different text in every row. If its values repeat, each value is a subject measured several times.</td></tr>
+      <tr><td><b>text</b></td><td>there are too many distinct texts to be categories.</td></tr>
+      <tr><td><b>empty</b></td><td>there are no data at all.</td></tr>
+    </tbody>
+  </table>
+  <figure>
+    <div class="marco"><img src="../img/en/b2-tipos.png" alt="The table of the kind and role of each column of the irises"></div>
+    <figcaption><b>Figure 2.4.</b> The irises: four continuous columns with the variable role and the species, nominal, with the group role. The summary gives mean ± standard deviation, minimum and maximum, or the categories with their frequencies.</figcaption>
+  </figure>
+
+  <table class="compacta">
+    <caption><b>Table 2.2.</b> The eight roles</caption>
+    <thead><tr><th style="width:1.25in">Role</th><th>What it is for</th></tr></thead>
+    <tbody>
+      <tr><td><b>variable</b></td><td>it is analyzed: it enters the matrices, the pairs and the networks</td></tr>
+      <tr><td><b>group</b></td><td>it splits the cases: correlations within and between groups, matrices by group, the colors of the figures</td></tr>
+      <tr><td><b>subject</b></td><td>it identifies whoever was measured several times: the repeated-measures correlation</td></tr>
+      <tr><td><b>time</b></td><td>it orders the rows: time series and their cross-correlation</td></tr>
+      <tr><td><b>X coordinate · Y coordinate</b></td><td>the position in space: Dutilleul’s test and the correlogram (the app recognizes them by names such as longitude, latitude, east, north)</td></tr>
+      <tr><td><b>weight</b></td><td>a sampling weight or a frequency per row. In this version no block weights the cases: the column is kept but not analyzed</td></tr>
+      <tr><td><b>not used</b></td><td>it is kept but no block touches it</td></tr>
+    </tbody>
+  </table>
+  <div class="caja importante">
+    <div class="caja-t"><span class="ico">!</span>A 1-to-5 scale is not continuous</div>
+    <p>If your satisfaction or damage column ended up as continuous because it has many values, but it is really a scale of ordered categories, change it to ordinal: Block 8 will compute the polychoric correlation, which is the right one for a latent variable measured in categories, and Block 3 will stop recommending Pearson.</p>
+  </div>
+  <p>Circular columns also have a <b>unit</b>: degrees (0 to 360), radians, hours (0 to 24), day of year or month. The app deduces it from the name and uses it to convert to angles in Block 10.</p>
+
+  <!-- 2.5 -->
+  <h2 id="s2-5"><span class="num">2.5</span>Missing data</h2>
+  <p>How many cells are missing, how many rows are complete and how many distinct <b>patterns</b> there are: which combinations of columns are missing together. One dominant pattern—the same column is always missing—is less serious than many scattered patterns.</p>
+  <figure>
+    <div class="marco"><img src="../img/en/b2-faltantes.png" alt="The missing data card with four patterns and the warning about -999"></div>
+    <figcaption><b>Figure 2.5.</b> Some pasted data where “no data” was written in three ways (<code>n/d</code>, <code>NA</code> and the empty cell): the app recognized them all. The <code>-999</code>, on the other hand, is not taken as missing without asking: the app warns about it, because it could be a real value.</figcaption>
+  </figure>
+  <p>The menu <span class="ui">For each pair of variables, use</span> decides what to do with what is missing, and it applies to every block:</p>
+  <table class="compacta">
+    <thead><tr><th style="width:2in">Option</th><th>Advantage</th><th>Cost</th></tr></thead>
+    <tbody>
+      <tr><td><b>Pairwise</b> (the default): the complete rows of that pair</td><td>Uses every datum</td><td>Each correlation of a matrix may come from different rows, and the matrix may not be valid; Block 5 checks and corrects it</td></tr>
+      <tr><td><b>Listwise</b>: only the rows complete in every column</td><td>All the correlations come from the same cases; the matrix is always valid</td><td>Rows with a single missing value are lost</td></tr>
+    </tbody>
+  </table>
+  <div class="caja error">
+    <div class="caja-t"><span class="ico">✕</span>Common mistake · a missing-value code taken as data</div>
+    <p>A <code>-999</code> or a <code>99</code> left in as numbers changes any correlation: a single <code>-999</code> in a column of diameters makes Pearson say whatever that point wants. When the app sees a value like that, far away from the rest, write it in <span class="ui">Other missing codes</span> and open the file again.</p>
+  </div>
+
+  <!-- 2.6 -->
+  <h2 id="s2-6"><span class="num">2.6</span>Transforming a column</h2>
+  <p>Each transformation creates a new column and leaves the original as it was; the list below says where each one came from, and <span class="ui">Remove</span> deletes it.</p>
+  <figure>
+    <div class="marco"><img src="../img/en/b2-transformar.png" alt="The Transform card with a Box–Cox column created"></div>
+    <figcaption><b>Figure 2.6.</b> The Box–Cox transformation of petal length, with λ estimated by maximum likelihood (λ = 0.931).</figcaption>
+  </figure>
+  <table class="compacta">
+    <thead><tr><th style="width:2.2in">Transformation</th><th>What for</th></tr></thead>
+    <tbody>
+      <tr><td>Ranks (average for ties)</td><td>Working with the order; Pearson on the ranks is Spearman</td></tr>
+      <tr><td>Standardize (<i>z</i>) · Centre on the mean</td><td>Putting the variables on the same scale; they do not change any correlation</td></tr>
+      <tr><td>Natural logarithm · Base-10 logarithm · log(<i>x</i> + 1)</td><td>Multiplicative relations and long right tails; the last one allows zeros</td></tr>
+      <tr><td>Square root · Inverse 1/<i>x</i></td><td>Counts and rates</td></tr>
+      <tr><td>Box–Cox (estimated λ)</td><td>The power that brings the variable closest to the normal (Box and Cox, 1964)</td></tr>
+      <tr><td>Normal scores</td><td>The ranks turned into normal quantiles: the basis of the Gaussian rank correlation</td></tr>
+      <tr><td>Reverse the scale</td><td>Making “more” mean the same thing on two scales</td></tr>
+      <tr><td>Centred log-ratio</td><td>The parts of a whole (compositional data), before correlating them</td></tr>
+    </tbody>
+  </table>
+  <p class="small">The menu only offers the transformations that make sense for the chosen column: the logarithm, for example, does not appear if there are zeros or negative values.</p>
+
+  <!-- 2.7 -->
+  <h2 id="s2-7"><span class="num">2.7</span>Which correlation should I use?</h2>
+  <p>Pick two columns in <span class="ui">X</span> and <span class="ui">Y</span>. The assistant looks at their kind and, if both are continuous, at the shape of their cloud: the outliers (beyond 3.5 on a robust scale), the curvature (the test of a quadratic term), the proportion of ties, <i>r</i>, ρ and the distance correlation. With that it proposes the measures in order, the first as <span class="ui">Recommended</span> and the others as <span class="ui">Also</span>, each with its reason, the block where it is computed and a <span class="ui">What is it?</span> link to its card in the catalog.</p>
+
+  <figure class="w70">
+    <div class="marco"><img src="../img/en/b2-asistente2.png" alt="The assistant with sepal length and sepal width of the irises"></div>
+    <figcaption><b>Figure 2.7.</b> Sepal length and sepal width of the irises: a straight cloud, no outliers, non-significant curvature (<i>p</i> = .057) and 85% ties. It recommends Pearson, and suggests checking the <i>p</i>-value by permutation because one of the two is not normal.</figcaption>
+  </figure>
+  <p>With variables that are not continuous the proposal changes completely. For two binary variables, such as sex and survival on the Titanic, it recommends φ, and as alternatives the odds ratio with Yule’s <i>Q</i>, which do not depend on the margins, and the tetrachoric correlation, if each binary variable is the cut of a latent continuous one. For a continuous and a categorical variable, the point-biserial, the rank-biserial or η; for two ordinal variables, Spearman, τ-b or the polychoric; for angles, the circular correlations; if one column is a subject, the repeated-measures correlation.</p>
+  <div class="caja ejemplo">
+    <div class="caja-t"><span class="ico">▸</span>Worked example · when the recommendation comes “with care”</div>
+    <p>If the cloud has outliers, the assistant puts the percentage bend or the biweight first and leaves Pearson as “Pearson’s r (with care)”. If there is curvature, it proposes Spearman and the distance correlation. It does not choose for you: it tells you what to look at, and Block 3 checks it for all the pairs at once.</p>
+  </div>
+  <p>When the recommendation is computed in Block 4, the button <span class="ui">Study this pair in Block 4 →</span> takes the pair there.</p>
+
+  <!-- 2.8 -->
+  <h2 id="s2-8"><span class="num">2.8</span>Saving</h2>
+  <p><span class="ui">Download CSV</span> saves the table as it is now, with the transformed columns, as comma-delimited text that any spreadsheet opens. To save the kinds, the roles, the handling of missing data and the preferences as well, and pick the analysis up another day, there is the project package of Block 13.</p>
+
+  <div class="caja regla">
+    <div class="caja-t"><span class="ico">✓</span>Before leaving Block 2</div>
+    <table class="compacta"><tbody>
+      <tr><td style="width:44%"><b>If</b> a column ended up with the wrong kind…</td><td>change it: the kind decides which coefficients the other blocks offer.</td></tr>
+      <tr><td><b>If</b> the app warns about a value very far from the rest…</td><td>find out whether it is a missing-value code before going on.</td></tr>
+      <tr><td><b>If</b> you are going to compare correlations from the same matrix or publish the matrix…</td><td>prefer listwise handling of missing data, or check the matrix in Block 5.</td></tr>
+      <tr><td><b>If</b> the cases repeat (subjects, plots, years)…</td><td>mark the column as subject or time: Block 10 needs it.</td></tr>
+    </tbody></table>
+  </div>
+</section>
+
+</body>
+</html>
