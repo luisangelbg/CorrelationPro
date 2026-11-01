@@ -1,7 +1,6 @@
 # CorrelationPro
 
-<!-- DOI: cuando exista el registro de Zenodo, va aquí su insignia:
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.XXXXXXXX.svg)](https://doi.org/10.5281/zenodo.XXXXXXXX) -->
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23867439.svg)](https://doi.org/10.5281/zenodo.23867439)
 
 **Análisis de correlación de todo tipo, con su teoría** · *English: [README.md](README.md)*
 
@@ -113,11 +112,12 @@ simulados que se anuncian como tales en la pantalla. Ver `PROCEDENCIA.md`.
 ## Cómo citar
 
 Barrera-Guzmán, L. Á. (2026). *CorrelationPro: análisis de correlación de
-todo tipo en el navegador* (versión 1.0.0) [Programa de cómputo].
-https://github.com/luisangelbg/CorrelationPro
+todo tipo en el navegador* (versión 1.0.0) [Programa de cómputo]. Zenodo.
+https://doi.org/10.5281/zenodo.23867439
 
-<!-- DOI: cuando exista el registro de Zenodo, se cambia la dirección del repositorio de
-arriba por https://doi.org/10.5281/zenodo.XXXXXXXX (DOI de concepto). -->
+Este DOI de concepto lleva siempre a la versión más reciente; cada versión
+tiene además el suyo en Zenodo (la 1.0.0: 10.5281/zenodo.23867440). Código:
+https://github.com/luisangelbg/CorrelationPro
 
 La sección **Cómo citar** de la portada de la app da la cita lista para
 copiar, también como entrada BibTeX; `CITATION.cff` tiene los mismos datos

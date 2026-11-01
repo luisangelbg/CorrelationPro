@@ -6,6 +6,8 @@
   "version": "1.0.0",
   "dateCreated": "2026-10-03",
   "dateModified": "2026-11-01",
+  "datePublished": "2026-11-01",
+  "identifier": "https://doi.org/10.5281/zenodo.23867439",
   "license": "https://spdx.org/licenses/GPL-3.0-or-later",
   "codeRepository": "https://github.com/luisangelbg/CorrelationPro",
   "url": "https://luisangelbg.github.io/CorrelationPro/",
@@ -26,5 +28,6 @@
     }
   ],
   "softwareRequirements": ["A modern web browser; no installation"],
-  "isAccessibleForFree": true
+  "isAccessibleForFree": true,
+  "relatedLink": ["https://doi.org/10.5281/zenodo.23867439", "https://doi.org/10.5281/zenodo.23867440"]
 }

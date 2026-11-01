@@ -266,8 +266,8 @@ function buildRefs() {
   host.innerHTML = keys.map(k => { const t = Theory.REFS[k][1]; return `<li data-t="${t}">${L2(Theory.refText(k, 'es'), Theory.refText(k, 'en'))} <span class="ref-topic">${L2(Theory.REF_TOPICS[t][0], Theory.REF_TOPICS[t][1])}</span></li>`; }).join('');
 }
 function buildCite() {
-  const apa = 'Barrera-Guzmán, L. Á. (2026). <i>CorrelationPro: análisis de correlación de todo tipo en el navegador</i> (versión 1.0.0) [Programa de cómputo]. https://github.com/luisangelbg/CorrelationPro';
-  const bib = '@software{barreraguzman2026correlationpro,\n  author  = {Barrera-Guzmán, Luis Ángel},\n  title   = {CorrelationPro: análisis de correlación de todo tipo en el navegador},\n  version = {1.0.0},\n  year    = {2026},\n  license = {GPL-3.0-or-later},\n  url     = {https://github.com/luisangelbg/CorrelationPro}\n}';
+  const apa = 'Barrera-Guzmán, L. Á. (2026). <i>CorrelationPro: análisis de correlación de todo tipo en el navegador</i> (versión 1.0.0) [Programa de cómputo]. Zenodo. https://doi.org/10.5281/zenodo.23867439';
+  const bib = '@software{barreraguzman2026correlationpro,\n  author  = {Barrera-Guzmán, Luis Ángel},\n  title   = {CorrelationPro: análisis de correlación de todo tipo en el navegador},\n  version = {1.0.0},\n  year    = {2026},\n  license = {GPL-3.0-or-later},\n  doi     = {10.5281/zenodo.23867439},\n  url     = {https://doi.org/10.5281/zenodo.23867439}\n}';
   const a = el('citeApa'), b = el('citeBib');
   if (a) a.innerHTML = apa;
   if (b) b.textContent = bib;

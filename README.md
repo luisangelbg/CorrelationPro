@@ -1,7 +1,6 @@
 # CorrelationPro
 
-<!-- DOI: when the Zenodo record exists, put its badge here:
-[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.XXXXXXXX.svg)](https://doi.org/10.5281/zenodo.XXXXXXXX) -->
+[![DOI](https://zenodo.org/badge/DOI/10.5281/zenodo.23867439.svg)](https://doi.org/10.5281/zenodo.23867439)
 
 **Correlation analysis of every kind, with its theory** · *Español: [LEEME.md](LEEME.md)*
 
@@ -134,11 +133,12 @@ announced as such on screen. `PROCEDENCIA.md` (in Spanish) gives the details.
 ## How to cite
 
 Barrera-Guzmán, L. Á. (2026). CorrelationPro: análisis de correlación de todo
-tipo en el navegador (Version 1.0.0) [Computer software].
-https://github.com/luisangelbg/CorrelationPro
+tipo en el navegador (Version 1.0.0) [Computer software]. Zenodo.
+https://doi.org/10.5281/zenodo.23867439
 
-<!-- DOI: when the Zenodo record exists, replace the repository address above with
-https://doi.org/10.5281/zenodo.XXXXXXXX (concept DOI) and add the line below. -->
+The DOI above always resolves to the latest version; each version has its own
+DOI on the Zenodo page (version 1.0.0: 10.5281/zenodo.23867440). Cite the
+version you used. Code: https://github.com/luisangelbg/CorrelationPro
 
 The **Home** page of the app gives the citation ready to copy, also as a
 BibTeX entry. `CITATION.cff` has the same data for reference managers.

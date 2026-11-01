@@ -25,9 +25,15 @@ authors:
     email: lbarrerag@chapingo.mx
     orcid: "https://orcid.org/0000-0001-8057-2583"
 version: "1.0.0"
-# DOI: when the Zenodo record exists, add here (concept DOI) and the release date:
-# doi: 10.5281/zenodo.XXXXXXXX
-# date-released: "YYYY-MM-DD"
+date-released: "2026-11-01"
+doi: 10.5281/zenodo.23867439
+identifiers:
+  - type: doi
+    value: 10.5281/zenodo.23867439
+    description: "Concept DOI — always resolves to the latest version. Cite this one."
+  - type: doi
+    value: 10.5281/zenodo.23867440
+    description: "DOI of version 1.0.0."
 url: "https://luisangelbg.github.io/CorrelationPro/"
 repository-code: "https://github.com/luisangelbg/CorrelationPro"
 license: GPL-3.0-or-later
@@ -47,3 +53,16 @@ keywords:
   - meta-analysis of correlations
   - statistical power
   - data visualization
+preferred-citation:
+  type: software
+  title: "CorrelationPro: a browser-based platform for correlation analysis of every kind, with its theory"
+  authors:
+    - given-names: "Luis Ángel"
+      family-names: "Barrera-Guzmán"
+      orcid: "https://orcid.org/0000-0001-8057-2583"
+  version: "1.0.0"
+  year: 2026
+  doi: 10.5281/zenodo.23867439
+  publisher:
+    name: "Zenodo"
+  url: "https://doi.org/10.5281/zenodo.23867439"

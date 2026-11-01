@@ -144,3 +144,18 @@ lo que se compara, cómo correrlo y los errores que la validación atrapó.
   (`r_pb = .81, IC 95 % [.64, .90], …`). Antes copiaba lo que estaba pintado, y con el subíndice ya en su sitio habría
   dado «rpb».
 - Las 285 pruebas siguen pasando.
+
+## Publicación: GitHub, Pages y Zenodo (1 de noviembre de 2026)
+
+- Repositorio público https://github.com/luisangelbg/CorrelationPro y la app en línea en
+  https://luisangelbg.github.io/CorrelationPro/. Sin cambio de versión: sigue siendo la 1.0.0.
+- DOI de Zenodo: 10.5281/zenodo.23867439 (de concepto, el que se cita; lleva siempre a la versión más reciente) y
+  10.5281/zenodo.23867440 (de la versión 1.0.0).
+- «Cómo citar» de la portada (`js/home.js`) con el DOI, y el BibTeX con los campos `doi` y `url`; el botón
+  «Reportar un problema» abre los reportes en el repositorio de la app (`<meta name="labg-repo">` en `index.html`,
+  escrito por `data/armar_index.js`).
+- `README.md` (inglés), `LEEME.md`, `CITATION.cff`, `codemeta.json`, `.zenodo.json`, `.gitignore` y `.nojekyll`
+  nuevos; `research/` y `validation/` no se distribuyen.
+- **Manual:** las citas de los créditos y del apéndice E.3 con el DOI, la dirección del código y la app en línea
+  (también en la sección I.5); PDF reimpreso.
+- Las 285 pruebas siguen pasando.
