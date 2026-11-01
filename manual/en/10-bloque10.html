@@ -34,25 +34,25 @@
 
   <!-- 10.1 -->
   <h2 id="s10-1"><span class="num">10.1</span>Groups and Simpson’s paradox</h2>
-  <p class="lead">When the cases come from different groups, there are three correlations, not one: the one within the groups, the one between their means, and the one from pooling everything, which mixes the other two.</p>
+  <p class="lead">When the cases come from different groups, there are three correlations, not one: the one within the groups, the one between their means, and the pooled one, which mixes the other two.</p>
   <p>You choose <span class="ui">X</span>, <span class="ui">Y</span> and the <span class="ui">Group</span>. Four figures: the <i>r</i> pooling everything; the <i>r</i> <b>within the groups</b>, computed with the data centered on the means of their group, with <i>n</i> − <i>K</i> − 1 degrees of freedom; the <i>r</i> <b>between the means</b> of the <i>K</i> groups; and the <i>Q</i> test that all the groups have the same <i>r</i> (with Fisher’s <i>z</i>).</p>
   <figure class="w70">
     <div class="marco"><img src="../img/en/b10-grupos.png" alt="The sepal length and width of the irises by species, with the line of each species and the one for all together"></div>
-    <figcaption><b>Figure 10.1.</b> The sepal of the irises, the example the block opens with. Within each species the relation is positive (.530); between the species means, negative (−.745); and pooling everything gives −.118. The dashed line is the one for all together; the large circles, the means. The <i>Q</i> test (<i>p</i> = .060) does not reject that the three species have the same <i>r</i>.</figcaption>
+    <figcaption><b>Figure 10.1.</b> The iris sepals, the example the block opens with. Within each species the relation is positive (.530); between the species means, negative (−.745); pooled, −.118. The dashed line is for all together; the large circles are the means. The <i>Q</i> test (<i>p</i> = .060) does not reject a common <i>r</i> for the three species.</figcaption>
   </figure>
-  <p>The table gives the <i>r</i> of each group. The reading warns of <b>Simpson’s paradox</b> when the relation within the groups has the opposite sign to the pooled one; otherwise, it reminds you that the <i>r</i> of all together describes neither of the two levels when they differ much.</p>
+  <p>The table gives the <i>r</i> of each group. The reading warns of <b>Simpson’s paradox</b> when the relation within the groups has the opposite sign to the pooled one; otherwise, it reminds you that the pooled <i>r</i> describes neither level when the two differ much.</p>
   <div class="caja importante">
     <div class="caja-t"><span class="ico">!</span>The question decides which to report</div>
-    <p>If the question is about individuals—do flowers with longer sepals have wider ones?—the answer is the within <i>r</i>. If it is about the groups—do species with longer sepals have wider ones?—it is the one between the means, with <i>K</i> cases, not <i>n</i>. Drawing conclusions about individuals from the correlation of the groups is the <b>ecological fallacy</b> (Robinson 1950).</p>
+    <p>If the question is about individuals—do flowers with longer sepals have wider ones?—the answer is the within <i>r</i>; if it is about the groups—do species with longer sepals have wider ones?—the one between the means, with <i>K</i> cases, not <i>n</i>. Judging individuals by the correlation of the groups is the <b>ecological fallacy</b> (Robinson 1950).</p>
   </div>
 
   <!-- 10.2 -->
   <h2 id="s10-2"><span class="num">10.2</span>Repeated measures</h2>
-  <p>When each subject contributes several rows, the usual <i>r</i> mixes the relation within subjects with the differences between them, and in addition counts the degrees of freedom as if each row were a new subject. The <b>repeated measures correlation</b> (Bakdash and Marusich 2017) uses only the variation within each subject, with a common slope for all, and has <i>N</i> − <i>k</i> − 1 degrees of freedom, with <i>N</i> rows and <i>k</i> subjects.</p>
-  <p>You choose the <span class="ui">Subject</span> column—the one with the subject role in Block 2, or any column with repeated values—and the two variables. The figures are the correlation with its interval, the degrees of freedom and the <i>r</i> ignoring the subjects, in red if it has the opposite sign. The chart shows each subject with its color and its line, all with the same slope.</p>
-  <figure class="w60">
+  <p>When each subject contributes several rows, the usual <i>r</i> mixes the relation within subjects with the differences between them, and also counts the degrees of freedom as if each row were a new subject. The <b>repeated measures correlation</b> (Bakdash and Marusich 2017) uses only the variation within each subject, with one common slope, and has <i>N</i> − <i>k</i> − 1 degrees of freedom, with <i>N</i> rows and <i>k</i> subjects.</p>
+  <p>You choose the <span class="ui">Subject</span> column—the one with the subject role in Block 2, or any column with repeated values—and the two variables. The figures are the correlation with its interval, the degrees of freedom and the <i>r</i> ignoring the subjects, in red if it has the opposite sign. The chart shows each subject in its own color, with lines of equal slope.</p>
+  <figure class="w70">
     <div class="marco"><img src="../img/en/b10-repetidas.png" alt="The repeated measures correlation of 12 simulated subjects measured 6 times"></div>
-    <figcaption><b>Figure 10.2.</b> The simulated example: 12 students measured 6 times. Within each one, more study hours go with a better grade (.825, with 59 degrees of freedom); ignoring the subjects, the relation comes out the other way (−.956), because those who study more are those who start from lower grades.</figcaption>
+    <figcaption><b>Figure 10.2.</b> Simulated example: 12 students measured 6 times. Within each one, more study hours go with a better grade (.825, with 59 degrees of freedom); ignoring the subjects, the relation comes out the other way (−.956), because those who study more are those who start from lower grades.</figcaption>
   </figure>
 
   <!-- 10.3 -->
