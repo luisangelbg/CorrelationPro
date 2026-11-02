@@ -1,7 +1,7 @@
 /* CorrelationPro — manual de usuario
    Hoja de estilo de la portada. Página tamaño carta (21.59 × 27.94 cm), pensada para imprimirse a PDF desde el
    navegador sin márgenes añadidos. Tipografías: Cormorant (títulos) y Jost (rótulos), ambas con licencia SIL Open
-   Font License 1.1. La portada es negro laca con oro y rojo de Olinalá, los colores de la app. */
+   Font License 1.1. La portada es blanca, como las de los demás manuales de la suite, con el negro laca, el oro y el rojo de Olinalá de la app. */
 
 @page { size: 8.5in 11in; margin: 0; }
 
@@ -12,7 +12,7 @@ body { background: #4a4242; font-family: 'Cormorant', serif; }
 /* cada .page es una hoja */
 .page {
   width: 8.5in; height: 11in; margin: 0.35in auto; position: relative; overflow: hidden;
-  background: #120c0c; box-shadow: 0 10px 40px rgba(0, 0, 0, 0.35);
+  background: #ffffff; box-shadow: 0 10px 40px rgba(0, 0, 0, 0.35);
   page-break-after: always; break-after: page;
 }
 .page > svg { display: block; width: 100%; height: 100%; }
